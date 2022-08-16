@@ -3,5 +3,39 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "@onlyoffice/document-editor-angular": {
+      "projectType": "library",
+      "root": "projects/onlyoffice/document-editor-angular",
+      "sourceRoot": "projects/onlyoffice/document-editor-angular/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/onlyoffice/document-editor-angular/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/onlyoffice/document-editor-angular/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/onlyoffice/document-editor-angular/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/onlyoffice/document-editor-angular/src/test.ts",
+            "tsConfig": "projects/onlyoffice/document-editor-angular/tsconfig.spec.json",
+            "karmaConfig": "projects/onlyoffice/document-editor-angular/karma.conf.js"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
   }
 }
