@@ -2,6 +2,7 @@
 
 ## Build
 
+Run `npm install` to install the project dependencies.
 Run `ng build @onlyoffice/document-editor-angular` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ## Package

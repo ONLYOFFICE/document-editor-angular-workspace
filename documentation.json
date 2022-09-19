@@ -1,0 +1,909 @@
+{
+    "pipes": [],
+    "interfaces": [
+        {
+            "name": "IConfig",
+            "id": "interface-IConfig-82d502ee514e44d944f50441620dc03ab0563600a9baadb65e5f12622ea0f38a53b2c4ca8b178d8135057fe90b4b5c7ef8437865a3479daf047080c8019a807b",
+            "file": "projects/onlyoffice/document-editor-angular/src/lib/model/config.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface IConfig {\r\n  document: {\r\n    fileType: string;\r\n    key?: string;\r\n    title: string;\r\n    permissions?: {\r\n      comment?: boolean;\r\n      download?: boolean;\r\n      edit?: boolean;\r\n      review?: boolean;\r\n    }\r\n    url: string;\r\n  }\r\n  documentType: string;\r\n  editorConfig?: {\r\n    callbackUrl?: string;\r\n    lang?: string,\r\n    mode?: string;\r\n    user?: {\r\n      id?: string;\r\n      name?: string;\r\n    }\r\n  }\r\n  height?: string;\r\n  token?: string;\r\n  type?: string;\r\n  width?: string;\r\n}",
+            "properties": [
+                {
+                    "name": "document",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                },
+                {
+                    "name": "documentType",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "editorConfig",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type",
+                    "optional": true,
+                    "description": "",
+                    "line": 15
+                },
+                {
+                    "name": "height",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 24
+                },
+                {
+                    "name": "token",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 25
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 26
+                },
+                {
+                    "name": "width",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 27
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
+            "name": "Window",
+            "id": "interface-Window-6327e1e3ee353349a03ed7c0208cd40338cd6557ad37551d1fa31e3b34a924d2559eb8f41a19253a57270cc656913a3fd2e4839cb79205cca837093b823347f4",
+            "file": "projects/onlyoffice/document-editor-angular/src/lib/components/document-editor.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';\nimport { IConfig } from '../model/config';\nimport loadScript from \"../utils/loadScript\";\n\ndeclare global {\n  interface Window {\n      DocsAPI?: any;\n      DocEditor?: any;\n  }\n}\n\n@Component({\n  selector: 'document-editor',\n  template: '<div [id]=\"id\"></div>',\n  styles: [\n  ]\n})\nexport class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {\n  @Input() id: string;\n  @Input() documentServerUrl: string;\n  @Input() config: IConfig;\n\n  @Input() document_fileType?: string;\n  @Input() document_title?: string;\n  @Input() documentType?: string;\n  @Input() editorConfig_lang?: string;\n  @Input() height?: string;\n  @Input() type?: string;\n  @Input() width?: string;\n\n  @Input() events_onAppReady?: (editor: object) => void;\n  @Input() events_onDocumentReady?: (editor: object) => void;\n  @Input() events_onDocumentStateChange?: (data: object) => void;\n  @Input() events_onError?: (error: string) => void;\n\n  isFirstOnChanges: boolean = true;\n\n  constructor() { }\n\n  ngOnInit(): void {\n    let url = this.documentServerUrl;\n    if (!url.endsWith(\"/\")) url += \"/\";\n\n    const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;\n    loadScript(docApiUrl, \"onlyoffice-api-script\")\n      .then(() => this.onLoad())\n      .catch((err) => console.error(err));\n  }\n\n  ngOnChanges(changes: SimpleChanges) {\n    const listNameChanges = [\"config\", \"document_fileType\", \"document_title\", \"documentType\", \"editorConfig_lang\", \"height\", \"type\", \"width\"];\n\n    if (this.isFirstOnChanges) {\n      this.isFirstOnChanges = false;\n      return;\n    }\n\n    for (const name of listNameChanges) {\n      if (changes.hasOwnProperty(name)) {\n        if (window?.DocEditor?.instances[this.id]) {\n          window.DocEditor.instances[this.id].destroyEditor();\n          window.DocEditor.instances[this.id] = undefined;\n    \n          console.log(\"Important props have been changed. Load new Editor.\");\n          this.onLoad();\n          return;\n        }\n      }\n    }\n  }\n\n  ngOnDestroy() {\n    if (window?.DocEditor?.instances[this.id]) {\n      window.DocEditor.instances[this.id].destroyEditor();\n      window.DocEditor.instances[this.id] = undefined;\n    }\n  }\n\n  onLoad = () => {\n    try {\n      if (!window.DocsAPI) throw new Error(\"DocsAPI is not defined\");\n      if (window?.DocEditor?.instances[this.id]) {\n        console.log(\"Skip loading. Instance already exists\", this.id);\n        return;\n      }\n\n      if (!window?.DocEditor?.instances) {\n        window.DocEditor = { instances: {} };\n      }\n\n      let initConfig = Object.assign({\n        document: {\n          fileType: this.document_fileType,\n          title: this.document_title,\n        },\n        documentType: this.documentType,\n        editorConfig: {\n          lang: this.editorConfig_lang,\n        },\n        events: {\n          onAppReady: this.events_onAppReady,\n          onDocumentReady: this.events_onDocumentReady,\n          onDocumentStateChange: this.events_onDocumentStateChange,\n          onError: this.events_onError,\n        },\n        height: this.height,\n        type: this.type,\n        width: this.width,\n      }, this.config || {});\n\n      const editor = window.DocsAPI.DocEditor(this.id, initConfig);\n      window.DocEditor.instances[this.id] = editor;\n    } catch (err: any) {\n      console.error(err);\n      this.events_onError!(err);\n    }\n};\n}\n",
+            "properties": [
+                {
+                    "name": "DocEditor",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": true,
+                    "description": "",
+                    "line": 8
+                },
+                {
+                    "name": "DocsAPI",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": true,
+                    "description": "",
+                    "line": 7
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        }
+    ],
+    "injectables": [],
+    "guards": [],
+    "interceptors": [],
+    "classes": [],
+    "directives": [],
+    "components": [
+        {
+            "name": "AppComponent",
+            "id": "component-AppComponent-d99ea7d45201ffc66fea4cf4e385ea4f5039a227d6cd264e6207efb5eb7a5505c6fdecfe5d6c838e31855dbee48dc86d35d2275014b0a94ef073bad2ce709e61",
+            "file": "src/app/app.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-root",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./app.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "config",
+                    "defaultValue": "{\r\n    document: {\r\n        fileType: \"docx\",\r\n        title: \"demo.docx\",\r\n        url: \"https://d2nlctn12v279m.cloudfront.net/assets/docs/samples/demo.docx\",\r\n        key: \"Khirz6zTPdfd7\"\r\n    },\r\n    documentType: \"word\",\r\n    editorConfig: {\r\n      mode: \"edit\",\r\n      user: {\r\n        id: \"uid-1\",\r\n        name: \"John Smith\",\r\n        },\r\n      },\r\n    height:\"600px\",\r\n    width:\"70%\"\r\n  }",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "IConfig",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  templateUrl: './app.component.html'\r\n})\r\nexport class AppComponent {\r\n  config: IConfig = {\r\n    document: {\r\n        fileType: \"docx\",\r\n        title: \"demo.docx\",\r\n        url: \"https://d2nlctn12v279m.cloudfront.net/assets/docs/samples/demo.docx\",\r\n        key: \"Khirz6zTPdfd7\"\r\n    },\r\n    documentType: \"word\",\r\n    editorConfig: {\r\n      mode: \"edit\",\r\n      user: {\r\n        id: \"uid-1\",\r\n        name: \"John Smith\",\r\n        },\r\n      },\r\n    height:\"600px\",\r\n    width:\"70%\"\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "templateData": "<document-editor \r\n  id=\"docEditor\" \r\n  documentServerUrl=\"http://192.168.0.169:85\"\r\n  [config]=\"config\"\r\n></document-editor>"
+        },
+        {
+            "name": "DocumentEditorComponent",
+            "id": "component-DocumentEditorComponent-6327e1e3ee353349a03ed7c0208cd40338cd6557ad37551d1fa31e3b34a924d2559eb8f41a19253a57270cc656913a3fd2e4839cb79205cca837093b823347f4",
+            "file": "projects/onlyoffice/document-editor-angular/src/lib/components/document-editor.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "document-editor",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<div [id]=\"id\"></div>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "config",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 21,
+                    "type": "IConfig",
+                    "decorators": []
+                },
+                {
+                    "name": "document_fileType",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 23,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "document_title",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 24,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "documentServerUrl",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "documentType",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 25,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "editorConfig_lang",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onAppReady",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 31,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onDocumentReady",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 32,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onDocumentStateChange",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 33,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onError",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 34,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "height",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 27,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 19,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 28,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "width",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 29,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "isFirstOnChanges",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 36
+                },
+                {
+                    "name": "onLoad",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 79
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnChanges",
+                    "args": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 50,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ngOnDestroy",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 72,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 40,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';\nimport { IConfig } from '../model/config';\nimport loadScript from \"../utils/loadScript\";\n\ndeclare global {\n  interface Window {\n      DocsAPI?: any;\n      DocEditor?: any;\n  }\n}\n\n@Component({\n  selector: 'document-editor',\n  template: '<div [id]=\"id\"></div>',\n  styles: [\n  ]\n})\nexport class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {\n  @Input() id: string;\n  @Input() documentServerUrl: string;\n  @Input() config: IConfig;\n\n  @Input() document_fileType?: string;\n  @Input() document_title?: string;\n  @Input() documentType?: string;\n  @Input() editorConfig_lang?: string;\n  @Input() height?: string;\n  @Input() type?: string;\n  @Input() width?: string;\n\n  @Input() events_onAppReady?: (editor: object) => void;\n  @Input() events_onDocumentReady?: (editor: object) => void;\n  @Input() events_onDocumentStateChange?: (data: object) => void;\n  @Input() events_onError?: (error: string) => void;\n\n  isFirstOnChanges: boolean = true;\n\n  constructor() { }\n\n  ngOnInit(): void {\n    let url = this.documentServerUrl;\n    if (!url.endsWith(\"/\")) url += \"/\";\n\n    const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;\n    loadScript(docApiUrl, \"onlyoffice-api-script\")\n      .then(() => this.onLoad())\n      .catch((err) => console.error(err));\n  }\n\n  ngOnChanges(changes: SimpleChanges) {\n    const listNameChanges = [\"config\", \"document_fileType\", \"document_title\", \"documentType\", \"editorConfig_lang\", \"height\", \"type\", \"width\"];\n\n    if (this.isFirstOnChanges) {\n      this.isFirstOnChanges = false;\n      return;\n    }\n\n    for (const name of listNameChanges) {\n      if (changes.hasOwnProperty(name)) {\n        if (window?.DocEditor?.instances[this.id]) {\n          window.DocEditor.instances[this.id].destroyEditor();\n          window.DocEditor.instances[this.id] = undefined;\n    \n          console.log(\"Important props have been changed. Load new Editor.\");\n          this.onLoad();\n          return;\n        }\n      }\n    }\n  }\n\n  ngOnDestroy() {\n    if (window?.DocEditor?.instances[this.id]) {\n      window.DocEditor.instances[this.id].destroyEditor();\n      window.DocEditor.instances[this.id] = undefined;\n    }\n  }\n\n  onLoad = () => {\n    try {\n      if (!window.DocsAPI) throw new Error(\"DocsAPI is not defined\");\n      if (window?.DocEditor?.instances[this.id]) {\n        console.log(\"Skip loading. Instance already exists\", this.id);\n        return;\n      }\n\n      if (!window?.DocEditor?.instances) {\n        window.DocEditor = { instances: {} };\n      }\n\n      let initConfig = Object.assign({\n        document: {\n          fileType: this.document_fileType,\n          title: this.document_title,\n        },\n        documentType: this.documentType,\n        editorConfig: {\n          lang: this.editorConfig_lang,\n        },\n        events: {\n          onAppReady: this.events_onAppReady,\n          onDocumentReady: this.events_onDocumentReady,\n          onDocumentStateChange: this.events_onDocumentStateChange,\n          onError: this.events_onError,\n        },\n        height: this.height,\n        type: this.type,\n        width: this.width,\n      }, this.config || {});\n\n      const editor = window.DocsAPI.DocEditor(this.id, initConfig);\n      window.DocEditor.instances[this.id] = editor;\n    } catch (err: any) {\n      console.error(err);\n      this.events_onError!(err);\n    }\n};\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 36
+            },
+            "implements": [
+                "OnInit",
+                "OnChanges",
+                "OnDestroy"
+            ]
+        }
+    ],
+    "modules": [
+        {
+            "name": "AppModule",
+            "id": "module-AppModule-cd407c1e8853c3df69077aeb09663a266db231838457a4654a0addcd6d8d9671d0bf31aa64b0680497abf905eec7b8fd7ee8fda1de02eb6b41b1fede5ca05a0b",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/app.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { BrowserModule } from '@angular/platform-browser';\r\nimport { DocumentEditorModule } from '@onlyoffice/document-editor-angular';\r\n\r\nimport { AppComponent } from './app.component';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent\r\n  ],\r\n  imports: [\r\n    BrowserModule,\r\n    DocumentEditorModule\r\n  ],\r\n  providers: [],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule { }\r\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "AppComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "DocumentEditorModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": [
+                        {
+                            "name": "AppComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "DocumentEditorModule",
+            "id": "module-DocumentEditorModule-ee551ea0c8dec9f5622e69de29bd550fbf5be6067f0e5a064c75fa87d66d6d75c2b11efffaa5c143af4bdab6e58ab07d6a3951a3b6cbd987923ddd304da3ffe0",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "projects/onlyoffice/document-editor-angular/src/lib/document-editor.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { DocumentEditorComponent } from './components/document-editor.component';\n\n\n\n@NgModule({\n  declarations: [\n    DocumentEditorComponent\n  ],\n  imports: [\n  ],\n  exports: [\n    DocumentEditorComponent\n  ]\n})\nexport class DocumentEditorModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "DocumentEditorComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "DocumentEditorComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        }
+    ],
+    "miscellaneous": {
+        "variables": [
+            {
+                "name": "context",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/test.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+            },
+            {
+                "name": "context",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/onlyoffice/document-editor-angular/src/test.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+            },
+            {
+                "name": "DocumentTemplate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/app.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.prod.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n  production: true\r\n}"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n  production: false\r\n}"
+            },
+            {
+                "name": "FormTemplate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/app.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "loadScript",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/onlyoffice/document-editor-angular/src/lib/utils/loadScript.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "async (url: string, id: string) => {\r\n  return new Promise((resolve, reject) => {\r\n    try {\r\n      if (document.getElementById(id)) {\r\n        if (window.DocsAPI) return resolve(null);\r\n\r\n        let intervalHandler = setInterval(() => {\r\n          if (!window.DocsAPI) return;\r\n\r\n          clearInterval(intervalHandler);\r\n\r\n          return resolve(null);\r\n        }, 500);\r\n      } else {\r\n        const script = document.createElement(\"script\");\r\n        script.setAttribute(\"type\", \"text/javascript\");\r\n        script.setAttribute(\"id\", id);\r\n\r\n        script.onload = resolve;\r\n        script.onerror = reject;\r\n\r\n        script.src = url;\r\n        script.async = true;\r\n\r\n        document.body.appendChild(script);\r\n      }\r\n    } catch (e) {\r\n      console.error(e);\r\n    }\r\n  });\r\n}"
+            },
+            {
+                "name": "PresentationTemplate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/app.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "require",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/test.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "literal type"
+            },
+            {
+                "name": "require",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/onlyoffice/document-editor-angular/src/test.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "literal type"
+            },
+            {
+                "name": "SpreadsheetTemplate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/app.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/app.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<DocumentEditorComponent>",
+                "defaultValue": "(args: DocumentEditorComponent) => ({\r\n  props: args,\r\n})"
+            }
+        ],
+        "functions": [],
+        "typealiases": [],
+        "enumerations": [],
+        "groupedVariables": {
+            "src/test.ts": [
+                {
+                    "name": "context",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/test.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+                },
+                {
+                    "name": "require",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/test.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type"
+                }
+            ],
+            "projects/onlyoffice/document-editor-angular/src/test.ts": [
+                {
+                    "name": "context",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/onlyoffice/document-editor-angular/src/test.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+                },
+                {
+                    "name": "require",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/onlyoffice/document-editor-angular/src/test.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type"
+                }
+            ],
+            "src/app/app.stories.ts": [
+                {
+                    "name": "DocumentTemplate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "FormTemplate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "PresentationTemplate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "SpreadsheetTemplate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<DocumentEditorComponent>",
+                    "defaultValue": "(args: DocumentEditorComponent) => ({\r\n  props: args,\r\n})"
+                }
+            ],
+            "src/environments/environment.prod.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.prod.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\r\n  production: true\r\n}"
+                }
+            ],
+            "src/environments/environment.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\r\n  production: false\r\n}"
+                }
+            ],
+            "projects/onlyoffice/document-editor-angular/src/lib/utils/loadScript.ts": [
+                {
+                    "name": "loadScript",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/onlyoffice/document-editor-angular/src/lib/utils/loadScript.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "async (url: string, id: string) => {\r\n  return new Promise((resolve, reject) => {\r\n    try {\r\n      if (document.getElementById(id)) {\r\n        if (window.DocsAPI) return resolve(null);\r\n\r\n        let intervalHandler = setInterval(() => {\r\n          if (!window.DocsAPI) return;\r\n\r\n          clearInterval(intervalHandler);\r\n\r\n          return resolve(null);\r\n        }, 500);\r\n      } else {\r\n        const script = document.createElement(\"script\");\r\n        script.setAttribute(\"type\", \"text/javascript\");\r\n        script.setAttribute(\"id\", id);\r\n\r\n        script.onload = resolve;\r\n        script.onerror = reject;\r\n\r\n        script.src = url;\r\n        script.async = true;\r\n\r\n        document.body.appendChild(script);\r\n      }\r\n    } catch (e) {\r\n      console.error(e);\r\n    }\r\n  });\r\n}"
+                }
+            ]
+        },
+        "groupedFunctions": {},
+        "groupedEnumerations": {},
+        "groupedTypeAliases": {}
+    },
+    "routes": [],
+    "coverage": {
+        "count": 0,
+        "status": "low",
+        "files": [
+            {
+                "filePath": "projects/onlyoffice/document-editor-angular/src/lib/components/document-editor.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DocumentEditorComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/21",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/onlyoffice/document-editor-angular/src/lib/components/document-editor.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "Window",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/onlyoffice/document-editor-angular/src/lib/model/config.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "IConfig",
+                "coveragePercent": 0,
+                "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/onlyoffice/document-editor-angular/src/lib/utils/loadScript.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "loadScript",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/onlyoffice/document-editor-angular/src/test.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "context",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/onlyoffice/document-editor-angular/src/test.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "require",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AppComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "DocumentTemplate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "FormTemplate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "PresentationTemplate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "SpreadsheetTemplate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/environments/environment.prod.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "environment",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/environments/environment.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "environment",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/test.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "context",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/test.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "require",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            }
+        ]
+    }
+}

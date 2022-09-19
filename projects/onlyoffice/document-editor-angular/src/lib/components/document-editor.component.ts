@@ -48,14 +48,14 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    const listNameCanges = ["config", "document_fileType", "document_title", "documentType", "editorConfig_lang", "height", "type", "width"];
+    const listNameChanges = ["config", "document_fileType", "document_title", "documentType", "editorConfig_lang", "height", "type", "width"];
 
     if (this.isFirstOnChanges) {
       this.isFirstOnChanges = false;
       return;
     }
 
-    for (const name of listNameCanges) {
+    for (const name of listNameChanges) {
       if (changes.hasOwnProperty(name)) {
         if (window?.DocEditor?.instances[this.id]) {
           window.DocEditor.instances[this.id].destroyEditor();
