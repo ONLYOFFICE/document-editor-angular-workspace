@@ -1,19 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DocumentEditorAngularComponent } from './document-editor-angular.component';
+import { DocumentEditorComponent } from './document-editor.component';
 
 describe('DocumentEditorAngularComponent', () => {
-  let component: DocumentEditorAngularComponent;
-  let fixture: ComponentFixture<DocumentEditorAngularComponent>;
+  let component: DocumentEditorComponent;
+  let fixture: ComponentFixture<DocumentEditorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DocumentEditorAngularComponent ]
+      declarations: [ DocumentEditorComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DocumentEditorAngularComponent);
+    fixture = TestBed.createComponent(DocumentEditorComponent);
     component = fixture.componentInstance;
+
+    component.id="docEditor";
+    component.documentServerUrl="http://documentserver/"
+
     fixture.detectChanges();
   });
 

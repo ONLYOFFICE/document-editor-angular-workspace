@@ -1,7 +1,7 @@
 /*
- * Public API Surface of document-editor-angular
+ * Public API Surface of @onlyoffice/document-editor-angular
  */
 
-export * from './lib/document-editor-angular.service';
-export * from './lib/document-editor-angular.component';
-export * from './lib/document-editor-angular.module';
+export * from './lib/document-editor.module';
+export * from './lib/components/document-editor.component';
+export * from './lib/model/config';
