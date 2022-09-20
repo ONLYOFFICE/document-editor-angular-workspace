@@ -1,6 +1,7 @@
 // also exported from '@storybook/angular' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { DocumentEditorComponent } from '@onlyoffice/document-editor-angular';
+import config from "./../../config/config.json";
 
 // More on default export: https://storybook.js.org/docs/angular/writing-stories/introduction#default-export
 export default {
@@ -44,12 +45,12 @@ export const FormTemplate = Template.bind({});
 FormTemplate.storyName = "Form";
 FormTemplate.args = {
     id: "oformEditor",
-    documentServerUrl: "http://192.168.0.169:85/",
+    documentServerUrl: config.documentserverUrl,
     config: {
         document: {
             fileType: "oform",
             title: "demo.oform",
-            url: "https://d2nlctn12v279m.cloudfront.net/assets/docs/samples/demo.oform",
+            url: config.demoStorage + "demo.oform",
         },
         documentType: "word",
     },
@@ -60,12 +61,12 @@ export const DocumentTemplate = Template.bind({});
 DocumentTemplate.storyName = "Document";
 DocumentTemplate.args = {
     id: "docxEditor",
-    documentServerUrl: "http://192.168.0.169:85/",
+    documentServerUrl: config.documentserverUrl,
     config: {
         document: {
             fileType: "docx",
             title: "demo.docx",
-            url: "https://d2nlctn12v279m.cloudfront.net/assets/docs/samples/demo.docx",
+            url: config.demoStorage + "demo.docx",
         },
         documentType: "word",
     },
@@ -76,12 +77,12 @@ export const SpreadsheetTemplate = Template.bind({});
 SpreadsheetTemplate.storyName = "Spreadsheet";
 SpreadsheetTemplate.args = {
     id: "xlsxEditor",
-    documentServerUrl: "http://192.168.0.169:85/",
+    documentServerUrl: config.documentserverUrl,
     config: {
         document: {
             fileType: "xlsx",
             title: "demo.xlsx",
-            url: "https://d2nlctn12v279m.cloudfront.net/assets/docs/samples/demo.xlsx",
+            url: config.demoStorage + "demo.xlsx",
         },
         documentType: "cell",
     },
@@ -92,12 +93,12 @@ export const PresentationTemplate = Template.bind({});
 PresentationTemplate.storyName = "Presentation";
 PresentationTemplate.args = {
     id: "pptxEditor",
-    documentServerUrl: "http://192.168.0.169:85/",
+    documentServerUrl: config.documentserverUrl,
     config: {
         document: {
             fileType: "pptx",
             title: "demo.pptx",
-            url: "https://d2nlctn12v279m.cloudfront.net/assets/docs/samples/demo.pptx",
+            url: config.demoStorage + "demo.pptx",
         },
         documentType: "slide",
     },
