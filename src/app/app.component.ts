@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IConfig } from '@onlyoffice/document-editor-angular';
+import config from "./../../config/config.json";
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ export class AppComponent {
     document: {
         fileType: "docx",
         title: "demo.docx",
-        url: "https://d2nlctn12v279m.cloudfront.net/assets/docs/samples/demo.docx",
+        url: config.demoStorage + "demo.docx",
         key: "Khirz6zTPdfd7"
     },
     documentType: "word",

@@ -1,13 +1,10 @@
-// also exported from '@storybook/angular' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { DocumentEditorComponent } from '@onlyoffice/document-editor-angular';
 import config from "./../../config/config.json";
 
-// More on default export: https://storybook.js.org/docs/angular/writing-stories/introduction#default-export
 export default {
   title: 'DocumentEditorComponent',
   component: DocumentEditorComponent,
-  // More on argTypes: https://storybook.js.org/docs/angular/api/argtypes
   parameters: {
     docs: false,
   },
@@ -36,7 +33,6 @@ export default {
   },
 } as Meta;
 
-// More on component templates: https://storybook.js.org/docs/angular/writing-stories/introduction#using-args
 const Template: Story<DocumentEditorComponent> = (args: DocumentEditorComponent) => ({
   props: args,
 });

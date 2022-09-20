@@ -159,7 +159,7 @@
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "templateData": "<document-editor \r\n  id=\"docEditor\" \r\n  documentServerUrl=\"http://192.168.0.169:85\"\r\n  [config]=\"config\"\r\n></document-editor>"
+            "templateData": "<document-editor \r\n  id=\"docEditor\" \r\n  documentServerUrl=\"http://documentserver\"\r\n  [config]=\"config\"\r\n></document-editor>"
         },
         {
             "name": "DocumentEditorComponent",
