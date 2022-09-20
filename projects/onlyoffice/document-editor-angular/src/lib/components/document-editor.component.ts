@@ -44,7 +44,10 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
     const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;
     loadScript(docApiUrl, "onlyoffice-api-script")
       .then(() => this.onLoad())
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        this.events_onError!(err);
+      });
   }
 
   ngOnChanges(changes: SimpleChanges) {
