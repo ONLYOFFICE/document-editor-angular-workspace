@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'onlyoffice-angular-workspace'`, () => {
+  it(`should have as title 'document-editor-angular-workspace'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('onlyoffice-angular-workspace');
+    expect(app.title).toEqual('document-editor-angular-workspace');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('onlyoffice-angular-workspace app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('document-editor-angular-workspace app is running!');
   });
 });
