@@ -25,4 +25,8 @@ export interface IConfig {
   token?: string;
   type?: string;
   width?: string;
+  events_onAppReady?: (editor: object) => void;
+  events_onDocumentReady?: (editor: object) => void;
+  events_onDocumentStateChange?: (data: object) => void;
+  events_onError?: (error: string) => void;
 }
