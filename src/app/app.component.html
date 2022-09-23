@@ -1,5 +1,11 @@
+
+<comments [comments]="comments"></comments>
+
 <document-editor 
-  id="docEditor" 
-  documentServerUrl="http://documentserver"
+  id="docxForComments" 
+  documentServerUrl="http://192.168.0.169"
   [config]="config"
+  [events_onDocumentReady]="onDocumentReady"
+  height="600px"
+  width="70%"
 ></document-editor>

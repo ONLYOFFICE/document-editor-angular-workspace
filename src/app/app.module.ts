@@ -3,10 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { DocumentEditorModule } from '@onlyoffice/document-editor-angular';
 
 import { AppComponent } from './app.component';
+import { CommentsComponent } from './components/comments/comments.component';
+import { ListCommentsComponent } from './components/comments/list-comments.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CommentsComponent,
+    ListCommentsComponent
   ],
   imports: [
     BrowserModule,
