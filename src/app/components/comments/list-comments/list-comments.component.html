@@ -1,7 +1,7 @@
 <div>
   <div *ngFor="let comment of comments" class="comment-div">
     <remove-comment [connector]="connector" [commentId]="comment['Id']"></remove-comment>
-    <div [id]="comment['Id']">
+    <div [id]="comment['Id']" (click)="goToComment($event)">
       <span class="comment-span">Author: {{ comment["Data"]["UserName"] }}</span>
       <span class="comment-span">Date: {{ dateParser(comment["Data"]["Time"]) }}</span>
       <span class="comment-span">Message: {{ comment["Data"]["Text"] }}</span>

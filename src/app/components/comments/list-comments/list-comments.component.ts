@@ -10,6 +10,12 @@ export class ListCommentsComponent implements OnChanges {
   @Input() userName: string;
   @Input() comments: any[];
 
+  goToComment (e: any) {
+    if (e.target.parentElement.id) {
+      this.connector.executeMethod("MoveToComment",[e.target.parentElement.id]);
+    }
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes.hasOwnProperty("connector")) {
       if (this.connector) {
