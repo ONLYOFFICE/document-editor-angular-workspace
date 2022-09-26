@@ -2,8 +2,15 @@
   <div *ngFor="let comment of comments" class="comment-div">
     <div [id]="comment['Id']">
       <span class="comment-span">Author: {{ comment["Data"]["UserName"] }}</span>
-      <span class="comment-span">{{ dateParser(comment["Data"]["Time"]) }}</span>
+      <span class="comment-span">Date: {{ dateParser(comment["Data"]["Time"]) }}</span>
       <span class="comment-span">Message: {{ comment["Data"]["Text"] }}</span>
+    </div>
+    <div class="comment-replies">
+      <div *ngFor="let reply of comment['Data']['Replies']" [style.marginBottom]="'10px'">
+        <span class="comment-span">Author: {{ reply["UserName"] }}</span>
+        <span class="comment-span">Date: {{ dateParser(reply["Time"]) }}</span>
+        <span class="comment-span">Message: {{ reply["Text"] }}</span>
+      </div>
     </div>
     <add-comment-reply [connector]="connector" [userName]="userName" [comment]="comment"></add-comment-reply>
   </div>
