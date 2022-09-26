@@ -8,22 +8,18 @@ import config from "./../../config/config.json";
 })
 export class AppComponent {
   comments: any[] = [];
-  connector = null;
+  connector: any = null;
 
   onDocumentReady = () => {
-    console.log("SDfdsafdsf");
     var editor = window.DocEditor.instances["docxForComments"];
-    var connector = editor.createConnector();
-    console.log("SDfdsafdsf");
-    connector.executeMethod("GetAllComments", null, function(data: any) {
+    this.connector = editor.createConnector();
+    this.connector.executeMethod("GetAllComments", null, function(data: any) {
       let commentsRevers: any[] = [];
       for (var i = 0; i < data.length; i++){
         commentsRevers[i] = data[(data.length - 1) - i];
       }
       this.comments = commentsRevers;
     }.bind(this));
-
-    this.connector = connector;
   };
 
   config: IConfig = {
