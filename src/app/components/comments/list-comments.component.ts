@@ -6,6 +6,8 @@ import {Component, Input, SimpleChanges} from '@angular/core'
   styleUrls: ['./comments.component.css']
 })
 export class ListCommentsComponent {
+  @Input() connector: any[];
+  @Input() userName: string;
   @Input() comments: any[];
 
   ngOnChanges(changes: SimpleChanges) {

@@ -1,9 +1,10 @@
 <div>
   <div *ngFor="let comment of comments" class="comment-div">
-          <div [id]="comment['Id']">
-            <span class="comment-span">Author: {{ comment["Data"]["UserName"] }}</span>
-            <span class="comment-span">{{ dateParser(comment["Data"]["Time"]) }}</span>
-            <span class="comment-span">Message: {{ comment["Data"]["Text"] }}</span>
-          </div>
+    <div [id]="comment['Id']">
+      <span class="comment-span">Author: {{ comment["Data"]["UserName"] }}</span>
+      <span class="comment-span">{{ dateParser(comment["Data"]["Time"]) }}</span>
+      <span class="comment-span">Message: {{ comment["Data"]["Text"] }}</span>
+    </div>
+    <add-comment-reply [connector]="connector" [userName]="userName" [comment]="comment"></add-comment-reply>
   </div>
 </div>

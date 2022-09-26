@@ -4,6 +4,7 @@ import { DocumentEditorModule } from '@onlyoffice/document-editor-angular';
 
 import { AppComponent } from './app.component';
 import { AddCommentComponent } from './components/comments/add-comment.component';
+import { AddCommentReplyComponent } from './components/comments/add-comment-reply.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { ListCommentsComponent } from './components/comments/list-comments.component';
 
@@ -12,7 +13,8 @@ import { ListCommentsComponent } from './components/comments/list-comments.compo
     AppComponent,
     CommentsComponent,
     ListCommentsComponent,
-    AddCommentComponent
+    AddCommentComponent,
+    AddCommentReplyComponent
   ],
   imports: [
     BrowserModule,
