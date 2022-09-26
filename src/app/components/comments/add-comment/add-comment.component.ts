@@ -3,7 +3,7 @@ import {Component, Input} from '@angular/core'
 @Component({
   selector: 'add-comment',
   templateUrl: './add-comment.component.html',
-  styleUrls: ['./comments.component.css']
+  styleUrls: ['../comments.component.css']
 })
 export class AddCommentComponent {
   @Input() connector: any;

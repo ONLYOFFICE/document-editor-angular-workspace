@@ -3,7 +3,7 @@ import {Component, Input, SimpleChanges} from '@angular/core'
 @Component({
   selector: 'list-comments',
   templateUrl: './list-comments.component.html',
-  styleUrls: ['./comments.component.css']
+  styleUrls: ['../comments.component.css']
 })
 export class ListCommentsComponent {
   @Input() connector: any[];
