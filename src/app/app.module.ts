@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { DocumentEditorModule } from '@onlyoffice/document-editor-angular';
 
 import { AppComponent } from './app.component';
+import { AddCommentComponent } from './components/comments/add-comment.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { ListCommentsComponent } from './components/comments/list-comments.component';
 
@@ -10,7 +11,8 @@ import { ListCommentsComponent } from './components/comments/list-comments.compo
   declarations: [
     AppComponent,
     CommentsComponent,
-    ListCommentsComponent
+    ListCommentsComponent,
+    AddCommentComponent
   ],
   imports: [
     BrowserModule,

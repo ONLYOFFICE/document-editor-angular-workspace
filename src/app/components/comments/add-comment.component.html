@@ -1,0 +1,6 @@
+<div [style.textAlign]="'right'">
+  <span [style.display]="'block'" [style.textAlign]="'left'">Enter your comment:</span>
+  <textarea [value]="comment" (change)="comment=getValue($event)"></textarea>
+
+  <button (click)="addComment()">Send</button>
+</div>
