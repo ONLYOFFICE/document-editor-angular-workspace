@@ -7,7 +7,8 @@
       <span class="comment-span">Message: {{ comment["Data"]["Text"] }}</span>
     </div>
     <div class="comment-replies">
-      <div *ngFor="let reply of comment['Data']['Replies']" [style.marginBottom]="'10px'">
+      <div *ngFor="let reply of comment['Data']['Replies']; let index = index" [style.marginBottom]="'10px'">
+        <remove-comment-reply [connector]="connector" [comment]="comment" [replyId]="index"></remove-comment-reply>
         <span class="comment-span">Author: {{ reply["UserName"] }}</span>
         <span class="comment-span">Date: {{ dateParser(reply["Time"]) }}</span>
         <span class="comment-span">Message: {{ reply["Text"] }}</span>

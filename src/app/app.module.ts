@@ -8,6 +8,7 @@ import { AddCommentReplyComponent } from './components/comments/add-comment-repl
 import { CommentsComponent } from './components/comments/comments.component';
 import { ListCommentsComponent } from './components/comments/list-comments/list-comments.component';
 import { RemoveCommentComponent } from './components/comments/remove-comment/remove-comment.component';
+import { RemoveCommentReplyComponent } from './components/comments/remove-comment-reply/remove-comment-reply.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { RemoveCommentComponent } from './components/comments/remove-comment/rem
     ListCommentsComponent,
     AddCommentComponent,
     AddCommentReplyComponent,
-    RemoveCommentComponent
+    RemoveCommentComponent,
+    RemoveCommentReplyComponent
   ],
   imports: [
     BrowserModule,
