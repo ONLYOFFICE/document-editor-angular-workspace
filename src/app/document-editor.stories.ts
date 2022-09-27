@@ -1,6 +1,6 @@
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { DocumentEditorComponent } from '@onlyoffice/document-editor-angular';
-import config from "./../../config/config.json";
+import config from "../../config/config.json";
 
 export default {
   title: 'DocumentEditorComponent',
