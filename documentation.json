@@ -460,6 +460,103 @@
             "templateData": "\r\n<comments userName=\"John Smith\" [comments]=\"comments\" [connector]=\"connector\"></comments>\r\n\r\n<document-editor \r\n  id=\"docxForComments\" \r\n  documentServerUrl=\"http://192.168.0.169\"\r\n  [config]=\"config\"\r\n  [events_onDocumentReady]=\"onDocumentReady\"\r\n  height=\"600px\"\r\n  width=\"70%\"\r\n></document-editor>"
         },
         {
+            "name": "CommenstStoriesComponent",
+            "id": "component-CommenstStoriesComponent-9cb1a444c4add6f011d639c829c4aed37914eb5dfb9c68098bf40f0b958100cb17d8772c49e197e33323267afbc32bbabbb1ee22dcdbba6c071fd4704b5b7cb6",
+            "file": "src/app/components/comments/comments-stories/commenst-stories.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "comments-stories",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./comments-stories.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "config",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "IConfig",
+                    "decorators": []
+                },
+                {
+                    "name": "documentServerUrl",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "editorId",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "userName",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "comments",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "connector",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                },
+                {
+                    "name": "onDocumentReady",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\n\r\n@Component({\r\n  selector: 'comments-stories',\r\n  templateUrl: './comments-stories.component.html'\r\n})\r\nexport class CommenstStoriesComponent {\r\n  @Input() editorId: string;\r\n  @Input() userName: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  comments: any[] = [];\r\n  connector: any = null;\r\n\r\n  onDocumentReady = () => {\r\n    var editor = window.DocEditor.instances[\"docxForComments\"];\r\n    this.connector = editor.createConnector();\r\n    this.connector.executeMethod(\"GetAllComments\", null, function(data: any) {\r\n      let commentsRevers: any[] = [];\r\n      for (var i = 0; i < data.length; i++){\r\n        commentsRevers[i] = data[(data.length - 1) - i];\r\n      }\r\n      this.comments = commentsRevers;\r\n    }.bind(this));\r\n  };\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "templateData": "<comments [userName]=\"userName\" [comments]=\"comments\" [connector]=\"connector\"></comments>\r\n\r\n<document-editor \r\n  [id]=\"editorId\" \r\n  [documentServerUrl]=\"documentServerUrl\"\r\n  [config]=\"config\"\r\n  [events_onDocumentReady]=\"onDocumentReady\"\r\n></document-editor>"
+        },
+        {
             "name": "CommentsComponent",
             "id": "component-CommentsComponent-d639fee2e9209e3e7c7e4b0040627b94267a8618fc90fabadf5732b5cc7bbf1d6f50d5abde980b19c169e1337584ffee87e1dfeb242bbfb62b3843d1fc416dee",
             "file": "src/app/components/comments/comments.component.ts",
@@ -1052,13 +1149,13 @@
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-ecb77688063ccbd9a05cb4c2c11f8e5709282887e89e3934d75b31e363eafe4dafa72d88707fbb2f506690eeedbe5fa7ccf8fcae2c88940c694b914fb53b453c",
+            "id": "module-AppModule-894997969ec6ec3ed1721936bfe5c0bf4f6bb4673d1d1457f835d390c171867951177b9f216e50b38ea45e7e72e6c3086cd57a5bd2a23c3c7ef3e372e46bc946",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { BrowserModule } from '@angular/platform-browser';\r\nimport { DocumentEditorModule } from '@onlyoffice/document-editor-angular';\r\n\r\nimport { AppComponent } from './app.component';\r\nimport { AddCommentComponent } from './components/comments/add-comment/add-comment.component';\r\nimport { AddCommentReplyComponent } from './components/comments/add-comment-reply/add-comment-reply.component';\r\nimport { CommentsComponent } from './components/comments/comments.component';\r\nimport { ListCommentsComponent } from './components/comments/list-comments/list-comments.component';\r\nimport { RemoveCommentComponent } from './components/comments/remove-comment/remove-comment.component';\r\nimport { RemoveCommentReplyComponent } from './components/comments/remove-comment-reply/remove-comment-reply.component';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    CommentsComponent,\r\n    ListCommentsComponent,\r\n    AddCommentComponent,\r\n    AddCommentReplyComponent,\r\n    RemoveCommentComponent,\r\n    RemoveCommentReplyComponent\r\n  ],\r\n  imports: [\r\n    BrowserModule,\r\n    DocumentEditorModule\r\n  ],\r\n  providers: [],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule { }\r\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { BrowserModule } from '@angular/platform-browser';\r\nimport { DocumentEditorModule } from '@onlyoffice/document-editor-angular';\r\n\r\nimport { AppComponent } from './app.component';\r\nimport { AddCommentComponent } from './components/comments/add-comment/add-comment.component';\r\nimport { AddCommentReplyComponent } from './components/comments/add-comment-reply/add-comment-reply.component';\r\nimport { CommentsComponent } from './components/comments/comments.component';\r\nimport { ListCommentsComponent } from './components/comments/list-comments/list-comments.component';\r\nimport { RemoveCommentComponent } from './components/comments/remove-comment/remove-comment.component';\r\nimport { RemoveCommentReplyComponent } from './components/comments/remove-comment-reply/remove-comment-reply.component';\r\nimport { CommenstStoriesComponent } from './components/comments/comments-stories/commenst-stories.component';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    CommentsComponent,\r\n    ListCommentsComponent,\r\n    AddCommentComponent,\r\n    AddCommentReplyComponent,\r\n    RemoveCommentComponent,\r\n    RemoveCommentReplyComponent,\r\n    CommenstStoriesComponent\r\n  ],\r\n  imports: [\r\n    BrowserModule,\r\n    DocumentEditorModule\r\n  ],\r\n  providers: [],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule { }\r\n",
             "children": [
                 {
                     "type": "providers",
@@ -1075,6 +1172,9 @@
                         },
                         {
                             "name": "AppComponent"
+                        },
+                        {
+                            "name": "CommenstStoriesComponent"
                         },
                         {
                             "name": "CommentsComponent"
@@ -1570,6 +1670,15 @@
                 "name": "AddCommentComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/comments/comments-stories/commenst-stories.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CommenstStoriesComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/8",
                 "status": "low"
             },
             {

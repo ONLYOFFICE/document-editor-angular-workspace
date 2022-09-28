@@ -45,7 +45,7 @@ CommentsTemplate.args = {
     document: {
       fileType: "docx",
       title: "demo.docx",
-      url: config.demoStorage + "demo.docx",
+      url: config.demoStorage + "withcomments.docx",
     },
     documentType: "word",
     editorConfig: {
