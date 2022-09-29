@@ -7,6 +7,9 @@ import { ContentControlsStoriesComponent } from './components/content-controls/c
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ContentControlsComponent } from './components/content-controls/content-controls.component';
+import { InputContentControlComponent } from './components/content-controls/input-content-control/input-content-control.component';
+import { RadioContentControlComponent } from './components/content-controls/radio-content-control/radio-content-control.component';
 
 function getPersonsOptions(){
   let personsOptions = [];
@@ -28,7 +31,7 @@ export default {
   },
   decorators: [
     moduleMetadata({
-      declarations: [ DocumentEditorComponent ],
+      declarations: [ DocumentEditorComponent, ContentControlsComponent, InputContentControlComponent, RadioContentControlComponent ],
       imports: [ NgSelectModule, CommonModule, FormsModule, ReactiveFormsModule ]
     }),
   ],

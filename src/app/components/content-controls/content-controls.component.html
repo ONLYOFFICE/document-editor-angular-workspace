@@ -1,0 +1,22 @@
+<div class="controlBlock">
+  <div *ngFor="let contentControl of copyContentControls" [ngSwitch]="contentControl.Type">
+
+    <input-content-control
+      *ngSwitchCase="'input'"
+      [id]="contentControl.Tag"
+      [label]="getLabel(contentControl.Tag)"
+      [value]="contentControl.Value"
+      [setFormValue]="setFormValue"
+      >
+    </input-content-control>
+
+    <radio-content-control
+      *ngSwitchCase="'radio'"
+      [id]="contentControl.Tag"
+      [label]="getLabel(contentControl.Tag)"
+      [options]="contentControl.Value"
+      [setFormValue]="setFormValue"
+    ></radio-content-control>
+
+  </div>
+</div>

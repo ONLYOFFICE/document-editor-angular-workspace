@@ -6,6 +6,8 @@
   [(ngModel)]="selectedPerson">
 </ng-select>
 
+<content-controls [contentControls]="contentControls" [setFormValue]="setFormValue"></content-controls>
+
 <document-editor 
   [id]="editorId" 
   [documentServerUrl]="documentServerUrl"

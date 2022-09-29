@@ -11,6 +11,9 @@ import { RemoveCommentComponent } from './components/comments/remove-comment/rem
 import { RemoveCommentReplyComponent } from './components/comments/remove-comment-reply/remove-comment-reply.component';
 import { CommenstStoriesComponent } from './components/comments/comments-stories/commenst-stories.component';
 import { ContentControlsStoriesComponent } from './components/content-controls/content-controls-stories/content-controls-stories.component';
+import { ContentControlsComponent } from './components/content-controls/content-controls.component';
+import { InputContentControlComponent } from './components/content-controls/input-content-control/input-content-control.component';
+import { RadioContentControlComponent } from './components/content-controls/radio-content-control/radio-content-control.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,7 +28,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RemoveCommentComponent,
     RemoveCommentReplyComponent,
     CommenstStoriesComponent,
-    ContentControlsStoriesComponent
+    ContentControlsStoriesComponent,
+    ContentControlsComponent,
+    InputContentControlComponent,
+    RadioContentControlComponent
   ],
   imports: [
     BrowserModule,

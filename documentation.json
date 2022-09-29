@@ -115,6 +115,38 @@
             "methods": []
         },
         {
+            "name": "IPerson",
+            "id": "interface-IPerson-1f17a45196515f256dd285bca04768438e1ac895f685835c94b90be337da3c18ee2f16e3fe861e8e22f80dbc552a937ba36ad2bcd29fa76a084add1e4c79e7d0",
+            "file": "src/app/model/person.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface IPerson {\r\n  label: string;\r\n  value?: any;\r\n}",
+            "properties": [
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                },
+                {
+                    "name": "value",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": true,
+                    "description": "",
+                    "line": 3
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
             "name": "Window",
             "id": "interface-Window-70f5980c3f6ac94917a4596a26542f538a3e6d73c13e080e2ef6649b38d37ef02e8403df782bfa203b5ab1daf671e0729df63adb0c305990785f829e917cc492",
             "file": "projects/onlyoffice/document-editor-angular/src/lib/components/document-editor.component.ts",
@@ -622,6 +654,237 @@
             "templateData": "<div id=\"blockComments\">\r\n  <h3 [style.textAlign]=\"'left'\">Comments</h3>\r\n  <add-comment [connector]=\"connector\" [userName]=\"userName\"></add-comment>\r\n  <list-comments [connector]=\"connector\" [userName]=\"userName\" [comments]=\"comments\"></list-comments>\r\n</div>"
         },
         {
+            "name": "ContentControlsComponent",
+            "id": "component-ContentControlsComponent-de4c9d3adeef92f66fb4b23e1db57f30166b54e1f8e37badcfe99d298c7574485d34547df5f72a78a821bc89b7386b59fe5f69e5f07ee0ec9b75421f8b7cf670",
+            "file": "src/app/components/content-controls/content-controls.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "content-controls",
+            "styleUrls": [
+                "./content-controls.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./content-controls.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "contentControls",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "any[]",
+                    "decorators": []
+                },
+                {
+                    "name": "setFormValue",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "function",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "getContentControls",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 13,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "getLabel",
+                    "args": [
+                        {
+                            "name": "nameTag",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 51,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "nameTag",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'content-controls',\r\n  templateUrl: './content-controls.component.html',\r\n  styleUrls: [ './content-controls.component.css' ]\r\n})\r\nexport class ContentControlsComponent {\r\n  @Input() contentControls: any[];\r\n  @Input() setFormValue: (id: string, value: string) => void;\r\n\r\n  getContentControls () {\r\n    let copyContentControls: any[] = [];\r\n\r\n    for (i = 0; i < this.contentControls?.length; i++) {\r\n      var copyContentControl = this.contentControls[i];\r\n      copyContentControls[i] = {...copyContentControl};\r\n    }\r\n  \r\n    let groupsRadioControls: any[] = copyContentControls.filter(contentControl => contentControl.Tag != \"\" && contentControl.Type == \"radio\").reduce((r, a) => {\r\n      r[a.GroupKey] = r[a.GroupKey] || [];\r\n      r[a.GroupKey].push({Tag: a.Tag, checked: a.Value});\r\n      return r;\r\n    }, {});\r\n  \r\n    for (const [key, value] of Object.entries(groupsRadioControls)) {\r\n      let index = [];\r\n      let first = true;\r\n  \r\n      for (var i = 0; i < copyContentControls.length; i++) {\r\n        if (copyContentControls[i].GroupKey && copyContentControls[i].GroupKey == key) {\r\n          index.push(i);\r\n        } \r\n      }\r\n  \r\n      for (var i = 0; i < index.length; i++) {\r\n        if (first) {\r\n          copyContentControls[index[i]].Tag = key;\r\n          copyContentControls[index[i]].Value = value;\r\n          first = false;\r\n        } else {\r\n          copyContentControls.splice(index[i], 1);\r\n        }\r\n      }\r\n    }\r\n\r\n    return copyContentControls.filter(contentControl => contentControl.Tag != \"\");\r\n  }\r\n\r\n  getLabel(nameTag: string) {\r\n    return nameTag.replace(/([a-z])([A-Z])/g, '$1 $2');\r\n  }\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".controlBlock {\r\n  width: 370px;\r\n  text-align: right;\r\n  margin-bottom: 20px;\r\n  display: inline-block;\r\n}\r\n\r\n.control {\r\n  margin: 5px;\r\n}\r\n\r\n.radioControl {\r\n  text-align: left;\r\n  display: inline-block;\r\n  width: 193px;\r\n}\r\n\r\nlabel {\r\n  font-weight: 700;\r\n  font-size: 14px;\r\n  line-height: 20px;\r\n  display: inline-block;\r\n  padding-right: 10px;\r\n}\r\n\r\n.radioLabel {\r\n  padding-left: 5px;\r\n}\r\n\r\ninput {\r\n  color: rgb(51, 51, 51);\r\n  box-shadow: rgb(0 0 0 / 10%) 0px 0px 0px 1px inset;\r\n  line-height: 16px;\r\n  padding: 6px 12px;\r\n  border-radius: 3em;\r\n  border: none;\r\n  box-sizing: border-box;\r\n  margin: 0px;\r\n}\r\n\r\niframe {\r\n  display: inline-block;\r\n}",
+                    "styleUrl": "./content-controls.component.css"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<div class=\"controlBlock\">\r\n  <div *ngFor=\"let contentControl of getContentControls()\" [ngSwitch]=\"contentControl.Type\">\r\n    <input-content-control \r\n      *ngSwitchCase=\"'input'\" \r\n      [id]=\"contentControl.Tag\" \r\n      [label]=\"getLabel(contentControl.Tag)\"\r\n      [value]=\"contentControl.Value\"\r\n      [setFormValue]=\"setFormValue\"\r\n      >\r\n    </input-content-control>\r\n    <radio-content-control\r\n      *ngSwitchCase=\"'radio'\"\r\n      [id]=\"contentControl.Tag\"\r\n      [label]=\"getLabel(contentControl.Tag)\"\r\n      [options]=\"contentControl.Value\"\r\n      [setFormValue]=\"setFormValue\"\r\n    ></radio-content-control>\r\n  </div>\r\n</div>"
+        },
+        {
+            "name": "ContentControlsStoriesComponent",
+            "id": "component-ContentControlsStoriesComponent-849ff4fe0bc384b803cd390fe47f75353d7ec0a00560c90fc0a05dec420b4d026e3c0ebb41de714a1f1fd8e11c0febd1a1950be475e94f18cf640a221a057c7e",
+            "file": "src/app/components/content-controls/content-controls-stories/content-controls-stories.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "content-controls-stories",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./content-controls-stories.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "config",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "IConfig",
+                    "decorators": []
+                },
+                {
+                    "name": "documentServerUrl",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "editorId",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "persons",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "IPerson[]",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "connector",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                },
+                {
+                    "name": "contentControls",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                },
+                {
+                    "name": "getAllContentControls",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 39
+                },
+                {
+                    "name": "onChangeSelect",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 20
+                },
+                {
+                    "name": "onDocumentReady",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 65
+                },
+                {
+                    "name": "selectedPerson",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                },
+                {
+                    "name": "setFormValue",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 33
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\nimport { IPerson } from '../../../model/person';\r\n\r\n@Component({\r\n  selector: 'content-controls-stories',\r\n  templateUrl: './content-controls-stories.component.html'\r\n})\r\nexport class ContentControlsStoriesComponent {\r\n  @Input() editorId: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n  @Input() persons: IPerson[];\r\n\r\n  connector: any = null;\r\n\r\n  contentControls: any;\r\n  selectedPerson: any;\r\n\r\n  onChangeSelect = () => {\r\n    for (var [key, value] of Object.entries<string>(this.selectedPerson)) {\r\n      if (key == \"Sex\") {\r\n        key = value == \"Male\" ? \"Male\" : \"Female\";\r\n        value = \"true\";\r\n      }\r\n\r\n      this.setFormValue(key, value || \"\");\r\n    }\r\n\r\n    this.getAllContentControls();\r\n  };\r\n\r\n  setFormValue = (formId: string, value: string) => {\r\n    this.connector.executeMethod(\"GetFormsByTag\", [formId], function(forms: any) {\r\n      this.connector.executeMethod(\"SetFormValue\", [forms[0][\"InternalId\"], value], null);\r\n    }.bind(this));\r\n  }\r\n\r\n  getAllContentControls = () => {\r\n    this.connector.executeMethod (\"GetAllContentControls\", null, function(data: any) {\r\n      for (let i = 0; i < data.length; i++) {\r\n        switch (data[i].Tag) {\r\n          case \"Male\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          case \"Female\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          default:\r\n            data[i].Type = \"input\";\r\n        }\r\n\r\n        this.connector.executeMethod(\"GetFormValue\", [data[i].InternalId], (value: any) => {\r\n            data[i].Value = value ? value : \"\";\r\n            if (data.length - 1 == i) {\r\n              this.contentControls = data;\r\n            }\r\n        });\r\n      }\r\n    }.bind(this));\r\n  }\r\n\r\n  onDocumentReady = () => {\r\n    try {\r\n      var editor = window.DocEditor.instances[\"oformEditor\"];\r\n      this.connector = editor.createConnector();\r\n      this.connector.connect();\r\n\r\n      this.getAllContentControls();\r\n      console.log(this.selectedPerson);\r\n      //this.connector.attachEvent(\"onChangeContentControl\", onBlurContentControl);\r\n    } catch (err) {\r\n      console.error(err);\r\n    }\r\n  };\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "templateData": "<ng-select \r\n  [items]=\"persons\"\r\n  bindLabel=\"label\"\r\n  bindValue=\"value\"\r\n  (change)=\"onChangeSelect()\" \r\n  [(ngModel)]=\"selectedPerson\">\r\n</ng-select>\r\n\r\n<content-controls [contentControls]=\"contentControls\" [setFormValue]=\"setFormValue\"></content-controls>\r\n\r\n<document-editor \r\n  [id]=\"editorId\" \r\n  [documentServerUrl]=\"documentServerUrl\"\r\n  [config]=\"config\"\r\n  [events_onDocumentReady]=\"onDocumentReady\"\r\n></document-editor>"
+        },
+        {
             "name": "DocumentEditorComponent",
             "id": "component-DocumentEditorComponent-70f5980c3f6ac94917a4596a26542f538a3e6d73c13e080e2ef6649b38d37ef02e8403df782bfa203b5ab1daf671e0729df63adb0c305990785f829e917cc492",
             "file": "projects/onlyoffice/document-editor-angular/src/lib/components/document-editor.component.ts",
@@ -849,6 +1112,119 @@
             ]
         },
         {
+            "name": "InputContentControlComponent",
+            "id": "component-InputContentControlComponent-e1d52bc528f203fcb6bb5d8b50d2067448657ddb8a23b6bbd6ac6622cddfb52bc9fcebab63ebcfc7070d2e075168f959c00f1d5c8159a29ca1e11bcfd5e64c15",
+            "file": "src/app/components/content-controls/input-content-control/input-content-control.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "input-content-control",
+            "styleUrls": [
+                "./../content-controls.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./input-content-control.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "setFormValue",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "value",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "val",
+                    "defaultValue": "\"3\"",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "getValue",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 16,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'input-content-control',\r\n  templateUrl: './input-content-control.component.html',\r\n  styleUrls: [ './../content-controls.component.css' ]\r\n})\r\nexport class InputContentControlComponent {\r\n  @Input() id: string;\r\n  @Input() value: string;\r\n  @Input() label: string;\r\n  @Input() setFormValue: (id: string, value: string) => void;\r\n\r\n  val= \"3\";\r\n\r\n  getValue(event: Event): string {\r\n    console.log(\"dsfdsf\")\r\n    this.val = (event.target as HTMLInputElement).value;\r\n    return (event.target as HTMLInputElement).value;\r\n  }\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".controlBlock {\r\n  width: 370px;\r\n  text-align: right;\r\n  margin-bottom: 20px;\r\n  display: inline-block;\r\n}\r\n\r\n.control {\r\n  margin: 5px;\r\n}\r\n\r\n.radioControl {\r\n  text-align: left;\r\n  display: inline-block;\r\n  width: 193px;\r\n}\r\n\r\nlabel {\r\n  font-weight: 700;\r\n  font-size: 14px;\r\n  line-height: 20px;\r\n  display: inline-block;\r\n  padding-right: 10px;\r\n}\r\n\r\n.radioLabel {\r\n  padding-left: 5px;\r\n}\r\n\r\ninput {\r\n  color: rgb(51, 51, 51);\r\n  box-shadow: rgb(0 0 0 / 10%) 0px 0px 0px 1px inset;\r\n  line-height: 16px;\r\n  padding: 6px 12px;\r\n  border-radius: 3em;\r\n  border: none;\r\n  box-sizing: border-box;\r\n  margin: 0px;\r\n}\r\n\r\niframe {\r\n  display: inline-block;\r\n}",
+                    "styleUrl": "./../content-controls.component.css"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<div class=\"control\">\r\n  <label>{{ label }}</label>\r\n  <input [id]=\"id\" [(ngModel)]=\"val\" (change)=\"val=getValue($event)\"/>\r\n</div>"
+        },
+        {
             "name": "ListCommentsComponent",
             "id": "component-ListCommentsComponent-c0617f4ec812584bd615d143d8ada4769574f481035a483c392258b7fc4c624cd9a24182128e824bef28b62ba7894b53ef7626b76cd468071262f03189e03c66",
             "file": "src/app/components/comments/list-comments/list-comments.component.ts",
@@ -1002,6 +1378,136 @@
             "templateData": "<div>\r\n  <div *ngFor=\"let comment of comments\" class=\"comment-div\">\r\n    <remove-comment [connector]=\"connector\" [commentId]=\"comment['Id']\"></remove-comment>\r\n    <div [id]=\"comment['Id']\" (click)=\"goToComment($event)\">\r\n      <span class=\"comment-span\">Author: {{ comment[\"Data\"][\"UserName\"] }}</span>\r\n      <span class=\"comment-span\">Date: {{ dateParser(comment[\"Data\"][\"Time\"]) }}</span>\r\n      <span class=\"comment-span\">Message: {{ comment[\"Data\"][\"Text\"] }}</span>\r\n    </div>\r\n    <div class=\"comment-replies\">\r\n      <div *ngFor=\"let reply of comment['Data']['Replies']; let index = index\" [style.marginBottom]=\"'10px'\">\r\n        <remove-comment-reply [connector]=\"connector\" [comment]=\"comment\" [replyId]=\"index\"></remove-comment-reply>\r\n        <span class=\"comment-span\">Author: {{ reply[\"UserName\"] }}</span>\r\n        <span class=\"comment-span\">Date: {{ dateParser(reply[\"Time\"]) }}</span>\r\n        <span class=\"comment-span\">Message: {{ reply[\"Text\"] }}</span>\r\n      </div>\r\n    </div>\r\n    <add-comment-reply [connector]=\"connector\" [userName]=\"userName\" [comment]=\"comment\"></add-comment-reply>\r\n  </div>\r\n</div>"
         },
         {
+            "name": "RadioContentControlComponent",
+            "id": "component-RadioContentControlComponent-55f63fce7f28588f63d7509c6763f4a4a25cd2fd419a5ec89b920cef0151f4c4775dcab1b86c3c757eb8df44043c2f08add8b36244b9bea54db5127a14d71304",
+            "file": "src/app/components/content-controls/radio-content-control/radio-content-control.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "radio-content-control",
+            "styleUrls": [
+                "./../content-controls.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./radio-content-control.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "options",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "any[]",
+                    "decorators": []
+                },
+                {
+                    "name": "setFormValue",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "function",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "getLabel",
+                    "args": [
+                        {
+                            "name": "nameTag",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 14,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "nameTag",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "isChecked",
+                    "args": [
+                        {
+                            "name": "nameTag",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 18,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "nameTag",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'radio-content-control',\r\n  templateUrl: './radio-content-control.component.html',\r\n  styleUrls: [ './../content-controls.component.css' ]\r\n})\r\nexport class RadioContentControlComponent {\r\n  @Input() id: string;\r\n  @Input() label: string;\r\n  @Input() options: any [];\r\n  @Input() setFormValue: (id: string, value: string) => void;\r\n\r\n  getLabel(nameTag: string) {\r\n    return nameTag.replace(/([a-z])([A-Z])/g, '$1 $2');\r\n  }\r\n\r\n  isChecked(nameTag: string) {\r\n    for (var i = 0; i < this.options.length; i++) {\r\n      if (this.options[i].checked == true) {\r\n        return nameTag == this.options[i].Tag;\r\n      }\r\n    }\r\n\r\n    return false;\r\n  }\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".controlBlock {\r\n  width: 370px;\r\n  text-align: right;\r\n  margin-bottom: 20px;\r\n  display: inline-block;\r\n}\r\n\r\n.control {\r\n  margin: 5px;\r\n}\r\n\r\n.radioControl {\r\n  text-align: left;\r\n  display: inline-block;\r\n  width: 193px;\r\n}\r\n\r\nlabel {\r\n  font-weight: 700;\r\n  font-size: 14px;\r\n  line-height: 20px;\r\n  display: inline-block;\r\n  padding-right: 10px;\r\n}\r\n\r\n.radioLabel {\r\n  padding-left: 5px;\r\n}\r\n\r\ninput {\r\n  color: rgb(51, 51, 51);\r\n  box-shadow: rgb(0 0 0 / 10%) 0px 0px 0px 1px inset;\r\n  line-height: 16px;\r\n  padding: 6px 12px;\r\n  border-radius: 3em;\r\n  border: none;\r\n  box-sizing: border-box;\r\n  margin: 0px;\r\n}\r\n\r\niframe {\r\n  display: inline-block;\r\n}",
+                    "styleUrl": "./../content-controls.component.css"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<div [id]=\"id\" class=\"control\">\r\n  <label>{{ label }}</label>\r\n  <div class=\"radioControl\">\r\n      <span *ngFor=\"let option of options\">\r\n        <input type=\"radio\" [id]=\"option.Tag\" [checked]=\"isChecked(option.Tag)\"/>\r\n        <label class=\"radioLabel\">{{ getLabel(option.Tag) }}</label>\r\n      </span>\r\n  </div>\r\n</div>"
+        },
+        {
             "name": "RemoveCommentComponent",
             "id": "component-RemoveCommentComponent-99cb561a7f99d1a81d1b118ba6cb9bbc7ebd48c6d8d090a4aa01e291d6c596af838a77f3626906f0390d2aabcad9eeb4d26585491d16fd853ff0120c736b335e",
             "file": "src/app/components/comments/remove-comment/remove-comment.component.ts",
@@ -1149,13 +1655,13 @@
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-894997969ec6ec3ed1721936bfe5c0bf4f6bb4673d1d1457f835d390c171867951177b9f216e50b38ea45e7e72e6c3086cd57a5bd2a23c3c7ef3e372e46bc946",
+            "id": "module-AppModule-24fed1199422845c50522914a603926fe84fd524cc2fc73413f0ef21f0fd492ed4af9649d4a2fc408a4b62ba7894404dc9dbd2156731518e995d25884f6a94f2",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { BrowserModule } from '@angular/platform-browser';\r\nimport { DocumentEditorModule } from '@onlyoffice/document-editor-angular';\r\n\r\nimport { AppComponent } from './app.component';\r\nimport { AddCommentComponent } from './components/comments/add-comment/add-comment.component';\r\nimport { AddCommentReplyComponent } from './components/comments/add-comment-reply/add-comment-reply.component';\r\nimport { CommentsComponent } from './components/comments/comments.component';\r\nimport { ListCommentsComponent } from './components/comments/list-comments/list-comments.component';\r\nimport { RemoveCommentComponent } from './components/comments/remove-comment/remove-comment.component';\r\nimport { RemoveCommentReplyComponent } from './components/comments/remove-comment-reply/remove-comment-reply.component';\r\nimport { CommenstStoriesComponent } from './components/comments/comments-stories/commenst-stories.component';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    CommentsComponent,\r\n    ListCommentsComponent,\r\n    AddCommentComponent,\r\n    AddCommentReplyComponent,\r\n    RemoveCommentComponent,\r\n    RemoveCommentReplyComponent,\r\n    CommenstStoriesComponent\r\n  ],\r\n  imports: [\r\n    BrowserModule,\r\n    DocumentEditorModule\r\n  ],\r\n  providers: [],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule { }\r\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { BrowserModule } from '@angular/platform-browser';\r\nimport { DocumentEditorModule } from '@onlyoffice/document-editor-angular';\r\n\r\nimport { AppComponent } from './app.component';\r\nimport { AddCommentComponent } from './components/comments/add-comment/add-comment.component';\r\nimport { AddCommentReplyComponent } from './components/comments/add-comment-reply/add-comment-reply.component';\r\nimport { CommentsComponent } from './components/comments/comments.component';\r\nimport { ListCommentsComponent } from './components/comments/list-comments/list-comments.component';\r\nimport { RemoveCommentComponent } from './components/comments/remove-comment/remove-comment.component';\r\nimport { RemoveCommentReplyComponent } from './components/comments/remove-comment-reply/remove-comment-reply.component';\r\nimport { CommenstStoriesComponent } from './components/comments/comments-stories/commenst-stories.component';\r\nimport { ContentControlsStoriesComponent } from './components/content-controls/content-controls-stories/content-controls-stories.component';\r\nimport { ContentControlsComponent } from './components/content-controls/content-controls.component';\r\nimport { InputContentControlComponent } from './components/content-controls/input-content-control/input-content-control.component';\r\nimport { RadioContentControlComponent } from './components/content-controls/radio-content-control/radio-content-control.component';\r\nimport { NgSelectModule } from '@ng-select/ng-select';\r\nimport { CommonModule } from '@angular/common';\r\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    CommentsComponent,\r\n    ListCommentsComponent,\r\n    AddCommentComponent,\r\n    AddCommentReplyComponent,\r\n    RemoveCommentComponent,\r\n    RemoveCommentReplyComponent,\r\n    CommenstStoriesComponent,\r\n    ContentControlsStoriesComponent,\r\n    ContentControlsComponent,\r\n    InputContentControlComponent,\r\n    RadioContentControlComponent\r\n  ],\r\n  imports: [\r\n    BrowserModule,\r\n    DocumentEditorModule,\r\n    NgSelectModule,\r\n    CommonModule,\r\n    FormsModule,\r\n    ReactiveFormsModule\r\n  ],\r\n  providers: [],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule { }\r\n",
             "children": [
                 {
                     "type": "providers",
@@ -1180,7 +1686,19 @@
                             "name": "CommentsComponent"
                         },
                         {
+                            "name": "ContentControlsComponent"
+                        },
+                        {
+                            "name": "ContentControlsStoriesComponent"
+                        },
+                        {
+                            "name": "InputContentControlComponent"
+                        },
+                        {
                             "name": "ListCommentsComponent"
+                        },
+                        {
+                            "name": "RadioContentControlComponent"
                         },
                         {
                             "name": "RemoveCommentComponent"
@@ -1268,6 +1786,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/comments.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "ContentControlsTemplate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/filling-form.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -1395,6 +1923,16 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/filling-form.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<any>",
+                "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/document-editor.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1402,7 +1940,18 @@
                 "defaultValue": "(args: DocumentEditorComponent) => ({\r\n  props: args,\r\n})"
             }
         ],
-        "functions": [],
+        "functions": [
+            {
+                "name": "getPersonsOptions",
+                "file": "src/app/filling-form.stories.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "args": []
+            }
+        ],
         "typealiases": [],
         "enumerations": [],
         "groupedVariables": {
@@ -1422,6 +1971,28 @@
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "src/app/comments.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<any>",
+                    "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+                }
+            ],
+            "src/app/filling-form.stories.ts": [
+                {
+                    "name": "ContentControlsTemplate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/filling-form.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/filling-form.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story<any>",
@@ -1559,7 +2130,20 @@
                 }
             ]
         },
-        "groupedFunctions": {},
+        "groupedFunctions": {
+            "src/app/filling-form.stories.ts": [
+                {
+                    "name": "getPersonsOptions",
+                    "file": "src/app/filling-form.stories.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "args": []
+                }
+            ]
+        },
         "groupedEnumerations": {},
         "groupedTypeAliases": {}
     },
@@ -1718,6 +2302,42 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/components/content-controls/content-controls-stories/content-controls-stories.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ContentControlsStoriesComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/12",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/content-controls/content-controls.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ContentControlsComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/content-controls/input-content-control/input-content-control.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "InputContentControlComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/content-controls/radio-content-control/radio-content-control.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "RadioContentControlComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/document-editor.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
@@ -1765,6 +2385,45 @@
                 "name": "Template",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/filling-form.stories.ts",
+                "type": "function",
+                "linktype": "miscellaneous",
+                "linksubtype": "function",
+                "name": "getPersonsOptions",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/filling-form.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ContentControlsTemplate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/filling-form.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/model/person.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "IPerson",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
                 "status": "low"
             },
             {
