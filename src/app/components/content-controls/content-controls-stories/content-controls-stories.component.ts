@@ -55,12 +55,16 @@ export class ContentControlsStoriesComponent {
         this.connector.executeMethod("GetFormValue", [data[i].InternalId], (value: any) => {
             data[i].Value = value ? value : "";
             if (data.length - 1 == i) {
-              this.contentControls = data;
+              this.contentControls = data.filter((contentControl: any) => contentControl.Tag != "");
             }
         });
       }
     }.bind(this));
   }
+
+  onChangeContentControl = (oPr: { Tag?: string; InternalId?: string }) => {
+    this.getAllContentControls();
+  };
 
   onDocumentReady = () => {
     try {
@@ -70,7 +74,7 @@ export class ContentControlsStoriesComponent {
 
       this.getAllContentControls();
       console.log(this.selectedPerson);
-      //this.connector.attachEvent("onChangeContentControl", onBlurContentControl);
+      this.connector.attachEvent("onChangeContentControl", this.onChangeContentControl);
     } catch (err) {
       console.error(err);
     }
