@@ -10,6 +10,10 @@ import { ListCommentsComponent } from './components/comments/list-comments/list-
 import { RemoveCommentComponent } from './components/comments/remove-comment/remove-comment.component';
 import { RemoveCommentReplyComponent } from './components/comments/remove-comment-reply/remove-comment-reply.component';
 import { CommenstStoriesComponent } from './components/comments/comments-stories/commenst-stories.component';
+import { ContentControlsStoriesComponent } from './components/content-controls/content-controls-stories/content-controls-stories.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,11 +24,16 @@ import { CommenstStoriesComponent } from './components/comments/comments-stories
     AddCommentReplyComponent,
     RemoveCommentComponent,
     RemoveCommentReplyComponent,
-    CommenstStoriesComponent
+    CommenstStoriesComponent,
+    ContentControlsStoriesComponent
   ],
   imports: [
     BrowserModule,
-    DocumentEditorModule
+    DocumentEditorModule,
+    NgSelectModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
