@@ -655,7 +655,7 @@
         },
         {
             "name": "ContentControlsComponent",
-            "id": "component-ContentControlsComponent-de4c9d3adeef92f66fb4b23e1db57f30166b54e1f8e37badcfe99d298c7574485d34547df5f72a78a821bc89b7386b59fe5f69e5f07ee0ec9b75421f8b7cf670",
+            "id": "component-ContentControlsComponent-d853f1e5d0a11962c4aa3dc27c6ddcd208413865c2e509e3100a8acc9c39a48543848816ddffd789d0a2b8d288806353d56071e0a845344232e4891f1692be1a",
             "file": "src/app/components/content-controls/content-controls.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -676,7 +676,7 @@
                     "name": "contentControls",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 10,
+                    "line": 9,
                     "type": "any[]",
                     "decorators": []
                 },
@@ -684,21 +684,32 @@
                     "name": "setFormValue",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 11,
+                    "line": 10,
                     "type": "function",
                     "decorators": []
                 }
             ],
             "outputsClass": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "copyContentControls",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                }
+            ],
             "methodsClass": [
                 {
-                    "name": "getContentControls",
+                    "name": "getCopyContentControls",
                     "args": [],
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 13,
+                    "line": 20,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -715,13 +726,41 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 51,
+                    "line": 58,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
                         {
                             "name": "nameTag",
                             "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ngOnChanges",
+                    "args": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 14,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
@@ -738,7 +777,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'content-controls',\r\n  templateUrl: './content-controls.component.html',\r\n  styleUrls: [ './content-controls.component.css' ]\r\n})\r\nexport class ContentControlsComponent {\r\n  @Input() contentControls: any[];\r\n  @Input() setFormValue: (id: string, value: string) => void;\r\n\r\n  getContentControls () {\r\n    let copyContentControls: any[] = [];\r\n\r\n    for (i = 0; i < this.contentControls?.length; i++) {\r\n      var copyContentControl = this.contentControls[i];\r\n      copyContentControls[i] = {...copyContentControl};\r\n    }\r\n  \r\n    let groupsRadioControls: any[] = copyContentControls.filter(contentControl => contentControl.Tag != \"\" && contentControl.Type == \"radio\").reduce((r, a) => {\r\n      r[a.GroupKey] = r[a.GroupKey] || [];\r\n      r[a.GroupKey].push({Tag: a.Tag, checked: a.Value});\r\n      return r;\r\n    }, {});\r\n  \r\n    for (const [key, value] of Object.entries(groupsRadioControls)) {\r\n      let index = [];\r\n      let first = true;\r\n  \r\n      for (var i = 0; i < copyContentControls.length; i++) {\r\n        if (copyContentControls[i].GroupKey && copyContentControls[i].GroupKey == key) {\r\n          index.push(i);\r\n        } \r\n      }\r\n  \r\n      for (var i = 0; i < index.length; i++) {\r\n        if (first) {\r\n          copyContentControls[index[i]].Tag = key;\r\n          copyContentControls[index[i]].Value = value;\r\n          first = false;\r\n        } else {\r\n          copyContentControls.splice(index[i], 1);\r\n        }\r\n      }\r\n    }\r\n\r\n    return copyContentControls.filter(contentControl => contentControl.Tag != \"\");\r\n  }\r\n\r\n  getLabel(nameTag: string) {\r\n    return nameTag.replace(/([a-z])([A-Z])/g, '$1 $2');\r\n  }\r\n}",
+            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'content-controls',\r\n  templateUrl: './content-controls.component.html',\r\n  styleUrls: [ './content-controls.component.css' ]\r\n})\r\nexport class ContentControlsComponent implements OnChanges {\r\n  @Input() contentControls: any[];\r\n  @Input() setFormValue: (id: string, value: string) => void;\r\n\r\n  copyContentControls: any[] = [];\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    if (changes.hasOwnProperty(\"contentControls\")) {\r\n      this.copyContentControls = this.getCopyContentControls()\r\n    }\r\n  }\r\n\r\n  getCopyContentControls () {\r\n    let copyContentControls: any[] = [];\r\n\r\n    for (i = 0; i < this.contentControls?.length; i++) {\r\n      var copyContentControl = this.contentControls[i];\r\n      copyContentControls[i] = {...copyContentControl};\r\n    }\r\n\r\n    let groupsRadioControls: any[] = copyContentControls.filter(contentControl => contentControl.Tag != \"\" && contentControl.Type == \"radio\").reduce((r, a) => {\r\n      r[a.GroupKey] = r[a.GroupKey] || [];\r\n      r[a.GroupKey].push({Tag: a.Tag, checked: a.Value});\r\n      return r;\r\n    }, {});\r\n\r\n    for (const [key, value] of Object.entries(groupsRadioControls)) {\r\n      let index = [];\r\n      let first = true;\r\n\r\n      for (var i = 0; i < copyContentControls.length; i++) {\r\n        if (copyContentControls[i].GroupKey && copyContentControls[i].GroupKey == key) {\r\n          index.push(i);\r\n        } \r\n      }\r\n\r\n      for (var i = 0; i < index.length; i++) {\r\n        if (first) {\r\n          copyContentControls[index[i]].Tag = key;\r\n          copyContentControls[index[i]].Value = value;\r\n          first = false;\r\n        } else {\r\n          copyContentControls.splice(index[i], 1);\r\n        }\r\n      }\r\n    }\r\n\r\n    return copyContentControls.filter(contentControl => contentControl.Tag != \"\");\r\n  }\r\n\r\n  getLabel(nameTag: string) {\r\n    return nameTag.replace(/([a-z])([A-Z])/g, '$1 $2');\r\n  }\r\n\r\n }",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -747,11 +786,14 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<div class=\"controlBlock\">\r\n  <div *ngFor=\"let contentControl of getContentControls()\" [ngSwitch]=\"contentControl.Type\">\r\n    <input-content-control \r\n      *ngSwitchCase=\"'input'\" \r\n      [id]=\"contentControl.Tag\" \r\n      [label]=\"getLabel(contentControl.Tag)\"\r\n      [value]=\"contentControl.Value\"\r\n      [setFormValue]=\"setFormValue\"\r\n      >\r\n    </input-content-control>\r\n    <radio-content-control\r\n      *ngSwitchCase=\"'radio'\"\r\n      [id]=\"contentControl.Tag\"\r\n      [label]=\"getLabel(contentControl.Tag)\"\r\n      [options]=\"contentControl.Value\"\r\n      [setFormValue]=\"setFormValue\"\r\n    ></radio-content-control>\r\n  </div>\r\n</div>"
+            "implements": [
+                "OnChanges"
+            ],
+            "templateData": "<div class=\"controlBlock\">\r\n  <div *ngFor=\"let contentControl of copyContentControls\" [ngSwitch]=\"contentControl.Type\">\r\n\r\n    <input-content-control\r\n      *ngSwitchCase=\"'input'\"\r\n      [id]=\"contentControl.Tag\"\r\n      [label]=\"getLabel(contentControl.Tag)\"\r\n      [value]=\"contentControl.Value\"\r\n      [setFormValue]=\"setFormValue\"\r\n      >\r\n    </input-content-control>\r\n\r\n    <radio-content-control\r\n      *ngSwitchCase=\"'radio'\"\r\n      [id]=\"contentControl.Tag\"\r\n      [label]=\"getLabel(contentControl.Tag)\"\r\n      [options]=\"contentControl.Value\"\r\n      [setFormValue]=\"setFormValue\"\r\n    ></radio-content-control>\r\n\r\n  </div>\r\n</div>"
         },
         {
             "name": "ContentControlsStoriesComponent",
-            "id": "component-ContentControlsStoriesComponent-849ff4fe0bc384b803cd390fe47f75353d7ec0a00560c90fc0a05dec420b4d026e3c0ebb41de714a1f1fd8e11c0febd1a1950be475e94f18cf640a221a057c7e",
+            "id": "component-ContentControlsStoriesComponent-181148093573899fff6e2f1d5f8547a247dd1804cd107a934560ae058417a8d2a2feb2f5bfc81ca21ca2f8c608a10c53202e9b2065804ba3000cb48327e38c93",
             "file": "src/app/components/content-controls/content-controls-stories/content-controls-stories.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -831,6 +873,16 @@
                     "line": 39
                 },
                 {
+                    "name": "onChangeContentControl",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 65
+                },
+                {
                     "name": "onChangeSelect",
                     "defaultValue": "() => {...}",
                     "deprecated": false,
@@ -848,7 +900,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 65
+                    "line": 69
                 },
                 {
                     "name": "selectedPerson",
@@ -878,11 +930,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\nimport { IPerson } from '../../../model/person';\r\n\r\n@Component({\r\n  selector: 'content-controls-stories',\r\n  templateUrl: './content-controls-stories.component.html'\r\n})\r\nexport class ContentControlsStoriesComponent {\r\n  @Input() editorId: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n  @Input() persons: IPerson[];\r\n\r\n  connector: any = null;\r\n\r\n  contentControls: any;\r\n  selectedPerson: any;\r\n\r\n  onChangeSelect = () => {\r\n    for (var [key, value] of Object.entries<string>(this.selectedPerson)) {\r\n      if (key == \"Sex\") {\r\n        key = value == \"Male\" ? \"Male\" : \"Female\";\r\n        value = \"true\";\r\n      }\r\n\r\n      this.setFormValue(key, value || \"\");\r\n    }\r\n\r\n    this.getAllContentControls();\r\n  };\r\n\r\n  setFormValue = (formId: string, value: string) => {\r\n    this.connector.executeMethod(\"GetFormsByTag\", [formId], function(forms: any) {\r\n      this.connector.executeMethod(\"SetFormValue\", [forms[0][\"InternalId\"], value], null);\r\n    }.bind(this));\r\n  }\r\n\r\n  getAllContentControls = () => {\r\n    this.connector.executeMethod (\"GetAllContentControls\", null, function(data: any) {\r\n      for (let i = 0; i < data.length; i++) {\r\n        switch (data[i].Tag) {\r\n          case \"Male\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          case \"Female\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          default:\r\n            data[i].Type = \"input\";\r\n        }\r\n\r\n        this.connector.executeMethod(\"GetFormValue\", [data[i].InternalId], (value: any) => {\r\n            data[i].Value = value ? value : \"\";\r\n            if (data.length - 1 == i) {\r\n              this.contentControls = data;\r\n            }\r\n        });\r\n      }\r\n    }.bind(this));\r\n  }\r\n\r\n  onDocumentReady = () => {\r\n    try {\r\n      var editor = window.DocEditor.instances[\"oformEditor\"];\r\n      this.connector = editor.createConnector();\r\n      this.connector.connect();\r\n\r\n      this.getAllContentControls();\r\n      console.log(this.selectedPerson);\r\n      //this.connector.attachEvent(\"onChangeContentControl\", onBlurContentControl);\r\n    } catch (err) {\r\n      console.error(err);\r\n    }\r\n  };\r\n}",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\nimport { IPerson } from '../../../model/person';\r\n\r\n@Component({\r\n  selector: 'content-controls-stories',\r\n  templateUrl: './content-controls-stories.component.html'\r\n})\r\nexport class ContentControlsStoriesComponent {\r\n  @Input() editorId: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n  @Input() persons: IPerson[];\r\n\r\n  connector: any = null;\r\n\r\n  contentControls: any;\r\n  selectedPerson: any;\r\n\r\n  onChangeSelect = () => {\r\n    for (var [key, value] of Object.entries<string>(this.selectedPerson)) {\r\n      if (key == \"Sex\") {\r\n        key = value == \"Male\" ? \"Male\" : \"Female\";\r\n        value = \"true\";\r\n      }\r\n\r\n      this.setFormValue(key, value || \"\");\r\n    }\r\n\r\n    this.getAllContentControls();\r\n  };\r\n\r\n  setFormValue = (formId: string, value: string) => {\r\n    this.connector.executeMethod(\"GetFormsByTag\", [formId], function(forms: any) {\r\n      this.connector.executeMethod(\"SetFormValue\", [forms[0][\"InternalId\"], value], null);\r\n    }.bind(this));\r\n  }\r\n\r\n  getAllContentControls = () => {\r\n    this.connector.executeMethod (\"GetAllContentControls\", null, function(data: any) {\r\n      for (let i = 0; i < data.length; i++) {\r\n        switch (data[i].Tag) {\r\n          case \"Male\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          case \"Female\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          default:\r\n            data[i].Type = \"input\";\r\n        }\r\n\r\n        this.connector.executeMethod(\"GetFormValue\", [data[i].InternalId], (value: any) => {\r\n            data[i].Value = value ? value : \"\";\r\n            if (data.length - 1 == i) {\r\n              this.contentControls = data.filter((contentControl: any) => contentControl.Tag != \"\");\r\n            }\r\n        });\r\n      }\r\n    }.bind(this));\r\n  }\r\n\r\n  onChangeContentControl = (oPr: { Tag?: string; InternalId?: string }) => {\r\n    this.getAllContentControls();\r\n  };\r\n\r\n  onDocumentReady = () => {\r\n    try {\r\n      var editor = window.DocEditor.instances[\"oformEditor\"];\r\n      this.connector = editor.createConnector();\r\n      this.connector.connect();\r\n\r\n      this.getAllContentControls();\r\n      console.log(this.selectedPerson);\r\n      this.connector.attachEvent(\"onChangeContentControl\", this.onChangeContentControl);\r\n    } catch (err) {\r\n      console.error(err);\r\n    }\r\n  };\r\n}",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "templateData": "<ng-select \r\n  [items]=\"persons\"\r\n  bindLabel=\"label\"\r\n  bindValue=\"value\"\r\n  (change)=\"onChangeSelect()\" \r\n  [(ngModel)]=\"selectedPerson\">\r\n</ng-select>\r\n\r\n<content-controls [contentControls]=\"contentControls\" [setFormValue]=\"setFormValue\"></content-controls>\r\n\r\n<document-editor \r\n  [id]=\"editorId\" \r\n  [documentServerUrl]=\"documentServerUrl\"\r\n  [config]=\"config\"\r\n  [events_onDocumentReady]=\"onDocumentReady\"\r\n></document-editor>"
+            "templateData": "<ng-select \r\n  [items]=\"persons\"\r\n  bindLabel=\"label\"\r\n  bindValue=\"value\"\r\n  (change)=\"onChangeSelect()\" \r\n  [(ngModel)]=\"selectedPerson\">\r\n</ng-select>\r\n<br/>\r\n\r\n<content-controls [contentControls]=\"contentControls\" [setFormValue]=\"setFormValue\"></content-controls>\r\n\r\n<document-editor \r\n  [id]=\"editorId\" \r\n  [documentServerUrl]=\"documentServerUrl\"\r\n  [config]=\"config\"\r\n  [events_onDocumentReady]=\"onDocumentReady\"\r\n></document-editor>"
         },
         {
             "name": "DocumentEditorComponent",
@@ -1113,7 +1165,7 @@
         },
         {
             "name": "InputContentControlComponent",
-            "id": "component-InputContentControlComponent-e1d52bc528f203fcb6bb5d8b50d2067448657ddb8a23b6bbd6ac6622cddfb52bc9fcebab63ebcfc7070d2e075168f959c00f1d5c8159a29ca1e11bcfd5e64c15",
+            "id": "component-InputContentControlComponent-853e372c9da180f6515f2df41fac7d062d6e9c2033565a734b6584ec94b71713d36417cab82ed8ce9dc87010d55ce52e0a04b7451ff11383cc0590033900b92e",
             "file": "src/app/components/content-controls/input-content-control/input-content-control.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1164,18 +1216,7 @@
                 }
             ],
             "outputsClass": [],
-            "propertiesClass": [
-                {
-                    "name": "val",
-                    "defaultValue": "\"3\"",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "optional": false,
-                    "description": "",
-                    "line": 14
-                }
-            ],
+            "propertiesClass": [],
             "methodsClass": [
                 {
                     "name": "getValue",
@@ -1190,7 +1231,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 16,
+                    "line": 14,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1213,7 +1254,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'input-content-control',\r\n  templateUrl: './input-content-control.component.html',\r\n  styleUrls: [ './../content-controls.component.css' ]\r\n})\r\nexport class InputContentControlComponent {\r\n  @Input() id: string;\r\n  @Input() value: string;\r\n  @Input() label: string;\r\n  @Input() setFormValue: (id: string, value: string) => void;\r\n\r\n  val= \"3\";\r\n\r\n  getValue(event: Event): string {\r\n    console.log(\"dsfdsf\")\r\n    this.val = (event.target as HTMLInputElement).value;\r\n    return (event.target as HTMLInputElement).value;\r\n  }\r\n}",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'input-content-control',\r\n  templateUrl: './input-content-control.component.html',\r\n  styleUrls: [ './../content-controls.component.css' ]\r\n})\r\nexport class InputContentControlComponent {\r\n  @Input() id: string;\r\n  @Input() value: string;\r\n  @Input() label: string;\r\n  @Input() setFormValue: (id: string, value: string) => void;\r\n\r\n  getValue(event: Event): string {\r\n    this.setFormValue((event.target as HTMLInputElement).id, (event.target as HTMLInputElement).value)\r\n    return (event.target as HTMLInputElement).value;\r\n  }\r\n}",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1222,7 +1263,7 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<div class=\"control\">\r\n  <label>{{ label }}</label>\r\n  <input [id]=\"id\" [(ngModel)]=\"val\" (change)=\"val=getValue($event)\"/>\r\n</div>"
+            "templateData": "<div class=\"control\">\r\n  <label>{{ label }}</label>\r\n  <input [id]=\"id\" [value]=\"value\" (keyup)=\"value=getValue($event)\" />\r\n</div>"
         },
         {
             "name": "ListCommentsComponent",
@@ -1379,7 +1420,7 @@
         },
         {
             "name": "RadioContentControlComponent",
-            "id": "component-RadioContentControlComponent-55f63fce7f28588f63d7509c6763f4a4a25cd2fd419a5ec89b920cef0151f4c4775dcab1b86c3c757eb8df44043c2f08add8b36244b9bea54db5127a14d71304",
+            "id": "component-RadioContentControlComponent-013001b309edadf0f9f13d0a15d5da08f4c28c311db2a82bf3d8ca821ff25e809b16f579e27e38a0a6eba4c43e4a2de97fa5cefe02959e42f67bf1659458fd4a",
             "file": "src/app/components/content-controls/radio-content-control/radio-content-control.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1473,13 +1514,41 @@
                     "optional": false,
                     "returnType": "boolean",
                     "typeParameters": [],
-                    "line": 18,
+                    "line": 22,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
                         {
                             "name": "nameTag",
                             "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onChange",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 18,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
@@ -1496,7 +1565,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'radio-content-control',\r\n  templateUrl: './radio-content-control.component.html',\r\n  styleUrls: [ './../content-controls.component.css' ]\r\n})\r\nexport class RadioContentControlComponent {\r\n  @Input() id: string;\r\n  @Input() label: string;\r\n  @Input() options: any [];\r\n  @Input() setFormValue: (id: string, value: string) => void;\r\n\r\n  getLabel(nameTag: string) {\r\n    return nameTag.replace(/([a-z])([A-Z])/g, '$1 $2');\r\n  }\r\n\r\n  isChecked(nameTag: string) {\r\n    for (var i = 0; i < this.options.length; i++) {\r\n      if (this.options[i].checked == true) {\r\n        return nameTag == this.options[i].Tag;\r\n      }\r\n    }\r\n\r\n    return false;\r\n  }\r\n}",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'radio-content-control',\r\n  templateUrl: './radio-content-control.component.html',\r\n  styleUrls: [ './../content-controls.component.css' ]\r\n})\r\nexport class RadioContentControlComponent {\r\n  @Input() id: string;\r\n  @Input() label: string;\r\n  @Input() options: any [];\r\n  @Input() setFormValue: (id: string, value: string) => void;\r\n\r\n  getLabel(nameTag: string) {\r\n    return nameTag.replace(/([a-z])([A-Z])/g, '$1 $2');\r\n  }\r\n\r\n  onChange(event: Event) {\r\n    this.setFormValue((event.target as HTMLInputElement).id, 'true')\r\n  }\r\n\r\n  isChecked(nameTag: string) {\r\n    for (var i = 0; i < this.options.length; i++) {\r\n      if (this.options[i].checked == true) {\r\n        return nameTag == this.options[i].Tag;\r\n      }\r\n    }\r\n\r\n    return false;\r\n  }\r\n}",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1505,7 +1574,7 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<div [id]=\"id\" class=\"control\">\r\n  <label>{{ label }}</label>\r\n  <div class=\"radioControl\">\r\n      <span *ngFor=\"let option of options\">\r\n        <input type=\"radio\" [id]=\"option.Tag\" [checked]=\"isChecked(option.Tag)\"/>\r\n        <label class=\"radioLabel\">{{ getLabel(option.Tag) }}</label>\r\n      </span>\r\n  </div>\r\n</div>"
+            "templateData": "<div [id]=\"id\" class=\"control\">\r\n  <label>{{ label }}</label>\r\n  <div class=\"radioControl\">\r\n      <span *ngFor=\"let option of options\">\r\n        <input type=\"radio\" [id]=\"option.Tag\" [name]=\"id\" [checked]=\"isChecked(option.Tag)\" (change)=\"onChange($event)\" />\r\n        <label class=\"radioLabel\">{{ getLabel(option.Tag) }}</label>\r\n      </span>\r\n  </div>\r\n</div>"
         },
         {
             "name": "RemoveCommentComponent",
@@ -1923,21 +1992,21 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/filling-form.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<any>",
-                "defaultValue": "(args) => ({\r\n  props: args\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/document-editor.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<DocumentEditorComponent>",
                 "defaultValue": "(args: DocumentEditorComponent) => ({\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/filling-form.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<any>",
+                "defaultValue": "(args) => ({\r\n  props: args\r\n})"
             }
         ],
         "functions": [
@@ -2307,7 +2376,7 @@
                 "linktype": "component",
                 "name": "ContentControlsStoriesComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/12",
+                "coverageCount": "0/13",
                 "status": "low"
             },
             {
@@ -2316,7 +2385,7 @@
                 "linktype": "component",
                 "name": "ContentControlsComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coverageCount": "0/7",
                 "status": "low"
             },
             {
@@ -2325,7 +2394,7 @@
                 "linktype": "component",
                 "name": "InputContentControlComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/7",
+                "coverageCount": "0/6",
                 "status": "low"
             },
             {
@@ -2334,7 +2403,7 @@
                 "linktype": "component",
                 "name": "RadioContentControlComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/7",
+                "coverageCount": "0/8",
                 "status": "low"
             },
             {

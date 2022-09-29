@@ -42,7 +42,7 @@ const Template: Story<any> = (args) => ({
 });
 
 export const ContentControlsTemplate = Template.bind({});
-ContentControlsTemplate.storyName = "Samples/Work with forms";
+ContentControlsTemplate.storyName = "Work with forms";
 ContentControlsTemplate.args = {
   editorId: "oformEditor",
   documentServerUrl: config.documentserverUrl,
