@@ -1,4 +1,4 @@
 <div class="control">
   <label>{{ label }}</label>
-  <input [id]="id" [value]="value" (change)="value=getValue($event)" />
+  <input [id]="id" [value]="value" (keyup)="value=getValue($event)" />
 </div>

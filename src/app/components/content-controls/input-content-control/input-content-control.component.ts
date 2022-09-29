@@ -12,6 +12,7 @@ export class InputContentControlComponent {
   @Input() setFormValue: (id: string, value: string) => void;
 
   getValue(event: Event): string {
+    this.setFormValue((event.target as HTMLInputElement).id, (event.target as HTMLInputElement).value)
     return (event.target as HTMLInputElement).value;
   }
 }

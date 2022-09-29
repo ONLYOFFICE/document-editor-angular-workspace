@@ -15,6 +15,10 @@ export class RadioContentControlComponent {
     return nameTag.replace(/([a-z])([A-Z])/g, '$1 $2');
   }
 
+  onChange(event: Event) {
+    this.setFormValue((event.target as HTMLInputElement).id, 'true')
+  }
+
   isChecked(nameTag: string) {
     for (var i = 0; i < this.options.length; i++) {
       if (this.options[i].checked == true) {

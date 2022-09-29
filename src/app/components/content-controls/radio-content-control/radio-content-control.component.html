@@ -2,7 +2,7 @@
   <label>{{ label }}</label>
   <div class="radioControl">
       <span *ngFor="let option of options">
-        <input type="radio" [id]="option.Tag" [name]="id" [checked]="isChecked(option.Tag)" />
+        <input type="radio" [id]="option.Tag" [name]="id" [checked]="isChecked(option.Tag)" (change)="onChange($event)" />
         <label class="radioLabel">{{ getLabel(option.Tag) }}</label>
       </span>
   </div>
