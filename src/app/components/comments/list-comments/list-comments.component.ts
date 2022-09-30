@@ -40,7 +40,6 @@ export class ListCommentsComponent implements OnChanges {
 
         this.connector.attachEvent("onChangeCommentData",  function (val:any) {
           const index = this.comments.findIndex((comment:any) => comment.Id === val.Id);
-          console.log(index);
 
           if (index !== -1) {
             this.comments[index].Data = val.Data;

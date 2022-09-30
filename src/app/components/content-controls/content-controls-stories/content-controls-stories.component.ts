@@ -73,7 +73,6 @@ export class ContentControlsStoriesComponent {
       this.connector.connect();
 
       this.getAllContentControls();
-      console.log(this.selectedPerson);
       this.connector.attachEvent("onChangeContentControl", this.onChangeContentControl);
     } catch (err) {
       console.error(err);
