@@ -17,6 +17,8 @@ import { RadioContentControlComponent } from './components/content-controls/radi
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsStoriesComponent } from './components/forms/forms-stories/forms-stories.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ContentControlsStoriesComponent,
     ContentControlsComponent,
     InputContentControlComponent,
-    RadioContentControlComponent
+    RadioContentControlComponent,
+    FormsStoriesComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgSelectModule,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

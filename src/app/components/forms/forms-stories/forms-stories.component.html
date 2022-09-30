@@ -1,0 +1,14 @@
+<ng-select [items]="formsService.forms"
+    bindLabel="label"
+    bindValue="value"
+    [loading]="loading"
+    (change)="onChangeSelect()"
+    [(ngModel)]="selectedForm">
+</ng-select>
+<br/>
+
+<document-editor
+  [id]="editorId"
+  [documentServerUrl]="documentServerUrl"
+  [config]="config"
+></document-editor>

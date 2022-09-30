@@ -179,7 +179,69 @@
             "methods": []
         }
     ],
-    "injectables": [],
+    "injectables": [
+        {
+            "name": "FormsService",
+            "id": "injectable-FormsService-b06bad2b6a867a09d0949bc53cef53bfe0fb23ae27e7f1e727c7ef7e7dc8f98e4b418b47fad8abd6fae6460fcb7eac083603a7e4d8dc7dcc60eced92464f14c0",
+            "file": "src/app/service/forms.service.ts",
+            "properties": [
+                {
+                    "name": "forms",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                }
+            ],
+            "methods": [
+                {
+                    "name": "getForms",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "Observable<any>",
+                    "typeParameters": [],
+                    "line": 17,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import {Injectable} from '@angular/core'\r\nimport {HttpClient} from '@angular/common/http'\r\nimport {catchError, Observable, tap, throwError} from 'rxjs'\r\nimport config from \"../../../config/config.json\";\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class FormsService  {\r\n  constructor(\r\n    private http: HttpClient\r\n  ) {\r\n  }\r\n\r\n  forms: any[] = [];\r\n\r\n  getForms(): Observable<any> {\r\n    return this.http.get<any>(config.oformsUrl).pipe(\r\n      tap(response => {\r\n          var fileOforms = response.data.map((item: { attributes: { file_oform: { data: any[] } } }) => {\r\n              return item.attributes.file_oform.data.find((f) => f.attributes.ext === \".oform\");\r\n          });\r\n\r\n          var forms = fileOforms.map((form: { attributes: { url: any; name: any } }) => {\r\n            return form && form.attributes\r\n              ? { value: { title:form.attributes.name, url: form.attributes.url }, label: form.attributes.name }\r\n              : null;\r\n          }).filter((o: any) => o != null);\r\n\r\n        this.forms = forms;\r\n      }),\r\n      catchError(error => throwError(() => error.message))\r\n    )\r\n  }\r\n}",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 9,
+                "jsdoctags": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "type": "injectable"
+        }
+    ],
     "guards": [],
     "interceptors": [],
     "classes": [],
@@ -793,7 +855,7 @@
         },
         {
             "name": "ContentControlsStoriesComponent",
-            "id": "component-ContentControlsStoriesComponent-181148093573899fff6e2f1d5f8547a247dd1804cd107a934560ae058417a8d2a2feb2f5bfc81ca21ca2f8c608a10c53202e9b2065804ba3000cb48327e38c93",
+            "id": "component-ContentControlsStoriesComponent-48c687cfaf85c5eb59d7c7ccad69ea6a7037779795ff3637d95d4d6450a73754fb536f3c17541f108d6ebf33e27fbbe9f08f17c313231d9ef0cbed70fc7edec6",
             "file": "src/app/components/content-controls/content-controls-stories/content-controls-stories.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -930,7 +992,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\nimport { IPerson } from '../../../model/person';\r\n\r\n@Component({\r\n  selector: 'content-controls-stories',\r\n  templateUrl: './content-controls-stories.component.html'\r\n})\r\nexport class ContentControlsStoriesComponent {\r\n  @Input() editorId: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n  @Input() persons: IPerson[];\r\n\r\n  connector: any = null;\r\n\r\n  contentControls: any;\r\n  selectedPerson: any;\r\n\r\n  onChangeSelect = () => {\r\n    for (var [key, value] of Object.entries<string>(this.selectedPerson)) {\r\n      if (key == \"Sex\") {\r\n        key = value == \"Male\" ? \"Male\" : \"Female\";\r\n        value = \"true\";\r\n      }\r\n\r\n      this.setFormValue(key, value || \"\");\r\n    }\r\n\r\n    this.getAllContentControls();\r\n  };\r\n\r\n  setFormValue = (formId: string, value: string) => {\r\n    this.connector.executeMethod(\"GetFormsByTag\", [formId], function(forms: any) {\r\n      this.connector.executeMethod(\"SetFormValue\", [forms[0][\"InternalId\"], value], null);\r\n    }.bind(this));\r\n  }\r\n\r\n  getAllContentControls = () => {\r\n    this.connector.executeMethod (\"GetAllContentControls\", null, function(data: any) {\r\n      for (let i = 0; i < data.length; i++) {\r\n        switch (data[i].Tag) {\r\n          case \"Male\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          case \"Female\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          default:\r\n            data[i].Type = \"input\";\r\n        }\r\n\r\n        this.connector.executeMethod(\"GetFormValue\", [data[i].InternalId], (value: any) => {\r\n            data[i].Value = value ? value : \"\";\r\n            if (data.length - 1 == i) {\r\n              this.contentControls = data.filter((contentControl: any) => contentControl.Tag != \"\");\r\n            }\r\n        });\r\n      }\r\n    }.bind(this));\r\n  }\r\n\r\n  onChangeContentControl = (oPr: { Tag?: string; InternalId?: string }) => {\r\n    this.getAllContentControls();\r\n  };\r\n\r\n  onDocumentReady = () => {\r\n    try {\r\n      var editor = window.DocEditor.instances[\"oformEditor\"];\r\n      this.connector = editor.createConnector();\r\n      this.connector.connect();\r\n\r\n      this.getAllContentControls();\r\n      console.log(this.selectedPerson);\r\n      this.connector.attachEvent(\"onChangeContentControl\", this.onChangeContentControl);\r\n    } catch (err) {\r\n      console.error(err);\r\n    }\r\n  };\r\n}",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\nimport { IPerson } from '../../../model/person';\r\n\r\n@Component({\r\n  selector: 'content-controls-stories',\r\n  templateUrl: './content-controls-stories.component.html'\r\n})\r\nexport class ContentControlsStoriesComponent {\r\n  @Input() editorId: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n  @Input() persons: IPerson[];\r\n\r\n  connector: any = null;\r\n\r\n  contentControls: any;\r\n  selectedPerson: any;\r\n\r\n  onChangeSelect = () => {\r\n    for (var [key, value] of Object.entries<string>(this.selectedPerson)) {\r\n      if (key == \"Sex\") {\r\n        key = value == \"Male\" ? \"Male\" : \"Female\";\r\n        value = \"true\";\r\n      }\r\n\r\n      this.setFormValue(key, value || \"\");\r\n    }\r\n\r\n    this.getAllContentControls();\r\n  };\r\n\r\n  setFormValue = (formId: string, value: string) => {\r\n    this.connector.executeMethod(\"GetFormsByTag\", [formId], function(forms: any) {\r\n      this.connector.executeMethod(\"SetFormValue\", [forms[0][\"InternalId\"], value], null);\r\n    }.bind(this));\r\n  }\r\n\r\n  getAllContentControls = () => {\r\n    this.connector.executeMethod (\"GetAllContentControls\", null, function(data: any) {\r\n      for (let i = 0; i < data.length; i++) {\r\n        switch (data[i].Tag) {\r\n          case \"Male\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          case \"Female\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          default:\r\n            data[i].Type = \"input\";\r\n        }\r\n\r\n        this.connector.executeMethod(\"GetFormValue\", [data[i].InternalId], (value: any) => {\r\n            data[i].Value = value ? value : \"\";\r\n            if (data.length - 1 == i) {\r\n              this.contentControls = data.filter((contentControl: any) => contentControl.Tag != \"\");\r\n            }\r\n        });\r\n      }\r\n    }.bind(this));\r\n  }\r\n\r\n  onChangeContentControl = (oPr: { Tag?: string; InternalId?: string }) => {\r\n    this.getAllContentControls();\r\n  };\r\n\r\n  onDocumentReady = () => {\r\n    try {\r\n      var editor = window.DocEditor.instances[\"oformEditor\"];\r\n      this.connector = editor.createConnector();\r\n      this.connector.connect();\r\n\r\n      this.getAllContentControls();\r\n      this.connector.attachEvent(\"onChangeContentControl\", this.onChangeContentControl);\r\n    } catch (err) {\r\n      console.error(err);\r\n    }\r\n  };\r\n}",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -1164,6 +1226,146 @@
             ]
         },
         {
+            "name": "FormsStoriesComponent",
+            "id": "component-FormsStoriesComponent-a0b0b6218302f650b430dce0116edadf0d34300d9e09cfb00e23c220c5c4aee9a87f238c4235876dd12d3c94eab2c8dabd5758eb5ce5ffcfd9b0d53613f37d9e",
+            "file": "src/app/components/forms/forms-stories/forms-stories.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "forms-stories",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./forms-stories.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "config",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "IConfig",
+                    "decorators": []
+                },
+                {
+                    "name": "documentServerUrl",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "editorId",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "formsService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FormsService",
+                    "optional": false,
+                    "description": "",
+                    "line": 17,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "loading",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "selectedForm",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 19,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onChangeSelect",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 26,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\nimport { FormsService } from 'src/app/service/forms.service';\r\n\r\n@Component({\r\n  selector: 'forms-stories',\r\n  templateUrl: './forms-stories.component.html'\r\n})\r\nexport class FormsStoriesComponent implements OnInit {\r\n  @Input() editorId: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  loading = false;\r\n  selectedForm: any;\r\n\r\n  constructor( public formsService: FormsService ) {}\r\n\r\n  ngOnInit(): void {\r\n    this.loading = true;\r\n    this.formsService.getForms().subscribe(() => {\r\n      this.loading = false\r\n    });\r\n  }\r\n\r\n  onChangeSelect(): void {\r\n    console.log(\"sadf\");\r\n    let newConfig = this.config;\r\n    newConfig = {...newConfig}\r\n    this.config = newConfig;\r\n    console.log(this.config);\r\n  }\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "formsService",
+                        "type": "FormsService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 15,
+                "jsdoctags": [
+                    {
+                        "name": "formsService",
+                        "type": "FormsService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<ng-select [items]=\"formsService.forms\"\r\n    bindLabel=\"label\"\r\n    bindValue=\"value\"\r\n    [loading]=\"loading\"\r\n    (change)=\"onChangeSelect()\"\r\n    [(ngModel)]=\"selectedForm\">\r\n</ng-select>\r\n<br/>\r\n\r\n<document-editor \r\n  [id]=\"editorId\" \r\n  [documentServerUrl]=\"documentServerUrl\"\r\n  [config]=\"config\"\r\n></document-editor>"
+        },
+        {
             "name": "InputContentControlComponent",
             "id": "component-InputContentControlComponent-853e372c9da180f6515f2df41fac7d062d6e9c2033565a734b6584ec94b71713d36417cab82ed8ce9dc87010d55ce52e0a04b7451ff11383cc0590033900b92e",
             "file": "src/app/components/content-controls/input-content-control/input-content-control.component.ts",
@@ -1267,7 +1469,7 @@
         },
         {
             "name": "ListCommentsComponent",
-            "id": "component-ListCommentsComponent-c0617f4ec812584bd615d143d8ada4769574f481035a483c392258b7fc4c624cd9a24182128e824bef28b62ba7894b53ef7626b76cd468071262f03189e03c66",
+            "id": "component-ListCommentsComponent-b2932c0ea67f147c1f2fce08555f5affd64a0c0b4ea6a12a298e6fa62a6206cad7596f3d71e6cd6467658bfc3aa8aa1a80db699a0051f8bf9d5b0721a136ebde",
             "file": "src/app/components/comments/list-comments/list-comments.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1325,7 +1527,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 53,
+                    "line": 52,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1404,7 +1606,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, Input, SimpleChanges, OnChanges} from '@angular/core'\r\n\r\n@Component({\r\n  selector: 'list-comments',\r\n  templateUrl: './list-comments.component.html',\r\n  styleUrls: ['../comments.component.css']\r\n})\r\nexport class ListCommentsComponent implements OnChanges {\r\n  @Input() connector: any;\r\n  @Input() userName: string;\r\n  @Input() comments: any[];\r\n\r\n  goToComment (e: any) {\r\n    if (e.target.parentElement.id) {\r\n      this.connector.executeMethod(\"MoveToComment\",[e.target.parentElement.id]);\r\n    }\r\n  }\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    if (changes.hasOwnProperty(\"connector\")) {\r\n      if (this.connector) {\r\n        this.connector.attachEvent(\"onAddComment\",  function (val:any) {\r\n          console.log(\"onAddComment\");\r\n          var comments = this.comments;\r\n          var index = this.comments.findIndex((comment:any) => comment.Id === val.Id)\r\n\r\n          if (index == -1) {\r\n             this.comments = [val, ...comments];\r\n          }\r\n        }.bind(this));\r\n\r\n        this.connector.attachEvent(\"onRemoveComment\",  function (val:any) {\r\n          console.log(\"onRemoveComment\");\r\n          const index = this.comments.findIndex((comment:any) => comment.Id === val.Id);\r\n\r\n          if (index !== -1) {\r\n            this.comments.splice(index, 1);\r\n          }\r\n        }.bind(this));\r\n\r\n        this.connector.attachEvent(\"onChangeCommentData\",  function (val:any) {\r\n          const index = this.comments.findIndex((comment:any) => comment.Id === val.Id);\r\n          console.log(index);\r\n\r\n          if (index !== -1) {\r\n            this.comments[index].Data = val.Data;\r\n          }\r\n        }.bind(this));\r\n      }\r\n    }\r\n  }\r\n\r\n  dateParser(date: string) {\r\n    return new Date(parseInt(date, 10)).toLocaleString();\r\n  }\r\n}",
+            "sourceCode": "import {Component, Input, SimpleChanges, OnChanges} from '@angular/core'\r\n\r\n@Component({\r\n  selector: 'list-comments',\r\n  templateUrl: './list-comments.component.html',\r\n  styleUrls: ['../comments.component.css']\r\n})\r\nexport class ListCommentsComponent implements OnChanges {\r\n  @Input() connector: any;\r\n  @Input() userName: string;\r\n  @Input() comments: any[];\r\n\r\n  goToComment (e: any) {\r\n    if (e.target.parentElement.id) {\r\n      this.connector.executeMethod(\"MoveToComment\",[e.target.parentElement.id]);\r\n    }\r\n  }\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    if (changes.hasOwnProperty(\"connector\")) {\r\n      if (this.connector) {\r\n        this.connector.attachEvent(\"onAddComment\",  function (val:any) {\r\n          console.log(\"onAddComment\");\r\n          var comments = this.comments;\r\n          var index = this.comments.findIndex((comment:any) => comment.Id === val.Id)\r\n\r\n          if (index == -1) {\r\n             this.comments = [val, ...comments];\r\n          }\r\n        }.bind(this));\r\n\r\n        this.connector.attachEvent(\"onRemoveComment\",  function (val:any) {\r\n          console.log(\"onRemoveComment\");\r\n          const index = this.comments.findIndex((comment:any) => comment.Id === val.Id);\r\n\r\n          if (index !== -1) {\r\n            this.comments.splice(index, 1);\r\n          }\r\n        }.bind(this));\r\n\r\n        this.connector.attachEvent(\"onChangeCommentData\",  function (val:any) {\r\n          const index = this.comments.findIndex((comment:any) => comment.Id === val.Id);\r\n\r\n          if (index !== -1) {\r\n            this.comments[index].Data = val.Data;\r\n          }\r\n        }.bind(this));\r\n      }\r\n    }\r\n  }\r\n\r\n  dateParser(date: string) {\r\n    return new Date(parseInt(date, 10)).toLocaleString();\r\n  }\r\n}",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1724,13 +1926,13 @@
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-24fed1199422845c50522914a603926fe84fd524cc2fc73413f0ef21f0fd492ed4af9649d4a2fc408a4b62ba7894404dc9dbd2156731518e995d25884f6a94f2",
+            "id": "module-AppModule-347a9675ae03ee12c57dcdc336168fbb10c4f515a896f6a169bd21e8d7ccca82b0497bd71f5d27cb24e6985b82c0c4ba9c3171b2e99bcbfa12431bd8b21001a0",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { BrowserModule } from '@angular/platform-browser';\r\nimport { DocumentEditorModule } from '@onlyoffice/document-editor-angular';\r\n\r\nimport { AppComponent } from './app.component';\r\nimport { AddCommentComponent } from './components/comments/add-comment/add-comment.component';\r\nimport { AddCommentReplyComponent } from './components/comments/add-comment-reply/add-comment-reply.component';\r\nimport { CommentsComponent } from './components/comments/comments.component';\r\nimport { ListCommentsComponent } from './components/comments/list-comments/list-comments.component';\r\nimport { RemoveCommentComponent } from './components/comments/remove-comment/remove-comment.component';\r\nimport { RemoveCommentReplyComponent } from './components/comments/remove-comment-reply/remove-comment-reply.component';\r\nimport { CommenstStoriesComponent } from './components/comments/comments-stories/commenst-stories.component';\r\nimport { ContentControlsStoriesComponent } from './components/content-controls/content-controls-stories/content-controls-stories.component';\r\nimport { ContentControlsComponent } from './components/content-controls/content-controls.component';\r\nimport { InputContentControlComponent } from './components/content-controls/input-content-control/input-content-control.component';\r\nimport { RadioContentControlComponent } from './components/content-controls/radio-content-control/radio-content-control.component';\r\nimport { NgSelectModule } from '@ng-select/ng-select';\r\nimport { CommonModule } from '@angular/common';\r\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    CommentsComponent,\r\n    ListCommentsComponent,\r\n    AddCommentComponent,\r\n    AddCommentReplyComponent,\r\n    RemoveCommentComponent,\r\n    RemoveCommentReplyComponent,\r\n    CommenstStoriesComponent,\r\n    ContentControlsStoriesComponent,\r\n    ContentControlsComponent,\r\n    InputContentControlComponent,\r\n    RadioContentControlComponent\r\n  ],\r\n  imports: [\r\n    BrowserModule,\r\n    DocumentEditorModule,\r\n    NgSelectModule,\r\n    CommonModule,\r\n    FormsModule,\r\n    ReactiveFormsModule\r\n  ],\r\n  providers: [],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule { }\r\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { BrowserModule } from '@angular/platform-browser';\r\nimport { DocumentEditorModule } from '@onlyoffice/document-editor-angular';\r\n\r\nimport { AppComponent } from './app.component';\r\nimport { AddCommentComponent } from './components/comments/add-comment/add-comment.component';\r\nimport { AddCommentReplyComponent } from './components/comments/add-comment-reply/add-comment-reply.component';\r\nimport { CommentsComponent } from './components/comments/comments.component';\r\nimport { ListCommentsComponent } from './components/comments/list-comments/list-comments.component';\r\nimport { RemoveCommentComponent } from './components/comments/remove-comment/remove-comment.component';\r\nimport { RemoveCommentReplyComponent } from './components/comments/remove-comment-reply/remove-comment-reply.component';\r\nimport { CommenstStoriesComponent } from './components/comments/comments-stories/commenst-stories.component';\r\nimport { ContentControlsStoriesComponent } from './components/content-controls/content-controls-stories/content-controls-stories.component';\r\nimport { ContentControlsComponent } from './components/content-controls/content-controls.component';\r\nimport { InputContentControlComponent } from './components/content-controls/input-content-control/input-content-control.component';\r\nimport { RadioContentControlComponent } from './components/content-controls/radio-content-control/radio-content-control.component';\r\nimport { NgSelectModule } from '@ng-select/ng-select';\r\nimport { CommonModule } from '@angular/common';\r\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\r\nimport { FormsStoriesComponent } from './components/forms/forms-stories/forms-stories.component';\r\nimport { HttpClientModule } from '@angular/common/http';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    CommentsComponent,\r\n    ListCommentsComponent,\r\n    AddCommentComponent,\r\n    AddCommentReplyComponent,\r\n    RemoveCommentComponent,\r\n    RemoveCommentReplyComponent,\r\n    CommenstStoriesComponent,\r\n    ContentControlsStoriesComponent,\r\n    ContentControlsComponent,\r\n    InputContentControlComponent,\r\n    RadioContentControlComponent,\r\n    FormsStoriesComponent\r\n  ],\r\n  imports: [\r\n    BrowserModule,\r\n    DocumentEditorModule,\r\n    NgSelectModule,\r\n    CommonModule,\r\n    FormsModule,\r\n    ReactiveFormsModule,\r\n    HttpClientModule\r\n  ],\r\n  providers: [],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule { }\r\n",
             "children": [
                 {
                     "type": "providers",
@@ -1759,6 +1961,9 @@
                         },
                         {
                             "name": "ContentControlsStoriesComponent"
+                        },
+                        {
+                            "name": "FormsStoriesComponent"
                         },
                         {
                             "name": "InputContentControlComponent"
@@ -1921,6 +2126,16 @@
                 "defaultValue": "{\r\n  production: false\r\n}"
             },
             {
+                "name": "FomsTemplate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/forms.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "FormTemplate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -2003,6 +2218,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/filling-form.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<any>",
+                "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/forms.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<any>",
@@ -2184,6 +2409,28 @@
                     "deprecationMessage": "",
                     "type": "object",
                     "defaultValue": "{\r\n  production: false\r\n}"
+                }
+            ],
+            "src/app/forms.stories.ts": [
+                {
+                    "name": "FomsTemplate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/forms.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/forms.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<any>",
+                    "defaultValue": "(args) => ({\r\n  props: args\r\n})"
                 }
             ],
             "projects/onlyoffice/document-editor-angular/src/lib/utils/loadScript.ts": [
@@ -2407,6 +2654,15 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/components/forms/forms-stories/forms-stories.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FormsStoriesComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/10",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/document-editor.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
@@ -2487,12 +2743,41 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/forms.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "FomsTemplate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/forms.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/model/person.ts",
                 "type": "interface",
                 "linktype": "interface",
                 "name": "IPerson",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/service/forms.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "FormsService",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
                 "status": "low"
             },
             {
