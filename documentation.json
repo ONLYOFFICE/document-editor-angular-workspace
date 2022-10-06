@@ -148,12 +148,12 @@
         },
         {
             "name": "Window",
-            "id": "interface-Window-70f5980c3f6ac94917a4596a26542f538a3e6d73c13e080e2ef6649b38d37ef02e8403df782bfa203b5ab1daf671e0729df63adb0c305990785f829e917cc492",
+            "id": "interface-Window-28a4cce51189cc30f653c2b760d63092a1e29964647313889d3124f41de3bfb2db230d4cb30efd4da47efad3437abb1895223955efd27e3de1e0bb18716981a7",
             "file": "projects/onlyoffice/document-editor-angular/src/lib/components/document-editor.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';\r\nimport { IConfig } from '../model/config';\r\nimport loadScript from \"../utils/loadScript\";\r\n\r\ndeclare global {\r\n  interface Window {\r\n      DocsAPI?: any;\r\n      DocEditor?: any;\r\n  }\r\n}\r\n\r\n@Component({\r\n  selector: 'document-editor',\r\n  template: '<div [id]=\"id\"></div>',\r\n  styles: [\r\n  ]\r\n})\r\nexport class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {\r\n  @Input() id: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  @Input() document_fileType?: string;\r\n  @Input() document_title?: string;\r\n  @Input() documentType?: string;\r\n  @Input() editorConfig_lang?: string;\r\n  @Input() height?: string;\r\n  @Input() type?: string;\r\n  @Input() width?: string;\r\n\r\n  @Input() events_onAppReady?: (editor: object) => void;\r\n  @Input() events_onDocumentReady?: (editor: object) => void;\r\n  @Input() events_onDocumentStateChange?: (data: object) => void;\r\n  @Input() events_onError?: (error: string) => void;\r\n\r\n  isFirstOnChanges: boolean = true;\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n    let url = this.documentServerUrl;\r\n    if (!url.endsWith(\"/\")) url += \"/\";\r\n\r\n    const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;\r\n    loadScript(docApiUrl, \"onlyoffice-api-script\")\r\n      .then(() => this.onLoad())\r\n      .catch((err) => {\r\n        console.error(err);\r\n        this.events_onError!(err);\r\n      });\r\n  }\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    const listNameChanges = [\"config\", \"document_fileType\", \"document_title\", \"documentType\", \"editorConfig_lang\", \"height\", \"type\", \"width\"];\r\n\r\n    if (this.isFirstOnChanges) {\r\n      this.isFirstOnChanges = false;\r\n      return;\r\n    }\r\n\r\n    for (const name of listNameChanges) {\r\n      if (changes.hasOwnProperty(name)) {\r\n        if (window?.DocEditor?.instances[this.id]) {\r\n          window.DocEditor.instances[this.id].destroyEditor();\r\n          window.DocEditor.instances[this.id] = undefined;\r\n    \r\n          console.log(\"Important props have been changed. Load new Editor.\");\r\n          this.onLoad();\r\n          return;\r\n        }\r\n      }\r\n    }\r\n  }\r\n\r\n  ngOnDestroy() {\r\n    if (window?.DocEditor?.instances[this.id]) {\r\n      window.DocEditor.instances[this.id].destroyEditor();\r\n      window.DocEditor.instances[this.id] = undefined;\r\n    }\r\n  }\r\n\r\n  onLoad = () => {\r\n    try {\r\n      if (!window.DocsAPI) throw new Error(\"DocsAPI is not defined\");\r\n      if (window?.DocEditor?.instances[this.id]) {\r\n        console.log(\"Skip loading. Instance already exists\", this.id);\r\n        return;\r\n      }\r\n\r\n      if (!window?.DocEditor?.instances) {\r\n        window.DocEditor = { instances: {} };\r\n      }\r\n\r\n      let initConfig = Object.assign({\r\n        document: {\r\n          fileType: this.document_fileType,\r\n          title: this.document_title,\r\n        },\r\n        documentType: this.documentType,\r\n        editorConfig: {\r\n          lang: this.editorConfig_lang,\r\n        },\r\n        events: {\r\n          onAppReady: this.events_onAppReady,\r\n          onDocumentReady: this.events_onDocumentReady,\r\n          onDocumentStateChange: this.events_onDocumentStateChange,\r\n          onError: this.events_onError,\r\n        },\r\n        height: this.height,\r\n        type: this.type,\r\n        width: this.width,\r\n      }, this.config || {});\r\n\r\n      const editor = window.DocsAPI.DocEditor(this.id, initConfig);\r\n      window.DocEditor.instances[this.id] = editor;\r\n    } catch (err: any) {\r\n      console.error(err);\r\n      this.events_onError!(err);\r\n    }\r\n};\r\n}\r\n",
+            "sourceCode": "import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';\r\nimport { IConfig } from '../model/config';\r\nimport loadScript from \"../utils/loadScript\";\r\n\r\ndeclare global {\r\n  interface Window {\r\n      DocsAPI?: any;\r\n      DocEditor?: any;\r\n  }\r\n}\r\n\r\n@Component({\r\n  selector: 'document-editor',\r\n  template: '<div [id]=\"id\"></div>',\r\n  styles: [\r\n  ]\r\n})\r\nexport class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {\r\n  @Input() id: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  @Input() document_fileType?: string;\r\n  @Input() document_title?: string;\r\n  @Input() documentType?: string;\r\n  @Input() editorConfig_lang?: string;\r\n  @Input() height?: string;\r\n  @Input() type?: string;\r\n  @Input() width?: string;\r\n\r\n  @Input() events_onAppReady?: (event: object) => void;\r\n  @Input() events_onDocumentStateChange?: (event: object) => void;\r\n  @Input() events_onMetaChange?: (event: object) => void;\r\n  @Input() events_onDocumentReady?: (event: object) => void;\r\n  @Input() events_onInfo?: (event: object) => void;\r\n  @Input() events_onWarning?: (event: object) => void;\r\n  @Input() events_onError?: (event: object) => void;\r\n  @Input() events_onRequestSharingSettings?: (event: object) => void;\r\n  @Input() events_onRequestRename?: (event: object) => void;\r\n  @Input() events_onMakeActionLink?: (event: object) => void;\r\n  @Input() events_onRequestInsertImage?: (event: object) => void;\r\n  @Input() events_onRequestSaveAs?: (event: object) => void;\r\n  @Input() events_onRequestMailMergeRecipients?: (event: object) => void;\r\n  @Input() events_onRequestCompareFile?: (event: object) => void;\r\n  @Input() events_onRequestEditRights?: (event: object) => void;\r\n  @Input() events_onRequestHistory?: (event: object) => void;\r\n  @Input() events_onRequestHistoryClose?: (event: object) => void;\r\n  @Input() events_onRequestHistoryData?: (event: object) => void;\r\n  @Input() events_onRequestRestore?: (event: object) => void;\r\n\r\n  isFirstOnChanges: boolean = true;\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n    let url = this.documentServerUrl;\r\n    if (!url.endsWith(\"/\")) url += \"/\";\r\n\r\n    const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;\r\n    loadScript(docApiUrl, \"onlyoffice-api-script\")\r\n      .then(() => this.onLoad())\r\n      .catch((err) => {\r\n        console.error(err);\r\n        this.events_onError!(err);\r\n      });\r\n  }\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    const listNameChanges = [\"config\", \"document_fileType\", \"document_title\", \"documentType\", \"editorConfig_lang\", \"height\", \"type\", \"width\"];\r\n\r\n    if (this.isFirstOnChanges) {\r\n      this.isFirstOnChanges = false;\r\n      return;\r\n    }\r\n\r\n    for (const name of listNameChanges) {\r\n      if (changes.hasOwnProperty(name)) {\r\n        if (window?.DocEditor?.instances[this.id]) {\r\n          window.DocEditor.instances[this.id].destroyEditor();\r\n          window.DocEditor.instances[this.id] = undefined;\r\n    \r\n          console.log(\"Important props have been changed. Load new Editor.\");\r\n          this.onLoad();\r\n          return;\r\n        }\r\n      }\r\n    }\r\n  }\r\n\r\n  ngOnDestroy() {\r\n    if (window?.DocEditor?.instances[this.id]) {\r\n      window.DocEditor.instances[this.id].destroyEditor();\r\n      window.DocEditor.instances[this.id] = undefined;\r\n    }\r\n  }\r\n\r\n  onLoad = () => {\r\n    try {\r\n      if (!window.DocsAPI) throw new Error(\"DocsAPI is not defined\");\r\n      if (window?.DocEditor?.instances[this.id]) {\r\n        console.log(\"Skip loading. Instance already exists\", this.id);\r\n        return;\r\n      }\r\n\r\n      if (!window?.DocEditor?.instances) {\r\n        window.DocEditor = { instances: {} };\r\n      }\r\n\r\n      let initConfig = Object.assign({\r\n        document: {\r\n          fileType: this.document_fileType,\r\n          title: this.document_title,\r\n        },\r\n        documentType: this.documentType,\r\n        editorConfig: {\r\n          lang: this.editorConfig_lang,\r\n        },\r\n        events: {\r\n          onAppReady: this.events_onAppReady,\r\n          onDocumentStateChange: this.events_onDocumentStateChange,\r\n          onMetaChange: this.events_onMetaChange,\r\n          onDocumentReady: this.events_onDocumentReady,\r\n          onInfo: this.events_onInfo,\r\n          onWarning: this.events_onWarning,\r\n          onError: this.events_onError,\r\n          onRequestSharingSettings: this.events_onRequestSharingSettings,\r\n          onRequestRename: this.events_onRequestRename,\r\n          onMakeActionLink: this.events_onMakeActionLink,\r\n          onRequestInsertImage: this.events_onRequestInsertImage,\r\n          onRequestSaveAs: this.events_onRequestSaveAs,\r\n          onRequestMailMergeRecipients: this.events_onRequestMailMergeRecipients,\r\n          onRequestCompareFile: this.events_onRequestCompareFile,\r\n          onRequestEditRights: this.events_onRequestEditRights,\r\n          onRequestHistory: this.events_onRequestHistory,\r\n          onRequestHistoryClose: this.events_onRequestHistoryClose,\r\n          onRequestHistoryData: this.events_onRequestHistoryData,\r\n          onRequestRestore: this.events_onRequestRestore\r\n        },\r\n        height: this.height,\r\n        type: this.type,\r\n        width: this.width,\r\n      }, this.config || {});\r\n\r\n      const editor = window.DocsAPI.DocEditor(this.id, initConfig);\r\n      window.DocEditor.instances[this.id] = editor;\r\n    } catch (err: any) {\r\n      console.error(err);\r\n      this.events_onError!(err);\r\n    }\r\n};\r\n}\r\n",
             "properties": [
                 {
                     "name": "DocEditor",
@@ -182,7 +182,7 @@
     "injectables": [
         {
             "name": "FormsService",
-            "id": "injectable-FormsService-b06bad2b6a867a09d0949bc53cef53bfe0fb23ae27e7f1e727c7ef7e7dc8f98e4b418b47fad8abd6fae6460fcb7eac083603a7e4d8dc7dcc60eced92464f14c0",
+            "id": "injectable-FormsService-84f24b683a5b79d943c3188672dd6523ce9fd3ea6dda03828f5bf1eb8e7563dc7b2992076933af9555cbd134574633ad3b593105c4bbb0e9423e24fd103c1f1b",
             "file": "src/app/service/forms.service.ts",
             "properties": [
                 {
@@ -212,7 +212,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import {Injectable} from '@angular/core'\r\nimport {HttpClient} from '@angular/common/http'\r\nimport {catchError, Observable, tap, throwError} from 'rxjs'\r\nimport config from \"../../../config/config.json\";\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class FormsService  {\r\n  constructor(\r\n    private http: HttpClient\r\n  ) {\r\n  }\r\n\r\n  forms: any[] = [];\r\n\r\n  getForms(): Observable<any> {\r\n    return this.http.get<any>(config.oformsUrl).pipe(\r\n      tap(response => {\r\n          var fileOforms = response.data.map((item: { attributes: { file_oform: { data: any[] } } }) => {\r\n              return item.attributes.file_oform.data.find((f) => f.attributes.ext === \".oform\");\r\n          });\r\n\r\n          var forms = fileOforms.map((form: { attributes: { url: any; name: any } }) => {\r\n            return form && form.attributes\r\n              ? { value: { title:form.attributes.name, url: form.attributes.url }, label: form.attributes.name }\r\n              : null;\r\n          }).filter((o: any) => o != null);\r\n\r\n        this.forms = forms;\r\n      }),\r\n      catchError(error => throwError(() => error.message))\r\n    )\r\n  }\r\n}",
+            "sourceCode": "import {Injectable} from '@angular/core'\r\nimport {HttpClient} from '@angular/common/http'\r\nimport {catchError, Observable, tap, throwError} from 'rxjs'\r\nimport config from \"../../../config/config.json\";\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class FormsService {\r\n  constructor(\r\n    private http: HttpClient\r\n  ) {\r\n  }\r\n\r\n  forms: any[] = [];\r\n\r\n  getForms(): Observable<any> {\r\n    return this.http.get<any>(config.oformsUrl).pipe(\r\n      tap(response => {\r\n          var fileOforms = response.data.map((item: { attributes: { file_oform: { data: any[] } } }) => {\r\n              return item.attributes.file_oform.data.find((f) => f.attributes.ext === \".oform\");\r\n          });\r\n\r\n          var forms = fileOforms.map((form: { attributes: { url: any; name: any } }) => {\r\n            return form && form.attributes\r\n              ? { value: { title:form.attributes.name, url: form.attributes.url }, label: form.attributes.name }\r\n              : null;\r\n          }).filter((o: any) => o != null);\r\n\r\n        this.forms = forms;\r\n      }),\r\n      catchError(error => throwError(() => error.message))\r\n    )\r\n  }\r\n}",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -1000,7 +1000,7 @@
         },
         {
             "name": "DocumentEditorComponent",
-            "id": "component-DocumentEditorComponent-70f5980c3f6ac94917a4596a26542f538a3e6d73c13e080e2ef6649b38d37ef02e8403df782bfa203b5ab1daf671e0729df63adb0c305990785f829e917cc492",
+            "id": "component-DocumentEditorComponent-28a4cce51189cc30f653c2b760d63092a1e29964647313889d3124f41de3bfb2db230d4cb30efd4da47efad3437abb1895223955efd27e3de1e0bb18716981a7",
             "file": "projects/onlyoffice/document-editor-angular/src/lib/components/document-editor.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1074,7 +1074,7 @@
                     "name": "events_onDocumentReady",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 32,
+                    "line": 34,
                     "type": "function",
                     "decorators": []
                 },
@@ -1082,7 +1082,7 @@
                     "name": "events_onDocumentStateChange",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 33,
+                    "line": 32,
                     "type": "function",
                     "decorators": []
                 },
@@ -1090,7 +1090,127 @@
                     "name": "events_onError",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 34,
+                    "line": 37,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onInfo",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 35,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onMakeActionLink",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 40,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onMetaChange",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 33,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestCompareFile",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 44,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestEditRights",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 45,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestHistory",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 46,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestHistoryClose",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 47,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestHistoryData",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 48,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestInsertImage",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 41,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestMailMergeRecipients",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 43,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestRename",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 39,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestRestore",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 49,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestSaveAs",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 42,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestSharingSettings",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 38,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onWarning",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 36,
                     "type": "function",
                     "decorators": []
                 },
@@ -1137,7 +1257,7 @@
                     "type": "boolean",
                     "optional": false,
                     "description": "",
-                    "line": 36
+                    "line": 51
                 },
                 {
                     "name": "onLoad",
@@ -1147,7 +1267,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 82
+                    "line": 97
                 }
             ],
             "methodsClass": [
@@ -1164,7 +1284,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 53,
+                    "line": 68,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1185,7 +1305,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 75,
+                    "line": 90,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -1195,7 +1315,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 40,
+                    "line": 55,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -1207,7 +1327,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';\r\nimport { IConfig } from '../model/config';\r\nimport loadScript from \"../utils/loadScript\";\r\n\r\ndeclare global {\r\n  interface Window {\r\n      DocsAPI?: any;\r\n      DocEditor?: any;\r\n  }\r\n}\r\n\r\n@Component({\r\n  selector: 'document-editor',\r\n  template: '<div [id]=\"id\"></div>',\r\n  styles: [\r\n  ]\r\n})\r\nexport class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {\r\n  @Input() id: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  @Input() document_fileType?: string;\r\n  @Input() document_title?: string;\r\n  @Input() documentType?: string;\r\n  @Input() editorConfig_lang?: string;\r\n  @Input() height?: string;\r\n  @Input() type?: string;\r\n  @Input() width?: string;\r\n\r\n  @Input() events_onAppReady?: (editor: object) => void;\r\n  @Input() events_onDocumentReady?: (editor: object) => void;\r\n  @Input() events_onDocumentStateChange?: (data: object) => void;\r\n  @Input() events_onError?: (error: string) => void;\r\n\r\n  isFirstOnChanges: boolean = true;\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n    let url = this.documentServerUrl;\r\n    if (!url.endsWith(\"/\")) url += \"/\";\r\n\r\n    const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;\r\n    loadScript(docApiUrl, \"onlyoffice-api-script\")\r\n      .then(() => this.onLoad())\r\n      .catch((err) => {\r\n        console.error(err);\r\n        this.events_onError!(err);\r\n      });\r\n  }\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    const listNameChanges = [\"config\", \"document_fileType\", \"document_title\", \"documentType\", \"editorConfig_lang\", \"height\", \"type\", \"width\"];\r\n\r\n    if (this.isFirstOnChanges) {\r\n      this.isFirstOnChanges = false;\r\n      return;\r\n    }\r\n\r\n    for (const name of listNameChanges) {\r\n      if (changes.hasOwnProperty(name)) {\r\n        if (window?.DocEditor?.instances[this.id]) {\r\n          window.DocEditor.instances[this.id].destroyEditor();\r\n          window.DocEditor.instances[this.id] = undefined;\r\n    \r\n          console.log(\"Important props have been changed. Load new Editor.\");\r\n          this.onLoad();\r\n          return;\r\n        }\r\n      }\r\n    }\r\n  }\r\n\r\n  ngOnDestroy() {\r\n    if (window?.DocEditor?.instances[this.id]) {\r\n      window.DocEditor.instances[this.id].destroyEditor();\r\n      window.DocEditor.instances[this.id] = undefined;\r\n    }\r\n  }\r\n\r\n  onLoad = () => {\r\n    try {\r\n      if (!window.DocsAPI) throw new Error(\"DocsAPI is not defined\");\r\n      if (window?.DocEditor?.instances[this.id]) {\r\n        console.log(\"Skip loading. Instance already exists\", this.id);\r\n        return;\r\n      }\r\n\r\n      if (!window?.DocEditor?.instances) {\r\n        window.DocEditor = { instances: {} };\r\n      }\r\n\r\n      let initConfig = Object.assign({\r\n        document: {\r\n          fileType: this.document_fileType,\r\n          title: this.document_title,\r\n        },\r\n        documentType: this.documentType,\r\n        editorConfig: {\r\n          lang: this.editorConfig_lang,\r\n        },\r\n        events: {\r\n          onAppReady: this.events_onAppReady,\r\n          onDocumentReady: this.events_onDocumentReady,\r\n          onDocumentStateChange: this.events_onDocumentStateChange,\r\n          onError: this.events_onError,\r\n        },\r\n        height: this.height,\r\n        type: this.type,\r\n        width: this.width,\r\n      }, this.config || {});\r\n\r\n      const editor = window.DocsAPI.DocEditor(this.id, initConfig);\r\n      window.DocEditor.instances[this.id] = editor;\r\n    } catch (err: any) {\r\n      console.error(err);\r\n      this.events_onError!(err);\r\n    }\r\n};\r\n}\r\n",
+            "sourceCode": "import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';\r\nimport { IConfig } from '../model/config';\r\nimport loadScript from \"../utils/loadScript\";\r\n\r\ndeclare global {\r\n  interface Window {\r\n      DocsAPI?: any;\r\n      DocEditor?: any;\r\n  }\r\n}\r\n\r\n@Component({\r\n  selector: 'document-editor',\r\n  template: '<div [id]=\"id\"></div>',\r\n  styles: [\r\n  ]\r\n})\r\nexport class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {\r\n  @Input() id: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  @Input() document_fileType?: string;\r\n  @Input() document_title?: string;\r\n  @Input() documentType?: string;\r\n  @Input() editorConfig_lang?: string;\r\n  @Input() height?: string;\r\n  @Input() type?: string;\r\n  @Input() width?: string;\r\n\r\n  @Input() events_onAppReady?: (event: object) => void;\r\n  @Input() events_onDocumentStateChange?: (event: object) => void;\r\n  @Input() events_onMetaChange?: (event: object) => void;\r\n  @Input() events_onDocumentReady?: (event: object) => void;\r\n  @Input() events_onInfo?: (event: object) => void;\r\n  @Input() events_onWarning?: (event: object) => void;\r\n  @Input() events_onError?: (event: object) => void;\r\n  @Input() events_onRequestSharingSettings?: (event: object) => void;\r\n  @Input() events_onRequestRename?: (event: object) => void;\r\n  @Input() events_onMakeActionLink?: (event: object) => void;\r\n  @Input() events_onRequestInsertImage?: (event: object) => void;\r\n  @Input() events_onRequestSaveAs?: (event: object) => void;\r\n  @Input() events_onRequestMailMergeRecipients?: (event: object) => void;\r\n  @Input() events_onRequestCompareFile?: (event: object) => void;\r\n  @Input() events_onRequestEditRights?: (event: object) => void;\r\n  @Input() events_onRequestHistory?: (event: object) => void;\r\n  @Input() events_onRequestHistoryClose?: (event: object) => void;\r\n  @Input() events_onRequestHistoryData?: (event: object) => void;\r\n  @Input() events_onRequestRestore?: (event: object) => void;\r\n\r\n  isFirstOnChanges: boolean = true;\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n    let url = this.documentServerUrl;\r\n    if (!url.endsWith(\"/\")) url += \"/\";\r\n\r\n    const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;\r\n    loadScript(docApiUrl, \"onlyoffice-api-script\")\r\n      .then(() => this.onLoad())\r\n      .catch((err) => {\r\n        console.error(err);\r\n        this.events_onError!(err);\r\n      });\r\n  }\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    const listNameChanges = [\"config\", \"document_fileType\", \"document_title\", \"documentType\", \"editorConfig_lang\", \"height\", \"type\", \"width\"];\r\n\r\n    if (this.isFirstOnChanges) {\r\n      this.isFirstOnChanges = false;\r\n      return;\r\n    }\r\n\r\n    for (const name of listNameChanges) {\r\n      if (changes.hasOwnProperty(name)) {\r\n        if (window?.DocEditor?.instances[this.id]) {\r\n          window.DocEditor.instances[this.id].destroyEditor();\r\n          window.DocEditor.instances[this.id] = undefined;\r\n    \r\n          console.log(\"Important props have been changed. Load new Editor.\");\r\n          this.onLoad();\r\n          return;\r\n        }\r\n      }\r\n    }\r\n  }\r\n\r\n  ngOnDestroy() {\r\n    if (window?.DocEditor?.instances[this.id]) {\r\n      window.DocEditor.instances[this.id].destroyEditor();\r\n      window.DocEditor.instances[this.id] = undefined;\r\n    }\r\n  }\r\n\r\n  onLoad = () => {\r\n    try {\r\n      if (!window.DocsAPI) throw new Error(\"DocsAPI is not defined\");\r\n      if (window?.DocEditor?.instances[this.id]) {\r\n        console.log(\"Skip loading. Instance already exists\", this.id);\r\n        return;\r\n      }\r\n\r\n      if (!window?.DocEditor?.instances) {\r\n        window.DocEditor = { instances: {} };\r\n      }\r\n\r\n      let initConfig = Object.assign({\r\n        document: {\r\n          fileType: this.document_fileType,\r\n          title: this.document_title,\r\n        },\r\n        documentType: this.documentType,\r\n        editorConfig: {\r\n          lang: this.editorConfig_lang,\r\n        },\r\n        events: {\r\n          onAppReady: this.events_onAppReady,\r\n          onDocumentStateChange: this.events_onDocumentStateChange,\r\n          onMetaChange: this.events_onMetaChange,\r\n          onDocumentReady: this.events_onDocumentReady,\r\n          onInfo: this.events_onInfo,\r\n          onWarning: this.events_onWarning,\r\n          onError: this.events_onError,\r\n          onRequestSharingSettings: this.events_onRequestSharingSettings,\r\n          onRequestRename: this.events_onRequestRename,\r\n          onMakeActionLink: this.events_onMakeActionLink,\r\n          onRequestInsertImage: this.events_onRequestInsertImage,\r\n          onRequestSaveAs: this.events_onRequestSaveAs,\r\n          onRequestMailMergeRecipients: this.events_onRequestMailMergeRecipients,\r\n          onRequestCompareFile: this.events_onRequestCompareFile,\r\n          onRequestEditRights: this.events_onRequestEditRights,\r\n          onRequestHistory: this.events_onRequestHistory,\r\n          onRequestHistoryClose: this.events_onRequestHistoryClose,\r\n          onRequestHistoryData: this.events_onRequestHistoryData,\r\n          onRequestRestore: this.events_onRequestRestore\r\n        },\r\n        height: this.height,\r\n        type: this.type,\r\n        width: this.width,\r\n      }, this.config || {});\r\n\r\n      const editor = window.DocsAPI.DocEditor(this.id, initConfig);\r\n      window.DocEditor.instances[this.id] = editor;\r\n    } catch (err: any) {\r\n      console.error(err);\r\n      this.events_onError!(err);\r\n    }\r\n};\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -1217,7 +1337,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 36
+                "line": 51
             },
             "implements": [
                 "OnInit",
@@ -1227,7 +1347,7 @@
         },
         {
             "name": "FormsStoriesComponent",
-            "id": "component-FormsStoriesComponent-a0b0b6218302f650b430dce0116edadf0d34300d9e09cfb00e23c220c5c4aee9a87f238c4235876dd12d3c94eab2c8dabd5758eb5ce5ffcfd9b0d53613f37d9e",
+            "id": "component-FormsStoriesComponent-4478bb02ae0fa2eedacd6bf09d87fd054098e0cc6d5814cdb4c6c6e775f1170f015a5ba082ed0a645d83cec4ad4b547ff3e07065b75958894aa9f5e63ebb3472",
             "file": "src/app/components/forms/forms-stories/forms-stories.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1330,7 +1450,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\nimport { FormsService } from 'src/app/service/forms.service';\r\n\r\n@Component({\r\n  selector: 'forms-stories',\r\n  templateUrl: './forms-stories.component.html'\r\n})\r\nexport class FormsStoriesComponent implements OnInit {\r\n  @Input() editorId: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  loading = false;\r\n  selectedForm: any;\r\n\r\n  constructor( public formsService: FormsService ) {}\r\n\r\n  ngOnInit(): void {\r\n    this.loading = true;\r\n    this.formsService.getForms().subscribe(() => {\r\n      this.loading = false\r\n    });\r\n  }\r\n\r\n  onChangeSelect(): void {\r\n    console.log(\"sadf\");\r\n    let newConfig = this.config;\r\n    newConfig = {...newConfig}\r\n    this.config = newConfig;\r\n    console.log(this.config);\r\n  }\r\n}",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\nimport { FormsService } from 'src/app/service/forms.service';\r\n\r\n@Component({\r\n  selector: 'forms-stories',\r\n  templateUrl: './forms-stories.component.html'\r\n})\r\nexport class FormsStoriesComponent implements OnInit {\r\n  @Input() editorId: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  loading = false;\r\n  selectedForm: any;\r\n\r\n  constructor( public formsService: FormsService ) {}\r\n\r\n  ngOnInit(): void {\r\n    this.loading = true;\r\n    this.formsService.getForms().subscribe(() => {\r\n      this.loading = false\r\n    });\r\n  }\r\n\r\n  onChangeSelect(): void {\r\n    let newConfig = this.config;\r\n    newConfig = {...newConfig}\r\n\r\n    newConfig.document.title = this.selectedForm.title;\r\n    newConfig.document.url = this.selectedForm.url;\r\n    newConfig.document.key = undefined;\r\n\r\n    this.config = newConfig;\r\n  }\r\n}",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -1363,7 +1483,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<ng-select [items]=\"formsService.forms\"\r\n    bindLabel=\"label\"\r\n    bindValue=\"value\"\r\n    [loading]=\"loading\"\r\n    (change)=\"onChangeSelect()\"\r\n    [(ngModel)]=\"selectedForm\">\r\n</ng-select>\r\n<br/>\r\n\r\n<document-editor \r\n  [id]=\"editorId\" \r\n  [documentServerUrl]=\"documentServerUrl\"\r\n  [config]=\"config\"\r\n></document-editor>"
+            "templateData": "<ng-select [items]=\"formsService.forms\"\r\n    bindLabel=\"label\"\r\n    bindValue=\"value\"\r\n    [loading]=\"loading\"\r\n    (change)=\"onChangeSelect()\"\r\n    [(ngModel)]=\"selectedForm\">\r\n</ng-select>\r\n<br/>\r\n\r\n<document-editor\r\n  [id]=\"editorId\"\r\n  [documentServerUrl]=\"documentServerUrl\"\r\n  [config]=\"config\"\r\n></document-editor>"
         },
         {
             "name": "InputContentControlComponent",
@@ -2474,7 +2594,7 @@
                 "linktype": "component",
                 "name": "DocumentEditorComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/21",
+                "coverageCount": "0/36",
                 "status": "low"
             },
             {

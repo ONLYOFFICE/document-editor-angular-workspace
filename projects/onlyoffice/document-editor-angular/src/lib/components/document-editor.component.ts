@@ -28,10 +28,25 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
   @Input() type?: string;
   @Input() width?: string;
 
-  @Input() events_onAppReady?: (editor: object) => void;
-  @Input() events_onDocumentReady?: (editor: object) => void;
-  @Input() events_onDocumentStateChange?: (data: object) => void;
-  @Input() events_onError?: (error: string) => void;
+  @Input() events_onAppReady?: (event: object) => void;
+  @Input() events_onDocumentStateChange?: (event: object) => void;
+  @Input() events_onMetaChange?: (event: object) => void;
+  @Input() events_onDocumentReady?: (event: object) => void;
+  @Input() events_onInfo?: (event: object) => void;
+  @Input() events_onWarning?: (event: object) => void;
+  @Input() events_onError?: (event: object) => void;
+  @Input() events_onRequestSharingSettings?: (event: object) => void;
+  @Input() events_onRequestRename?: (event: object) => void;
+  @Input() events_onMakeActionLink?: (event: object) => void;
+  @Input() events_onRequestInsertImage?: (event: object) => void;
+  @Input() events_onRequestSaveAs?: (event: object) => void;
+  @Input() events_onRequestMailMergeRecipients?: (event: object) => void;
+  @Input() events_onRequestCompareFile?: (event: object) => void;
+  @Input() events_onRequestEditRights?: (event: object) => void;
+  @Input() events_onRequestHistory?: (event: object) => void;
+  @Input() events_onRequestHistoryClose?: (event: object) => void;
+  @Input() events_onRequestHistoryData?: (event: object) => void;
+  @Input() events_onRequestRestore?: (event: object) => void;
 
   isFirstOnChanges: boolean = true;
 
@@ -102,9 +117,24 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
         },
         events: {
           onAppReady: this.events_onAppReady,
-          onDocumentReady: this.events_onDocumentReady,
           onDocumentStateChange: this.events_onDocumentStateChange,
+          onMetaChange: this.events_onMetaChange,
+          onDocumentReady: this.events_onDocumentReady,
+          onInfo: this.events_onInfo,
+          onWarning: this.events_onWarning,
           onError: this.events_onError,
+          onRequestSharingSettings: this.events_onRequestSharingSettings,
+          onRequestRename: this.events_onRequestRename,
+          onMakeActionLink: this.events_onMakeActionLink,
+          onRequestInsertImage: this.events_onRequestInsertImage,
+          onRequestSaveAs: this.events_onRequestSaveAs,
+          onRequestMailMergeRecipients: this.events_onRequestMailMergeRecipients,
+          onRequestCompareFile: this.events_onRequestCompareFile,
+          onRequestEditRights: this.events_onRequestEditRights,
+          onRequestHistory: this.events_onRequestHistory,
+          onRequestHistoryClose: this.events_onRequestHistoryClose,
+          onRequestHistoryData: this.events_onRequestHistoryData,
+          onRequestRestore: this.events_onRequestRestore
         },
         height: this.height,
         type: this.type,
