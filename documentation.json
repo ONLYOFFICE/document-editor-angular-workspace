@@ -855,7 +855,7 @@
         },
         {
             "name": "ContentControlsStoriesComponent",
-            "id": "component-ContentControlsStoriesComponent-48c687cfaf85c5eb59d7c7ccad69ea6a7037779795ff3637d95d4d6450a73754fb536f3c17541f108d6ebf33e27fbbe9f08f17c313231d9ef0cbed70fc7edec6",
+            "id": "component-ContentControlsStoriesComponent-e67ca1225bce406b945bcd36da1e5e3ddb05b099403f2747e364e715b415bf1c716f3e854e4943307b67391bd0ca83555bfdc1ef6d26308b1fc68bd3fb7f23bd",
             "file": "src/app/components/content-controls/content-controls-stories/content-controls-stories.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -935,6 +935,16 @@
                     "line": 39
                 },
                 {
+                    "name": "onBlurContentControl",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 69
+                },
+                {
                     "name": "onChangeContentControl",
                     "defaultValue": "() => {...}",
                     "deprecated": false,
@@ -962,7 +972,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 69
+                    "line": 73
                 },
                 {
                     "name": "selectedPerson",
@@ -992,7 +1002,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\nimport { IPerson } from '../../../model/person';\r\n\r\n@Component({\r\n  selector: 'content-controls-stories',\r\n  templateUrl: './content-controls-stories.component.html'\r\n})\r\nexport class ContentControlsStoriesComponent {\r\n  @Input() editorId: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n  @Input() persons: IPerson[];\r\n\r\n  connector: any = null;\r\n\r\n  contentControls: any;\r\n  selectedPerson: any;\r\n\r\n  onChangeSelect = () => {\r\n    for (var [key, value] of Object.entries<string>(this.selectedPerson)) {\r\n      if (key == \"Sex\") {\r\n        key = value == \"Male\" ? \"Male\" : \"Female\";\r\n        value = \"true\";\r\n      }\r\n\r\n      this.setFormValue(key, value || \"\");\r\n    }\r\n\r\n    this.getAllContentControls();\r\n  };\r\n\r\n  setFormValue = (formId: string, value: string) => {\r\n    this.connector.executeMethod(\"GetFormsByTag\", [formId], function(forms: any) {\r\n      this.connector.executeMethod(\"SetFormValue\", [forms[0][\"InternalId\"], value], null);\r\n    }.bind(this));\r\n  }\r\n\r\n  getAllContentControls = () => {\r\n    this.connector.executeMethod (\"GetAllContentControls\", null, function(data: any) {\r\n      for (let i = 0; i < data.length; i++) {\r\n        switch (data[i].Tag) {\r\n          case \"Male\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          case \"Female\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          default:\r\n            data[i].Type = \"input\";\r\n        }\r\n\r\n        this.connector.executeMethod(\"GetFormValue\", [data[i].InternalId], (value: any) => {\r\n            data[i].Value = value ? value : \"\";\r\n            if (data.length - 1 == i) {\r\n              this.contentControls = data.filter((contentControl: any) => contentControl.Tag != \"\");\r\n            }\r\n        });\r\n      }\r\n    }.bind(this));\r\n  }\r\n\r\n  onChangeContentControl = (oPr: { Tag?: string; InternalId?: string }) => {\r\n    this.getAllContentControls();\r\n  };\r\n\r\n  onDocumentReady = () => {\r\n    try {\r\n      var editor = window.DocEditor.instances[\"oformEditor\"];\r\n      this.connector = editor.createConnector();\r\n      this.connector.connect();\r\n\r\n      this.getAllContentControls();\r\n      this.connector.attachEvent(\"onChangeContentControl\", this.onChangeContentControl);\r\n    } catch (err) {\r\n      console.error(err);\r\n    }\r\n  };\r\n}",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\nimport { IPerson } from '../../../model/person';\r\n\r\n@Component({\r\n  selector: 'content-controls-stories',\r\n  templateUrl: './content-controls-stories.component.html'\r\n})\r\nexport class ContentControlsStoriesComponent {\r\n  @Input() editorId: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n  @Input() persons: IPerson[];\r\n\r\n  connector: any = null;\r\n\r\n  contentControls: any;\r\n  selectedPerson: any;\r\n\r\n  onChangeSelect = () => {\r\n    for (var [key, value] of Object.entries<string>(this.selectedPerson)) {\r\n      if (key == \"Sex\") {\r\n        key = value == \"Male\" ? \"Male\" : \"Female\";\r\n        value = \"true\";\r\n      }\r\n\r\n      this.setFormValue(key, value || \"\");\r\n    }\r\n\r\n    this.getAllContentControls();\r\n  };\r\n\r\n  setFormValue = (formId: string, value: string) => {\r\n    this.connector.executeMethod(\"GetFormsByTag\", [formId], function(forms: any) {\r\n      this.connector.executeMethod(\"SetFormValue\", [forms[0][\"InternalId\"], value], null);\r\n    }.bind(this));\r\n  }\r\n\r\n  getAllContentControls = () => {\r\n    this.connector.executeMethod (\"GetAllContentControls\", null, function(data: any) {\r\n      for (let i = 0; i < data.length; i++) {\r\n        switch (data[i].Tag) {\r\n          case \"Male\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          case \"Female\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          default:\r\n            data[i].Type = \"input\";\r\n        }\r\n\r\n        this.connector.executeMethod(\"GetFormValue\", [data[i].InternalId], (value: any) => {\r\n            data[i].Value = value ? value : \"\";\r\n            if (data.length - 1 == i) {\r\n              this.contentControls = data.filter((contentControl: any) => contentControl.Tag != \"\");\r\n            }\r\n        });\r\n      }\r\n    }.bind(this));\r\n  }\r\n\r\n  onChangeContentControl = (oPr: { Tag?: string; InternalId?: string }) => {\r\n    this.getAllContentControls();\r\n  };\r\n\r\n  onBlurContentControl = (oPr: { Tag?: string; InternalId?: string }) => {\r\n    this.selectedPerson = { label: \"Custom Data\" }\r\n  };\r\n\r\n  onDocumentReady = () => {\r\n    try {\r\n      var editor = window.DocEditor.instances[\"oformEditor\"];\r\n      this.connector = editor.createConnector();\r\n      this.connector.connect();\r\n\r\n      this.getAllContentControls();\r\n      this.connector.attachEvent(\"onChangeContentControl\", this.onChangeContentControl);\r\n      this.connector.attachEvent(\"onBlurContentControl\", this.onBlurContentControl);\r\n    } catch (err) {\r\n      console.error(err);\r\n    }\r\n  };\r\n}",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -2743,7 +2753,7 @@
                 "linktype": "component",
                 "name": "ContentControlsStoriesComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/13",
+                "coverageCount": "0/14",
                 "status": "low"
             },
             {
