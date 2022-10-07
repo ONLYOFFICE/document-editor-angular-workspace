@@ -19,6 +19,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormsStoriesComponent } from './components/forms/forms-stories/forms-stories.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ReviewComponent } from './components/review/review.component';
+import { ReviewStoriesComponent } from './components/review/review-stories/review-stories.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { HttpClientModule } from '@angular/common/http';
     ContentControlsComponent,
     InputContentControlComponent,
     RadioContentControlComponent,
-    FormsStoriesComponent
+    FormsStoriesComponent,
+    ReviewComponent,
+    ReviewStoriesComponent
   ],
   imports: [
     BrowserModule,

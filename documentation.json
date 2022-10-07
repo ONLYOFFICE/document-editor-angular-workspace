@@ -855,7 +855,7 @@
         },
         {
             "name": "ContentControlsStoriesComponent",
-            "id": "component-ContentControlsStoriesComponent-e67ca1225bce406b945bcd36da1e5e3ddb05b099403f2747e364e715b415bf1c716f3e854e4943307b67391bd0ca83555bfdc1ef6d26308b1fc68bd3fb7f23bd",
+            "id": "component-ContentControlsStoriesComponent-48c687cfaf85c5eb59d7c7ccad69ea6a7037779795ff3637d95d4d6450a73754fb536f3c17541f108d6ebf33e27fbbe9f08f17c313231d9ef0cbed70fc7edec6",
             "file": "src/app/components/content-controls/content-controls-stories/content-controls-stories.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -935,16 +935,6 @@
                     "line": 39
                 },
                 {
-                    "name": "onBlurContentControl",
-                    "defaultValue": "() => {...}",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 69
-                },
-                {
                     "name": "onChangeContentControl",
                     "defaultValue": "() => {...}",
                     "deprecated": false,
@@ -972,7 +962,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 73
+                    "line": 69
                 },
                 {
                     "name": "selectedPerson",
@@ -1002,7 +992,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\nimport { IPerson } from '../../../model/person';\r\n\r\n@Component({\r\n  selector: 'content-controls-stories',\r\n  templateUrl: './content-controls-stories.component.html'\r\n})\r\nexport class ContentControlsStoriesComponent {\r\n  @Input() editorId: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n  @Input() persons: IPerson[];\r\n\r\n  connector: any = null;\r\n\r\n  contentControls: any;\r\n  selectedPerson: any;\r\n\r\n  onChangeSelect = () => {\r\n    for (var [key, value] of Object.entries<string>(this.selectedPerson)) {\r\n      if (key == \"Sex\") {\r\n        key = value == \"Male\" ? \"Male\" : \"Female\";\r\n        value = \"true\";\r\n      }\r\n\r\n      this.setFormValue(key, value || \"\");\r\n    }\r\n\r\n    this.getAllContentControls();\r\n  };\r\n\r\n  setFormValue = (formId: string, value: string) => {\r\n    this.connector.executeMethod(\"GetFormsByTag\", [formId], function(forms: any) {\r\n      this.connector.executeMethod(\"SetFormValue\", [forms[0][\"InternalId\"], value], null);\r\n    }.bind(this));\r\n  }\r\n\r\n  getAllContentControls = () => {\r\n    this.connector.executeMethod (\"GetAllContentControls\", null, function(data: any) {\r\n      for (let i = 0; i < data.length; i++) {\r\n        switch (data[i].Tag) {\r\n          case \"Male\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          case \"Female\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          default:\r\n            data[i].Type = \"input\";\r\n        }\r\n\r\n        this.connector.executeMethod(\"GetFormValue\", [data[i].InternalId], (value: any) => {\r\n            data[i].Value = value ? value : \"\";\r\n            if (data.length - 1 == i) {\r\n              this.contentControls = data.filter((contentControl: any) => contentControl.Tag != \"\");\r\n            }\r\n        });\r\n      }\r\n    }.bind(this));\r\n  }\r\n\r\n  onChangeContentControl = (oPr: { Tag?: string; InternalId?: string }) => {\r\n    this.getAllContentControls();\r\n  };\r\n\r\n  onBlurContentControl = (oPr: { Tag?: string; InternalId?: string }) => {\r\n    this.selectedPerson = { label: \"Custom Data\" }\r\n  };\r\n\r\n  onDocumentReady = () => {\r\n    try {\r\n      var editor = window.DocEditor.instances[\"oformEditor\"];\r\n      this.connector = editor.createConnector();\r\n      this.connector.connect();\r\n\r\n      this.getAllContentControls();\r\n      this.connector.attachEvent(\"onChangeContentControl\", this.onChangeContentControl);\r\n      this.connector.attachEvent(\"onBlurContentControl\", this.onBlurContentControl);\r\n    } catch (err) {\r\n      console.error(err);\r\n    }\r\n  };\r\n}",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\nimport { IPerson } from '../../../model/person';\r\n\r\n@Component({\r\n  selector: 'content-controls-stories',\r\n  templateUrl: './content-controls-stories.component.html'\r\n})\r\nexport class ContentControlsStoriesComponent {\r\n  @Input() editorId: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n  @Input() persons: IPerson[];\r\n\r\n  connector: any = null;\r\n\r\n  contentControls: any;\r\n  selectedPerson: any;\r\n\r\n  onChangeSelect = () => {\r\n    for (var [key, value] of Object.entries<string>(this.selectedPerson)) {\r\n      if (key == \"Sex\") {\r\n        key = value == \"Male\" ? \"Male\" : \"Female\";\r\n        value = \"true\";\r\n      }\r\n\r\n      this.setFormValue(key, value || \"\");\r\n    }\r\n\r\n    this.getAllContentControls();\r\n  };\r\n\r\n  setFormValue = (formId: string, value: string) => {\r\n    this.connector.executeMethod(\"GetFormsByTag\", [formId], function(forms: any) {\r\n      this.connector.executeMethod(\"SetFormValue\", [forms[0][\"InternalId\"], value], null);\r\n    }.bind(this));\r\n  }\r\n\r\n  getAllContentControls = () => {\r\n    this.connector.executeMethod (\"GetAllContentControls\", null, function(data: any) {\r\n      for (let i = 0; i < data.length; i++) {\r\n        switch (data[i].Tag) {\r\n          case \"Male\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          case \"Female\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          default:\r\n            data[i].Type = \"input\";\r\n        }\r\n\r\n        this.connector.executeMethod(\"GetFormValue\", [data[i].InternalId], (value: any) => {\r\n            data[i].Value = value ? value : \"\";\r\n            if (data.length - 1 == i) {\r\n              this.contentControls = data.filter((contentControl: any) => contentControl.Tag != \"\");\r\n            }\r\n        });\r\n      }\r\n    }.bind(this));\r\n  }\r\n\r\n  onChangeContentControl = (oPr: { Tag?: string; InternalId?: string }) => {\r\n    this.getAllContentControls();\r\n  };\r\n\r\n  onDocumentReady = () => {\r\n    try {\r\n      var editor = window.DocEditor.instances[\"oformEditor\"];\r\n      this.connector = editor.createConnector();\r\n      this.connector.connect();\r\n\r\n      this.getAllContentControls();\r\n      this.connector.attachEvent(\"onChangeContentControl\", this.onChangeContentControl);\r\n    } catch (err) {\r\n      console.error(err);\r\n    }\r\n  };\r\n}",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -2051,18 +2041,197 @@
             ],
             "stylesData": "",
             "templateData": "<div class=\"comment-del-div\">\r\n  <span class=\"comment-del\" (click)=\"removeCommentReply()\"></span>\r\n</div>"
+        },
+        {
+            "name": "ReviewComponent",
+            "id": "component-ReviewComponent-0367c31c364b7175705d447e778444e17d756b8744d5534747d1b153d630ea6e60af6c59b7dafe761e76074814c2d9b2e2a19a9c002b5ca11a23811c1ede340a",
+            "file": "src/app/components/review/review.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "review",
+            "styleUrls": [
+                "./review.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./review.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "connector",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "any",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "acceptReview",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 19,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "nextReview",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 15,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "prevReview",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 11,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "rejectReview",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 23,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {Component, Input} from '@angular/core'\r\n\r\n@Component({\r\n  selector: 'review',\r\n  templateUrl: './review.component.html',\r\n  styleUrls: ['./review.component.css']\r\n})\r\nexport class ReviewComponent {\r\n  @Input() connector: any;\r\n\r\n  prevReview() {\r\n    this.connector.executeMethod(\"MoveToNextReviewChange\", [false]);\r\n  };\r\n\r\n  nextReview() {\r\n    this.connector.executeMethod(\"MoveToNextReviewChange\");\r\n  };\r\n\r\n  acceptReview() {\r\n    this.connector.executeMethod(\"AcceptReviewChanges\");\r\n  };\r\n\r\n  rejectReview() {\r\n    this.connector.executeMethod(\"RejectReviewChanges\");\r\n  };\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".reviewBlock {\r\n  text-align: center;\r\n  margin-bottom: 16px;\r\n}\r\n\r\nbutton {\r\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\r\n  font-weight: 700;\r\n  border: 0;\r\n  border-radius: 3em;\r\n  cursor: pointer;\r\n  display: inline-block;\r\n  line-height: 1;\r\n  font-size: 12px;\r\n  padding: 10px 16px;\r\n  color: #333;\r\n  background-color: transparent;\r\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;\r\n  margin-right: 5px;\r\n}\r\n\r\nbutton:hover {\r\n  background: rgb(221, 235, 250);\r\n}",
+                    "styleUrl": "./review.component.css"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<div className=\"reviewBlock\">\r\n  <button (click)=\"prevReview()\">Prev</button>\r\n  <button (click)=\"nextReview()\">Next</button>\r\n  <button (click)=\"acceptReview()\">Accept</button>\r\n  <button (click)=\"rejectReview()\">Reject</button>\r\n</div>"
+        },
+        {
+            "name": "ReviewStoriesComponent",
+            "id": "component-ReviewStoriesComponent-86751217412415d9a19428a98024977d0febd5f1698ccfed340a9220722aca060e013922cff31b934abaf396d92d93c5fdb41c14e948654055aca66e357c9347",
+            "file": "src/app/components/review/review-stories/review-stories.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "review-stories",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./review-stories.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "config",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "IConfig",
+                    "decorators": []
+                },
+                {
+                    "name": "documentServerUrl",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "editorId",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "comments",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "connector",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "onDocumentReady",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 16
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\n\r\n@Component({\r\n  selector: 'review-stories',\r\n  templateUrl: './review-stories.component.html'\r\n})\r\nexport class ReviewStoriesComponent {\r\n  @Input() editorId: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  comments: any[] = [];\r\n  connector: any = null;\r\n\r\n  onDocumentReady = () => {\r\n    var editor = window.DocEditor.instances[\"docxForComments\"];\r\n    this.connector = editor.createConnector();\r\n  };\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "templateData": "<review [connector]=\"connector\"></review>\r\n\r\n<document-editor \r\n  [id]=\"editorId\" \r\n  [documentServerUrl]=\"documentServerUrl\"\r\n  [config]=\"config\"\r\n  [events_onDocumentReady]=\"onDocumentReady\"\r\n></document-editor>"
         }
     ],
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-347a9675ae03ee12c57dcdc336168fbb10c4f515a896f6a169bd21e8d7ccca82b0497bd71f5d27cb24e6985b82c0c4ba9c3171b2e99bcbfa12431bd8b21001a0",
+            "id": "module-AppModule-e1f4d9ac30d2cbe1b1aeb70135e039b5d94dc1a2dea9b9d5e73d29382e7c161a15a9adb0928ec303c261456b7bf451a72179917602d3a8331273b9a7da03877f",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { BrowserModule } from '@angular/platform-browser';\r\nimport { DocumentEditorModule } from '@onlyoffice/document-editor-angular';\r\n\r\nimport { AppComponent } from './app.component';\r\nimport { AddCommentComponent } from './components/comments/add-comment/add-comment.component';\r\nimport { AddCommentReplyComponent } from './components/comments/add-comment-reply/add-comment-reply.component';\r\nimport { CommentsComponent } from './components/comments/comments.component';\r\nimport { ListCommentsComponent } from './components/comments/list-comments/list-comments.component';\r\nimport { RemoveCommentComponent } from './components/comments/remove-comment/remove-comment.component';\r\nimport { RemoveCommentReplyComponent } from './components/comments/remove-comment-reply/remove-comment-reply.component';\r\nimport { CommenstStoriesComponent } from './components/comments/comments-stories/commenst-stories.component';\r\nimport { ContentControlsStoriesComponent } from './components/content-controls/content-controls-stories/content-controls-stories.component';\r\nimport { ContentControlsComponent } from './components/content-controls/content-controls.component';\r\nimport { InputContentControlComponent } from './components/content-controls/input-content-control/input-content-control.component';\r\nimport { RadioContentControlComponent } from './components/content-controls/radio-content-control/radio-content-control.component';\r\nimport { NgSelectModule } from '@ng-select/ng-select';\r\nimport { CommonModule } from '@angular/common';\r\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\r\nimport { FormsStoriesComponent } from './components/forms/forms-stories/forms-stories.component';\r\nimport { HttpClientModule } from '@angular/common/http';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    CommentsComponent,\r\n    ListCommentsComponent,\r\n    AddCommentComponent,\r\n    AddCommentReplyComponent,\r\n    RemoveCommentComponent,\r\n    RemoveCommentReplyComponent,\r\n    CommenstStoriesComponent,\r\n    ContentControlsStoriesComponent,\r\n    ContentControlsComponent,\r\n    InputContentControlComponent,\r\n    RadioContentControlComponent,\r\n    FormsStoriesComponent\r\n  ],\r\n  imports: [\r\n    BrowserModule,\r\n    DocumentEditorModule,\r\n    NgSelectModule,\r\n    CommonModule,\r\n    FormsModule,\r\n    ReactiveFormsModule,\r\n    HttpClientModule\r\n  ],\r\n  providers: [],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule { }\r\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { BrowserModule } from '@angular/platform-browser';\r\nimport { DocumentEditorModule } from '@onlyoffice/document-editor-angular';\r\n\r\nimport { AppComponent } from './app.component';\r\nimport { AddCommentComponent } from './components/comments/add-comment/add-comment.component';\r\nimport { AddCommentReplyComponent } from './components/comments/add-comment-reply/add-comment-reply.component';\r\nimport { CommentsComponent } from './components/comments/comments.component';\r\nimport { ListCommentsComponent } from './components/comments/list-comments/list-comments.component';\r\nimport { RemoveCommentComponent } from './components/comments/remove-comment/remove-comment.component';\r\nimport { RemoveCommentReplyComponent } from './components/comments/remove-comment-reply/remove-comment-reply.component';\r\nimport { CommenstStoriesComponent } from './components/comments/comments-stories/commenst-stories.component';\r\nimport { ContentControlsStoriesComponent } from './components/content-controls/content-controls-stories/content-controls-stories.component';\r\nimport { ContentControlsComponent } from './components/content-controls/content-controls.component';\r\nimport { InputContentControlComponent } from './components/content-controls/input-content-control/input-content-control.component';\r\nimport { RadioContentControlComponent } from './components/content-controls/radio-content-control/radio-content-control.component';\r\nimport { NgSelectModule } from '@ng-select/ng-select';\r\nimport { CommonModule } from '@angular/common';\r\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\r\nimport { FormsStoriesComponent } from './components/forms/forms-stories/forms-stories.component';\r\nimport { HttpClientModule } from '@angular/common/http';\r\nimport { ReviewComponent } from './components/review/review.component';\r\nimport { ReviewStoriesComponent } from './components/review/review-stories/review-stories.component';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    CommentsComponent,\r\n    ListCommentsComponent,\r\n    AddCommentComponent,\r\n    AddCommentReplyComponent,\r\n    RemoveCommentComponent,\r\n    RemoveCommentReplyComponent,\r\n    CommenstStoriesComponent,\r\n    ContentControlsStoriesComponent,\r\n    ContentControlsComponent,\r\n    InputContentControlComponent,\r\n    RadioContentControlComponent,\r\n    FormsStoriesComponent,\r\n    ReviewComponent,\r\n    ReviewStoriesComponent\r\n  ],\r\n  imports: [\r\n    BrowserModule,\r\n    DocumentEditorModule,\r\n    NgSelectModule,\r\n    CommonModule,\r\n    FormsModule,\r\n    ReactiveFormsModule,\r\n    HttpClientModule\r\n  ],\r\n  providers: [],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule { }\r\n",
             "children": [
                 {
                     "type": "providers",
@@ -2109,6 +2278,12 @@
                         },
                         {
                             "name": "RemoveCommentReplyComponent"
+                        },
+                        {
+                            "name": "ReviewComponent"
+                        },
+                        {
+                            "name": "ReviewStoriesComponent"
                         }
                     ]
                 },
@@ -2190,6 +2365,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/comments.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "CommentsTemplate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/review.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -2362,6 +2547,16 @@
                 "deprecationMessage": "",
                 "type": "Story<any>",
                 "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/review.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<any>",
+                "defaultValue": "(args) => ({\r\n  props: args\r\n})"
             }
         ],
         "functions": [
@@ -2395,6 +2590,28 @@
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "src/app/comments.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<any>",
+                    "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+                }
+            ],
+            "src/app/review.stories.ts": [
+                {
+                    "name": "CommentsTemplate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/review.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/review.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story<any>",
@@ -2753,7 +2970,7 @@
                 "linktype": "component",
                 "name": "ContentControlsStoriesComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/14",
+                "coverageCount": "0/13",
                 "status": "low"
             },
             {
@@ -2790,6 +3007,24 @@
                 "name": "FormsStoriesComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/10",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/review/review-stories/review-stories.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ReviewStoriesComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/review/review.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ReviewComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
                 "status": "low"
             },
             {
@@ -2899,6 +3134,26 @@
                 "name": "IPerson",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/review.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "CommentsTemplate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/review.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
