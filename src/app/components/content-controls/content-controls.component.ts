@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'content-controls',
@@ -7,6 +7,8 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 })
 export class ContentControlsComponent implements OnChanges {
   @Input() contentControls: any[];
+  @Input() selectedOption: any;
+  @Output() selectedOptionChange: EventEmitter<any> = new EventEmitter();
   @Input() setFormValue: (id: string, value: string) => void;
 
   copyContentControls: any[] = [];
@@ -57,6 +59,10 @@ export class ContentControlsComponent implements OnChanges {
 
   getLabel(nameTag: string) {
     return nameTag.replace(/([a-z])([A-Z])/g, '$1 $2');
+  }
+
+  onChangeSelectedOption = (value: any) => {
+    this.selectedOptionChange.emit(value);
   }
 
  }

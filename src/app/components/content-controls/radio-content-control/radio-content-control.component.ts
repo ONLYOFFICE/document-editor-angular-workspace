@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'radio-content-control',
@@ -9,6 +9,8 @@ export class RadioContentControlComponent {
   @Input() id: string;
   @Input() label: string;
   @Input() options: any [];
+  @Input() selectedOption: any;
+  @Output() onChangeSelectedOption: EventEmitter<any> = new EventEmitter<any>();
   @Input() setFormValue: (id: string, value: string) => void;
 
   getLabel(nameTag: string) {
@@ -16,7 +18,8 @@ export class RadioContentControlComponent {
   }
 
   onChange(event: Event) {
-    this.setFormValue((event.target as HTMLInputElement).id, 'true')
+    this.setFormValue((event.target as HTMLInputElement).id, 'true');
+    this.onChangeSelectedOption.emit({label: "Custom Data"});
   }
 
   isChecked(nameTag: string) {

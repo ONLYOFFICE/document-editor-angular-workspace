@@ -18,7 +18,7 @@ export class ContentControlsStoriesComponent {
   selectedPerson: any;
 
   onChangeSelect = () => {
-    for (var [key, value] of Object.entries<string>(this.selectedPerson)) {
+    for (var [key, value] of Object.entries<string>(this.selectedPerson.value)) {
       if (key == "Sex") {
         key = value == "Male" ? "Male" : "Female";
         value = "true";
@@ -26,8 +26,6 @@ export class ContentControlsStoriesComponent {
 
       this.setFormValue(key, value || "");
     }
-
-    this.getAllContentControls();
   };
 
   setFormValue = (formId: string, value: string) => {
@@ -66,6 +64,10 @@ export class ContentControlsStoriesComponent {
     this.getAllContentControls();
   };
 
+  onBlurContentControl = (oPr: { Tag: string; InternalId: string }) => {
+    this.selectedPerson = {label: "Custom Data"};
+  };
+
   onDocumentReady = () => {
     try {
       var editor = window.DocEditor.instances["oformEditor"];
@@ -74,6 +76,7 @@ export class ContentControlsStoriesComponent {
 
       this.getAllContentControls();
       this.connector.attachEvent("onChangeContentControl", this.onChangeContentControl);
+      this.connector.attachEvent("onBlurContentControl", this.onBlurContentControl);
     } catch (err) {
       console.error(err);
     }

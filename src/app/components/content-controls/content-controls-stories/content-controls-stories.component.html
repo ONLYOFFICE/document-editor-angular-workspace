@@ -1,13 +1,11 @@
 <ng-select 
   [items]="persons"
-  bindLabel="label"
-  bindValue="value"
   (change)="onChangeSelect()" 
   [(ngModel)]="selectedPerson">
 </ng-select>
 <br/>
 
-<content-controls [contentControls]="contentControls" [setFormValue]="setFormValue"></content-controls>
+<content-controls [contentControls]="contentControls" [setFormValue]="setFormValue" [(selectedOption)]="selectedPerson" ></content-controls>
 
 <document-editor 
   [id]="editorId" 

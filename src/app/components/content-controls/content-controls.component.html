@@ -6,6 +6,7 @@
       [id]="contentControl.Tag"
       [label]="getLabel(contentControl.Tag)"
       [value]="contentControl.Value"
+      (onChangeSelectedOption)="onChangeSelectedOption($event)"
       [setFormValue]="setFormValue"
       >
     </input-content-control>
@@ -15,6 +16,7 @@
       [id]="contentControl.Tag"
       [label]="getLabel(contentControl.Tag)"
       [options]="contentControl.Value"
+      (onChangeSelectedOption)="onChangeSelectedOption($event)"
       [setFormValue]="setFormValue"
     ></radio-content-control>
 
