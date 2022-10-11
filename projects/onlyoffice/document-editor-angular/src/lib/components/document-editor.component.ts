@@ -116,7 +116,7 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
           lang: this.editorConfig_lang,
         },
         events: {
-          onAppReady: this.events_onAppReady,
+          onAppReady: this.onAppReady,
           onDocumentStateChange: this.events_onDocumentStateChange,
           onMetaChange: this.events_onMetaChange,
           onDocumentReady: this.events_onDocumentReady,
@@ -147,5 +147,9 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
       console.error(err);
       this.events_onError!(err);
     }
-};
+  };
+
+  onAppReady() {
+    this.events_onAppReady!(window.DocEditor.instances[this.id]);
+  }
 }
