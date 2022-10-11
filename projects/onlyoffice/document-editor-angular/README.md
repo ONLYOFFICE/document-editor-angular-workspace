@@ -124,11 +124,4 @@ cd ./projects
 
 ng test @onlyoffice/document-editor-angular
 ```
-### Storybook build:
-```
-npm run build-storybook
-```
-### Storybook start:
-```
-npm run storybook
-```
+
