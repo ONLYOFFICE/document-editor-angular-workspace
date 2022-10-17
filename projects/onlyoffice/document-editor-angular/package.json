@@ -4,12 +4,12 @@
   "description": "This repo contains the Angular component for [ONLYOFFICE Document Server](https://github.com/ONLYOFFICE/DocumentServer).",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/ONLYOFFICE/document-editor-angular/issues"
+    "url": "https://github.com/ONLYOFFICE/document-editor-angular-workspace/issues"
   },
   "homepage": "https://www.onlyoffice.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ONLYOFFICE/document-editor-angular.git"
+    "url": "git+https://github.com/ONLYOFFICE/document-editor-angular-workspace.git"
   },
   "author": "Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyoffice.com)",
   "maintainers": [
