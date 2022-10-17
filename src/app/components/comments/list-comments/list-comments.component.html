@@ -1,0 +1,19 @@
+<div>
+  <div *ngFor="let comment of comments" class="comment-div">
+    <remove-comment [connector]="connector" [commentId]="comment['Id']"></remove-comment>
+    <div [id]="comment['Id']" (click)="goToComment($event)">
+      <span class="comment-span">Author: {{ comment["Data"]["UserName"] }}</span>
+      <span class="comment-span">Date: {{ dateParser(comment["Data"]["Time"]) }}</span>
+      <span class="comment-span">Message: {{ comment["Data"]["Text"] }}</span>
+    </div>
+    <div class="comment-replies">
+      <div *ngFor="let reply of comment['Data']['Replies']; let index = index" [style.marginBottom]="'10px'">
+        <remove-comment-reply [connector]="connector" [comment]="comment" [replyId]="index"></remove-comment-reply>
+        <span class="comment-span">Author: {{ reply["UserName"] }}</span>
+        <span class="comment-span">Date: {{ dateParser(reply["Time"]) }}</span>
+        <span class="comment-span">Message: {{ reply["Text"] }}</span>
+      </div>
+    </div>
+    <add-comment-reply [connector]="connector" [userName]="userName" [comment]="comment"></add-comment-reply>
+  </div>
+</div>

@@ -1,0 +1,3291 @@
+{
+    "pipes": [],
+    "interfaces": [
+        {
+            "name": "IConfig",
+            "id": "interface-IConfig-a0fd10286b56d26c0af592cd8a2b7c36d27c17fd3eabdc11db6c4c435bfc4fac5cde558a899dd5d1594c384fede11d85c31810b5ad1bebab5cebb834ebad7021",
+            "file": "projects/onlyoffice/document-editor-angular/src/lib/model/config.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface IConfig {\r\n  document: {\r\n    fileType: string;\r\n    key?: string;\r\n    title: string;\r\n    permissions?: {\r\n      comment?: boolean;\r\n      download?: boolean;\r\n      edit?: boolean;\r\n      review?: boolean;\r\n    }\r\n    url: string;\r\n  }\r\n  documentType: string;\r\n  editorConfig?: {\r\n    callbackUrl?: string;\r\n    lang?: string,\r\n    mode?: string;\r\n    user?: {\r\n      id?: string;\r\n      name?: string;\r\n    }\r\n  }\r\n  height?: string;\r\n  token?: string;\r\n  type?: string;\r\n  width?: string;\r\n  events_onAppReady?: (editor: object) => void;\r\n  events_onDocumentReady?: (editor: object) => void;\r\n  events_onDocumentStateChange?: (data: object) => void;\r\n  events_onError?: (error: string) => void;\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "document",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                },
+                {
+                    "name": "documentType",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 30
+                },
+                {
+                    "name": "editorConfig",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type",
+                    "optional": true,
+                    "description": "",
+                    "line": 31
+                },
+                {
+                    "name": "events_onAppReady",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "function",
+                    "optional": true,
+                    "description": "",
+                    "line": 44
+                },
+                {
+                    "name": "events_onDocumentReady",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "function",
+                    "optional": true,
+                    "description": "",
+                    "line": 45
+                },
+                {
+                    "name": "events_onDocumentStateChange",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "function",
+                    "optional": true,
+                    "description": "",
+                    "line": 46
+                },
+                {
+                    "name": "events_onError",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "function",
+                    "optional": true,
+                    "description": "",
+                    "line": 47
+                },
+                {
+                    "name": "height",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 40
+                },
+                {
+                    "name": "token",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 41
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 42
+                },
+                {
+                    "name": "width",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 43
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
+            "name": "IPerson",
+            "id": "interface-IPerson-1f17a45196515f256dd285bca04768438e1ac895f685835c94b90be337da3c18ee2f16e3fe861e8e22f80dbc552a937ba36ad2bcd29fa76a084add1e4c79e7d0",
+            "file": "src/app/model/person.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface IPerson {\r\n  label: string;\r\n  value?: any;\r\n}",
+            "properties": [
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                },
+                {
+                    "name": "value",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": true,
+                    "description": "",
+                    "line": 3
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
+            "name": "Window",
+            "id": "interface-Window-8b2d7dcc00cb5865ab22da76a1dfbc2fc27d78f454265f4c2369870b2c803f7d710e8cf2cdef314d9128f837d645c347189bda5d4c1d483aef7c055640d99387",
+            "file": "projects/onlyoffice/document-editor-angular/src/lib/components/document-editor.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';\r\nimport { IConfig } from '../model/config';\r\nimport loadScript from \"../utils/loadScript\";\r\n\r\ndeclare global {\r\n  interface Window {\r\n      DocsAPI?: any;\r\n      DocEditor?: any;\r\n  }\r\n}\r\n\r\n@Component({\r\n  selector: 'document-editor',\r\n  template: '<div [id]=\"id\"></div>',\r\n  styles: [\r\n  ]\r\n})\r\nexport class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {\r\n  @Input() id: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  @Input() document_fileType?: string;\r\n  @Input() document_title?: string;\r\n  @Input() documentType?: string;\r\n  @Input() editorConfig_lang?: string;\r\n  @Input() height?: string;\r\n  @Input() type?: string;\r\n  @Input() width?: string;\r\n\r\n  @Input() events_onAppReady?: (event: object) => void;\r\n  @Input() events_onDocumentStateChange?: (event: object) => void;\r\n  @Input() events_onMetaChange?: (event: object) => void;\r\n  @Input() events_onDocumentReady?: (event: object) => void;\r\n  @Input() events_onInfo?: (event: object) => void;\r\n  @Input() events_onWarning?: (event: object) => void;\r\n  @Input() events_onError?: (event: object) => void;\r\n  @Input() events_onRequestSharingSettings?: (event: object) => void;\r\n  @Input() events_onRequestRename?: (event: object) => void;\r\n  @Input() events_onMakeActionLink?: (event: object) => void;\r\n  @Input() events_onRequestInsertImage?: (event: object) => void;\r\n  @Input() events_onRequestSaveAs?: (event: object) => void;\r\n  @Input() events_onRequestMailMergeRecipients?: (event: object) => void;\r\n  @Input() events_onRequestCompareFile?: (event: object) => void;\r\n  @Input() events_onRequestEditRights?: (event: object) => void;\r\n  @Input() events_onRequestHistory?: (event: object) => void;\r\n  @Input() events_onRequestHistoryClose?: (event: object) => void;\r\n  @Input() events_onRequestHistoryData?: (event: object) => void;\r\n  @Input() events_onRequestRestore?: (event: object) => void;\r\n\r\n  isFirstOnChanges: boolean = true;\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n    let url = this.documentServerUrl;\r\n    if (!url.endsWith(\"/\")) url += \"/\";\r\n\r\n    const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;\r\n    loadScript(docApiUrl, \"onlyoffice-api-script\")\r\n      .then(() => this.onLoad())\r\n      .catch((err) => {\r\n        console.error(err);\r\n        this.events_onError!(err);\r\n      });\r\n  }\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    const listNameChanges = [\"config\", \"document_fileType\", \"document_title\", \"documentType\", \"editorConfig_lang\", \"height\", \"type\", \"width\"];\r\n\r\n    if (this.isFirstOnChanges) {\r\n      this.isFirstOnChanges = false;\r\n      return;\r\n    }\r\n\r\n    for (const name of listNameChanges) {\r\n      if (changes.hasOwnProperty(name)) {\r\n        if (window?.DocEditor?.instances[this.id]) {\r\n          window.DocEditor.instances[this.id].destroyEditor();\r\n          window.DocEditor.instances[this.id] = undefined;\r\n    \r\n          console.log(\"Important props have been changed. Load new Editor.\");\r\n          this.onLoad();\r\n          return;\r\n        }\r\n      }\r\n    }\r\n  }\r\n\r\n  ngOnDestroy() {\r\n    if (window?.DocEditor?.instances[this.id]) {\r\n      window.DocEditor.instances[this.id].destroyEditor();\r\n      window.DocEditor.instances[this.id] = undefined;\r\n    }\r\n  }\r\n\r\n  onLoad = () => {\r\n    try {\r\n      if (!window.DocsAPI) throw new Error(\"DocsAPI is not defined\");\r\n      if (window?.DocEditor?.instances[this.id]) {\r\n        console.log(\"Skip loading. Instance already exists\", this.id);\r\n        return;\r\n      }\r\n\r\n      if (!window?.DocEditor?.instances) {\r\n        window.DocEditor = { instances: {} };\r\n      }\r\n\r\n      let initConfig = Object.assign({\r\n        document: {\r\n          fileType: this.document_fileType,\r\n          title: this.document_title,\r\n        },\r\n        documentType: this.documentType,\r\n        editorConfig: {\r\n          lang: this.editorConfig_lang,\r\n        },\r\n        events: {\r\n          onAppReady: this.onAppReady,\r\n          onDocumentStateChange: this.events_onDocumentStateChange,\r\n          onMetaChange: this.events_onMetaChange,\r\n          onDocumentReady: this.events_onDocumentReady,\r\n          onInfo: this.events_onInfo,\r\n          onWarning: this.events_onWarning,\r\n          onError: this.events_onError,\r\n          onRequestSharingSettings: this.events_onRequestSharingSettings,\r\n          onRequestRename: this.events_onRequestRename,\r\n          onMakeActionLink: this.events_onMakeActionLink,\r\n          onRequestInsertImage: this.events_onRequestInsertImage,\r\n          onRequestSaveAs: this.events_onRequestSaveAs,\r\n          onRequestMailMergeRecipients: this.events_onRequestMailMergeRecipients,\r\n          onRequestCompareFile: this.events_onRequestCompareFile,\r\n          onRequestEditRights: this.events_onRequestEditRights,\r\n          onRequestHistory: this.events_onRequestHistory,\r\n          onRequestHistoryClose: this.events_onRequestHistoryClose,\r\n          onRequestHistoryData: this.events_onRequestHistoryData,\r\n          onRequestRestore: this.events_onRequestRestore\r\n        },\r\n        height: this.height,\r\n        type: this.type,\r\n        width: this.width,\r\n      }, this.config || {});\r\n\r\n      const editor = window.DocsAPI.DocEditor(this.id, initConfig);\r\n      window.DocEditor.instances[this.id] = editor;\r\n    } catch (err: any) {\r\n      console.error(err);\r\n      this.events_onError!(err);\r\n    }\r\n  };\r\n\r\n  onAppReady() {\r\n    this.events_onAppReady!(window.DocEditor.instances[this.id]);\r\n  }\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "DocEditor",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": true,
+                    "description": "",
+                    "line": 24
+                },
+                {
+                    "name": "DocsAPI",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": true,
+                    "description": "",
+                    "line": 23
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        }
+    ],
+    "injectables": [
+        {
+            "name": "FormsService",
+            "id": "injectable-FormsService-84f24b683a5b79d943c3188672dd6523ce9fd3ea6dda03828f5bf1eb8e7563dc7b2992076933af9555cbd134574633ad3b593105c4bbb0e9423e24fd103c1f1b",
+            "file": "src/app/service/forms.service.ts",
+            "properties": [
+                {
+                    "name": "forms",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                }
+            ],
+            "methods": [
+                {
+                    "name": "getForms",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "Observable<any>",
+                    "typeParameters": [],
+                    "line": 17,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import {Injectable} from '@angular/core'\r\nimport {HttpClient} from '@angular/common/http'\r\nimport {catchError, Observable, tap, throwError} from 'rxjs'\r\nimport config from \"../../../config/config.json\";\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class FormsService {\r\n  constructor(\r\n    private http: HttpClient\r\n  ) {\r\n  }\r\n\r\n  forms: any[] = [];\r\n\r\n  getForms(): Observable<any> {\r\n    return this.http.get<any>(config.oformsUrl).pipe(\r\n      tap(response => {\r\n          var fileOforms = response.data.map((item: { attributes: { file_oform: { data: any[] } } }) => {\r\n              return item.attributes.file_oform.data.find((f) => f.attributes.ext === \".oform\");\r\n          });\r\n\r\n          var forms = fileOforms.map((form: { attributes: { url: any; name: any } }) => {\r\n            return form && form.attributes\r\n              ? { value: { title:form.attributes.name, url: form.attributes.url }, label: form.attributes.name }\r\n              : null;\r\n          }).filter((o: any) => o != null);\r\n\r\n        this.forms = forms;\r\n      }),\r\n      catchError(error => throwError(() => error.message))\r\n    )\r\n  }\r\n}",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 9,
+                "jsdoctags": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "type": "injectable"
+        }
+    ],
+    "guards": [],
+    "interceptors": [],
+    "classes": [],
+    "directives": [],
+    "components": [
+        {
+            "name": "AddCommentComponent",
+            "id": "component-AddCommentComponent-b4f9dcdb1fe2644e27a8992ac7b7de2f8681bd1a4464ea5b64809f435e59af92c52e44c3670d5cc40b105c0d498233b1a3de0bb544b03238cfa8ee36edbd0b0d",
+            "file": "src/app/components/comments/add-comment/add-comment.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "add-comment",
+            "styleUrls": [
+                "../comments.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./add-comment.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "connector",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "any",
+                    "decorators": []
+                },
+                {
+                    "name": "userName",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "comment",
+                    "defaultValue": "\"\"",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "addComment",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 18,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "getValue",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 14,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {Component, Input} from '@angular/core'\r\n\r\n@Component({\r\n  selector: 'add-comment',\r\n  templateUrl: './add-comment.component.html',\r\n  styleUrls: ['../comments.component.css']\r\n})\r\nexport class AddCommentComponent {\r\n  @Input() connector: any;\r\n  @Input() userName: string;\r\n\r\n  comment=\"\";\r\n\r\n  getValue(event: Event): string {\r\n    return (event.target as HTMLInputElement).value;\r\n  }\r\n\r\n  addComment () {\r\n    if(Boolean(this.comment)) {\r\n      var currentdate = Date.now(); \r\n      var datetime = \"\" + currentdate;\r\n\r\n      this.connector.executeMethod(\"AddComment\",[{Text: this.comment, UserName: this.userName, Time: datetime}]);\r\n      this.comment = \"\";\r\n    }\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "#blockComments{\r\n  margin: 5px;\r\n  display: inline-block;\r\n  width: 306px;\r\n}\r\n\r\n.comment-div {\r\n  position: relative;\r\n  border-radius: 5px;\r\n  border: 2px solid #000;\r\n  margin: 5px;\r\n  text-align: right;\r\n}\r\n\r\n.comment-span{\r\n  display: block;\r\n  margin: 3px;\r\n  text-align: left;\r\n}\r\n\r\n\r\n.comment-del-div {\r\n  position: absolute;\r\n  margin-top: 3px;\r\n  margin-right: 5px;\r\n  right: 0;\r\n} \r\n\r\n.comment-del {\r\n  display: inline-flex;\r\n  width: 1rem;\r\n  height: 1rem;\r\n  position: relative;\r\n  cursor: pointer;\r\n}\r\n\r\n.comment-del::before,\r\n.comment-del::after {\r\n  content: '';\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 1rem;\r\n  height: .1rem;\r\n  background-color: #f00;\r\n  margin: -.05rem 0 0 -.4rem;\r\n  transform: rotate(-45deg);\r\n  border-radius: .1rem;\r\n}\r\n\r\n.comment-del::after {\r\n  transform: rotate(45deg);\r\n}\r\n\r\n.comment-replies{\r\n  padding-left: 24px;\r\n  margin-left: 7px;\r\n  box-sizing: border-box;\r\n  background-image: url(reply.svg);\r\n  background-size: 22px;\r\n  background-repeat: no-repeat;\r\n}\r\n\r\ntextarea {\r\n  width: 300px;\r\n  min-height: 100px;\r\n}\r\n\r\niframe {\r\n  display: inline-block;\r\n}",
+                    "styleUrl": "../comments.component.css"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<div [style.textAlign]=\"'right'\">\r\n  <span [style.display]=\"'block'\" [style.textAlign]=\"'left'\">Enter your comment:</span>\r\n  <textarea [value]=\"comment\" (change)=\"comment=getValue($event)\"></textarea>\r\n\r\n  <button (click)=\"addComment()\">Send</button>\r\n</div>"
+        },
+        {
+            "name": "AddCommentReplyComponent",
+            "id": "component-AddCommentReplyComponent-ec3ec1e7fe7dc70bb53058a7df55c87bd3919d1cc6b825112dfed8a9449065ab97b61e7a2a342d4993454ee7df9bb76dbebc55b1578d893255be94fcbb08f9d1",
+            "file": "src/app/components/comments/add-comment-reply/add-comment-reply.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "add-comment-reply",
+            "styleUrls": [
+                "../comments.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./add-comment-reply.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "comment",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "any",
+                    "decorators": []
+                },
+                {
+                    "name": "connector",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "any",
+                    "decorators": []
+                },
+                {
+                    "name": "userName",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "reply",
+                    "defaultValue": "\"\"",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "showAddReply",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "addReply",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 20,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "getValue",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 16,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {Component, Input} from '@angular/core'\r\n\r\n@Component({\r\n  selector: 'add-comment-reply',\r\n  templateUrl: './add-comment-reply.component.html',\r\n  styleUrls: ['../comments.component.css']\r\n})\r\nexport class AddCommentReplyComponent {\r\n  @Input() connector: any;\r\n  @Input() userName: string;\r\n  @Input() comment: any;\r\n\r\n  reply = \"\";\r\n  showAddReply = false;\r\n\r\n  getValue(event: Event): string {\r\n    return (event.target as HTMLInputElement).value;\r\n  }\r\n\r\n  addReply () {\r\n    if (Boolean(this.reply)) {\r\n      var currentdate = Date.now(); \r\n      var datetime = \"\" + currentdate;\r\n\r\n      this.comment[\"Data\"][\"Replies\"].push({ Text: this.reply, Time: datetime, UserName: this.userName });\r\n\r\n      this.connector.executeMethod(\"ChangeComment\", [this.comment[\"Id\"], this.comment[\"Data\"]]);\r\n\r\n      this.reply = \"\";\r\n      this.showAddReply = false;\r\n    }\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "#blockComments{\r\n  margin: 5px;\r\n  display: inline-block;\r\n  width: 306px;\r\n}\r\n\r\n.comment-div {\r\n  position: relative;\r\n  border-radius: 5px;\r\n  border: 2px solid #000;\r\n  margin: 5px;\r\n  text-align: right;\r\n}\r\n\r\n.comment-span{\r\n  display: block;\r\n  margin: 3px;\r\n  text-align: left;\r\n}\r\n\r\n\r\n.comment-del-div {\r\n  position: absolute;\r\n  margin-top: 3px;\r\n  margin-right: 5px;\r\n  right: 0;\r\n} \r\n\r\n.comment-del {\r\n  display: inline-flex;\r\n  width: 1rem;\r\n  height: 1rem;\r\n  position: relative;\r\n  cursor: pointer;\r\n}\r\n\r\n.comment-del::before,\r\n.comment-del::after {\r\n  content: '';\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 1rem;\r\n  height: .1rem;\r\n  background-color: #f00;\r\n  margin: -.05rem 0 0 -.4rem;\r\n  transform: rotate(-45deg);\r\n  border-radius: .1rem;\r\n}\r\n\r\n.comment-del::after {\r\n  transform: rotate(45deg);\r\n}\r\n\r\n.comment-replies{\r\n  padding-left: 24px;\r\n  margin-left: 7px;\r\n  box-sizing: border-box;\r\n  background-image: url(reply.svg);\r\n  background-size: 22px;\r\n  background-repeat: no-repeat;\r\n}\r\n\r\ntextarea {\r\n  width: 300px;\r\n  min-height: 100px;\r\n}\r\n\r\niframe {\r\n  display: inline-block;\r\n}",
+                    "styleUrl": "../comments.component.css"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<div *ngIf=\"showAddReply\">\r\n  <textarea [style.width]=\"'270px'\" [style.marginRight]=\"'8px'\" [value]=\"reply\" (change)=\"reply=getValue($event)\"></textarea>\r\n  <button (click)=\"addReply()\">Add</button>\r\n  <button (click)=\"showAddReply = false\">Cancel</button>\r\n</div>\r\n\r\n<button *ngIf=\"!showAddReply\" (click)=\"showAddReply = true\">Add reply</button>"
+        },
+        {
+            "name": "AppComponent",
+            "id": "component-AppComponent-78a182a4ae76729627b50d7bb92640727fcc4ce54a1f693d777afc7c28ea8d3b39b426700b737af8f9d1b732771e941129822519d4b35dd05103903e42e9a4c6",
+            "file": "src/app/app.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-root",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./app.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "comments",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "config",
+                    "defaultValue": "{\r\n    document: {\r\n        fileType: \"docx\",\r\n        title: \"demo.docx\",\r\n        url: \"http://192.168.0.169:8090/plugins/servlet/onlyoffice/file-provider?vkey=NGQ2MjJkYjY4M2U2NmFhODg2YzFhZDU1OGYyYjA3NzRhN2U5MDcyNjJmMGZmMDUzNmMxNWU3NDFlMjc1Mjk3Zj8zMjQ0MDM0\",\r\n        key: \"712027760_embedded\"\r\n    },\r\n    documentType: \"word\",\r\n    editorConfig: {\r\n      mode: \"edit\",\r\n      user: {\r\n        id: \"uid-1\",\r\n        name: \"John Smith\",\r\n        },\r\n      },\r\n    height:\"600px\",\r\n    width:\"70%\"\r\n  }",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "IConfig",
+                    "optional": false,
+                    "description": "",
+                    "line": 25
+                },
+                {
+                    "name": "connector",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                },
+                {
+                    "name": "onDocumentReady",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\nimport config from \"./../../config/config.json\";\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  templateUrl: './app.component.html'\r\n})\r\nexport class AppComponent {\r\n  comments: any[] = [];\r\n  connector: any = null;\r\n\r\n  onDocumentReady = () => {\r\n    var editor = window.DocEditor.instances[\"docxForComments\"];\r\n    this.connector = editor.createConnector();\r\n    this.connector.executeMethod(\"GetAllComments\", null, function(data: any) {\r\n      let commentsRevers: any[] = [];\r\n      for (var i = 0; i < data.length; i++){\r\n        commentsRevers[i] = data[(data.length - 1) - i];\r\n      }\r\n      this.comments = commentsRevers;\r\n    }.bind(this));\r\n  };\r\n\r\n  config: IConfig = {\r\n    document: {\r\n        fileType: \"docx\",\r\n        title: \"demo.docx\",\r\n        url: \"http://192.168.0.169:8090/plugins/servlet/onlyoffice/file-provider?vkey=NGQ2MjJkYjY4M2U2NmFhODg2YzFhZDU1OGYyYjA3NzRhN2U5MDcyNjJmMGZmMDUzNmMxNWU3NDFlMjc1Mjk3Zj8zMjQ0MDM0\",\r\n        key: \"712027760_embedded\"\r\n    },\r\n    documentType: \"word\",\r\n    editorConfig: {\r\n      mode: \"edit\",\r\n      user: {\r\n        id: \"uid-1\",\r\n        name: \"John Smith\",\r\n        },\r\n      },\r\n    height:\"600px\",\r\n    width:\"70%\"\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "templateData": "\r\n<comments userName=\"John Smith\" [comments]=\"comments\" [connector]=\"connector\"></comments>\r\n\r\n<document-editor \r\n  id=\"docxForComments\" \r\n  documentServerUrl=\"http://192.168.0.169\"\r\n  [config]=\"config\"\r\n  [events_onDocumentReady]=\"onDocumentReady\"\r\n  height=\"600px\"\r\n  width=\"70%\"\r\n></document-editor>"
+        },
+        {
+            "name": "CommenstStoriesComponent",
+            "id": "component-CommenstStoriesComponent-9cb1a444c4add6f011d639c829c4aed37914eb5dfb9c68098bf40f0b958100cb17d8772c49e197e33323267afbc32bbabbb1ee22dcdbba6c071fd4704b5b7cb6",
+            "file": "src/app/components/comments/comments-stories/commenst-stories.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "comments-stories",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./comments-stories.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "config",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "IConfig",
+                    "decorators": []
+                },
+                {
+                    "name": "documentServerUrl",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "editorId",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "userName",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "comments",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "connector",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                },
+                {
+                    "name": "onDocumentReady",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\n\r\n@Component({\r\n  selector: 'comments-stories',\r\n  templateUrl: './comments-stories.component.html'\r\n})\r\nexport class CommenstStoriesComponent {\r\n  @Input() editorId: string;\r\n  @Input() userName: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  comments: any[] = [];\r\n  connector: any = null;\r\n\r\n  onDocumentReady = () => {\r\n    var editor = window.DocEditor.instances[\"docxForComments\"];\r\n    this.connector = editor.createConnector();\r\n    this.connector.executeMethod(\"GetAllComments\", null, function(data: any) {\r\n      let commentsRevers: any[] = [];\r\n      for (var i = 0; i < data.length; i++){\r\n        commentsRevers[i] = data[(data.length - 1) - i];\r\n      }\r\n      this.comments = commentsRevers;\r\n    }.bind(this));\r\n  };\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "templateData": "<comments [userName]=\"userName\" [comments]=\"comments\" [connector]=\"connector\"></comments>\r\n\r\n<document-editor \r\n  [id]=\"editorId\" \r\n  [documentServerUrl]=\"documentServerUrl\"\r\n  [config]=\"config\"\r\n  [events_onDocumentReady]=\"onDocumentReady\"\r\n></document-editor>"
+        },
+        {
+            "name": "CommentsComponent",
+            "id": "component-CommentsComponent-d639fee2e9209e3e7c7e4b0040627b94267a8618fc90fabadf5732b5cc7bbf1d6f50d5abde980b19c169e1337584ffee87e1dfeb242bbfb62b3843d1fc416dee",
+            "file": "src/app/components/comments/comments.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "comments",
+            "styleUrls": [
+                "./comments.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./comments.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "comments",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "any[]",
+                    "decorators": []
+                },
+                {
+                    "name": "connector",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "any",
+                    "decorators": []
+                },
+                {
+                    "name": "userName",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {Component, Input} from '@angular/core'\r\n\r\n@Component({\r\n  selector: 'comments',\r\n  templateUrl: './comments.component.html',\r\n  styleUrls: ['./comments.component.css']\r\n})\r\nexport class CommentsComponent {\r\n  @Input() userName: string;\r\n  @Input() comments: any[];\r\n  @Input() connector: any;\r\n\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "#blockComments{\r\n  margin: 5px;\r\n  display: inline-block;\r\n  width: 306px;\r\n}\r\n\r\n.comment-div {\r\n  position: relative;\r\n  border-radius: 5px;\r\n  border: 2px solid #000;\r\n  margin: 5px;\r\n  text-align: right;\r\n}\r\n\r\n.comment-span{\r\n  display: block;\r\n  margin: 3px;\r\n  text-align: left;\r\n}\r\n\r\n\r\n.comment-del-div {\r\n  position: absolute;\r\n  margin-top: 3px;\r\n  margin-right: 5px;\r\n  right: 0;\r\n} \r\n\r\n.comment-del {\r\n  display: inline-flex;\r\n  width: 1rem;\r\n  height: 1rem;\r\n  position: relative;\r\n  cursor: pointer;\r\n}\r\n\r\n.comment-del::before,\r\n.comment-del::after {\r\n  content: '';\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 1rem;\r\n  height: .1rem;\r\n  background-color: #f00;\r\n  margin: -.05rem 0 0 -.4rem;\r\n  transform: rotate(-45deg);\r\n  border-radius: .1rem;\r\n}\r\n\r\n.comment-del::after {\r\n  transform: rotate(45deg);\r\n}\r\n\r\n.comment-replies{\r\n  padding-left: 24px;\r\n  margin-left: 7px;\r\n  box-sizing: border-box;\r\n  background-image: url(reply.svg);\r\n  background-size: 22px;\r\n  background-repeat: no-repeat;\r\n}\r\n\r\ntextarea {\r\n  width: 300px;\r\n  min-height: 100px;\r\n}\r\n\r\niframe {\r\n  display: inline-block;\r\n}",
+                    "styleUrl": "./comments.component.css"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<div id=\"blockComments\">\r\n  <h3 [style.textAlign]=\"'left'\">Comments</h3>\r\n  <add-comment [connector]=\"connector\" [userName]=\"userName\"></add-comment>\r\n  <list-comments [connector]=\"connector\" [userName]=\"userName\" [comments]=\"comments\"></list-comments>\r\n</div>"
+        },
+        {
+            "name": "ContentControlsComponent",
+            "id": "component-ContentControlsComponent-b26525960c55175e947cfc2b7d93a577f808e406fd973c9990dd0f5cca44af0484c3ec0e5e874ca87626892701a403e5851130938d96be126b862b4905b1078d",
+            "file": "src/app/components/content-controls/content-controls.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "content-controls",
+            "styleUrls": [
+                "./content-controls.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./content-controls.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "contentControls",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "any[]",
+                    "decorators": []
+                },
+                {
+                    "name": "selectedOption",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "any",
+                    "decorators": []
+                },
+                {
+                    "name": "setFormValue",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "function",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "selectedOptionChange",
+                    "defaultValue": "new EventEmitter()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "EventEmitter<any>"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "copyContentControls",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "onChangeSelectedOption",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 64
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "getCopyContentControls",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 22,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "getLabel",
+                    "args": [
+                        {
+                            "name": "nameTag",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 60,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "nameTag",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ngOnChanges",
+                    "args": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 16,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'content-controls',\r\n  templateUrl: './content-controls.component.html',\r\n  styleUrls: [ './content-controls.component.css' ]\r\n})\r\nexport class ContentControlsComponent implements OnChanges {\r\n  @Input() contentControls: any[];\r\n  @Input() selectedOption: any;\r\n  @Output() selectedOptionChange: EventEmitter<any> = new EventEmitter();\r\n  @Input() setFormValue: (id: string, value: string) => void;\r\n\r\n  copyContentControls: any[] = [];\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    if (changes.hasOwnProperty(\"contentControls\")) {\r\n      this.copyContentControls = this.getCopyContentControls()\r\n    }\r\n  }\r\n\r\n  getCopyContentControls () {\r\n    let copyContentControls: any[] = [];\r\n\r\n    for (i = 0; i < this.contentControls?.length; i++) {\r\n      var copyContentControl = this.contentControls[i];\r\n      copyContentControls[i] = {...copyContentControl};\r\n    }\r\n\r\n    let groupsRadioControls: any[] = copyContentControls.filter(contentControl => contentControl.Tag != \"\" && contentControl.Type == \"radio\").reduce((r, a) => {\r\n      r[a.GroupKey] = r[a.GroupKey] || [];\r\n      r[a.GroupKey].push({Tag: a.Tag, checked: a.Value});\r\n      return r;\r\n    }, {});\r\n\r\n    for (const [key, value] of Object.entries(groupsRadioControls)) {\r\n      let index = [];\r\n      let first = true;\r\n\r\n      for (var i = 0; i < copyContentControls.length; i++) {\r\n        if (copyContentControls[i].GroupKey && copyContentControls[i].GroupKey == key) {\r\n          index.push(i);\r\n        } \r\n      }\r\n\r\n      for (var i = 0; i < index.length; i++) {\r\n        if (first) {\r\n          copyContentControls[index[i]].Tag = key;\r\n          copyContentControls[index[i]].Value = value;\r\n          first = false;\r\n        } else {\r\n          copyContentControls.splice(index[i], 1);\r\n        }\r\n      }\r\n    }\r\n\r\n    return copyContentControls.filter(contentControl => contentControl.Tag != \"\");\r\n  }\r\n\r\n  getLabel(nameTag: string) {\r\n    return nameTag.replace(/([a-z])([A-Z])/g, '$1 $2');\r\n  }\r\n\r\n  onChangeSelectedOption = (value: any) => {\r\n    this.selectedOptionChange.emit(value);\r\n  }\r\n\r\n }",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".controlBlock {\r\n  width: 370px;\r\n  text-align: right;\r\n  margin-bottom: 20px;\r\n  display: inline-block;\r\n}\r\n\r\n.control {\r\n  margin: 5px;\r\n}\r\n\r\n.radioControl {\r\n  text-align: left;\r\n  display: inline-block;\r\n  width: 193px;\r\n}\r\n\r\nlabel {\r\n  font-weight: 700;\r\n  font-size: 14px;\r\n  line-height: 20px;\r\n  display: inline-block;\r\n  padding-right: 10px;\r\n}\r\n\r\n.radioLabel {\r\n  padding-left: 5px;\r\n}\r\n\r\ninput {\r\n  color: rgb(51, 51, 51);\r\n  box-shadow: rgb(0 0 0 / 10%) 0px 0px 0px 1px inset;\r\n  line-height: 16px;\r\n  padding: 6px 12px;\r\n  border-radius: 3em;\r\n  border: none;\r\n  box-sizing: border-box;\r\n  margin: 0px;\r\n}\r\n\r\niframe {\r\n  display: inline-block;\r\n}",
+                    "styleUrl": "./content-controls.component.css"
+                }
+            ],
+            "stylesData": "",
+            "implements": [
+                "OnChanges"
+            ],
+            "templateData": "<div class=\"controlBlock\">\r\n  <div *ngFor=\"let contentControl of copyContentControls\" [ngSwitch]=\"contentControl.Type\">\r\n\r\n    <input-content-control\r\n      *ngSwitchCase=\"'input'\"\r\n      [id]=\"contentControl.Tag\"\r\n      [label]=\"getLabel(contentControl.Tag)\"\r\n      [value]=\"contentControl.Value\"\r\n      (onChangeSelectedOption)=\"onChangeSelectedOption($event)\"\r\n      [setFormValue]=\"setFormValue\"\r\n      >\r\n    </input-content-control>\r\n\r\n    <radio-content-control\r\n      *ngSwitchCase=\"'radio'\"\r\n      [id]=\"contentControl.Tag\"\r\n      [label]=\"getLabel(contentControl.Tag)\"\r\n      [options]=\"contentControl.Value\"\r\n      (onChangeSelectedOption)=\"onChangeSelectedOption($event)\"\r\n      [setFormValue]=\"setFormValue\"\r\n    ></radio-content-control>\r\n\r\n  </div>\r\n</div>"
+        },
+        {
+            "name": "ContentControlsStoriesComponent",
+            "id": "component-ContentControlsStoriesComponent-af7fdb7c98bbda213359f053e008a93958cce27d17909ade4b7ae5baeafee46973fb5216dcdf6aba6d865f3ca224d71379fc978f1462bde38d862eb8fffe73ac",
+            "file": "src/app/components/content-controls/content-controls-stories/content-controls-stories.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "content-controls-stories",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./content-controls-stories.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "config",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "IConfig",
+                    "decorators": []
+                },
+                {
+                    "name": "documentServerUrl",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "editorId",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "persons",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "IPerson[]",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "connector",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                },
+                {
+                    "name": "contentControls",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                },
+                {
+                    "name": "getAllContentControls",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 37
+                },
+                {
+                    "name": "onBlurContentControl",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 67
+                },
+                {
+                    "name": "onChangeContentControl",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 63
+                },
+                {
+                    "name": "onChangeSelect",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 20
+                },
+                {
+                    "name": "onDocumentReady",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 71
+                },
+                {
+                    "name": "selectedPerson",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                },
+                {
+                    "name": "setFormValue",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 31
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\nimport { IPerson } from '../../../model/person';\r\n\r\n@Component({\r\n  selector: 'content-controls-stories',\r\n  templateUrl: './content-controls-stories.component.html'\r\n})\r\nexport class ContentControlsStoriesComponent {\r\n  @Input() editorId: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n  @Input() persons: IPerson[];\r\n\r\n  connector: any = null;\r\n\r\n  contentControls: any;\r\n  selectedPerson: any;\r\n\r\n  onChangeSelect = () => {\r\n    for (var [key, value] of Object.entries<string>(this.selectedPerson.value)) {\r\n      if (key == \"Sex\") {\r\n        key = value == \"Male\" ? \"Male\" : \"Female\";\r\n        value = \"true\";\r\n      }\r\n\r\n      this.setFormValue(key, value || \"\");\r\n    }\r\n  };\r\n\r\n  setFormValue = (formId: string, value: string) => {\r\n    this.connector.executeMethod(\"GetFormsByTag\", [formId], function(forms: any) {\r\n      this.connector.executeMethod(\"SetFormValue\", [forms[0][\"InternalId\"], value], null);\r\n    }.bind(this));\r\n  }\r\n\r\n  getAllContentControls = () => {\r\n    this.connector.executeMethod (\"GetAllContentControls\", null, function(data: any) {\r\n      for (let i = 0; i < data.length; i++) {\r\n        switch (data[i].Tag) {\r\n          case \"Male\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          case \"Female\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          default:\r\n            data[i].Type = \"input\";\r\n        }\r\n\r\n        this.connector.executeMethod(\"GetFormValue\", [data[i].InternalId], (value: any) => {\r\n            data[i].Value = value ? value : \"\";\r\n            if (data.length - 1 == i) {\r\n              this.contentControls = data.filter((contentControl: any) => contentControl.Tag != \"\");\r\n            }\r\n        });\r\n      }\r\n    }.bind(this));\r\n  }\r\n\r\n  onChangeContentControl = (oPr: { Tag?: string; InternalId?: string }) => {\r\n    this.getAllContentControls();\r\n  };\r\n\r\n  onBlurContentControl = (oPr: { Tag: string; InternalId: string }) => {\r\n    this.selectedPerson = {label: \"Custom Data\"};\r\n  };\r\n\r\n  onDocumentReady = () => {\r\n    try {\r\n      var editor = window.DocEditor.instances[\"oformEditor\"];\r\n      this.connector = editor.createConnector();\r\n      this.connector.connect();\r\n\r\n      this.getAllContentControls();\r\n      this.connector.attachEvent(\"onChangeContentControl\", this.onChangeContentControl);\r\n      this.connector.attachEvent(\"onBlurContentControl\", this.onBlurContentControl);\r\n    } catch (err) {\r\n      console.error(err);\r\n    }\r\n  };\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "templateData": "<ng-select \r\n  [items]=\"persons\"\r\n  (change)=\"onChangeSelect()\" \r\n  [(ngModel)]=\"selectedPerson\">\r\n</ng-select>\r\n<br/>\r\n\r\n<content-controls [contentControls]=\"contentControls\" [setFormValue]=\"setFormValue\" [(selectedOption)]=\"selectedPerson\" ></content-controls>\r\n\r\n<document-editor \r\n  [id]=\"editorId\" \r\n  [documentServerUrl]=\"documentServerUrl\"\r\n  [config]=\"config\"\r\n  [events_onDocumentReady]=\"onDocumentReady\"\r\n></document-editor>"
+        },
+        {
+            "name": "DocumentEditorComponent",
+            "id": "component-DocumentEditorComponent-8b2d7dcc00cb5865ab22da76a1dfbc2fc27d78f454265f4c2369870b2c803f7d710e8cf2cdef314d9128f837d645c347189bda5d4c1d483aef7c055640d99387",
+            "file": "projects/onlyoffice/document-editor-angular/src/lib/components/document-editor.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "document-editor",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<div [id]=\"id\"></div>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "config",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 37,
+                    "type": "IConfig",
+                    "decorators": []
+                },
+                {
+                    "name": "document_fileType",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 39,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "document_title",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 40,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "documentServerUrl",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 36,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "documentType",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 41,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "editorConfig_lang",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 42,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onAppReady",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 47,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onDocumentReady",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 50,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onDocumentStateChange",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 48,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onError",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 53,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onInfo",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 51,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onMakeActionLink",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 56,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onMetaChange",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 49,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestCompareFile",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 60,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestEditRights",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 61,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestHistory",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 62,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestHistoryClose",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 63,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestHistoryData",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 64,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestInsertImage",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 57,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestMailMergeRecipients",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 59,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestRename",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 55,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestRestore",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 65,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestSaveAs",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 58,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onRequestSharingSettings",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 54,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "events_onWarning",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 52,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "height",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 43,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 35,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 44,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "width",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 45,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "isFirstOnChanges",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 67
+                },
+                {
+                    "name": "onLoad",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 113
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnChanges",
+                    "args": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 84,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ngOnDestroy",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 106,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 71,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onAppReady",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 168,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';\r\nimport { IConfig } from '../model/config';\r\nimport loadScript from \"../utils/loadScript\";\r\n\r\ndeclare global {\r\n  interface Window {\r\n      DocsAPI?: any;\r\n      DocEditor?: any;\r\n  }\r\n}\r\n\r\n@Component({\r\n  selector: 'document-editor',\r\n  template: '<div [id]=\"id\"></div>',\r\n  styles: [\r\n  ]\r\n})\r\nexport class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {\r\n  @Input() id: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  @Input() document_fileType?: string;\r\n  @Input() document_title?: string;\r\n  @Input() documentType?: string;\r\n  @Input() editorConfig_lang?: string;\r\n  @Input() height?: string;\r\n  @Input() type?: string;\r\n  @Input() width?: string;\r\n\r\n  @Input() events_onAppReady?: (event: object) => void;\r\n  @Input() events_onDocumentStateChange?: (event: object) => void;\r\n  @Input() events_onMetaChange?: (event: object) => void;\r\n  @Input() events_onDocumentReady?: (event: object) => void;\r\n  @Input() events_onInfo?: (event: object) => void;\r\n  @Input() events_onWarning?: (event: object) => void;\r\n  @Input() events_onError?: (event: object) => void;\r\n  @Input() events_onRequestSharingSettings?: (event: object) => void;\r\n  @Input() events_onRequestRename?: (event: object) => void;\r\n  @Input() events_onMakeActionLink?: (event: object) => void;\r\n  @Input() events_onRequestInsertImage?: (event: object) => void;\r\n  @Input() events_onRequestSaveAs?: (event: object) => void;\r\n  @Input() events_onRequestMailMergeRecipients?: (event: object) => void;\r\n  @Input() events_onRequestCompareFile?: (event: object) => void;\r\n  @Input() events_onRequestEditRights?: (event: object) => void;\r\n  @Input() events_onRequestHistory?: (event: object) => void;\r\n  @Input() events_onRequestHistoryClose?: (event: object) => void;\r\n  @Input() events_onRequestHistoryData?: (event: object) => void;\r\n  @Input() events_onRequestRestore?: (event: object) => void;\r\n\r\n  isFirstOnChanges: boolean = true;\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n    let url = this.documentServerUrl;\r\n    if (!url.endsWith(\"/\")) url += \"/\";\r\n\r\n    const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;\r\n    loadScript(docApiUrl, \"onlyoffice-api-script\")\r\n      .then(() => this.onLoad())\r\n      .catch((err) => {\r\n        console.error(err);\r\n        this.events_onError!(err);\r\n      });\r\n  }\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    const listNameChanges = [\"config\", \"document_fileType\", \"document_title\", \"documentType\", \"editorConfig_lang\", \"height\", \"type\", \"width\"];\r\n\r\n    if (this.isFirstOnChanges) {\r\n      this.isFirstOnChanges = false;\r\n      return;\r\n    }\r\n\r\n    for (const name of listNameChanges) {\r\n      if (changes.hasOwnProperty(name)) {\r\n        if (window?.DocEditor?.instances[this.id]) {\r\n          window.DocEditor.instances[this.id].destroyEditor();\r\n          window.DocEditor.instances[this.id] = undefined;\r\n    \r\n          console.log(\"Important props have been changed. Load new Editor.\");\r\n          this.onLoad();\r\n          return;\r\n        }\r\n      }\r\n    }\r\n  }\r\n\r\n  ngOnDestroy() {\r\n    if (window?.DocEditor?.instances[this.id]) {\r\n      window.DocEditor.instances[this.id].destroyEditor();\r\n      window.DocEditor.instances[this.id] = undefined;\r\n    }\r\n  }\r\n\r\n  onLoad = () => {\r\n    try {\r\n      if (!window.DocsAPI) throw new Error(\"DocsAPI is not defined\");\r\n      if (window?.DocEditor?.instances[this.id]) {\r\n        console.log(\"Skip loading. Instance already exists\", this.id);\r\n        return;\r\n      }\r\n\r\n      if (!window?.DocEditor?.instances) {\r\n        window.DocEditor = { instances: {} };\r\n      }\r\n\r\n      let initConfig = Object.assign({\r\n        document: {\r\n          fileType: this.document_fileType,\r\n          title: this.document_title,\r\n        },\r\n        documentType: this.documentType,\r\n        editorConfig: {\r\n          lang: this.editorConfig_lang,\r\n        },\r\n        events: {\r\n          onAppReady: this.onAppReady,\r\n          onDocumentStateChange: this.events_onDocumentStateChange,\r\n          onMetaChange: this.events_onMetaChange,\r\n          onDocumentReady: this.events_onDocumentReady,\r\n          onInfo: this.events_onInfo,\r\n          onWarning: this.events_onWarning,\r\n          onError: this.events_onError,\r\n          onRequestSharingSettings: this.events_onRequestSharingSettings,\r\n          onRequestRename: this.events_onRequestRename,\r\n          onMakeActionLink: this.events_onMakeActionLink,\r\n          onRequestInsertImage: this.events_onRequestInsertImage,\r\n          onRequestSaveAs: this.events_onRequestSaveAs,\r\n          onRequestMailMergeRecipients: this.events_onRequestMailMergeRecipients,\r\n          onRequestCompareFile: this.events_onRequestCompareFile,\r\n          onRequestEditRights: this.events_onRequestEditRights,\r\n          onRequestHistory: this.events_onRequestHistory,\r\n          onRequestHistoryClose: this.events_onRequestHistoryClose,\r\n          onRequestHistoryData: this.events_onRequestHistoryData,\r\n          onRequestRestore: this.events_onRequestRestore\r\n        },\r\n        height: this.height,\r\n        type: this.type,\r\n        width: this.width,\r\n      }, this.config || {});\r\n\r\n      const editor = window.DocsAPI.DocEditor(this.id, initConfig);\r\n      window.DocEditor.instances[this.id] = editor;\r\n    } catch (err: any) {\r\n      console.error(err);\r\n      this.events_onError!(err);\r\n    }\r\n  };\r\n\r\n  onAppReady() {\r\n    this.events_onAppReady!(window.DocEditor.instances[this.id]);\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 67
+            },
+            "implements": [
+                "OnInit",
+                "OnChanges",
+                "OnDestroy"
+            ]
+        },
+        {
+            "name": "FormsStoriesComponent",
+            "id": "component-FormsStoriesComponent-4478bb02ae0fa2eedacd6bf09d87fd054098e0cc6d5814cdb4c6c6e775f1170f015a5ba082ed0a645d83cec4ad4b547ff3e07065b75958894aa9f5e63ebb3472",
+            "file": "src/app/components/forms/forms-stories/forms-stories.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "forms-stories",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./forms-stories.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "config",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "IConfig",
+                    "decorators": []
+                },
+                {
+                    "name": "documentServerUrl",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "editorId",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "formsService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FormsService",
+                    "optional": false,
+                    "description": "",
+                    "line": 17,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "loading",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "selectedForm",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 19,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onChangeSelect",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 26,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\nimport { FormsService } from 'src/app/service/forms.service';\r\n\r\n@Component({\r\n  selector: 'forms-stories',\r\n  templateUrl: './forms-stories.component.html'\r\n})\r\nexport class FormsStoriesComponent implements OnInit {\r\n  @Input() editorId: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  loading = false;\r\n  selectedForm: any;\r\n\r\n  constructor( public formsService: FormsService ) {}\r\n\r\n  ngOnInit(): void {\r\n    this.loading = true;\r\n    this.formsService.getForms().subscribe(() => {\r\n      this.loading = false\r\n    });\r\n  }\r\n\r\n  onChangeSelect(): void {\r\n    let newConfig = this.config;\r\n    newConfig = {...newConfig}\r\n\r\n    newConfig.document.title = this.selectedForm.title;\r\n    newConfig.document.url = this.selectedForm.url;\r\n    newConfig.document.key = undefined;\r\n\r\n    this.config = newConfig;\r\n  }\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "formsService",
+                        "type": "FormsService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 15,
+                "jsdoctags": [
+                    {
+                        "name": "formsService",
+                        "type": "FormsService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<ng-select [items]=\"formsService.forms\"\r\n    bindLabel=\"label\"\r\n    bindValue=\"value\"\r\n    [loading]=\"loading\"\r\n    (change)=\"onChangeSelect()\"\r\n    [(ngModel)]=\"selectedForm\">\r\n</ng-select>\r\n<br/>\r\n\r\n<document-editor\r\n  [id]=\"editorId\"\r\n  [documentServerUrl]=\"documentServerUrl\"\r\n  [config]=\"config\"\r\n></document-editor>"
+        },
+        {
+            "name": "InputContentControlComponent",
+            "id": "component-InputContentControlComponent-6a8744381af762a3fa19e5169194f9eb819950832a13378fd75043fbbd87cb68e36142b7376f1ba8d9b41ed710864f839d3c67d8964376f0268e993fc9e6fd5c",
+            "file": "src/app/components/content-controls/input-content-control/input-content-control.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "input-content-control",
+            "styleUrls": [
+                "./../content-controls.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./input-content-control.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "selectedOption",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "any",
+                    "decorators": []
+                },
+                {
+                    "name": "setFormValue",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "value",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "onChangeSelectedOption",
+                    "defaultValue": "new EventEmitter<any>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "EventEmitter<any>"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "getValue",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 16,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'input-content-control',\r\n  templateUrl: './input-content-control.component.html',\r\n  styleUrls: [ './../content-controls.component.css' ]\r\n})\r\nexport class InputContentControlComponent {\r\n  @Input() id: string;\r\n  @Input() value: string;\r\n  @Input() label: string;\r\n  @Input() selectedOption: any;\r\n  @Output() onChangeSelectedOption: EventEmitter<any> = new EventEmitter<any>();\r\n  @Input() setFormValue: (id: string, value: string) => void;\r\n\r\n  getValue(event: Event): string {\r\n    this.setFormValue((event.target as HTMLInputElement).id, (event.target as HTMLInputElement).value);\r\n    this.onChangeSelectedOption.emit({label: \"Custom Data\"});\r\n    return (event.target as HTMLInputElement).value;\r\n  }\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".controlBlock {\r\n  width: 370px;\r\n  text-align: right;\r\n  margin-bottom: 20px;\r\n  display: inline-block;\r\n}\r\n\r\n.control {\r\n  margin: 5px;\r\n}\r\n\r\n.radioControl {\r\n  text-align: left;\r\n  display: inline-block;\r\n  width: 193px;\r\n}\r\n\r\nlabel {\r\n  font-weight: 700;\r\n  font-size: 14px;\r\n  line-height: 20px;\r\n  display: inline-block;\r\n  padding-right: 10px;\r\n}\r\n\r\n.radioLabel {\r\n  padding-left: 5px;\r\n}\r\n\r\ninput {\r\n  color: rgb(51, 51, 51);\r\n  box-shadow: rgb(0 0 0 / 10%) 0px 0px 0px 1px inset;\r\n  line-height: 16px;\r\n  padding: 6px 12px;\r\n  border-radius: 3em;\r\n  border: none;\r\n  box-sizing: border-box;\r\n  margin: 0px;\r\n}\r\n\r\niframe {\r\n  display: inline-block;\r\n}",
+                    "styleUrl": "./../content-controls.component.css"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<div class=\"control\">\r\n  <label>{{ label }}</label>\r\n  <input [id]=\"id\" [value]=\"value\" (keyup)=\"value=getValue($event)\" />\r\n</div>"
+        },
+        {
+            "name": "ListCommentsComponent",
+            "id": "component-ListCommentsComponent-b2932c0ea67f147c1f2fce08555f5affd64a0c0b4ea6a12a298e6fa62a6206cad7596f3d71e6cd6467658bfc3aa8aa1a80db699a0051f8bf9d5b0721a136ebde",
+            "file": "src/app/components/comments/list-comments/list-comments.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "list-comments",
+            "styleUrls": [
+                "../comments.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./list-comments.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "comments",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "any[]",
+                    "decorators": []
+                },
+                {
+                    "name": "connector",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "any",
+                    "decorators": []
+                },
+                {
+                    "name": "userName",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "dateParser",
+                    "args": [
+                        {
+                            "name": "date",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 52,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "date",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "goToComment",
+                    "args": [
+                        {
+                            "name": "e",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 13,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "e",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ngOnChanges",
+                    "args": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 19,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {Component, Input, SimpleChanges, OnChanges} from '@angular/core'\r\n\r\n@Component({\r\n  selector: 'list-comments',\r\n  templateUrl: './list-comments.component.html',\r\n  styleUrls: ['../comments.component.css']\r\n})\r\nexport class ListCommentsComponent implements OnChanges {\r\n  @Input() connector: any;\r\n  @Input() userName: string;\r\n  @Input() comments: any[];\r\n\r\n  goToComment (e: any) {\r\n    if (e.target.parentElement.id) {\r\n      this.connector.executeMethod(\"MoveToComment\",[e.target.parentElement.id]);\r\n    }\r\n  }\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    if (changes.hasOwnProperty(\"connector\")) {\r\n      if (this.connector) {\r\n        this.connector.attachEvent(\"onAddComment\",  function (val:any) {\r\n          console.log(\"onAddComment\");\r\n          var comments = this.comments;\r\n          var index = this.comments.findIndex((comment:any) => comment.Id === val.Id)\r\n\r\n          if (index == -1) {\r\n             this.comments = [val, ...comments];\r\n          }\r\n        }.bind(this));\r\n\r\n        this.connector.attachEvent(\"onRemoveComment\",  function (val:any) {\r\n          console.log(\"onRemoveComment\");\r\n          const index = this.comments.findIndex((comment:any) => comment.Id === val.Id);\r\n\r\n          if (index !== -1) {\r\n            this.comments.splice(index, 1);\r\n          }\r\n        }.bind(this));\r\n\r\n        this.connector.attachEvent(\"onChangeCommentData\",  function (val:any) {\r\n          const index = this.comments.findIndex((comment:any) => comment.Id === val.Id);\r\n\r\n          if (index !== -1) {\r\n            this.comments[index].Data = val.Data;\r\n          }\r\n        }.bind(this));\r\n      }\r\n    }\r\n  }\r\n\r\n  dateParser(date: string) {\r\n    return new Date(parseInt(date, 10)).toLocaleString();\r\n  }\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "#blockComments{\r\n  margin: 5px;\r\n  display: inline-block;\r\n  width: 306px;\r\n}\r\n\r\n.comment-div {\r\n  position: relative;\r\n  border-radius: 5px;\r\n  border: 2px solid #000;\r\n  margin: 5px;\r\n  text-align: right;\r\n}\r\n\r\n.comment-span{\r\n  display: block;\r\n  margin: 3px;\r\n  text-align: left;\r\n}\r\n\r\n\r\n.comment-del-div {\r\n  position: absolute;\r\n  margin-top: 3px;\r\n  margin-right: 5px;\r\n  right: 0;\r\n} \r\n\r\n.comment-del {\r\n  display: inline-flex;\r\n  width: 1rem;\r\n  height: 1rem;\r\n  position: relative;\r\n  cursor: pointer;\r\n}\r\n\r\n.comment-del::before,\r\n.comment-del::after {\r\n  content: '';\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 1rem;\r\n  height: .1rem;\r\n  background-color: #f00;\r\n  margin: -.05rem 0 0 -.4rem;\r\n  transform: rotate(-45deg);\r\n  border-radius: .1rem;\r\n}\r\n\r\n.comment-del::after {\r\n  transform: rotate(45deg);\r\n}\r\n\r\n.comment-replies{\r\n  padding-left: 24px;\r\n  margin-left: 7px;\r\n  box-sizing: border-box;\r\n  background-image: url(reply.svg);\r\n  background-size: 22px;\r\n  background-repeat: no-repeat;\r\n}\r\n\r\ntextarea {\r\n  width: 300px;\r\n  min-height: 100px;\r\n}\r\n\r\niframe {\r\n  display: inline-block;\r\n}",
+                    "styleUrl": "../comments.component.css"
+                }
+            ],
+            "stylesData": "",
+            "implements": [
+                "OnChanges"
+            ],
+            "templateData": "<div>\r\n  <div *ngFor=\"let comment of comments\" class=\"comment-div\">\r\n    <remove-comment [connector]=\"connector\" [commentId]=\"comment['Id']\"></remove-comment>\r\n    <div [id]=\"comment['Id']\" (click)=\"goToComment($event)\">\r\n      <span class=\"comment-span\">Author: {{ comment[\"Data\"][\"UserName\"] }}</span>\r\n      <span class=\"comment-span\">Date: {{ dateParser(comment[\"Data\"][\"Time\"]) }}</span>\r\n      <span class=\"comment-span\">Message: {{ comment[\"Data\"][\"Text\"] }}</span>\r\n    </div>\r\n    <div class=\"comment-replies\">\r\n      <div *ngFor=\"let reply of comment['Data']['Replies']; let index = index\" [style.marginBottom]=\"'10px'\">\r\n        <remove-comment-reply [connector]=\"connector\" [comment]=\"comment\" [replyId]=\"index\"></remove-comment-reply>\r\n        <span class=\"comment-span\">Author: {{ reply[\"UserName\"] }}</span>\r\n        <span class=\"comment-span\">Date: {{ dateParser(reply[\"Time\"]) }}</span>\r\n        <span class=\"comment-span\">Message: {{ reply[\"Text\"] }}</span>\r\n      </div>\r\n    </div>\r\n    <add-comment-reply [connector]=\"connector\" [userName]=\"userName\" [comment]=\"comment\"></add-comment-reply>\r\n  </div>\r\n</div>"
+        },
+        {
+            "name": "RadioContentControlComponent",
+            "id": "component-RadioContentControlComponent-721a53e643facd479891d4c3a1acb3d6e43214198c9567cca23c507117e1940097855fe0efdc3d96c5dd2e0d812bfb00e35a327b6ca78a7a9e09dd691cf50608",
+            "file": "src/app/components/content-controls/radio-content-control/radio-content-control.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "radio-content-control",
+            "styleUrls": [
+                "./../content-controls.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./radio-content-control.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "options",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "any[]",
+                    "decorators": []
+                },
+                {
+                    "name": "selectedOption",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "any",
+                    "decorators": []
+                },
+                {
+                    "name": "setFormValue",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "function",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "onChangeSelectedOption",
+                    "defaultValue": "new EventEmitter<any>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "EventEmitter<any>"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "getLabel",
+                    "args": [
+                        {
+                            "name": "nameTag",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 16,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "nameTag",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "isChecked",
+                    "args": [
+                        {
+                            "name": "nameTag",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 25,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "nameTag",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onChange",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 20,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'radio-content-control',\r\n  templateUrl: './radio-content-control.component.html',\r\n  styleUrls: [ './../content-controls.component.css' ]\r\n})\r\nexport class RadioContentControlComponent {\r\n  @Input() id: string;\r\n  @Input() label: string;\r\n  @Input() options: any [];\r\n  @Input() selectedOption: any;\r\n  @Output() onChangeSelectedOption: EventEmitter<any> = new EventEmitter<any>();\r\n  @Input() setFormValue: (id: string, value: string) => void;\r\n\r\n  getLabel(nameTag: string) {\r\n    return nameTag.replace(/([a-z])([A-Z])/g, '$1 $2');\r\n  }\r\n\r\n  onChange(event: Event) {\r\n    this.setFormValue((event.target as HTMLInputElement).id, 'true');\r\n    this.onChangeSelectedOption.emit({label: \"Custom Data\"});\r\n  }\r\n\r\n  isChecked(nameTag: string) {\r\n    for (var i = 0; i < this.options.length; i++) {\r\n      if (this.options[i].checked == true) {\r\n        return nameTag == this.options[i].Tag;\r\n      }\r\n    }\r\n\r\n    return false;\r\n  }\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".controlBlock {\r\n  width: 370px;\r\n  text-align: right;\r\n  margin-bottom: 20px;\r\n  display: inline-block;\r\n}\r\n\r\n.control {\r\n  margin: 5px;\r\n}\r\n\r\n.radioControl {\r\n  text-align: left;\r\n  display: inline-block;\r\n  width: 193px;\r\n}\r\n\r\nlabel {\r\n  font-weight: 700;\r\n  font-size: 14px;\r\n  line-height: 20px;\r\n  display: inline-block;\r\n  padding-right: 10px;\r\n}\r\n\r\n.radioLabel {\r\n  padding-left: 5px;\r\n}\r\n\r\ninput {\r\n  color: rgb(51, 51, 51);\r\n  box-shadow: rgb(0 0 0 / 10%) 0px 0px 0px 1px inset;\r\n  line-height: 16px;\r\n  padding: 6px 12px;\r\n  border-radius: 3em;\r\n  border: none;\r\n  box-sizing: border-box;\r\n  margin: 0px;\r\n}\r\n\r\niframe {\r\n  display: inline-block;\r\n}",
+                    "styleUrl": "./../content-controls.component.css"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<div [id]=\"id\" class=\"control\">\r\n  <label>{{ label }}</label>\r\n  <div class=\"radioControl\">\r\n      <span *ngFor=\"let option of options\">\r\n        <input type=\"radio\" [id]=\"option.Tag\" [name]=\"id\" [checked]=\"isChecked(option.Tag)\" (change)=\"onChange($event)\" />\r\n        <label class=\"radioLabel\">{{ getLabel(option.Tag) }}</label>\r\n      </span>\r\n  </div>\r\n</div>"
+        },
+        {
+            "name": "RemoveCommentComponent",
+            "id": "component-RemoveCommentComponent-99cb561a7f99d1a81d1b118ba6cb9bbc7ebd48c6d8d090a4aa01e291d6c596af838a77f3626906f0390d2aabcad9eeb4d26585491d16fd853ff0120c736b335e",
+            "file": "src/app/components/comments/remove-comment/remove-comment.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "remove-comment",
+            "styleUrls": [
+                "../comments.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./remove-comment.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "commentId",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "connector",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "any",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "removeComment",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {Component, Input} from '@angular/core'\r\n\r\n@Component({\r\n  selector: 'remove-comment',\r\n  templateUrl: './remove-comment.component.html',\r\n  styleUrls: ['../comments.component.css']\r\n})\r\nexport class RemoveCommentComponent {\r\n  @Input() connector: any;\r\n  @Input() commentId: string;\r\n\r\n  removeComment () {\r\n    this.connector.executeMethod(\"RemoveComments\", [[this.commentId]]);\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "#blockComments{\r\n  margin: 5px;\r\n  display: inline-block;\r\n  width: 306px;\r\n}\r\n\r\n.comment-div {\r\n  position: relative;\r\n  border-radius: 5px;\r\n  border: 2px solid #000;\r\n  margin: 5px;\r\n  text-align: right;\r\n}\r\n\r\n.comment-span{\r\n  display: block;\r\n  margin: 3px;\r\n  text-align: left;\r\n}\r\n\r\n\r\n.comment-del-div {\r\n  position: absolute;\r\n  margin-top: 3px;\r\n  margin-right: 5px;\r\n  right: 0;\r\n} \r\n\r\n.comment-del {\r\n  display: inline-flex;\r\n  width: 1rem;\r\n  height: 1rem;\r\n  position: relative;\r\n  cursor: pointer;\r\n}\r\n\r\n.comment-del::before,\r\n.comment-del::after {\r\n  content: '';\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 1rem;\r\n  height: .1rem;\r\n  background-color: #f00;\r\n  margin: -.05rem 0 0 -.4rem;\r\n  transform: rotate(-45deg);\r\n  border-radius: .1rem;\r\n}\r\n\r\n.comment-del::after {\r\n  transform: rotate(45deg);\r\n}\r\n\r\n.comment-replies{\r\n  padding-left: 24px;\r\n  margin-left: 7px;\r\n  box-sizing: border-box;\r\n  background-image: url(reply.svg);\r\n  background-size: 22px;\r\n  background-repeat: no-repeat;\r\n}\r\n\r\ntextarea {\r\n  width: 300px;\r\n  min-height: 100px;\r\n}\r\n\r\niframe {\r\n  display: inline-block;\r\n}",
+                    "styleUrl": "../comments.component.css"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<div class=\"comment-del-div\">\r\n  <span class=\"comment-del\" (click)=\"removeComment()\"></span>\r\n</div>"
+        },
+        {
+            "name": "RemoveCommentReplyComponent",
+            "id": "component-RemoveCommentReplyComponent-dcb661572bb57b349c1f5db6c4f9f04fa538f7295b898e3846ab93751ddf8b144c5ac273bcd20499c7b39c82da32e463e318b5e0ab90876fe4a7c174d71dccf4",
+            "file": "src/app/components/comments/remove-comment-reply/remove-comment-reply.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "remove-comment-reply",
+            "styleUrls": [
+                "../comments.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./remove-comment-reply.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "comment",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "any",
+                    "decorators": []
+                },
+                {
+                    "name": "connector",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "any",
+                    "decorators": []
+                },
+                {
+                    "name": "replyId",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "number",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "removeCommentReply",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 13,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {Component, Input} from '@angular/core'\r\n\r\n@Component({\r\n  selector: 'remove-comment-reply',\r\n  templateUrl: './remove-comment-reply.component.html',\r\n  styleUrls: ['../comments.component.css']\r\n})\r\nexport class RemoveCommentReplyComponent {\r\n  @Input() connector: any;\r\n  @Input() comment: any;\r\n  @Input() replyId: number;\r\n\r\n  removeCommentReply () {\r\n    let commentData = this.comment[\"Data\"];\r\n    commentData[\"Replies\"].splice(this.replyId, 1);\r\n\r\n    this.connector.executeMethod(\"ChangeComment\", [this.comment[\"Id\"], commentData]);\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "#blockComments{\r\n  margin: 5px;\r\n  display: inline-block;\r\n  width: 306px;\r\n}\r\n\r\n.comment-div {\r\n  position: relative;\r\n  border-radius: 5px;\r\n  border: 2px solid #000;\r\n  margin: 5px;\r\n  text-align: right;\r\n}\r\n\r\n.comment-span{\r\n  display: block;\r\n  margin: 3px;\r\n  text-align: left;\r\n}\r\n\r\n\r\n.comment-del-div {\r\n  position: absolute;\r\n  margin-top: 3px;\r\n  margin-right: 5px;\r\n  right: 0;\r\n} \r\n\r\n.comment-del {\r\n  display: inline-flex;\r\n  width: 1rem;\r\n  height: 1rem;\r\n  position: relative;\r\n  cursor: pointer;\r\n}\r\n\r\n.comment-del::before,\r\n.comment-del::after {\r\n  content: '';\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 1rem;\r\n  height: .1rem;\r\n  background-color: #f00;\r\n  margin: -.05rem 0 0 -.4rem;\r\n  transform: rotate(-45deg);\r\n  border-radius: .1rem;\r\n}\r\n\r\n.comment-del::after {\r\n  transform: rotate(45deg);\r\n}\r\n\r\n.comment-replies{\r\n  padding-left: 24px;\r\n  margin-left: 7px;\r\n  box-sizing: border-box;\r\n  background-image: url(reply.svg);\r\n  background-size: 22px;\r\n  background-repeat: no-repeat;\r\n}\r\n\r\ntextarea {\r\n  width: 300px;\r\n  min-height: 100px;\r\n}\r\n\r\niframe {\r\n  display: inline-block;\r\n}",
+                    "styleUrl": "../comments.component.css"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<div class=\"comment-del-div\">\r\n  <span class=\"comment-del\" (click)=\"removeCommentReply()\"></span>\r\n</div>"
+        },
+        {
+            "name": "ReviewComponent",
+            "id": "component-ReviewComponent-0367c31c364b7175705d447e778444e17d756b8744d5534747d1b153d630ea6e60af6c59b7dafe761e76074814c2d9b2e2a19a9c002b5ca11a23811c1ede340a",
+            "file": "src/app/components/review/review.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "review",
+            "styleUrls": [
+                "./review.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./review.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "connector",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "any",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "acceptReview",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 19,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "nextReview",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 15,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "prevReview",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 11,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "rejectReview",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 23,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {Component, Input} from '@angular/core'\r\n\r\n@Component({\r\n  selector: 'review',\r\n  templateUrl: './review.component.html',\r\n  styleUrls: ['./review.component.css']\r\n})\r\nexport class ReviewComponent {\r\n  @Input() connector: any;\r\n\r\n  prevReview() {\r\n    this.connector.executeMethod(\"MoveToNextReviewChange\", [false]);\r\n  };\r\n\r\n  nextReview() {\r\n    this.connector.executeMethod(\"MoveToNextReviewChange\");\r\n  };\r\n\r\n  acceptReview() {\r\n    this.connector.executeMethod(\"AcceptReviewChanges\");\r\n  };\r\n\r\n  rejectReview() {\r\n    this.connector.executeMethod(\"RejectReviewChanges\");\r\n  };\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".reviewBlock {\r\n  text-align: center;\r\n  margin-bottom: 16px;\r\n}\r\n\r\nbutton {\r\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\r\n  font-weight: 700;\r\n  border: 0;\r\n  border-radius: 3em;\r\n  cursor: pointer;\r\n  display: inline-block;\r\n  line-height: 1;\r\n  font-size: 12px;\r\n  padding: 10px 16px;\r\n  color: #333;\r\n  background-color: transparent;\r\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;\r\n  margin-right: 5px;\r\n}\r\n\r\nbutton:hover {\r\n  background: rgb(221, 235, 250);\r\n}",
+                    "styleUrl": "./review.component.css"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<div class=\"reviewBlock\">\r\n  <button (click)=\"prevReview()\">Prev</button>\r\n  <button (click)=\"nextReview()\">Next</button>\r\n  <button (click)=\"acceptReview()\">Accept</button>\r\n  <button (click)=\"rejectReview()\">Reject</button>\r\n</div>"
+        },
+        {
+            "name": "ReviewStoriesComponent",
+            "id": "component-ReviewStoriesComponent-8609f681dee5c9b6b6cd17d379bfaed5a839abaf3944cfd6738023d8824c2e9088815c6b050101477a688d81255c6ae43f56fb68f4edab556d82afe7b193597c",
+            "file": "src/app/components/review/review-stories/review-stories.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "review-stories",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./review-stories.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "config",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "IConfig",
+                    "decorators": []
+                },
+                {
+                    "name": "documentServerUrl",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "editorId",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 9,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "comments",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "connector",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "onDocumentReady",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 16
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\n\r\n@Component({\r\n  selector: 'review-stories',\r\n  templateUrl: './review-stories.component.html'\r\n})\r\nexport class ReviewStoriesComponent {\r\n  @Input() editorId: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  comments: any[] = [];\r\n  connector: any = null;\r\n\r\n  onDocumentReady = () => {\r\n    var editor = window.DocEditor.instances[this.editorId];\r\n    this.connector = editor.createConnector();\r\n  };\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "templateData": "<review [connector]=\"connector\"></review>\r\n\r\n<document-editor \r\n  [id]=\"editorId\" \r\n  [documentServerUrl]=\"documentServerUrl\"\r\n  [config]=\"config\"\r\n  [events_onDocumentReady]=\"onDocumentReady\"\r\n></document-editor>"
+        }
+    ],
+    "modules": [
+        {
+            "name": "AppModule",
+            "id": "module-AppModule-e1f4d9ac30d2cbe1b1aeb70135e039b5d94dc1a2dea9b9d5e73d29382e7c161a15a9adb0928ec303c261456b7bf451a72179917602d3a8331273b9a7da03877f",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/app.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { BrowserModule } from '@angular/platform-browser';\r\nimport { DocumentEditorModule } from '@onlyoffice/document-editor-angular';\r\n\r\nimport { AppComponent } from './app.component';\r\nimport { AddCommentComponent } from './components/comments/add-comment/add-comment.component';\r\nimport { AddCommentReplyComponent } from './components/comments/add-comment-reply/add-comment-reply.component';\r\nimport { CommentsComponent } from './components/comments/comments.component';\r\nimport { ListCommentsComponent } from './components/comments/list-comments/list-comments.component';\r\nimport { RemoveCommentComponent } from './components/comments/remove-comment/remove-comment.component';\r\nimport { RemoveCommentReplyComponent } from './components/comments/remove-comment-reply/remove-comment-reply.component';\r\nimport { CommenstStoriesComponent } from './components/comments/comments-stories/commenst-stories.component';\r\nimport { ContentControlsStoriesComponent } from './components/content-controls/content-controls-stories/content-controls-stories.component';\r\nimport { ContentControlsComponent } from './components/content-controls/content-controls.component';\r\nimport { InputContentControlComponent } from './components/content-controls/input-content-control/input-content-control.component';\r\nimport { RadioContentControlComponent } from './components/content-controls/radio-content-control/radio-content-control.component';\r\nimport { NgSelectModule } from '@ng-select/ng-select';\r\nimport { CommonModule } from '@angular/common';\r\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\r\nimport { FormsStoriesComponent } from './components/forms/forms-stories/forms-stories.component';\r\nimport { HttpClientModule } from '@angular/common/http';\r\nimport { ReviewComponent } from './components/review/review.component';\r\nimport { ReviewStoriesComponent } from './components/review/review-stories/review-stories.component';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    CommentsComponent,\r\n    ListCommentsComponent,\r\n    AddCommentComponent,\r\n    AddCommentReplyComponent,\r\n    RemoveCommentComponent,\r\n    RemoveCommentReplyComponent,\r\n    CommenstStoriesComponent,\r\n    ContentControlsStoriesComponent,\r\n    ContentControlsComponent,\r\n    InputContentControlComponent,\r\n    RadioContentControlComponent,\r\n    FormsStoriesComponent,\r\n    ReviewComponent,\r\n    ReviewStoriesComponent\r\n  ],\r\n  imports: [\r\n    BrowserModule,\r\n    DocumentEditorModule,\r\n    NgSelectModule,\r\n    CommonModule,\r\n    FormsModule,\r\n    ReactiveFormsModule,\r\n    HttpClientModule\r\n  ],\r\n  providers: [],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule { }\r\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "AddCommentComponent"
+                        },
+                        {
+                            "name": "AddCommentReplyComponent"
+                        },
+                        {
+                            "name": "AppComponent"
+                        },
+                        {
+                            "name": "CommenstStoriesComponent"
+                        },
+                        {
+                            "name": "CommentsComponent"
+                        },
+                        {
+                            "name": "ContentControlsComponent"
+                        },
+                        {
+                            "name": "ContentControlsStoriesComponent"
+                        },
+                        {
+                            "name": "FormsStoriesComponent"
+                        },
+                        {
+                            "name": "InputContentControlComponent"
+                        },
+                        {
+                            "name": "ListCommentsComponent"
+                        },
+                        {
+                            "name": "RadioContentControlComponent"
+                        },
+                        {
+                            "name": "RemoveCommentComponent"
+                        },
+                        {
+                            "name": "RemoveCommentReplyComponent"
+                        },
+                        {
+                            "name": "ReviewComponent"
+                        },
+                        {
+                            "name": "ReviewStoriesComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "DocumentEditorModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": [
+                        {
+                            "name": "AppComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "DocumentEditorModule",
+            "id": "module-DocumentEditorModule-06a0b5b8a40965edcde464c1c55fbc965ebb6a36d92892aa233f790567a8deec752e8d6f2b63e5d4a6a00b6b805810b8e4bb74cd673433fcf94ade4cb0d94acf",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "projects/onlyoffice/document-editor-angular/src/lib/document-editor.module.ts",
+            "methods": [],
+            "sourceCode": "/*\r\n* (c) Copyright Ascensio System SIA 2022\r\n*\r\n* Licensed under the Apache License, Version 2.0 (the \"License\");\r\n* you may not use this file except in compliance with the License.\r\n* You may obtain a copy of the License at\r\n*\r\n*     http://www.apache.org/licenses/LICENSE-2.0\r\n*\r\n* Unless required by applicable law or agreed to in writing, software\r\n* distributed under the License is distributed on an \"AS IS\" BASIS,\r\n* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n* See the License for the specific language governing permissions and\r\n* limitations under the License.\r\n*/\r\n\r\nimport { NgModule } from '@angular/core';\r\nimport { DocumentEditorComponent } from './components/document-editor.component';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    DocumentEditorComponent\r\n  ],\r\n  imports: [\r\n  ],\r\n  exports: [\r\n    DocumentEditorComponent\r\n  ]\r\n})\r\nexport class DocumentEditorModule { }\r\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "DocumentEditorComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "DocumentEditorComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        }
+    ],
+    "miscellaneous": {
+        "variables": [
+            {
+                "name": "CommentsTemplate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/comments.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "CommentsTemplate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/review.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "ContentControlsTemplate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/filling-form.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "context",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/test.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+            },
+            {
+                "name": "context",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/onlyoffice/document-editor-angular/src/test.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+            },
+            {
+                "name": "DocumentTemplate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/document-editor.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.prod.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n  production: true\r\n}"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n  production: false\r\n}"
+            },
+            {
+                "name": "FomsTemplate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/forms.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "FormTemplate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/document-editor.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "loadScript",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/onlyoffice/document-editor-angular/src/lib/utils/loadScript.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "async (url: string, id: string) => {\r\n  return new Promise((resolve, reject) => {\r\n    try {\r\n      if (document.getElementById(id)) {\r\n        if (window.DocsAPI) return resolve(null);\r\n\r\n        let intervalHandler = setInterval(() => {\r\n          if (!window.DocsAPI) return;\r\n\r\n          clearInterval(intervalHandler);\r\n\r\n          return resolve(null);\r\n        }, 500);\r\n      } else {\r\n        const script = document.createElement(\"script\");\r\n        script.setAttribute(\"type\", \"text/javascript\");\r\n        script.setAttribute(\"id\", id);\r\n\r\n        script.onload = resolve;\r\n        script.onerror = reject;\r\n\r\n        script.src = url;\r\n        script.async = true;\r\n\r\n        document.body.appendChild(script);\r\n      }\r\n    } catch (e) {\r\n      console.error(e);\r\n    }\r\n  });\r\n}"
+            },
+            {
+                "name": "PresentationTemplate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/document-editor.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "require",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/test.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "literal type"
+            },
+            {
+                "name": "require",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/onlyoffice/document-editor-angular/src/test.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "literal type"
+            },
+            {
+                "name": "SpreadsheetTemplate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/document-editor.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/comments.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<any>",
+                "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/document-editor.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<DocumentEditorComponent>",
+                "defaultValue": "(args: DocumentEditorComponent) => ({\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/filling-form.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<any>",
+                "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/forms.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<any>",
+                "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/review.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<any>",
+                "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+            }
+        ],
+        "functions": [
+            {
+                "name": "getPersonsOptions",
+                "file": "src/app/filling-form.stories.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "args": []
+            }
+        ],
+        "typealiases": [],
+        "enumerations": [],
+        "groupedVariables": {
+            "src/app/comments.stories.ts": [
+                {
+                    "name": "CommentsTemplate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/comments.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/comments.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<any>",
+                    "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+                }
+            ],
+            "src/app/review.stories.ts": [
+                {
+                    "name": "CommentsTemplate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/review.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/review.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<any>",
+                    "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+                }
+            ],
+            "src/app/filling-form.stories.ts": [
+                {
+                    "name": "ContentControlsTemplate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/filling-form.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/filling-form.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<any>",
+                    "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+                }
+            ],
+            "src/test.ts": [
+                {
+                    "name": "context",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/test.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+                },
+                {
+                    "name": "require",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/test.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type"
+                }
+            ],
+            "projects/onlyoffice/document-editor-angular/src/test.ts": [
+                {
+                    "name": "context",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/onlyoffice/document-editor-angular/src/test.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+                },
+                {
+                    "name": "require",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/onlyoffice/document-editor-angular/src/test.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type"
+                }
+            ],
+            "src/app/document-editor.stories.ts": [
+                {
+                    "name": "DocumentTemplate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/document-editor.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "FormTemplate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/document-editor.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "PresentationTemplate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/document-editor.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "SpreadsheetTemplate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/document-editor.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/document-editor.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<DocumentEditorComponent>",
+                    "defaultValue": "(args: DocumentEditorComponent) => ({\r\n  props: args,\r\n})"
+                }
+            ],
+            "src/environments/environment.prod.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.prod.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\r\n  production: true\r\n}"
+                }
+            ],
+            "src/environments/environment.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\r\n  production: false\r\n}"
+                }
+            ],
+            "src/app/forms.stories.ts": [
+                {
+                    "name": "FomsTemplate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/forms.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/forms.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<any>",
+                    "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+                }
+            ],
+            "projects/onlyoffice/document-editor-angular/src/lib/utils/loadScript.ts": [
+                {
+                    "name": "loadScript",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/onlyoffice/document-editor-angular/src/lib/utils/loadScript.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "async (url: string, id: string) => {\r\n  return new Promise((resolve, reject) => {\r\n    try {\r\n      if (document.getElementById(id)) {\r\n        if (window.DocsAPI) return resolve(null);\r\n\r\n        let intervalHandler = setInterval(() => {\r\n          if (!window.DocsAPI) return;\r\n\r\n          clearInterval(intervalHandler);\r\n\r\n          return resolve(null);\r\n        }, 500);\r\n      } else {\r\n        const script = document.createElement(\"script\");\r\n        script.setAttribute(\"type\", \"text/javascript\");\r\n        script.setAttribute(\"id\", id);\r\n\r\n        script.onload = resolve;\r\n        script.onerror = reject;\r\n\r\n        script.src = url;\r\n        script.async = true;\r\n\r\n        document.body.appendChild(script);\r\n      }\r\n    } catch (e) {\r\n      console.error(e);\r\n    }\r\n  });\r\n}"
+                }
+            ]
+        },
+        "groupedFunctions": {
+            "src/app/filling-form.stories.ts": [
+                {
+                    "name": "getPersonsOptions",
+                    "file": "src/app/filling-form.stories.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "args": []
+                }
+            ]
+        },
+        "groupedEnumerations": {},
+        "groupedTypeAliases": {}
+    },
+    "routes": [],
+    "coverage": {
+        "count": 0,
+        "status": "low",
+        "files": [
+            {
+                "filePath": "projects/onlyoffice/document-editor-angular/src/lib/components/document-editor.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DocumentEditorComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/37",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/onlyoffice/document-editor-angular/src/lib/components/document-editor.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "Window",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/onlyoffice/document-editor-angular/src/lib/model/config.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "IConfig",
+                "coveragePercent": 0,
+                "coverageCount": "0/12",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/onlyoffice/document-editor-angular/src/lib/utils/loadScript.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "loadScript",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/onlyoffice/document-editor-angular/src/test.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "context",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/onlyoffice/document-editor-angular/src/test.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "require",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AppComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/comments.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "CommentsTemplate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/comments.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/comments/add-comment-reply/add-comment-reply.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AddCommentReplyComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/comments/add-comment/add-comment.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AddCommentComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/comments/comments-stories/commenst-stories.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CommenstStoriesComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/comments/comments.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CommentsComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/comments/list-comments/list-comments.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ListCommentsComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/comments/remove-comment-reply/remove-comment-reply.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "RemoveCommentReplyComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/comments/remove-comment/remove-comment.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "RemoveCommentComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/content-controls/content-controls-stories/content-controls-stories.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ContentControlsStoriesComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/14",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/content-controls/content-controls.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ContentControlsComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/10",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/content-controls/input-content-control/input-content-control.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "InputContentControlComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/content-controls/radio-content-control/radio-content-control.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "RadioContentControlComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/10",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/forms/forms-stories/forms-stories.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FormsStoriesComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/10",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/review/review-stories/review-stories.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ReviewStoriesComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/review/review.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ReviewComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/document-editor.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "DocumentTemplate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/document-editor.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "FormTemplate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/document-editor.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "PresentationTemplate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/document-editor.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "SpreadsheetTemplate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/document-editor.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/filling-form.stories.ts",
+                "type": "function",
+                "linktype": "miscellaneous",
+                "linksubtype": "function",
+                "name": "getPersonsOptions",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/filling-form.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ContentControlsTemplate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/filling-form.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/forms.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "FomsTemplate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/forms.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/model/person.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "IPerson",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/review.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "CommentsTemplate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/review.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/service/forms.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "FormsService",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/environments/environment.prod.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "environment",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/environments/environment.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "environment",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/test.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "context",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/test.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "require",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            }
+        ]
+    }
+}

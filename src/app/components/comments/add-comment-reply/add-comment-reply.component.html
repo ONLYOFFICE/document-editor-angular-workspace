@@ -1,0 +1,7 @@
+<div *ngIf="showAddReply">
+  <textarea [style.width]="'270px'" [style.marginRight]="'8px'" [value]="reply" (change)="reply=getValue($event)"></textarea>
+  <button (click)="addReply()">Add</button>
+  <button (click)="showAddReply = false">Cancel</button>
+</div>
+
+<button *ngIf="!showAddReply" (click)="showAddReply = true">Add reply</button>
