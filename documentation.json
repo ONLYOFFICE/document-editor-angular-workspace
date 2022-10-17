@@ -3,12 +3,12 @@
     "interfaces": [
         {
             "name": "IConfig",
-            "id": "interface-IConfig-d4faf37ee09cb6095c9b16483bdb479ce0abad6a6cc3d3a716f1b2becaf842fe5fa2c3c22bfeb781abf77e31f43ccd90faa3310d3710de5b7918daf27e2284f4",
+            "id": "interface-IConfig-a0fd10286b56d26c0af592cd8a2b7c36d27c17fd3eabdc11db6c4c435bfc4fac5cde558a899dd5d1594c384fede11d85c31810b5ad1bebab5cebb834ebad7021",
             "file": "projects/onlyoffice/document-editor-angular/src/lib/model/config.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "export interface IConfig {\r\n  document: {\r\n    fileType: string;\r\n    key?: string;\r\n    title: string;\r\n    permissions?: {\r\n      comment?: boolean;\r\n      download?: boolean;\r\n      edit?: boolean;\r\n      review?: boolean;\r\n    }\r\n    url: string;\r\n  }\r\n  documentType: string;\r\n  editorConfig?: {\r\n    callbackUrl?: string;\r\n    lang?: string,\r\n    mode?: string;\r\n    user?: {\r\n      id?: string;\r\n      name?: string;\r\n    }\r\n  }\r\n  height?: string;\r\n  token?: string;\r\n  type?: string;\r\n  width?: string;\r\n  events_onAppReady?: (editor: object) => void;\r\n  events_onDocumentReady?: (editor: object) => void;\r\n  events_onDocumentStateChange?: (data: object) => void;\r\n  events_onError?: (error: string) => void;\r\n}",
+            "sourceCode": "export interface IConfig {\r\n  document: {\r\n    fileType: string;\r\n    key?: string;\r\n    title: string;\r\n    permissions?: {\r\n      comment?: boolean;\r\n      download?: boolean;\r\n      edit?: boolean;\r\n      review?: boolean;\r\n    }\r\n    url: string;\r\n  }\r\n  documentType: string;\r\n  editorConfig?: {\r\n    callbackUrl?: string;\r\n    lang?: string,\r\n    mode?: string;\r\n    user?: {\r\n      id?: string;\r\n      name?: string;\r\n    }\r\n  }\r\n  height?: string;\r\n  token?: string;\r\n  type?: string;\r\n  width?: string;\r\n  events_onAppReady?: (editor: object) => void;\r\n  events_onDocumentReady?: (editor: object) => void;\r\n  events_onDocumentStateChange?: (data: object) => void;\r\n  events_onError?: (error: string) => void;\r\n}\r\n",
             "properties": [
                 {
                     "name": "document",
@@ -17,7 +17,7 @@
                     "type": "literal type",
                     "optional": false,
                     "description": "",
-                    "line": 2
+                    "line": 18
                 },
                 {
                     "name": "documentType",
@@ -26,7 +26,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 14
+                    "line": 30
                 },
                 {
                     "name": "editorConfig",
@@ -35,7 +35,7 @@
                     "type": "literal type",
                     "optional": true,
                     "description": "",
-                    "line": 15
+                    "line": 31
                 },
                 {
                     "name": "events_onAppReady",
@@ -44,7 +44,7 @@
                     "type": "function",
                     "optional": true,
                     "description": "",
-                    "line": 28
+                    "line": 44
                 },
                 {
                     "name": "events_onDocumentReady",
@@ -53,7 +53,7 @@
                     "type": "function",
                     "optional": true,
                     "description": "",
-                    "line": 29
+                    "line": 45
                 },
                 {
                     "name": "events_onDocumentStateChange",
@@ -62,7 +62,7 @@
                     "type": "function",
                     "optional": true,
                     "description": "",
-                    "line": 30
+                    "line": 46
                 },
                 {
                     "name": "events_onError",
@@ -71,7 +71,7 @@
                     "type": "function",
                     "optional": true,
                     "description": "",
-                    "line": 31
+                    "line": 47
                 },
                 {
                     "name": "height",
@@ -80,7 +80,7 @@
                     "type": "string",
                     "optional": true,
                     "description": "",
-                    "line": 24
+                    "line": 40
                 },
                 {
                     "name": "token",
@@ -89,7 +89,7 @@
                     "type": "string",
                     "optional": true,
                     "description": "",
-                    "line": 25
+                    "line": 41
                 },
                 {
                     "name": "type",
@@ -98,7 +98,7 @@
                     "type": "string",
                     "optional": true,
                     "description": "",
-                    "line": 26
+                    "line": 42
                 },
                 {
                     "name": "width",
@@ -107,7 +107,7 @@
                     "type": "string",
                     "optional": true,
                     "description": "",
-                    "line": 27
+                    "line": 43
                 }
             ],
             "indexSignatures": [],
@@ -162,7 +162,7 @@
                     "type": "any",
                     "optional": true,
                     "description": "",
-                    "line": 8
+                    "line": 24
                 },
                 {
                     "name": "DocsAPI",
@@ -171,7 +171,7 @@
                     "type": "any",
                     "optional": true,
                     "description": "",
-                    "line": 7
+                    "line": 23
                 }
             ],
             "indexSignatures": [],
@@ -1055,7 +1055,7 @@
                     "name": "config",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 21,
+                    "line": 37,
                     "type": "IConfig",
                     "decorators": []
                 },
@@ -1063,7 +1063,7 @@
                     "name": "document_fileType",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 23,
+                    "line": 39,
                     "type": "string",
                     "decorators": []
                 },
@@ -1071,7 +1071,7 @@
                     "name": "document_title",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 24,
+                    "line": 40,
                     "type": "string",
                     "decorators": []
                 },
@@ -1079,7 +1079,7 @@
                     "name": "documentServerUrl",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 20,
+                    "line": 36,
                     "type": "string",
                     "decorators": []
                 },
@@ -1087,7 +1087,7 @@
                     "name": "documentType",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 25,
+                    "line": 41,
                     "type": "string",
                     "decorators": []
                 },
@@ -1095,7 +1095,7 @@
                     "name": "editorConfig_lang",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
+                    "line": 42,
                     "type": "string",
                     "decorators": []
                 },
@@ -1103,7 +1103,7 @@
                     "name": "events_onAppReady",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 31,
+                    "line": 47,
                     "type": "function",
                     "decorators": []
                 },
@@ -1111,7 +1111,7 @@
                     "name": "events_onDocumentReady",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 34,
+                    "line": 50,
                     "type": "function",
                     "decorators": []
                 },
@@ -1119,7 +1119,7 @@
                     "name": "events_onDocumentStateChange",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 32,
+                    "line": 48,
                     "type": "function",
                     "decorators": []
                 },
@@ -1127,7 +1127,7 @@
                     "name": "events_onError",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 37,
+                    "line": 53,
                     "type": "function",
                     "decorators": []
                 },
@@ -1135,7 +1135,7 @@
                     "name": "events_onInfo",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 35,
+                    "line": 51,
                     "type": "function",
                     "decorators": []
                 },
@@ -1143,7 +1143,7 @@
                     "name": "events_onMakeActionLink",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 40,
+                    "line": 56,
                     "type": "function",
                     "decorators": []
                 },
@@ -1151,7 +1151,7 @@
                     "name": "events_onMetaChange",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 33,
+                    "line": 49,
                     "type": "function",
                     "decorators": []
                 },
@@ -1159,7 +1159,7 @@
                     "name": "events_onRequestCompareFile",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 44,
+                    "line": 60,
                     "type": "function",
                     "decorators": []
                 },
@@ -1167,7 +1167,7 @@
                     "name": "events_onRequestEditRights",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 45,
+                    "line": 61,
                     "type": "function",
                     "decorators": []
                 },
@@ -1175,7 +1175,7 @@
                     "name": "events_onRequestHistory",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 46,
+                    "line": 62,
                     "type": "function",
                     "decorators": []
                 },
@@ -1183,7 +1183,7 @@
                     "name": "events_onRequestHistoryClose",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 47,
+                    "line": 63,
                     "type": "function",
                     "decorators": []
                 },
@@ -1191,7 +1191,7 @@
                     "name": "events_onRequestHistoryData",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 48,
+                    "line": 64,
                     "type": "function",
                     "decorators": []
                 },
@@ -1199,7 +1199,7 @@
                     "name": "events_onRequestInsertImage",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 41,
+                    "line": 57,
                     "type": "function",
                     "decorators": []
                 },
@@ -1207,7 +1207,7 @@
                     "name": "events_onRequestMailMergeRecipients",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 43,
+                    "line": 59,
                     "type": "function",
                     "decorators": []
                 },
@@ -1215,7 +1215,7 @@
                     "name": "events_onRequestRename",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 39,
+                    "line": 55,
                     "type": "function",
                     "decorators": []
                 },
@@ -1223,7 +1223,7 @@
                     "name": "events_onRequestRestore",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 49,
+                    "line": 65,
                     "type": "function",
                     "decorators": []
                 },
@@ -1231,7 +1231,7 @@
                     "name": "events_onRequestSaveAs",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 42,
+                    "line": 58,
                     "type": "function",
                     "decorators": []
                 },
@@ -1239,7 +1239,7 @@
                     "name": "events_onRequestSharingSettings",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 38,
+                    "line": 54,
                     "type": "function",
                     "decorators": []
                 },
@@ -1247,7 +1247,7 @@
                     "name": "events_onWarning",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 36,
+                    "line": 52,
                     "type": "function",
                     "decorators": []
                 },
@@ -1255,7 +1255,7 @@
                     "name": "height",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 27,
+                    "line": 43,
                     "type": "string",
                     "decorators": []
                 },
@@ -1263,7 +1263,7 @@
                     "name": "id",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 19,
+                    "line": 35,
                     "type": "string",
                     "decorators": []
                 },
@@ -1271,7 +1271,7 @@
                     "name": "type",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 28,
+                    "line": 44,
                     "type": "string",
                     "decorators": []
                 },
@@ -1279,7 +1279,7 @@
                     "name": "width",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 29,
+                    "line": 45,
                     "type": "string",
                     "decorators": []
                 }
@@ -1294,7 +1294,7 @@
                     "type": "boolean",
                     "optional": false,
                     "description": "",
-                    "line": 51
+                    "line": 67
                 },
                 {
                     "name": "onLoad",
@@ -1304,7 +1304,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 97
+                    "line": 113
                 }
             ],
             "methodsClass": [
@@ -1321,7 +1321,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 68,
+                    "line": 84,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1342,7 +1342,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 90,
+                    "line": 106,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -1352,7 +1352,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 55,
+                    "line": 71,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -1362,7 +1362,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 152,
+                    "line": 168,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -1384,7 +1384,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 51
+                "line": 67
             },
             "implements": [
                 "OnInit",
@@ -2396,13 +2396,13 @@
         },
         {
             "name": "DocumentEditorModule",
-            "id": "module-DocumentEditorModule-5c158b6f4905815e565ab31846b09f9b3fb5f46faec706ed60b4da9ee8a2ba31fd73298f0b60a25db893d1c1a0a0e098c19b0493fea2ef3a5662eb6d60936cc7",
+            "id": "module-DocumentEditorModule-06a0b5b8a40965edcde464c1c55fbc965ebb6a36d92892aa233f790567a8deec752e8d6f2b63e5d4a6a00b6b805810b8e4bb74cd673433fcf94ade4cb0d94acf",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "projects/onlyoffice/document-editor-angular/src/lib/document-editor.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { DocumentEditorComponent } from './components/document-editor.component';\r\n\r\n\r\n\r\n@NgModule({\r\n  declarations: [\r\n    DocumentEditorComponent\r\n  ],\r\n  imports: [\r\n  ],\r\n  exports: [\r\n    DocumentEditorComponent\r\n  ]\r\n})\r\nexport class DocumentEditorModule { }\r\n",
+            "sourceCode": "/*\r\n* (c) Copyright Ascensio System SIA 2022\r\n*\r\n* Licensed under the Apache License, Version 2.0 (the \"License\");\r\n* you may not use this file except in compliance with the License.\r\n* You may obtain a copy of the License at\r\n*\r\n*     http://www.apache.org/licenses/LICENSE-2.0\r\n*\r\n* Unless required by applicable law or agreed to in writing, software\r\n* distributed under the License is distributed on an \"AS IS\" BASIS,\r\n* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\n* See the License for the specific language governing permissions and\r\n* limitations under the License.\r\n*/\r\n\r\nimport { NgModule } from '@angular/core';\r\nimport { DocumentEditorComponent } from './components/document-editor.component';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    DocumentEditorComponent\r\n  ],\r\n  imports: [\r\n  ],\r\n  exports: [\r\n    DocumentEditorComponent\r\n  ]\r\n})\r\nexport class DocumentEditorModule { }\r\n",
             "children": [
                 {
                     "type": "providers",
