@@ -148,12 +148,12 @@
         },
         {
             "name": "Window",
-            "id": "interface-Window-28a4cce51189cc30f653c2b760d63092a1e29964647313889d3124f41de3bfb2db230d4cb30efd4da47efad3437abb1895223955efd27e3de1e0bb18716981a7",
+            "id": "interface-Window-8b2d7dcc00cb5865ab22da76a1dfbc2fc27d78f454265f4c2369870b2c803f7d710e8cf2cdef314d9128f837d645c347189bda5d4c1d483aef7c055640d99387",
             "file": "projects/onlyoffice/document-editor-angular/src/lib/components/document-editor.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';\r\nimport { IConfig } from '../model/config';\r\nimport loadScript from \"../utils/loadScript\";\r\n\r\ndeclare global {\r\n  interface Window {\r\n      DocsAPI?: any;\r\n      DocEditor?: any;\r\n  }\r\n}\r\n\r\n@Component({\r\n  selector: 'document-editor',\r\n  template: '<div [id]=\"id\"></div>',\r\n  styles: [\r\n  ]\r\n})\r\nexport class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {\r\n  @Input() id: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  @Input() document_fileType?: string;\r\n  @Input() document_title?: string;\r\n  @Input() documentType?: string;\r\n  @Input() editorConfig_lang?: string;\r\n  @Input() height?: string;\r\n  @Input() type?: string;\r\n  @Input() width?: string;\r\n\r\n  @Input() events_onAppReady?: (event: object) => void;\r\n  @Input() events_onDocumentStateChange?: (event: object) => void;\r\n  @Input() events_onMetaChange?: (event: object) => void;\r\n  @Input() events_onDocumentReady?: (event: object) => void;\r\n  @Input() events_onInfo?: (event: object) => void;\r\n  @Input() events_onWarning?: (event: object) => void;\r\n  @Input() events_onError?: (event: object) => void;\r\n  @Input() events_onRequestSharingSettings?: (event: object) => void;\r\n  @Input() events_onRequestRename?: (event: object) => void;\r\n  @Input() events_onMakeActionLink?: (event: object) => void;\r\n  @Input() events_onRequestInsertImage?: (event: object) => void;\r\n  @Input() events_onRequestSaveAs?: (event: object) => void;\r\n  @Input() events_onRequestMailMergeRecipients?: (event: object) => void;\r\n  @Input() events_onRequestCompareFile?: (event: object) => void;\r\n  @Input() events_onRequestEditRights?: (event: object) => void;\r\n  @Input() events_onRequestHistory?: (event: object) => void;\r\n  @Input() events_onRequestHistoryClose?: (event: object) => void;\r\n  @Input() events_onRequestHistoryData?: (event: object) => void;\r\n  @Input() events_onRequestRestore?: (event: object) => void;\r\n\r\n  isFirstOnChanges: boolean = true;\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n    let url = this.documentServerUrl;\r\n    if (!url.endsWith(\"/\")) url += \"/\";\r\n\r\n    const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;\r\n    loadScript(docApiUrl, \"onlyoffice-api-script\")\r\n      .then(() => this.onLoad())\r\n      .catch((err) => {\r\n        console.error(err);\r\n        this.events_onError!(err);\r\n      });\r\n  }\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    const listNameChanges = [\"config\", \"document_fileType\", \"document_title\", \"documentType\", \"editorConfig_lang\", \"height\", \"type\", \"width\"];\r\n\r\n    if (this.isFirstOnChanges) {\r\n      this.isFirstOnChanges = false;\r\n      return;\r\n    }\r\n\r\n    for (const name of listNameChanges) {\r\n      if (changes.hasOwnProperty(name)) {\r\n        if (window?.DocEditor?.instances[this.id]) {\r\n          window.DocEditor.instances[this.id].destroyEditor();\r\n          window.DocEditor.instances[this.id] = undefined;\r\n    \r\n          console.log(\"Important props have been changed. Load new Editor.\");\r\n          this.onLoad();\r\n          return;\r\n        }\r\n      }\r\n    }\r\n  }\r\n\r\n  ngOnDestroy() {\r\n    if (window?.DocEditor?.instances[this.id]) {\r\n      window.DocEditor.instances[this.id].destroyEditor();\r\n      window.DocEditor.instances[this.id] = undefined;\r\n    }\r\n  }\r\n\r\n  onLoad = () => {\r\n    try {\r\n      if (!window.DocsAPI) throw new Error(\"DocsAPI is not defined\");\r\n      if (window?.DocEditor?.instances[this.id]) {\r\n        console.log(\"Skip loading. Instance already exists\", this.id);\r\n        return;\r\n      }\r\n\r\n      if (!window?.DocEditor?.instances) {\r\n        window.DocEditor = { instances: {} };\r\n      }\r\n\r\n      let initConfig = Object.assign({\r\n        document: {\r\n          fileType: this.document_fileType,\r\n          title: this.document_title,\r\n        },\r\n        documentType: this.documentType,\r\n        editorConfig: {\r\n          lang: this.editorConfig_lang,\r\n        },\r\n        events: {\r\n          onAppReady: this.events_onAppReady,\r\n          onDocumentStateChange: this.events_onDocumentStateChange,\r\n          onMetaChange: this.events_onMetaChange,\r\n          onDocumentReady: this.events_onDocumentReady,\r\n          onInfo: this.events_onInfo,\r\n          onWarning: this.events_onWarning,\r\n          onError: this.events_onError,\r\n          onRequestSharingSettings: this.events_onRequestSharingSettings,\r\n          onRequestRename: this.events_onRequestRename,\r\n          onMakeActionLink: this.events_onMakeActionLink,\r\n          onRequestInsertImage: this.events_onRequestInsertImage,\r\n          onRequestSaveAs: this.events_onRequestSaveAs,\r\n          onRequestMailMergeRecipients: this.events_onRequestMailMergeRecipients,\r\n          onRequestCompareFile: this.events_onRequestCompareFile,\r\n          onRequestEditRights: this.events_onRequestEditRights,\r\n          onRequestHistory: this.events_onRequestHistory,\r\n          onRequestHistoryClose: this.events_onRequestHistoryClose,\r\n          onRequestHistoryData: this.events_onRequestHistoryData,\r\n          onRequestRestore: this.events_onRequestRestore\r\n        },\r\n        height: this.height,\r\n        type: this.type,\r\n        width: this.width,\r\n      }, this.config || {});\r\n\r\n      const editor = window.DocsAPI.DocEditor(this.id, initConfig);\r\n      window.DocEditor.instances[this.id] = editor;\r\n    } catch (err: any) {\r\n      console.error(err);\r\n      this.events_onError!(err);\r\n    }\r\n};\r\n}\r\n",
+            "sourceCode": "import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';\r\nimport { IConfig } from '../model/config';\r\nimport loadScript from \"../utils/loadScript\";\r\n\r\ndeclare global {\r\n  interface Window {\r\n      DocsAPI?: any;\r\n      DocEditor?: any;\r\n  }\r\n}\r\n\r\n@Component({\r\n  selector: 'document-editor',\r\n  template: '<div [id]=\"id\"></div>',\r\n  styles: [\r\n  ]\r\n})\r\nexport class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {\r\n  @Input() id: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  @Input() document_fileType?: string;\r\n  @Input() document_title?: string;\r\n  @Input() documentType?: string;\r\n  @Input() editorConfig_lang?: string;\r\n  @Input() height?: string;\r\n  @Input() type?: string;\r\n  @Input() width?: string;\r\n\r\n  @Input() events_onAppReady?: (event: object) => void;\r\n  @Input() events_onDocumentStateChange?: (event: object) => void;\r\n  @Input() events_onMetaChange?: (event: object) => void;\r\n  @Input() events_onDocumentReady?: (event: object) => void;\r\n  @Input() events_onInfo?: (event: object) => void;\r\n  @Input() events_onWarning?: (event: object) => void;\r\n  @Input() events_onError?: (event: object) => void;\r\n  @Input() events_onRequestSharingSettings?: (event: object) => void;\r\n  @Input() events_onRequestRename?: (event: object) => void;\r\n  @Input() events_onMakeActionLink?: (event: object) => void;\r\n  @Input() events_onRequestInsertImage?: (event: object) => void;\r\n  @Input() events_onRequestSaveAs?: (event: object) => void;\r\n  @Input() events_onRequestMailMergeRecipients?: (event: object) => void;\r\n  @Input() events_onRequestCompareFile?: (event: object) => void;\r\n  @Input() events_onRequestEditRights?: (event: object) => void;\r\n  @Input() events_onRequestHistory?: (event: object) => void;\r\n  @Input() events_onRequestHistoryClose?: (event: object) => void;\r\n  @Input() events_onRequestHistoryData?: (event: object) => void;\r\n  @Input() events_onRequestRestore?: (event: object) => void;\r\n\r\n  isFirstOnChanges: boolean = true;\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n    let url = this.documentServerUrl;\r\n    if (!url.endsWith(\"/\")) url += \"/\";\r\n\r\n    const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;\r\n    loadScript(docApiUrl, \"onlyoffice-api-script\")\r\n      .then(() => this.onLoad())\r\n      .catch((err) => {\r\n        console.error(err);\r\n        this.events_onError!(err);\r\n      });\r\n  }\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    const listNameChanges = [\"config\", \"document_fileType\", \"document_title\", \"documentType\", \"editorConfig_lang\", \"height\", \"type\", \"width\"];\r\n\r\n    if (this.isFirstOnChanges) {\r\n      this.isFirstOnChanges = false;\r\n      return;\r\n    }\r\n\r\n    for (const name of listNameChanges) {\r\n      if (changes.hasOwnProperty(name)) {\r\n        if (window?.DocEditor?.instances[this.id]) {\r\n          window.DocEditor.instances[this.id].destroyEditor();\r\n          window.DocEditor.instances[this.id] = undefined;\r\n    \r\n          console.log(\"Important props have been changed. Load new Editor.\");\r\n          this.onLoad();\r\n          return;\r\n        }\r\n      }\r\n    }\r\n  }\r\n\r\n  ngOnDestroy() {\r\n    if (window?.DocEditor?.instances[this.id]) {\r\n      window.DocEditor.instances[this.id].destroyEditor();\r\n      window.DocEditor.instances[this.id] = undefined;\r\n    }\r\n  }\r\n\r\n  onLoad = () => {\r\n    try {\r\n      if (!window.DocsAPI) throw new Error(\"DocsAPI is not defined\");\r\n      if (window?.DocEditor?.instances[this.id]) {\r\n        console.log(\"Skip loading. Instance already exists\", this.id);\r\n        return;\r\n      }\r\n\r\n      if (!window?.DocEditor?.instances) {\r\n        window.DocEditor = { instances: {} };\r\n      }\r\n\r\n      let initConfig = Object.assign({\r\n        document: {\r\n          fileType: this.document_fileType,\r\n          title: this.document_title,\r\n        },\r\n        documentType: this.documentType,\r\n        editorConfig: {\r\n          lang: this.editorConfig_lang,\r\n        },\r\n        events: {\r\n          onAppReady: this.onAppReady,\r\n          onDocumentStateChange: this.events_onDocumentStateChange,\r\n          onMetaChange: this.events_onMetaChange,\r\n          onDocumentReady: this.events_onDocumentReady,\r\n          onInfo: this.events_onInfo,\r\n          onWarning: this.events_onWarning,\r\n          onError: this.events_onError,\r\n          onRequestSharingSettings: this.events_onRequestSharingSettings,\r\n          onRequestRename: this.events_onRequestRename,\r\n          onMakeActionLink: this.events_onMakeActionLink,\r\n          onRequestInsertImage: this.events_onRequestInsertImage,\r\n          onRequestSaveAs: this.events_onRequestSaveAs,\r\n          onRequestMailMergeRecipients: this.events_onRequestMailMergeRecipients,\r\n          onRequestCompareFile: this.events_onRequestCompareFile,\r\n          onRequestEditRights: this.events_onRequestEditRights,\r\n          onRequestHistory: this.events_onRequestHistory,\r\n          onRequestHistoryClose: this.events_onRequestHistoryClose,\r\n          onRequestHistoryData: this.events_onRequestHistoryData,\r\n          onRequestRestore: this.events_onRequestRestore\r\n        },\r\n        height: this.height,\r\n        type: this.type,\r\n        width: this.width,\r\n      }, this.config || {});\r\n\r\n      const editor = window.DocsAPI.DocEditor(this.id, initConfig);\r\n      window.DocEditor.instances[this.id] = editor;\r\n    } catch (err: any) {\r\n      console.error(err);\r\n      this.events_onError!(err);\r\n    }\r\n  };\r\n\r\n  onAppReady() {\r\n    this.events_onAppReady!(window.DocEditor.instances[this.id]);\r\n  }\r\n}\r\n",
             "properties": [
                 {
                     "name": "DocEditor",
@@ -717,7 +717,7 @@
         },
         {
             "name": "ContentControlsComponent",
-            "id": "component-ContentControlsComponent-8b31494f666ee7b4b800f38e74c78c7e3f3daa48128b1ec319aeaf49d8ab7ed08a94c7a85fde155829d70470f2aef6a1362f17f2060237157a62af6330e85abd",
+            "id": "component-ContentControlsComponent-b26525960c55175e947cfc2b7d93a577f808e406fd973c9990dd0f5cca44af0484c3ec0e5e874ca87626892701a403e5851130938d96be126b862b4905b1078d",
             "file": "src/app/components/content-controls/content-controls.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -754,12 +754,21 @@
                     "name": "setFormValue",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 11,
+                    "line": 12,
                     "type": "function",
                     "decorators": []
                 }
             ],
-            "outputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "selectedOptionChange",
+                    "defaultValue": "new EventEmitter()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "EventEmitter<any>"
+                }
+            ],
             "propertiesClass": [
                 {
                     "name": "copyContentControls",
@@ -769,7 +778,17 @@
                     "type": "any[]",
                     "optional": false,
                     "description": "",
-                    "line": 13
+                    "line": 14
+                },
+                {
+                    "name": "onChangeSelectedOption",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 64
                 }
             ],
             "methodsClass": [
@@ -779,7 +798,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 24,
+                    "line": 22,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -796,7 +815,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 62,
+                    "line": 60,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -824,7 +843,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 15,
+                    "line": 16,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -847,7 +866,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'content-controls',\r\n  templateUrl: './content-controls.component.html',\r\n  styleUrls: [ './content-controls.component.css' ]\r\n})\r\nexport class ContentControlsComponent implements OnChanges {\r\n  @Input() contentControls: any[];\r\n  @Input() selectedOption: any;\r\n  @Input() setFormValue: (id: string, value: string) => void;\r\n\r\n  copyContentControls: any[] = [];\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    console.log(\"sdf\");\r\n    this.selectedOption.label = \"Custom Data\";\r\n    // this.selectedOption.emit({label: \"Custom Data\"});\r\n    if (changes.hasOwnProperty(\"contentControls\")) {\r\n      this.copyContentControls = this.getCopyContentControls()\r\n    }\r\n  }\r\n\r\n  getCopyContentControls () {\r\n    let copyContentControls: any[] = [];\r\n\r\n    for (i = 0; i < this.contentControls?.length; i++) {\r\n      var copyContentControl = this.contentControls[i];\r\n      copyContentControls[i] = {...copyContentControl};\r\n    }\r\n\r\n    let groupsRadioControls: any[] = copyContentControls.filter(contentControl => contentControl.Tag != \"\" && contentControl.Type == \"radio\").reduce((r, a) => {\r\n      r[a.GroupKey] = r[a.GroupKey] || [];\r\n      r[a.GroupKey].push({Tag: a.Tag, checked: a.Value});\r\n      return r;\r\n    }, {});\r\n\r\n    for (const [key, value] of Object.entries(groupsRadioControls)) {\r\n      let index = [];\r\n      let first = true;\r\n\r\n      for (var i = 0; i < copyContentControls.length; i++) {\r\n        if (copyContentControls[i].GroupKey && copyContentControls[i].GroupKey == key) {\r\n          index.push(i);\r\n        } \r\n      }\r\n\r\n      for (var i = 0; i < index.length; i++) {\r\n        if (first) {\r\n          copyContentControls[index[i]].Tag = key;\r\n          copyContentControls[index[i]].Value = value;\r\n          first = false;\r\n        } else {\r\n          copyContentControls.splice(index[i], 1);\r\n        }\r\n      }\r\n    }\r\n\r\n    return copyContentControls.filter(contentControl => contentControl.Tag != \"\");\r\n  }\r\n\r\n  getLabel(nameTag: string) {\r\n    return nameTag.replace(/([a-z])([A-Z])/g, '$1 $2');\r\n  }\r\n\r\n }",
+            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'content-controls',\r\n  templateUrl: './content-controls.component.html',\r\n  styleUrls: [ './content-controls.component.css' ]\r\n})\r\nexport class ContentControlsComponent implements OnChanges {\r\n  @Input() contentControls: any[];\r\n  @Input() selectedOption: any;\r\n  @Output() selectedOptionChange: EventEmitter<any> = new EventEmitter();\r\n  @Input() setFormValue: (id: string, value: string) => void;\r\n\r\n  copyContentControls: any[] = [];\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    if (changes.hasOwnProperty(\"contentControls\")) {\r\n      this.copyContentControls = this.getCopyContentControls()\r\n    }\r\n  }\r\n\r\n  getCopyContentControls () {\r\n    let copyContentControls: any[] = [];\r\n\r\n    for (i = 0; i < this.contentControls?.length; i++) {\r\n      var copyContentControl = this.contentControls[i];\r\n      copyContentControls[i] = {...copyContentControl};\r\n    }\r\n\r\n    let groupsRadioControls: any[] = copyContentControls.filter(contentControl => contentControl.Tag != \"\" && contentControl.Type == \"radio\").reduce((r, a) => {\r\n      r[a.GroupKey] = r[a.GroupKey] || [];\r\n      r[a.GroupKey].push({Tag: a.Tag, checked: a.Value});\r\n      return r;\r\n    }, {});\r\n\r\n    for (const [key, value] of Object.entries(groupsRadioControls)) {\r\n      let index = [];\r\n      let first = true;\r\n\r\n      for (var i = 0; i < copyContentControls.length; i++) {\r\n        if (copyContentControls[i].GroupKey && copyContentControls[i].GroupKey == key) {\r\n          index.push(i);\r\n        } \r\n      }\r\n\r\n      for (var i = 0; i < index.length; i++) {\r\n        if (first) {\r\n          copyContentControls[index[i]].Tag = key;\r\n          copyContentControls[index[i]].Value = value;\r\n          first = false;\r\n        } else {\r\n          copyContentControls.splice(index[i], 1);\r\n        }\r\n      }\r\n    }\r\n\r\n    return copyContentControls.filter(contentControl => contentControl.Tag != \"\");\r\n  }\r\n\r\n  getLabel(nameTag: string) {\r\n    return nameTag.replace(/([a-z])([A-Z])/g, '$1 $2');\r\n  }\r\n\r\n  onChangeSelectedOption = (value: any) => {\r\n    this.selectedOptionChange.emit(value);\r\n  }\r\n\r\n }",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -859,11 +878,11 @@
             "implements": [
                 "OnChanges"
             ],
-            "templateData": "<div class=\"controlBlock\">\r\n  <div *ngFor=\"let contentControl of copyContentControls\" [ngSwitch]=\"contentControl.Type\">\r\n\r\n    <input-content-control\r\n      *ngSwitchCase=\"'input'\"\r\n      [id]=\"contentControl.Tag\"\r\n      [label]=\"getLabel(contentControl.Tag)\"\r\n      [value]=\"contentControl.Value\"\r\n      [selectedOption]=\"selectedOption\"\r\n      [setFormValue]=\"setFormValue\"\r\n      >\r\n    </input-content-control>\r\n\r\n    <radio-content-control\r\n      *ngSwitchCase=\"'radio'\"\r\n      [id]=\"contentControl.Tag\"\r\n      [label]=\"getLabel(contentControl.Tag)\"\r\n      [options]=\"contentControl.Value\"\r\n      [selectedOption]=\"selectedOption\"\r\n      [setFormValue]=\"setFormValue\"\r\n    ></radio-content-control>\r\n\r\n  </div>\r\n</div>"
+            "templateData": "<div class=\"controlBlock\">\r\n  <div *ngFor=\"let contentControl of copyContentControls\" [ngSwitch]=\"contentControl.Type\">\r\n\r\n    <input-content-control\r\n      *ngSwitchCase=\"'input'\"\r\n      [id]=\"contentControl.Tag\"\r\n      [label]=\"getLabel(contentControl.Tag)\"\r\n      [value]=\"contentControl.Value\"\r\n      (onChangeSelectedOption)=\"onChangeSelectedOption($event)\"\r\n      [setFormValue]=\"setFormValue\"\r\n      >\r\n    </input-content-control>\r\n\r\n    <radio-content-control\r\n      *ngSwitchCase=\"'radio'\"\r\n      [id]=\"contentControl.Tag\"\r\n      [label]=\"getLabel(contentControl.Tag)\"\r\n      [options]=\"contentControl.Value\"\r\n      (onChangeSelectedOption)=\"onChangeSelectedOption($event)\"\r\n      [setFormValue]=\"setFormValue\"\r\n    ></radio-content-control>\r\n\r\n  </div>\r\n</div>"
         },
         {
             "name": "ContentControlsStoriesComponent",
-            "id": "component-ContentControlsStoriesComponent-0fdc57cd9ec261e016f7cf0e9bc6baa3a3e68fcd0abcaf4c5508d08d6700b1ff4eff053a401add39e7af04f91d4d8d99637614fdaad6d9be008c556fa15a9f60",
+            "id": "component-ContentControlsStoriesComponent-af7fdb7c98bbda213359f053e008a93958cce27d17909ade4b7ae5baeafee46973fb5216dcdf6aba6d865f3ca224d71379fc978f1462bde38d862eb8fffe73ac",
             "file": "src/app/components/content-controls/content-controls-stories/content-controls-stories.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1010,15 +1029,15 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\nimport { IPerson } from '../../../model/person';\r\n\r\n@Component({\r\n  selector: 'content-controls-stories',\r\n  templateUrl: './content-controls-stories.component.html'\r\n})\r\nexport class ContentControlsStoriesComponent {\r\n  @Input() editorId: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n  @Input() persons: IPerson[];\r\n\r\n  connector: any = null;\r\n\r\n  contentControls: any;\r\n  selectedPerson: any;\r\n\r\n  onChangeSelect = () => {\r\n    for (var [key, value] of Object.entries<string>(this.selectedPerson.value)) {\r\n      if (key == \"Sex\") {\r\n        key = value == \"Male\" ? \"Male\" : \"Female\";\r\n        value = \"true\";\r\n      }\r\n\r\n      this.setFormValue(key, value || \"\");\r\n    }\r\n  };\r\n\r\n  setFormValue = (formId: string, value: string) => {\r\n    this.connector.executeMethod(\"GetFormsByTag\", [formId], function(forms: any) {\r\n      this.connector.executeMethod(\"SetFormValue\", [forms[0][\"InternalId\"], value], null);\r\n    }.bind(this));\r\n  }\r\n\r\n  getAllContentControls = () => {\r\n    this.connector.executeMethod (\"GetAllContentControls\", null, function(data: any) {\r\n      for (let i = 0; i < data.length; i++) {\r\n        switch (data[i].Tag) {\r\n          case \"Male\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          case \"Female\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          default:\r\n            data[i].Type = \"input\";\r\n        }\r\n\r\n        this.connector.executeMethod(\"GetFormValue\", [data[i].InternalId], (value: any) => {\r\n            data[i].Value = value ? value : \"\";\r\n            if (data.length - 1 == i) {\r\n              this.contentControls = data.filter((contentControl: any) => contentControl.Tag != \"\");\r\n            }\r\n        });\r\n      }\r\n    }.bind(this));\r\n  }\r\n\r\n  onChangeContentControl = (oPr: { Tag?: string; InternalId?: string }) => {\r\n    this.getAllContentControls();\r\n  };\r\n\r\n  onBlurContentControl = (oPr: { Tag: string; InternalId: string }) => {\r\n    // this.selectedPerson = {label: \"Custom Data\"};\r\n  };\r\n\r\n  onDocumentReady = () => {\r\n    try {\r\n      var editor = window.DocEditor.instances[\"oformEditor\"];\r\n      this.connector = editor.createConnector();\r\n      this.connector.connect();\r\n\r\n      this.getAllContentControls();\r\n      this.connector.attachEvent(\"onChangeContentControl\", this.onChangeContentControl);\r\n      this.connector.attachEvent(\"onBlurContentControl\", this.onBlurContentControl);\r\n    } catch (err) {\r\n      console.error(err);\r\n    }\r\n  };\r\n}",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\nimport { IPerson } from '../../../model/person';\r\n\r\n@Component({\r\n  selector: 'content-controls-stories',\r\n  templateUrl: './content-controls-stories.component.html'\r\n})\r\nexport class ContentControlsStoriesComponent {\r\n  @Input() editorId: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n  @Input() persons: IPerson[];\r\n\r\n  connector: any = null;\r\n\r\n  contentControls: any;\r\n  selectedPerson: any;\r\n\r\n  onChangeSelect = () => {\r\n    for (var [key, value] of Object.entries<string>(this.selectedPerson.value)) {\r\n      if (key == \"Sex\") {\r\n        key = value == \"Male\" ? \"Male\" : \"Female\";\r\n        value = \"true\";\r\n      }\r\n\r\n      this.setFormValue(key, value || \"\");\r\n    }\r\n  };\r\n\r\n  setFormValue = (formId: string, value: string) => {\r\n    this.connector.executeMethod(\"GetFormsByTag\", [formId], function(forms: any) {\r\n      this.connector.executeMethod(\"SetFormValue\", [forms[0][\"InternalId\"], value], null);\r\n    }.bind(this));\r\n  }\r\n\r\n  getAllContentControls = () => {\r\n    this.connector.executeMethod (\"GetAllContentControls\", null, function(data: any) {\r\n      for (let i = 0; i < data.length; i++) {\r\n        switch (data[i].Tag) {\r\n          case \"Male\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          case \"Female\":\r\n            data[i].GroupKey = \"Sex\";\r\n            data[i].Type = \"radio\";\r\n            break;\r\n          default:\r\n            data[i].Type = \"input\";\r\n        }\r\n\r\n        this.connector.executeMethod(\"GetFormValue\", [data[i].InternalId], (value: any) => {\r\n            data[i].Value = value ? value : \"\";\r\n            if (data.length - 1 == i) {\r\n              this.contentControls = data.filter((contentControl: any) => contentControl.Tag != \"\");\r\n            }\r\n        });\r\n      }\r\n    }.bind(this));\r\n  }\r\n\r\n  onChangeContentControl = (oPr: { Tag?: string; InternalId?: string }) => {\r\n    this.getAllContentControls();\r\n  };\r\n\r\n  onBlurContentControl = (oPr: { Tag: string; InternalId: string }) => {\r\n    this.selectedPerson = {label: \"Custom Data\"};\r\n  };\r\n\r\n  onDocumentReady = () => {\r\n    try {\r\n      var editor = window.DocEditor.instances[\"oformEditor\"];\r\n      this.connector = editor.createConnector();\r\n      this.connector.connect();\r\n\r\n      this.getAllContentControls();\r\n      this.connector.attachEvent(\"onChangeContentControl\", this.onChangeContentControl);\r\n      this.connector.attachEvent(\"onBlurContentControl\", this.onBlurContentControl);\r\n    } catch (err) {\r\n      console.error(err);\r\n    }\r\n  };\r\n}",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "templateData": "<ng-select \r\n  [items]=\"persons\"\r\n  (change)=\"onChangeSelect()\" \r\n  [(ngModel)]=\"selectedPerson\">\r\n</ng-select>\r\n<br/>\r\n\r\n<content-controls [contentControls]=\"contentControls\" [setFormValue]=\"setFormValue\" [selectedOption]=\"selectedPerson\"></content-controls>\r\n\r\n<document-editor \r\n  [id]=\"editorId\" \r\n  [documentServerUrl]=\"documentServerUrl\"\r\n  [config]=\"config\"\r\n  [events_onDocumentReady]=\"onDocumentReady\"\r\n></document-editor>"
+            "templateData": "<ng-select \r\n  [items]=\"persons\"\r\n  (change)=\"onChangeSelect()\" \r\n  [(ngModel)]=\"selectedPerson\">\r\n</ng-select>\r\n<br/>\r\n\r\n<content-controls [contentControls]=\"contentControls\" [setFormValue]=\"setFormValue\" [(selectedOption)]=\"selectedPerson\" ></content-controls>\r\n\r\n<document-editor \r\n  [id]=\"editorId\" \r\n  [documentServerUrl]=\"documentServerUrl\"\r\n  [config]=\"config\"\r\n  [events_onDocumentReady]=\"onDocumentReady\"\r\n></document-editor>"
         },
         {
             "name": "DocumentEditorComponent",
-            "id": "component-DocumentEditorComponent-28a4cce51189cc30f653c2b760d63092a1e29964647313889d3124f41de3bfb2db230d4cb30efd4da47efad3437abb1895223955efd27e3de1e0bb18716981a7",
+            "id": "component-DocumentEditorComponent-8b2d7dcc00cb5865ab22da76a1dfbc2fc27d78f454265f4c2369870b2c803f7d710e8cf2cdef314d9128f837d645c347189bda5d4c1d483aef7c055640d99387",
             "file": "projects/onlyoffice/document-editor-angular/src/lib/components/document-editor.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1336,6 +1355,16 @@
                     "line": 55,
                     "deprecated": false,
                     "deprecationMessage": ""
+                },
+                {
+                    "name": "onAppReady",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 152,
+                    "deprecated": false,
+                    "deprecationMessage": ""
                 }
             ],
             "deprecated": false,
@@ -1345,7 +1374,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';\r\nimport { IConfig } from '../model/config';\r\nimport loadScript from \"../utils/loadScript\";\r\n\r\ndeclare global {\r\n  interface Window {\r\n      DocsAPI?: any;\r\n      DocEditor?: any;\r\n  }\r\n}\r\n\r\n@Component({\r\n  selector: 'document-editor',\r\n  template: '<div [id]=\"id\"></div>',\r\n  styles: [\r\n  ]\r\n})\r\nexport class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {\r\n  @Input() id: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  @Input() document_fileType?: string;\r\n  @Input() document_title?: string;\r\n  @Input() documentType?: string;\r\n  @Input() editorConfig_lang?: string;\r\n  @Input() height?: string;\r\n  @Input() type?: string;\r\n  @Input() width?: string;\r\n\r\n  @Input() events_onAppReady?: (event: object) => void;\r\n  @Input() events_onDocumentStateChange?: (event: object) => void;\r\n  @Input() events_onMetaChange?: (event: object) => void;\r\n  @Input() events_onDocumentReady?: (event: object) => void;\r\n  @Input() events_onInfo?: (event: object) => void;\r\n  @Input() events_onWarning?: (event: object) => void;\r\n  @Input() events_onError?: (event: object) => void;\r\n  @Input() events_onRequestSharingSettings?: (event: object) => void;\r\n  @Input() events_onRequestRename?: (event: object) => void;\r\n  @Input() events_onMakeActionLink?: (event: object) => void;\r\n  @Input() events_onRequestInsertImage?: (event: object) => void;\r\n  @Input() events_onRequestSaveAs?: (event: object) => void;\r\n  @Input() events_onRequestMailMergeRecipients?: (event: object) => void;\r\n  @Input() events_onRequestCompareFile?: (event: object) => void;\r\n  @Input() events_onRequestEditRights?: (event: object) => void;\r\n  @Input() events_onRequestHistory?: (event: object) => void;\r\n  @Input() events_onRequestHistoryClose?: (event: object) => void;\r\n  @Input() events_onRequestHistoryData?: (event: object) => void;\r\n  @Input() events_onRequestRestore?: (event: object) => void;\r\n\r\n  isFirstOnChanges: boolean = true;\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n    let url = this.documentServerUrl;\r\n    if (!url.endsWith(\"/\")) url += \"/\";\r\n\r\n    const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;\r\n    loadScript(docApiUrl, \"onlyoffice-api-script\")\r\n      .then(() => this.onLoad())\r\n      .catch((err) => {\r\n        console.error(err);\r\n        this.events_onError!(err);\r\n      });\r\n  }\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    const listNameChanges = [\"config\", \"document_fileType\", \"document_title\", \"documentType\", \"editorConfig_lang\", \"height\", \"type\", \"width\"];\r\n\r\n    if (this.isFirstOnChanges) {\r\n      this.isFirstOnChanges = false;\r\n      return;\r\n    }\r\n\r\n    for (const name of listNameChanges) {\r\n      if (changes.hasOwnProperty(name)) {\r\n        if (window?.DocEditor?.instances[this.id]) {\r\n          window.DocEditor.instances[this.id].destroyEditor();\r\n          window.DocEditor.instances[this.id] = undefined;\r\n    \r\n          console.log(\"Important props have been changed. Load new Editor.\");\r\n          this.onLoad();\r\n          return;\r\n        }\r\n      }\r\n    }\r\n  }\r\n\r\n  ngOnDestroy() {\r\n    if (window?.DocEditor?.instances[this.id]) {\r\n      window.DocEditor.instances[this.id].destroyEditor();\r\n      window.DocEditor.instances[this.id] = undefined;\r\n    }\r\n  }\r\n\r\n  onLoad = () => {\r\n    try {\r\n      if (!window.DocsAPI) throw new Error(\"DocsAPI is not defined\");\r\n      if (window?.DocEditor?.instances[this.id]) {\r\n        console.log(\"Skip loading. Instance already exists\", this.id);\r\n        return;\r\n      }\r\n\r\n      if (!window?.DocEditor?.instances) {\r\n        window.DocEditor = { instances: {} };\r\n      }\r\n\r\n      let initConfig = Object.assign({\r\n        document: {\r\n          fileType: this.document_fileType,\r\n          title: this.document_title,\r\n        },\r\n        documentType: this.documentType,\r\n        editorConfig: {\r\n          lang: this.editorConfig_lang,\r\n        },\r\n        events: {\r\n          onAppReady: this.events_onAppReady,\r\n          onDocumentStateChange: this.events_onDocumentStateChange,\r\n          onMetaChange: this.events_onMetaChange,\r\n          onDocumentReady: this.events_onDocumentReady,\r\n          onInfo: this.events_onInfo,\r\n          onWarning: this.events_onWarning,\r\n          onError: this.events_onError,\r\n          onRequestSharingSettings: this.events_onRequestSharingSettings,\r\n          onRequestRename: this.events_onRequestRename,\r\n          onMakeActionLink: this.events_onMakeActionLink,\r\n          onRequestInsertImage: this.events_onRequestInsertImage,\r\n          onRequestSaveAs: this.events_onRequestSaveAs,\r\n          onRequestMailMergeRecipients: this.events_onRequestMailMergeRecipients,\r\n          onRequestCompareFile: this.events_onRequestCompareFile,\r\n          onRequestEditRights: this.events_onRequestEditRights,\r\n          onRequestHistory: this.events_onRequestHistory,\r\n          onRequestHistoryClose: this.events_onRequestHistoryClose,\r\n          onRequestHistoryData: this.events_onRequestHistoryData,\r\n          onRequestRestore: this.events_onRequestRestore\r\n        },\r\n        height: this.height,\r\n        type: this.type,\r\n        width: this.width,\r\n      }, this.config || {});\r\n\r\n      const editor = window.DocsAPI.DocEditor(this.id, initConfig);\r\n      window.DocEditor.instances[this.id] = editor;\r\n    } catch (err: any) {\r\n      console.error(err);\r\n      this.events_onError!(err);\r\n    }\r\n};\r\n}\r\n",
+            "sourceCode": "import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';\r\nimport { IConfig } from '../model/config';\r\nimport loadScript from \"../utils/loadScript\";\r\n\r\ndeclare global {\r\n  interface Window {\r\n      DocsAPI?: any;\r\n      DocEditor?: any;\r\n  }\r\n}\r\n\r\n@Component({\r\n  selector: 'document-editor',\r\n  template: '<div [id]=\"id\"></div>',\r\n  styles: [\r\n  ]\r\n})\r\nexport class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {\r\n  @Input() id: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  @Input() document_fileType?: string;\r\n  @Input() document_title?: string;\r\n  @Input() documentType?: string;\r\n  @Input() editorConfig_lang?: string;\r\n  @Input() height?: string;\r\n  @Input() type?: string;\r\n  @Input() width?: string;\r\n\r\n  @Input() events_onAppReady?: (event: object) => void;\r\n  @Input() events_onDocumentStateChange?: (event: object) => void;\r\n  @Input() events_onMetaChange?: (event: object) => void;\r\n  @Input() events_onDocumentReady?: (event: object) => void;\r\n  @Input() events_onInfo?: (event: object) => void;\r\n  @Input() events_onWarning?: (event: object) => void;\r\n  @Input() events_onError?: (event: object) => void;\r\n  @Input() events_onRequestSharingSettings?: (event: object) => void;\r\n  @Input() events_onRequestRename?: (event: object) => void;\r\n  @Input() events_onMakeActionLink?: (event: object) => void;\r\n  @Input() events_onRequestInsertImage?: (event: object) => void;\r\n  @Input() events_onRequestSaveAs?: (event: object) => void;\r\n  @Input() events_onRequestMailMergeRecipients?: (event: object) => void;\r\n  @Input() events_onRequestCompareFile?: (event: object) => void;\r\n  @Input() events_onRequestEditRights?: (event: object) => void;\r\n  @Input() events_onRequestHistory?: (event: object) => void;\r\n  @Input() events_onRequestHistoryClose?: (event: object) => void;\r\n  @Input() events_onRequestHistoryData?: (event: object) => void;\r\n  @Input() events_onRequestRestore?: (event: object) => void;\r\n\r\n  isFirstOnChanges: boolean = true;\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n    let url = this.documentServerUrl;\r\n    if (!url.endsWith(\"/\")) url += \"/\";\r\n\r\n    const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;\r\n    loadScript(docApiUrl, \"onlyoffice-api-script\")\r\n      .then(() => this.onLoad())\r\n      .catch((err) => {\r\n        console.error(err);\r\n        this.events_onError!(err);\r\n      });\r\n  }\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    const listNameChanges = [\"config\", \"document_fileType\", \"document_title\", \"documentType\", \"editorConfig_lang\", \"height\", \"type\", \"width\"];\r\n\r\n    if (this.isFirstOnChanges) {\r\n      this.isFirstOnChanges = false;\r\n      return;\r\n    }\r\n\r\n    for (const name of listNameChanges) {\r\n      if (changes.hasOwnProperty(name)) {\r\n        if (window?.DocEditor?.instances[this.id]) {\r\n          window.DocEditor.instances[this.id].destroyEditor();\r\n          window.DocEditor.instances[this.id] = undefined;\r\n    \r\n          console.log(\"Important props have been changed. Load new Editor.\");\r\n          this.onLoad();\r\n          return;\r\n        }\r\n      }\r\n    }\r\n  }\r\n\r\n  ngOnDestroy() {\r\n    if (window?.DocEditor?.instances[this.id]) {\r\n      window.DocEditor.instances[this.id].destroyEditor();\r\n      window.DocEditor.instances[this.id] = undefined;\r\n    }\r\n  }\r\n\r\n  onLoad = () => {\r\n    try {\r\n      if (!window.DocsAPI) throw new Error(\"DocsAPI is not defined\");\r\n      if (window?.DocEditor?.instances[this.id]) {\r\n        console.log(\"Skip loading. Instance already exists\", this.id);\r\n        return;\r\n      }\r\n\r\n      if (!window?.DocEditor?.instances) {\r\n        window.DocEditor = { instances: {} };\r\n      }\r\n\r\n      let initConfig = Object.assign({\r\n        document: {\r\n          fileType: this.document_fileType,\r\n          title: this.document_title,\r\n        },\r\n        documentType: this.documentType,\r\n        editorConfig: {\r\n          lang: this.editorConfig_lang,\r\n        },\r\n        events: {\r\n          onAppReady: this.onAppReady,\r\n          onDocumentStateChange: this.events_onDocumentStateChange,\r\n          onMetaChange: this.events_onMetaChange,\r\n          onDocumentReady: this.events_onDocumentReady,\r\n          onInfo: this.events_onInfo,\r\n          onWarning: this.events_onWarning,\r\n          onError: this.events_onError,\r\n          onRequestSharingSettings: this.events_onRequestSharingSettings,\r\n          onRequestRename: this.events_onRequestRename,\r\n          onMakeActionLink: this.events_onMakeActionLink,\r\n          onRequestInsertImage: this.events_onRequestInsertImage,\r\n          onRequestSaveAs: this.events_onRequestSaveAs,\r\n          onRequestMailMergeRecipients: this.events_onRequestMailMergeRecipients,\r\n          onRequestCompareFile: this.events_onRequestCompareFile,\r\n          onRequestEditRights: this.events_onRequestEditRights,\r\n          onRequestHistory: this.events_onRequestHistory,\r\n          onRequestHistoryClose: this.events_onRequestHistoryClose,\r\n          onRequestHistoryData: this.events_onRequestHistoryData,\r\n          onRequestRestore: this.events_onRequestRestore\r\n        },\r\n        height: this.height,\r\n        type: this.type,\r\n        width: this.width,\r\n      }, this.config || {});\r\n\r\n      const editor = window.DocsAPI.DocEditor(this.id, initConfig);\r\n      window.DocEditor.instances[this.id] = editor;\r\n    } catch (err: any) {\r\n      console.error(err);\r\n      this.events_onError!(err);\r\n    }\r\n  };\r\n\r\n  onAppReady() {\r\n    this.events_onAppReady!(window.DocEditor.instances[this.id]);\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -1505,7 +1534,7 @@
         },
         {
             "name": "InputContentControlComponent",
-            "id": "component-InputContentControlComponent-ffcea9b43a073a5a21b30ba6d77c525d7dea60a599d728c22fd6fb3e0b3e0b395ef029c0100ce5532c312a5ae4323b974e2923f68a678d08991de90d6c539fc2",
+            "id": "component-InputContentControlComponent-6a8744381af762a3fa19e5169194f9eb819950832a13378fd75043fbbd87cb68e36142b7376f1ba8d9b41ed710864f839d3c67d8964376f0268e993fc9e6fd5c",
             "file": "src/app/components/content-controls/input-content-control/input-content-control.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1550,7 +1579,7 @@
                     "name": "setFormValue",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 13,
+                    "line": 14,
                     "type": "function",
                     "decorators": []
                 },
@@ -1563,7 +1592,16 @@
                     "decorators": []
                 }
             ],
-            "outputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "onChangeSelectedOption",
+                    "defaultValue": "new EventEmitter<any>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "EventEmitter<any>"
+                }
+            ],
             "propertiesClass": [],
             "methodsClass": [
                 {
@@ -1579,7 +1617,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 15,
+                    "line": 16,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1602,7 +1640,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'input-content-control',\r\n  templateUrl: './input-content-control.component.html',\r\n  styleUrls: [ './../content-controls.component.css' ]\r\n})\r\nexport class InputContentControlComponent {\r\n  @Input() id: string;\r\n  @Input() value: string;\r\n  @Input() label: string;\r\n  @Input() selectedOption: any;\r\n  @Input() setFormValue: (id: string, value: string) => void;\r\n\r\n  getValue(event: Event): string {\r\n    this.setFormValue((event.target as HTMLInputElement).id, (event.target as HTMLInputElement).value);\r\n    this.selectedOption = {label: \"Custom Data\"};\r\n    return (event.target as HTMLInputElement).value;\r\n  }\r\n}",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'input-content-control',\r\n  templateUrl: './input-content-control.component.html',\r\n  styleUrls: [ './../content-controls.component.css' ]\r\n})\r\nexport class InputContentControlComponent {\r\n  @Input() id: string;\r\n  @Input() value: string;\r\n  @Input() label: string;\r\n  @Input() selectedOption: any;\r\n  @Output() onChangeSelectedOption: EventEmitter<any> = new EventEmitter<any>();\r\n  @Input() setFormValue: (id: string, value: string) => void;\r\n\r\n  getValue(event: Event): string {\r\n    this.setFormValue((event.target as HTMLInputElement).id, (event.target as HTMLInputElement).value);\r\n    this.onChangeSelectedOption.emit({label: \"Custom Data\"});\r\n    return (event.target as HTMLInputElement).value;\r\n  }\r\n}",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1768,7 +1806,7 @@
         },
         {
             "name": "RadioContentControlComponent",
-            "id": "component-RadioContentControlComponent-a176a4f41e3e928a8e913a43a0fd4d1994b888502f0274a645417a70bd8e069e01c04ddeab652829bcc6a09827760c24e87dc0a38fa9785044a60dafa7e328db",
+            "id": "component-RadioContentControlComponent-721a53e643facd479891d4c3a1acb3d6e43214198c9567cca23c507117e1940097855fe0efdc3d96c5dd2e0d812bfb00e35a327b6ca78a7a9e09dd691cf50608",
             "file": "src/app/components/content-controls/radio-content-control/radio-content-control.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1821,12 +1859,21 @@
                     "name": "setFormValue",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 13,
+                    "line": 14,
                     "type": "function",
                     "decorators": []
                 }
             ],
-            "outputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "onChangeSelectedOption",
+                    "defaultValue": "new EventEmitter<any>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "EventEmitter<any>"
+                }
+            ],
             "propertiesClass": [],
             "methodsClass": [
                 {
@@ -1842,7 +1889,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 15,
+                    "line": 16,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1870,7 +1917,7 @@
                     "optional": false,
                     "returnType": "boolean",
                     "typeParameters": [],
-                    "line": 24,
+                    "line": 25,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1898,7 +1945,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 19,
+                    "line": 20,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1921,7 +1968,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'radio-content-control',\r\n  templateUrl: './radio-content-control.component.html',\r\n  styleUrls: [ './../content-controls.component.css' ]\r\n})\r\nexport class RadioContentControlComponent {\r\n  @Input() id: string;\r\n  @Input() label: string;\r\n  @Input() options: any [];\r\n  @Input() selectedOption: any;\r\n  @Input() setFormValue: (id: string, value: string) => void;\r\n\r\n  getLabel(nameTag: string) {\r\n    return nameTag.replace(/([a-z])([A-Z])/g, '$1 $2');\r\n  }\r\n\r\n  onChange(event: Event) {\r\n    this.setFormValue((event.target as HTMLInputElement).id, 'true');\r\n    this.selectedOption = {label: \"Custom Data\"};\r\n  }\r\n\r\n  isChecked(nameTag: string) {\r\n    for (var i = 0; i < this.options.length; i++) {\r\n      if (this.options[i].checked == true) {\r\n        return nameTag == this.options[i].Tag;\r\n      }\r\n    }\r\n\r\n    return false;\r\n  }\r\n}",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'radio-content-control',\r\n  templateUrl: './radio-content-control.component.html',\r\n  styleUrls: [ './../content-controls.component.css' ]\r\n})\r\nexport class RadioContentControlComponent {\r\n  @Input() id: string;\r\n  @Input() label: string;\r\n  @Input() options: any [];\r\n  @Input() selectedOption: any;\r\n  @Output() onChangeSelectedOption: EventEmitter<any> = new EventEmitter<any>();\r\n  @Input() setFormValue: (id: string, value: string) => void;\r\n\r\n  getLabel(nameTag: string) {\r\n    return nameTag.replace(/([a-z])([A-Z])/g, '$1 $2');\r\n  }\r\n\r\n  onChange(event: Event) {\r\n    this.setFormValue((event.target as HTMLInputElement).id, 'true');\r\n    this.onChangeSelectedOption.emit({label: \"Custom Data\"});\r\n  }\r\n\r\n  isChecked(nameTag: string) {\r\n    for (var i = 0; i < this.options.length; i++) {\r\n      if (this.options[i].checked == true) {\r\n        return nameTag == this.options[i].Tag;\r\n      }\r\n    }\r\n\r\n    return false;\r\n  }\r\n}",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2855,7 +2902,7 @@
                 "linktype": "component",
                 "name": "DocumentEditorComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/36",
+                "coverageCount": "0/37",
                 "status": "low"
             },
             {
@@ -3013,7 +3060,7 @@
                 "linktype": "component",
                 "name": "ContentControlsComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/8",
+                "coverageCount": "0/10",
                 "status": "low"
             },
             {
@@ -3022,7 +3069,7 @@
                 "linktype": "component",
                 "name": "InputContentControlComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/7",
+                "coverageCount": "0/8",
                 "status": "low"
             },
             {
@@ -3031,7 +3078,7 @@
                 "linktype": "component",
                 "name": "RadioContentControlComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/9",
+                "coverageCount": "0/10",
                 "status": "low"
             },
             {
