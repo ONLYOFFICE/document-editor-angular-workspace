@@ -15,34 +15,160 @@
 */
 
 export interface IConfig {
-  document: {
-    fileType: string;
-    key?: string;
-    title: string;
-    permissions?: {
-      comment?: boolean;
-      download?: boolean;
-      edit?: boolean;
-      review?: boolean;
-    }
-    url: string;
-  }
-  documentType: string;
-  editorConfig?: {
-    callbackUrl?: string;
-    lang?: string,
-    mode?: string;
-    user?: {
-      id?: string;
-      name?: string;
-    }
-  }
+  documentType?: string;
   height?: string;
   token?: string;
   type?: string;
   width?: string;
-  events_onAppReady?: (editor: object) => void;
-  events_onDocumentReady?: (editor: object) => void;
-  events_onDocumentStateChange?: (data: object) => void;
-  events_onError?: (error: string) => void;
+  document: {
+    fileType: string;
+    key?: string;
+    title: string;
+    url: string;
+    info?: {
+      author?: string;
+      created?: string;
+      favorite?: boolean;
+      folder?: string;
+      owner?: string;
+      sharingSettings?: any[];
+    };
+    permissions?: {
+      changeHistory?: boolean;
+      chat?: boolean;
+      comment?: boolean;
+      commentGroups?: any;
+      deleteCommentAuthorOnly?: boolean;
+      download?: boolean;
+      edit?: boolean;
+      editCommentAuthorOnly?: boolean;
+      fillForms?: boolean;
+      modifyContentControl?: boolean;
+      modifyFilter?: boolean;
+      print?: boolean;
+      protect?: boolean;
+      rename?: boolean;
+      review?: boolean;
+      reviewGroups?: string[];
+      userInfoGroups?: string[];
+    };
+  };
+  editorConfig?: {
+    actionLink?: any;
+    callbackUrl?: string;
+    coEditing?: any;
+    createUrl?: string;
+    lang?: string;
+    location?: string;
+    mode?: string;
+    recent?: any[];
+    region?: string;
+    templates?: any[];
+    user?: {
+      firstname?: string;
+      group?: string;
+      id?: string;
+      lastname?: string;
+      name?: string;
+    };
+    customization?: {
+      anonymous?: {
+        request?: boolean;
+        label?: string;
+      };
+      autosave?: boolean;
+      chat?: boolean;
+      commentAuthorOnly?: boolean;
+      comments?: boolean;
+      compactHeader?: boolean;
+      compactToolbar?: boolean;
+      compatibleFeatures?: boolean;
+      customer?: {
+        address?: string;
+        info?: string;
+        logo?: string;
+        logoDark?: string;
+        mail?: string;
+        name?: string;
+        phone?: string;
+        www?: string;
+      };
+      features?: any;
+      feedback?: any;
+      forcesave?: boolean;
+      goback?: any;
+      help?: boolean;
+      hideNotes?: boolean;
+      hideRightMenu?: boolean;
+      hideRulers?: boolean;
+      integrationMode?: string;
+      logo?: {
+        image?: string;
+        imageDark?: string;
+        imageEmbedded?: string;
+        url?: string;
+      };
+      macros?: boolean;
+      macrosMode?: string;
+      mentionShare?: boolean;
+      plugins?: boolean;
+      review?: {
+        hideReviewDisplay?: boolean;
+        hoverMode?: boolean;
+        reviewDisplay?: string;
+        showReviewChanges?: boolean;
+        trackChanges?: boolean;
+      };
+      reviewDisplay?: string;
+      showReviewChanges?: boolean;
+      spellcheck?: boolean;
+      toolbarHideFileName?: boolean;
+      toolbarNoTabs?: boolean;
+      trackChanges?: boolean;
+      uiTheme?: string;
+      unit?: string;
+      zoom?: number;
+    };
+    embedded?: {
+      embedUrl?: string;
+      fullscreenUrl?: string;
+      saveUrl?: string;
+      shareUrl?: string;
+      toolbarDocked?: string;
+    };
+    plugins?: {
+      autostart?: string[];
+      pluginsData?: string[];
+      url?: string;
+    };
+  };
+  events?: {
+    onAppReady?: (event: object) => void;
+    onCollaborativeChanges?: (event: object) => void;
+    onDocumentReady?: (event: object) => void;
+    onDocumentStateChange?: (event: object) => void;
+    onDownloadAs?: (event: object) => void;
+    onError?: (event: object) => void;
+    onInfo?: (event: object) => void;
+    onMetaChange?: (event: object) => void;
+    onMakeActionLink?: (event: object) => void;
+    onOutdatedVersion?: (event: object) => void;
+    onPluginsReady?: (event: object) => void;
+    onRequestClose?: (event: object) => void;
+    onRequestCompareFile?: (event: object) => void;
+    onRequestCreateNew?: (event: object) => void;
+    onRequestEditRights?: (event: object) => void;
+    onRequestHistory?: (event: object) => void;
+    onRequestHistoryClose?: (event: object) => void;
+    onRequestHistoryData?: (event: object) => void;
+    onRequestInsertImage?: (event: object) => void;
+    onRequestMailMergeRecipients?: (event: object) => void;
+    onRequestRename?: (event: object) => void;
+    onRequestRestore?: (event: object) => void;
+    onRequestSaveAs?: (event: object) => void;
+    onRequestSendNotify?: (event: object) => void;
+    onRequestSharingSettings?: (event: object) => void;
+    onRequestUsers?: (event: object) => void;
+    onWarning?: (event: object) => void;
+  };
 }
