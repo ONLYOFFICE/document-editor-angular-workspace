@@ -52,6 +52,22 @@ export class ExampleComponent {
   onDocumentReady = (event) => {
     console.log("Document is loaded");
   };
+
+  onLoadComponentError = (errorCode, errorDescription) => {
+    switch(errorCode) {
+      case -1: // Unknown error loading component
+          console.log(errorDescription);
+          break;
+
+      case -2: // Error load DocsAPI from http://documentserver/
+        console.log(errorDescription);
+        break;
+
+      case -3: // DocsAPI is not defined
+        console.log(errorDescription);
+        break;
+    }
+  };
 }
 ```
 ### In template, use the `document-editor` component with your options:
@@ -61,6 +77,7 @@ export class ExampleComponent {
   documentServerUrl="http://documentserver/"
   [config]="config"
   [events_onDocumentReady]="onDocumentReady"
+  [onLoadComponentError]="onLoadComponentError"
 ></document-editor>
 ```
 
