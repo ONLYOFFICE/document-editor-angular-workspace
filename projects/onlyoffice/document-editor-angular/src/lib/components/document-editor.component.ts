@@ -1,5 +1,5 @@
 /*
-* (c) Copyright Ascensio System SIA 2022
+* (c) Copyright Ascensio System SIA 2023
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -44,6 +44,8 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
   @Input() type?: string;
   @Input() width?: string;
 
+  @Input() onLoadComponentError?: (errorCode: number, errorDescription: string) => void;
+
   @Input() events_onAppReady?: (event: object) => void;
   @Input() events_onDocumentStateChange?: (event: object) => void;
   @Input() events_onMetaChange?: (event: object) => void;
@@ -76,8 +78,7 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
     loadScript(docApiUrl, "onlyoffice-api-script")
       .then(() => this.onLoad())
       .catch((err) => {
-        console.error(err);
-        this.events_onError!(err);
+        this.onError(-2);
       });
   }
 
@@ -112,7 +113,7 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
 
   onLoad = () => {
     try {
-      if (!window.DocsAPI) throw new Error("DocsAPI is not defined");
+      if (!window.DocsAPI) this.onError(-3);
       if (window?.DocEditor?.instances[this.id]) {
         console.log("Skip loading. Instance already exists", this.id);
         return;
@@ -161,9 +162,31 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
       window.DocEditor.instances[this.id] = editor;
     } catch (err: any) {
       console.error(err);
-      this.events_onError!(err);
+      this.onError(-1);
     }
   };
+
+  onError = (errorCode: number) => {
+    let message;
+
+    switch(errorCode) {
+      case -2:
+        message = "Error load DocsAPI from " + this.documentServerUrl;
+        break;
+      case -3:
+        message = "DocsAPI is not defined";
+        break;
+      default:
+        message = "Unknown error loading component";
+        errorCode = -1;
+    }
+
+    if (typeof this.onLoadComponentError == "undefined") {
+      console.error(message);
+    } else {
+      this.onLoadComponentError(errorCode, message);
+    }
+  }
 
   onAppReady() {
     this.events_onAppReady!(window.DocEditor.instances[this.id]);

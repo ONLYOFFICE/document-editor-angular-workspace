@@ -52,6 +52,22 @@ export class ExampleComponent {
   onDocumentReady = (event) => {
     console.log("Document is loaded");
   };
+
+  onLoadComponentError = (errorCode, errorDescription) => {
+    switch(errorCode) {
+      case -1: // Unknown error loading component
+          console.log(errorDescription);
+          break;
+
+      case -2: // Error load DocsAPI from http://documentserver/
+        console.log(errorDescription);
+        break;
+
+      case -3: // DocsAPI is not defined
+        console.log(errorDescription);
+        break;
+    }
+  };
 }
 ```
 ### In template, use the `document-editor` component with your options:
@@ -61,6 +77,7 @@ export class ExampleComponent {
   documentServerUrl="http://documentserver/"
   [config]="config"
   [events_onDocumentReady]="onDocumentReady"
+  [onLoadComponentError]="onLoadComponentError"
 ></document-editor>
 ```
 
@@ -70,7 +87,8 @@ export class ExampleComponent {
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | `id` | string | null | yes | Component unique identifier. |
 | `documentServerUrl` | string | null | yes | Address ONLYOFFICE Document Server. |
-| `config` | object | null | yes | Generic configuration object for opening a file with token. [Config API](https://api.onlyoffice.com/editors/config/) | |
+| `config` | object | null | yes | Generic configuration object for opening a file with token. [Config API](https://api.onlyoffice.com/editors/config/) |
+| `onLoadComponentError` | (errorCode: number, errorDescription: string) => void | null | no | The function called when an error occurs while loading a component |
 | `document_fileType` | string | null | no | The type of the file. |
 | `document_title` | string | null | no | The file name. |
 | `documentType` | string | null | no | The document type. |
