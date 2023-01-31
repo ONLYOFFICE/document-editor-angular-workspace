@@ -1,6 +1,6 @@
 # Change Log
 
-## 1.2.0
+## 1.2.1
 - added component property onLoadComponentError
 
 ## 1.1.0
