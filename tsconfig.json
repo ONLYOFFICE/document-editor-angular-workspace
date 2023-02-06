@@ -22,16 +22,17 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "noImplicitThis": false,
-    "target": "es2020",
-    "module": "es2020",
+    "target": "ES2022",
+    "module": "es2022",
     "strictPropertyInitialization": false,
     "lib": [
-      "es2020",
+      "es2022",
       "dom"
     ],
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
