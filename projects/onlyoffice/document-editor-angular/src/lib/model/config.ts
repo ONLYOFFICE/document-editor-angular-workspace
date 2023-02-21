@@ -35,6 +35,7 @@ export interface IConfig {
     };
     permissions?: {
       changeHistory?: boolean;
+      copy?:boolean;
       chat?: boolean;
       comment?: boolean;
       commentGroups?: any;
