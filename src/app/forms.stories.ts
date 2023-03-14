@@ -38,6 +38,7 @@ FomsTemplate.args = {
   config:{
     document: {
         fileType: "oform",
+        key: "oform" + Math.random(),
         title: "demo.oform",
         url: config.demoStorage + "demo.oform",
     },

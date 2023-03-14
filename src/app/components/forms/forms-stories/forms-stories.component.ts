@@ -29,7 +29,7 @@ export class FormsStoriesComponent implements OnInit {
 
     newConfig.document.title = this.selectedForm.title;
     newConfig.document.url = this.selectedForm.url;
-    newConfig.document.key = undefined;
+    newConfig.document.key = "oform" + Math.random();
 
     this.config = newConfig;
   }
