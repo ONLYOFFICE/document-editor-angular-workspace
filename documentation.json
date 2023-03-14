@@ -3,12 +3,12 @@
     "interfaces": [
         {
             "name": "IConfig",
-            "id": "interface-IConfig-a0fd10286b56d26c0af592cd8a2b7c36d27c17fd3eabdc11db6c4c435bfc4fac5cde558a899dd5d1594c384fede11d85c31810b5ad1bebab5cebb834ebad7021",
+            "id": "interface-IConfig-592005be23fe436cf686a0074b054d70335146fef7e959723531f6dffdc59ecda4a3e5844812491d11ad55bc9cf7b7655cb555a7e18329f892dbd31e7c1e00bb",
             "file": "projects/onlyoffice/document-editor-angular/src/lib/model/config.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "export interface IConfig {\r\n  document: {\r\n    fileType: string;\r\n    key?: string;\r\n    title: string;\r\n    permissions?: {\r\n      comment?: boolean;\r\n      download?: boolean;\r\n      edit?: boolean;\r\n      review?: boolean;\r\n    }\r\n    url: string;\r\n  }\r\n  documentType: string;\r\n  editorConfig?: {\r\n    callbackUrl?: string;\r\n    lang?: string,\r\n    mode?: string;\r\n    user?: {\r\n      id?: string;\r\n      name?: string;\r\n    }\r\n  }\r\n  height?: string;\r\n  token?: string;\r\n  type?: string;\r\n  width?: string;\r\n  events_onAppReady?: (editor: object) => void;\r\n  events_onDocumentReady?: (editor: object) => void;\r\n  events_onDocumentStateChange?: (data: object) => void;\r\n  events_onError?: (error: string) => void;\r\n}\r\n",
+            "sourceCode": "export interface IConfig {\r\n  documentType?: string;\r\n  height?: string;\r\n  token?: string;\r\n  type?: string;\r\n  width?: string;\r\n  document: {\r\n    fileType: string;\r\n    key?: string;\r\n    title: string;\r\n    url: string;\r\n    info?: {\r\n      author?: string;\r\n      created?: string;\r\n      favorite?: boolean;\r\n      folder?: string;\r\n      owner?: string;\r\n      sharingSettings?: any[];\r\n    };\r\n    permissions?: {\r\n      changeHistory?: boolean;\r\n      chat?: boolean;\r\n      comment?: boolean;\r\n      commentGroups?: any;\r\n      deleteCommentAuthorOnly?: boolean;\r\n      download?: boolean;\r\n      edit?: boolean;\r\n      editCommentAuthorOnly?: boolean;\r\n      fillForms?: boolean;\r\n      modifyContentControl?: boolean;\r\n      modifyFilter?: boolean;\r\n      print?: boolean;\r\n      protect?: boolean;\r\n      rename?: boolean;\r\n      review?: boolean;\r\n      reviewGroups?: string[];\r\n      userInfoGroups?: string[];\r\n    };\r\n  };\r\n  editorConfig?: {\r\n    actionLink?: any;\r\n    callbackUrl?: string;\r\n    coEditing?: any;\r\n    createUrl?: string;\r\n    lang?: string;\r\n    location?: string;\r\n    mode?: string;\r\n    recent?: any[];\r\n    region?: string;\r\n    templates?: any[];\r\n    user?: {\r\n      firstname?: string;\r\n      group?: string;\r\n      id?: string;\r\n      lastname?: string;\r\n      name?: string;\r\n    };\r\n    customization?: {\r\n      anonymous?: {\r\n        request?: boolean;\r\n        label?: string;\r\n      };\r\n      autosave?: boolean;\r\n      chat?: boolean;\r\n      commentAuthorOnly?: boolean;\r\n      comments?: boolean;\r\n      compactHeader?: boolean;\r\n      compactToolbar?: boolean;\r\n      compatibleFeatures?: boolean;\r\n      customer?: {\r\n        address?: string;\r\n        info?: string;\r\n        logo?: string;\r\n        logoDark?: string;\r\n        mail?: string;\r\n        name?: string;\r\n        phone?: string;\r\n        www?: string;\r\n      };\r\n      features?: any;\r\n      feedback?: any;\r\n      forcesave?: boolean;\r\n      goback?: any;\r\n      help?: boolean;\r\n      hideNotes?: boolean;\r\n      hideRightMenu?: boolean;\r\n      hideRulers?: boolean;\r\n      integrationMode?: string;\r\n      logo?: {\r\n        image?: string;\r\n        imageDark?: string;\r\n        imageEmbedded?: string;\r\n        url?: string;\r\n      };\r\n      macros?: boolean;\r\n      macrosMode?: string;\r\n      mentionShare?: boolean;\r\n      plugins?: boolean;\r\n      review?: {\r\n        hideReviewDisplay?: boolean;\r\n        hoverMode?: boolean;\r\n        reviewDisplay?: string;\r\n        showReviewChanges?: boolean;\r\n        trackChanges?: boolean;\r\n      };\r\n      reviewDisplay?: string;\r\n      showReviewChanges?: boolean;\r\n      spellcheck?: boolean;\r\n      toolbarHideFileName?: boolean;\r\n      toolbarNoTabs?: boolean;\r\n      trackChanges?: boolean;\r\n      uiTheme?: string;\r\n      unit?: string;\r\n      zoom?: number;\r\n    };\r\n    embedded?: {\r\n      embedUrl?: string;\r\n      fullscreenUrl?: string;\r\n      saveUrl?: string;\r\n      shareUrl?: string;\r\n      toolbarDocked?: string;\r\n    };\r\n    plugins?: {\r\n      autostart?: string[];\r\n      pluginsData?: string[];\r\n      url?: string;\r\n    };\r\n  };\r\n  events?: {\r\n    onAppReady?: (event: object) => void;\r\n    onCollaborativeChanges?: (event: object) => void;\r\n    onDocumentReady?: (event: object) => void;\r\n    onDocumentStateChange?: (event: object) => void;\r\n    onDownloadAs?: (event: object) => void;\r\n    onError?: (event: object) => void;\r\n    onInfo?: (event: object) => void;\r\n    onMetaChange?: (event: object) => void;\r\n    onMakeActionLink?: (event: object) => void;\r\n    onOutdatedVersion?: (event: object) => void;\r\n    onPluginsReady?: (event: object) => void;\r\n    onRequestClose?: (event: object) => void;\r\n    onRequestCompareFile?: (event: object) => void;\r\n    onRequestCreateNew?: (event: object) => void;\r\n    onRequestEditRights?: (event: object) => void;\r\n    onRequestHistory?: (event: object) => void;\r\n    onRequestHistoryClose?: (event: object) => void;\r\n    onRequestHistoryData?: (event: object) => void;\r\n    onRequestInsertImage?: (event: object) => void;\r\n    onRequestMailMergeRecipients?: (event: object) => void;\r\n    onRequestRename?: (event: object) => void;\r\n    onRequestRestore?: (event: object) => void;\r\n    onRequestSaveAs?: (event: object) => void;\r\n    onRequestSendNotify?: (event: object) => void;\r\n    onRequestSharingSettings?: (event: object) => void;\r\n    onRequestUsers?: (event: object) => void;\r\n    onWarning?: (event: object) => void;\r\n  };\r\n}\r\n",
             "properties": [
                 {
                     "name": "document",
@@ -17,16 +17,16 @@
                     "type": "literal type",
                     "optional": false,
                     "description": "",
-                    "line": 18
+                    "line": 23
                 },
                 {
                     "name": "documentType",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "string",
-                    "optional": false,
+                    "optional": true,
                     "description": "",
-                    "line": 30
+                    "line": 18
                 },
                 {
                     "name": "editorConfig",
@@ -35,43 +35,16 @@
                     "type": "literal type",
                     "optional": true,
                     "description": "",
-                    "line": 31
+                    "line": 56
                 },
                 {
-                    "name": "events_onAppReady",
+                    "name": "events",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "function",
+                    "type": "literal type",
                     "optional": true,
                     "description": "",
-                    "line": 44
-                },
-                {
-                    "name": "events_onDocumentReady",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "function",
-                    "optional": true,
-                    "description": "",
-                    "line": 45
-                },
-                {
-                    "name": "events_onDocumentStateChange",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "function",
-                    "optional": true,
-                    "description": "",
-                    "line": 46
-                },
-                {
-                    "name": "events_onError",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "function",
-                    "optional": true,
-                    "description": "",
-                    "line": 47
+                    "line": 145
                 },
                 {
                     "name": "height",
@@ -80,7 +53,7 @@
                     "type": "string",
                     "optional": true,
                     "description": "",
-                    "line": 40
+                    "line": 19
                 },
                 {
                     "name": "token",
@@ -89,7 +62,7 @@
                     "type": "string",
                     "optional": true,
                     "description": "",
-                    "line": 41
+                    "line": 20
                 },
                 {
                     "name": "type",
@@ -98,7 +71,7 @@
                     "type": "string",
                     "optional": true,
                     "description": "",
-                    "line": 42
+                    "line": 21
                 },
                 {
                     "name": "width",
@@ -107,7 +80,7 @@
                     "type": "string",
                     "optional": true,
                     "description": "",
-                    "line": 43
+                    "line": 22
                 }
             ],
             "indexSignatures": [],
@@ -148,12 +121,12 @@
         },
         {
             "name": "Window",
-            "id": "interface-Window-8b2d7dcc00cb5865ab22da76a1dfbc2fc27d78f454265f4c2369870b2c803f7d710e8cf2cdef314d9128f837d645c347189bda5d4c1d483aef7c055640d99387",
+            "id": "interface-Window-bc176374e98594ba9ef31775f1d5fbba65addd11ce7db1b36af7727a7f9db26168b73600f649abdfbf3b1682ac255e769d3a2de56e2e1872ded656c4f52240ab",
             "file": "projects/onlyoffice/document-editor-angular/src/lib/components/document-editor.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';\r\nimport { IConfig } from '../model/config';\r\nimport loadScript from \"../utils/loadScript\";\r\n\r\ndeclare global {\r\n  interface Window {\r\n      DocsAPI?: any;\r\n      DocEditor?: any;\r\n  }\r\n}\r\n\r\n@Component({\r\n  selector: 'document-editor',\r\n  template: '<div [id]=\"id\"></div>',\r\n  styles: [\r\n  ]\r\n})\r\nexport class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {\r\n  @Input() id: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  @Input() document_fileType?: string;\r\n  @Input() document_title?: string;\r\n  @Input() documentType?: string;\r\n  @Input() editorConfig_lang?: string;\r\n  @Input() height?: string;\r\n  @Input() type?: string;\r\n  @Input() width?: string;\r\n\r\n  @Input() events_onAppReady?: (event: object) => void;\r\n  @Input() events_onDocumentStateChange?: (event: object) => void;\r\n  @Input() events_onMetaChange?: (event: object) => void;\r\n  @Input() events_onDocumentReady?: (event: object) => void;\r\n  @Input() events_onInfo?: (event: object) => void;\r\n  @Input() events_onWarning?: (event: object) => void;\r\n  @Input() events_onError?: (event: object) => void;\r\n  @Input() events_onRequestSharingSettings?: (event: object) => void;\r\n  @Input() events_onRequestRename?: (event: object) => void;\r\n  @Input() events_onMakeActionLink?: (event: object) => void;\r\n  @Input() events_onRequestInsertImage?: (event: object) => void;\r\n  @Input() events_onRequestSaveAs?: (event: object) => void;\r\n  @Input() events_onRequestMailMergeRecipients?: (event: object) => void;\r\n  @Input() events_onRequestCompareFile?: (event: object) => void;\r\n  @Input() events_onRequestEditRights?: (event: object) => void;\r\n  @Input() events_onRequestHistory?: (event: object) => void;\r\n  @Input() events_onRequestHistoryClose?: (event: object) => void;\r\n  @Input() events_onRequestHistoryData?: (event: object) => void;\r\n  @Input() events_onRequestRestore?: (event: object) => void;\r\n\r\n  isFirstOnChanges: boolean = true;\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n    let url = this.documentServerUrl;\r\n    if (!url.endsWith(\"/\")) url += \"/\";\r\n\r\n    const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;\r\n    loadScript(docApiUrl, \"onlyoffice-api-script\")\r\n      .then(() => this.onLoad())\r\n      .catch((err) => {\r\n        console.error(err);\r\n        this.events_onError!(err);\r\n      });\r\n  }\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    const listNameChanges = [\"config\", \"document_fileType\", \"document_title\", \"documentType\", \"editorConfig_lang\", \"height\", \"type\", \"width\"];\r\n\r\n    if (this.isFirstOnChanges) {\r\n      this.isFirstOnChanges = false;\r\n      return;\r\n    }\r\n\r\n    for (const name of listNameChanges) {\r\n      if (changes.hasOwnProperty(name)) {\r\n        if (window?.DocEditor?.instances[this.id]) {\r\n          window.DocEditor.instances[this.id].destroyEditor();\r\n          window.DocEditor.instances[this.id] = undefined;\r\n    \r\n          console.log(\"Important props have been changed. Load new Editor.\");\r\n          this.onLoad();\r\n          return;\r\n        }\r\n      }\r\n    }\r\n  }\r\n\r\n  ngOnDestroy() {\r\n    if (window?.DocEditor?.instances[this.id]) {\r\n      window.DocEditor.instances[this.id].destroyEditor();\r\n      window.DocEditor.instances[this.id] = undefined;\r\n    }\r\n  }\r\n\r\n  onLoad = () => {\r\n    try {\r\n      if (!window.DocsAPI) throw new Error(\"DocsAPI is not defined\");\r\n      if (window?.DocEditor?.instances[this.id]) {\r\n        console.log(\"Skip loading. Instance already exists\", this.id);\r\n        return;\r\n      }\r\n\r\n      if (!window?.DocEditor?.instances) {\r\n        window.DocEditor = { instances: {} };\r\n      }\r\n\r\n      let initConfig = Object.assign({\r\n        document: {\r\n          fileType: this.document_fileType,\r\n          title: this.document_title,\r\n        },\r\n        documentType: this.documentType,\r\n        editorConfig: {\r\n          lang: this.editorConfig_lang,\r\n        },\r\n        events: {\r\n          onAppReady: this.onAppReady,\r\n          onDocumentStateChange: this.events_onDocumentStateChange,\r\n          onMetaChange: this.events_onMetaChange,\r\n          onDocumentReady: this.events_onDocumentReady,\r\n          onInfo: this.events_onInfo,\r\n          onWarning: this.events_onWarning,\r\n          onError: this.events_onError,\r\n          onRequestSharingSettings: this.events_onRequestSharingSettings,\r\n          onRequestRename: this.events_onRequestRename,\r\n          onMakeActionLink: this.events_onMakeActionLink,\r\n          onRequestInsertImage: this.events_onRequestInsertImage,\r\n          onRequestSaveAs: this.events_onRequestSaveAs,\r\n          onRequestMailMergeRecipients: this.events_onRequestMailMergeRecipients,\r\n          onRequestCompareFile: this.events_onRequestCompareFile,\r\n          onRequestEditRights: this.events_onRequestEditRights,\r\n          onRequestHistory: this.events_onRequestHistory,\r\n          onRequestHistoryClose: this.events_onRequestHistoryClose,\r\n          onRequestHistoryData: this.events_onRequestHistoryData,\r\n          onRequestRestore: this.events_onRequestRestore\r\n        },\r\n        height: this.height,\r\n        type: this.type,\r\n        width: this.width,\r\n      }, this.config || {});\r\n\r\n      const editor = window.DocsAPI.DocEditor(this.id, initConfig);\r\n      window.DocEditor.instances[this.id] = editor;\r\n    } catch (err: any) {\r\n      console.error(err);\r\n      this.events_onError!(err);\r\n    }\r\n  };\r\n\r\n  onAppReady() {\r\n    this.events_onAppReady!(window.DocEditor.instances[this.id]);\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';\r\nimport { IConfig } from '../model/config';\r\nimport loadScript from \"../utils/loadScript\";\r\n\r\ndeclare global {\r\n  interface Window {\r\n      DocsAPI?: any;\r\n      DocEditor?: any;\r\n  }\r\n}\r\n\r\n@Component({\r\n  selector: 'document-editor',\r\n  template: '<div [id]=\"id\"></div>',\r\n  styles: [\r\n  ]\r\n})\r\nexport class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {\r\n  @Input() id: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  @Input() document_fileType?: string;\r\n  @Input() document_title?: string;\r\n  @Input() documentType?: string;\r\n  @Input() editorConfig_lang?: string;\r\n  @Input() height?: string;\r\n  @Input() type?: string;\r\n  @Input() width?: string;\r\n\r\n  @Input() onLoadComponentError?: (errorCode: number, errorDescription: string) => void;\r\n\r\n  @Input() events_onAppReady?: (event: object) => void;\r\n  @Input() events_onDocumentStateChange?: (event: object) => void;\r\n  @Input() events_onMetaChange?: (event: object) => void;\r\n  @Input() events_onDocumentReady?: (event: object) => void;\r\n  @Input() events_onInfo?: (event: object) => void;\r\n  @Input() events_onWarning?: (event: object) => void;\r\n  @Input() events_onError?: (event: object) => void;\r\n  @Input() events_onRequestSharingSettings?: (event: object) => void;\r\n  @Input() events_onRequestRename?: (event: object) => void;\r\n  @Input() events_onMakeActionLink?: (event: object) => void;\r\n  @Input() events_onRequestInsertImage?: (event: object) => void;\r\n  @Input() events_onRequestSaveAs?: (event: object) => void;\r\n  @Input() events_onRequestMailMergeRecipients?: (event: object) => void;\r\n  @Input() events_onRequestCompareFile?: (event: object) => void;\r\n  @Input() events_onRequestEditRights?: (event: object) => void;\r\n  @Input() events_onRequestHistory?: (event: object) => void;\r\n  @Input() events_onRequestHistoryClose?: (event: object) => void;\r\n  @Input() events_onRequestHistoryData?: (event: object) => void;\r\n  @Input() events_onRequestRestore?: (event: object) => void;\r\n\r\n  isFirstOnChanges: boolean = true;\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n    let url = this.documentServerUrl;\r\n    if (!url.endsWith(\"/\")) url += \"/\";\r\n\r\n    const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;\r\n    loadScript(docApiUrl, \"onlyoffice-api-script\")\r\n      .then(() => this.onLoad())\r\n      .catch((err) => {\r\n        this.onError(-2);\r\n      });\r\n  }\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    const listNameChanges = [\"config\", \"document_fileType\", \"document_title\", \"documentType\", \"editorConfig_lang\", \"height\", \"type\", \"width\"];\r\n\r\n    if (this.isFirstOnChanges) {\r\n      this.isFirstOnChanges = false;\r\n      return;\r\n    }\r\n\r\n    for (const name of listNameChanges) {\r\n      if (changes.hasOwnProperty(name)) {\r\n        if (window?.DocEditor?.instances[this.id]) {\r\n          window.DocEditor.instances[this.id].destroyEditor();\r\n          window.DocEditor.instances[this.id] = undefined;\r\n    \r\n          console.log(\"Important props have been changed. Load new Editor.\");\r\n          this.onLoad();\r\n          return;\r\n        }\r\n      }\r\n    }\r\n  }\r\n\r\n  ngOnDestroy() {\r\n    if (window?.DocEditor?.instances[this.id]) {\r\n      window.DocEditor.instances[this.id].destroyEditor();\r\n      window.DocEditor.instances[this.id] = undefined;\r\n    }\r\n  }\r\n\r\n  onLoad = () => {\r\n    try {\r\n      if (!window.DocsAPI) this.onError(-3);\r\n      if (window?.DocEditor?.instances[this.id]) {\r\n        console.log(\"Skip loading. Instance already exists\", this.id);\r\n        return;\r\n      }\r\n\r\n      if (!window?.DocEditor?.instances) {\r\n        window.DocEditor = { instances: {} };\r\n      }\r\n\r\n      let initConfig = Object.assign({\r\n        document: {\r\n          fileType: this.document_fileType,\r\n          title: this.document_title,\r\n        },\r\n        documentType: this.documentType,\r\n        editorConfig: {\r\n          lang: this.editorConfig_lang,\r\n        },\r\n        events: {\r\n          onAppReady: this.onAppReady,\r\n          onDocumentStateChange: this.events_onDocumentStateChange,\r\n          onMetaChange: this.events_onMetaChange,\r\n          onDocumentReady: this.events_onDocumentReady,\r\n          onInfo: this.events_onInfo,\r\n          onWarning: this.events_onWarning,\r\n          onError: this.events_onError,\r\n          onRequestSharingSettings: this.events_onRequestSharingSettings,\r\n          onRequestRename: this.events_onRequestRename,\r\n          onMakeActionLink: this.events_onMakeActionLink,\r\n          onRequestInsertImage: this.events_onRequestInsertImage,\r\n          onRequestSaveAs: this.events_onRequestSaveAs,\r\n          onRequestMailMergeRecipients: this.events_onRequestMailMergeRecipients,\r\n          onRequestCompareFile: this.events_onRequestCompareFile,\r\n          onRequestEditRights: this.events_onRequestEditRights,\r\n          onRequestHistory: this.events_onRequestHistory,\r\n          onRequestHistoryClose: this.events_onRequestHistoryClose,\r\n          onRequestHistoryData: this.events_onRequestHistoryData,\r\n          onRequestRestore: this.events_onRequestRestore\r\n        },\r\n        height: this.height,\r\n        type: this.type,\r\n        width: this.width,\r\n      }, this.config || {});\r\n\r\n      const editor = window.DocsAPI.DocEditor(this.id, initConfig);\r\n      window.DocEditor.instances[this.id] = editor;\r\n    } catch (err: any) {\r\n      console.error(err);\r\n      this.onError(-1);\r\n    }\r\n  };\r\n\r\n  onError = (errorCode: number) => {\r\n    let message;\r\n\r\n    switch(errorCode) {\r\n      case -2:\r\n        message = \"Error load DocsAPI from \" + this.documentServerUrl;\r\n        break;\r\n      case -3:\r\n        message = \"DocsAPI is not defined\";\r\n        break;\r\n      default:\r\n        message = \"Unknown error loading component\";\r\n        errorCode = -1;\r\n    }\r\n\r\n    if (typeof this.onLoadComponentError == \"undefined\") {\r\n      console.error(message);\r\n    } else {\r\n      this.onLoadComponentError(errorCode, message);\r\n    }\r\n  }\r\n\r\n  onAppReady() {\r\n    this.events_onAppReady!(window.DocEditor.instances[this.id]);\r\n  }\r\n}\r\n",
             "properties": [
                 {
                     "name": "DocEditor",
@@ -551,7 +524,7 @@
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "templateData": "\r\n<comments userName=\"John Smith\" [comments]=\"comments\" [connector]=\"connector\"></comments>\r\n\r\n<document-editor \r\n  id=\"docxForComments\" \r\n  documentServerUrl=\"http://192.168.0.169\"\r\n  [config]=\"config\"\r\n  [events_onDocumentReady]=\"onDocumentReady\"\r\n  height=\"600px\"\r\n  width=\"70%\"\r\n></document-editor>"
+            "templateData": "\r\n<comments userName=\"John Smith\" [comments]=\"comments\" [connector]=\"connector\"></comments>\r\n\r\n<document-editor \r\n  id=\"docxForComments\" \r\n  documentServerUrl=\"http://192.168.4.38\"\r\n  [config]=\"config\"\r\n  [events_onDocumentReady]=\"onDocumentReady\"\r\n  height=\"600px\"\r\n  width=\"70%\"\r\n></document-editor>"
         },
         {
             "name": "CommenstStoriesComponent",
@@ -1037,7 +1010,7 @@
         },
         {
             "name": "DocumentEditorComponent",
-            "id": "component-DocumentEditorComponent-8b2d7dcc00cb5865ab22da76a1dfbc2fc27d78f454265f4c2369870b2c803f7d710e8cf2cdef314d9128f837d645c347189bda5d4c1d483aef7c055640d99387",
+            "id": "component-DocumentEditorComponent-bc176374e98594ba9ef31775f1d5fbba65addd11ce7db1b36af7727a7f9db26168b73600f649abdfbf3b1682ac255e769d3a2de56e2e1872ded656c4f52240ab",
             "file": "projects/onlyoffice/document-editor-angular/src/lib/components/document-editor.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1103,7 +1076,7 @@
                     "name": "events_onAppReady",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 47,
+                    "line": 49,
                     "type": "function",
                     "decorators": []
                 },
@@ -1111,7 +1084,7 @@
                     "name": "events_onDocumentReady",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 50,
+                    "line": 52,
                     "type": "function",
                     "decorators": []
                 },
@@ -1119,7 +1092,7 @@
                     "name": "events_onDocumentStateChange",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 48,
+                    "line": 50,
                     "type": "function",
                     "decorators": []
                 },
@@ -1127,7 +1100,7 @@
                     "name": "events_onError",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 53,
+                    "line": 55,
                     "type": "function",
                     "decorators": []
                 },
@@ -1135,7 +1108,7 @@
                     "name": "events_onInfo",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 51,
+                    "line": 53,
                     "type": "function",
                     "decorators": []
                 },
@@ -1143,7 +1116,7 @@
                     "name": "events_onMakeActionLink",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 56,
+                    "line": 58,
                     "type": "function",
                     "decorators": []
                 },
@@ -1151,7 +1124,7 @@
                     "name": "events_onMetaChange",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 49,
+                    "line": 51,
                     "type": "function",
                     "decorators": []
                 },
@@ -1159,7 +1132,7 @@
                     "name": "events_onRequestCompareFile",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 60,
+                    "line": 62,
                     "type": "function",
                     "decorators": []
                 },
@@ -1167,7 +1140,7 @@
                     "name": "events_onRequestEditRights",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 61,
+                    "line": 63,
                     "type": "function",
                     "decorators": []
                 },
@@ -1175,7 +1148,7 @@
                     "name": "events_onRequestHistory",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 62,
+                    "line": 64,
                     "type": "function",
                     "decorators": []
                 },
@@ -1183,7 +1156,7 @@
                     "name": "events_onRequestHistoryClose",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 63,
+                    "line": 65,
                     "type": "function",
                     "decorators": []
                 },
@@ -1191,7 +1164,7 @@
                     "name": "events_onRequestHistoryData",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 64,
+                    "line": 66,
                     "type": "function",
                     "decorators": []
                 },
@@ -1199,7 +1172,7 @@
                     "name": "events_onRequestInsertImage",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 57,
+                    "line": 59,
                     "type": "function",
                     "decorators": []
                 },
@@ -1207,7 +1180,7 @@
                     "name": "events_onRequestMailMergeRecipients",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 59,
+                    "line": 61,
                     "type": "function",
                     "decorators": []
                 },
@@ -1215,7 +1188,7 @@
                     "name": "events_onRequestRename",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 55,
+                    "line": 57,
                     "type": "function",
                     "decorators": []
                 },
@@ -1223,7 +1196,7 @@
                     "name": "events_onRequestRestore",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 65,
+                    "line": 67,
                     "type": "function",
                     "decorators": []
                 },
@@ -1231,7 +1204,7 @@
                     "name": "events_onRequestSaveAs",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 58,
+                    "line": 60,
                     "type": "function",
                     "decorators": []
                 },
@@ -1239,7 +1212,7 @@
                     "name": "events_onRequestSharingSettings",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 54,
+                    "line": 56,
                     "type": "function",
                     "decorators": []
                 },
@@ -1247,7 +1220,7 @@
                     "name": "events_onWarning",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 52,
+                    "line": 54,
                     "type": "function",
                     "decorators": []
                 },
@@ -1265,6 +1238,14 @@
                     "deprecationMessage": "",
                     "line": 35,
                     "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "onLoadComponentError",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 47,
+                    "type": "function",
                     "decorators": []
                 },
                 {
@@ -1294,7 +1275,17 @@
                     "type": "boolean",
                     "optional": false,
                     "description": "",
-                    "line": 67
+                    "line": 69
+                },
+                {
+                    "name": "onError",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 169
                 },
                 {
                     "name": "onLoad",
@@ -1304,7 +1295,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 113
+                    "line": 114
                 }
             ],
             "methodsClass": [
@@ -1321,7 +1312,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 84,
+                    "line": 85,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1342,7 +1333,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 106,
+                    "line": 107,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -1352,7 +1343,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 71,
+                    "line": 73,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -1362,7 +1353,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 168,
+                    "line": 191,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -1374,7 +1365,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';\r\nimport { IConfig } from '../model/config';\r\nimport loadScript from \"../utils/loadScript\";\r\n\r\ndeclare global {\r\n  interface Window {\r\n      DocsAPI?: any;\r\n      DocEditor?: any;\r\n  }\r\n}\r\n\r\n@Component({\r\n  selector: 'document-editor',\r\n  template: '<div [id]=\"id\"></div>',\r\n  styles: [\r\n  ]\r\n})\r\nexport class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {\r\n  @Input() id: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  @Input() document_fileType?: string;\r\n  @Input() document_title?: string;\r\n  @Input() documentType?: string;\r\n  @Input() editorConfig_lang?: string;\r\n  @Input() height?: string;\r\n  @Input() type?: string;\r\n  @Input() width?: string;\r\n\r\n  @Input() events_onAppReady?: (event: object) => void;\r\n  @Input() events_onDocumentStateChange?: (event: object) => void;\r\n  @Input() events_onMetaChange?: (event: object) => void;\r\n  @Input() events_onDocumentReady?: (event: object) => void;\r\n  @Input() events_onInfo?: (event: object) => void;\r\n  @Input() events_onWarning?: (event: object) => void;\r\n  @Input() events_onError?: (event: object) => void;\r\n  @Input() events_onRequestSharingSettings?: (event: object) => void;\r\n  @Input() events_onRequestRename?: (event: object) => void;\r\n  @Input() events_onMakeActionLink?: (event: object) => void;\r\n  @Input() events_onRequestInsertImage?: (event: object) => void;\r\n  @Input() events_onRequestSaveAs?: (event: object) => void;\r\n  @Input() events_onRequestMailMergeRecipients?: (event: object) => void;\r\n  @Input() events_onRequestCompareFile?: (event: object) => void;\r\n  @Input() events_onRequestEditRights?: (event: object) => void;\r\n  @Input() events_onRequestHistory?: (event: object) => void;\r\n  @Input() events_onRequestHistoryClose?: (event: object) => void;\r\n  @Input() events_onRequestHistoryData?: (event: object) => void;\r\n  @Input() events_onRequestRestore?: (event: object) => void;\r\n\r\n  isFirstOnChanges: boolean = true;\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n    let url = this.documentServerUrl;\r\n    if (!url.endsWith(\"/\")) url += \"/\";\r\n\r\n    const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;\r\n    loadScript(docApiUrl, \"onlyoffice-api-script\")\r\n      .then(() => this.onLoad())\r\n      .catch((err) => {\r\n        console.error(err);\r\n        this.events_onError!(err);\r\n      });\r\n  }\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    const listNameChanges = [\"config\", \"document_fileType\", \"document_title\", \"documentType\", \"editorConfig_lang\", \"height\", \"type\", \"width\"];\r\n\r\n    if (this.isFirstOnChanges) {\r\n      this.isFirstOnChanges = false;\r\n      return;\r\n    }\r\n\r\n    for (const name of listNameChanges) {\r\n      if (changes.hasOwnProperty(name)) {\r\n        if (window?.DocEditor?.instances[this.id]) {\r\n          window.DocEditor.instances[this.id].destroyEditor();\r\n          window.DocEditor.instances[this.id] = undefined;\r\n    \r\n          console.log(\"Important props have been changed. Load new Editor.\");\r\n          this.onLoad();\r\n          return;\r\n        }\r\n      }\r\n    }\r\n  }\r\n\r\n  ngOnDestroy() {\r\n    if (window?.DocEditor?.instances[this.id]) {\r\n      window.DocEditor.instances[this.id].destroyEditor();\r\n      window.DocEditor.instances[this.id] = undefined;\r\n    }\r\n  }\r\n\r\n  onLoad = () => {\r\n    try {\r\n      if (!window.DocsAPI) throw new Error(\"DocsAPI is not defined\");\r\n      if (window?.DocEditor?.instances[this.id]) {\r\n        console.log(\"Skip loading. Instance already exists\", this.id);\r\n        return;\r\n      }\r\n\r\n      if (!window?.DocEditor?.instances) {\r\n        window.DocEditor = { instances: {} };\r\n      }\r\n\r\n      let initConfig = Object.assign({\r\n        document: {\r\n          fileType: this.document_fileType,\r\n          title: this.document_title,\r\n        },\r\n        documentType: this.documentType,\r\n        editorConfig: {\r\n          lang: this.editorConfig_lang,\r\n        },\r\n        events: {\r\n          onAppReady: this.onAppReady,\r\n          onDocumentStateChange: this.events_onDocumentStateChange,\r\n          onMetaChange: this.events_onMetaChange,\r\n          onDocumentReady: this.events_onDocumentReady,\r\n          onInfo: this.events_onInfo,\r\n          onWarning: this.events_onWarning,\r\n          onError: this.events_onError,\r\n          onRequestSharingSettings: this.events_onRequestSharingSettings,\r\n          onRequestRename: this.events_onRequestRename,\r\n          onMakeActionLink: this.events_onMakeActionLink,\r\n          onRequestInsertImage: this.events_onRequestInsertImage,\r\n          onRequestSaveAs: this.events_onRequestSaveAs,\r\n          onRequestMailMergeRecipients: this.events_onRequestMailMergeRecipients,\r\n          onRequestCompareFile: this.events_onRequestCompareFile,\r\n          onRequestEditRights: this.events_onRequestEditRights,\r\n          onRequestHistory: this.events_onRequestHistory,\r\n          onRequestHistoryClose: this.events_onRequestHistoryClose,\r\n          onRequestHistoryData: this.events_onRequestHistoryData,\r\n          onRequestRestore: this.events_onRequestRestore\r\n        },\r\n        height: this.height,\r\n        type: this.type,\r\n        width: this.width,\r\n      }, this.config || {});\r\n\r\n      const editor = window.DocsAPI.DocEditor(this.id, initConfig);\r\n      window.DocEditor.instances[this.id] = editor;\r\n    } catch (err: any) {\r\n      console.error(err);\r\n      this.events_onError!(err);\r\n    }\r\n  };\r\n\r\n  onAppReady() {\r\n    this.events_onAppReady!(window.DocEditor.instances[this.id]);\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';\r\nimport { IConfig } from '../model/config';\r\nimport loadScript from \"../utils/loadScript\";\r\n\r\ndeclare global {\r\n  interface Window {\r\n      DocsAPI?: any;\r\n      DocEditor?: any;\r\n  }\r\n}\r\n\r\n@Component({\r\n  selector: 'document-editor',\r\n  template: '<div [id]=\"id\"></div>',\r\n  styles: [\r\n  ]\r\n})\r\nexport class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {\r\n  @Input() id: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  @Input() document_fileType?: string;\r\n  @Input() document_title?: string;\r\n  @Input() documentType?: string;\r\n  @Input() editorConfig_lang?: string;\r\n  @Input() height?: string;\r\n  @Input() type?: string;\r\n  @Input() width?: string;\r\n\r\n  @Input() onLoadComponentError?: (errorCode: number, errorDescription: string) => void;\r\n\r\n  @Input() events_onAppReady?: (event: object) => void;\r\n  @Input() events_onDocumentStateChange?: (event: object) => void;\r\n  @Input() events_onMetaChange?: (event: object) => void;\r\n  @Input() events_onDocumentReady?: (event: object) => void;\r\n  @Input() events_onInfo?: (event: object) => void;\r\n  @Input() events_onWarning?: (event: object) => void;\r\n  @Input() events_onError?: (event: object) => void;\r\n  @Input() events_onRequestSharingSettings?: (event: object) => void;\r\n  @Input() events_onRequestRename?: (event: object) => void;\r\n  @Input() events_onMakeActionLink?: (event: object) => void;\r\n  @Input() events_onRequestInsertImage?: (event: object) => void;\r\n  @Input() events_onRequestSaveAs?: (event: object) => void;\r\n  @Input() events_onRequestMailMergeRecipients?: (event: object) => void;\r\n  @Input() events_onRequestCompareFile?: (event: object) => void;\r\n  @Input() events_onRequestEditRights?: (event: object) => void;\r\n  @Input() events_onRequestHistory?: (event: object) => void;\r\n  @Input() events_onRequestHistoryClose?: (event: object) => void;\r\n  @Input() events_onRequestHistoryData?: (event: object) => void;\r\n  @Input() events_onRequestRestore?: (event: object) => void;\r\n\r\n  isFirstOnChanges: boolean = true;\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n    let url = this.documentServerUrl;\r\n    if (!url.endsWith(\"/\")) url += \"/\";\r\n\r\n    const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;\r\n    loadScript(docApiUrl, \"onlyoffice-api-script\")\r\n      .then(() => this.onLoad())\r\n      .catch((err) => {\r\n        this.onError(-2);\r\n      });\r\n  }\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    const listNameChanges = [\"config\", \"document_fileType\", \"document_title\", \"documentType\", \"editorConfig_lang\", \"height\", \"type\", \"width\"];\r\n\r\n    if (this.isFirstOnChanges) {\r\n      this.isFirstOnChanges = false;\r\n      return;\r\n    }\r\n\r\n    for (const name of listNameChanges) {\r\n      if (changes.hasOwnProperty(name)) {\r\n        if (window?.DocEditor?.instances[this.id]) {\r\n          window.DocEditor.instances[this.id].destroyEditor();\r\n          window.DocEditor.instances[this.id] = undefined;\r\n    \r\n          console.log(\"Important props have been changed. Load new Editor.\");\r\n          this.onLoad();\r\n          return;\r\n        }\r\n      }\r\n    }\r\n  }\r\n\r\n  ngOnDestroy() {\r\n    if (window?.DocEditor?.instances[this.id]) {\r\n      window.DocEditor.instances[this.id].destroyEditor();\r\n      window.DocEditor.instances[this.id] = undefined;\r\n    }\r\n  }\r\n\r\n  onLoad = () => {\r\n    try {\r\n      if (!window.DocsAPI) this.onError(-3);\r\n      if (window?.DocEditor?.instances[this.id]) {\r\n        console.log(\"Skip loading. Instance already exists\", this.id);\r\n        return;\r\n      }\r\n\r\n      if (!window?.DocEditor?.instances) {\r\n        window.DocEditor = { instances: {} };\r\n      }\r\n\r\n      let initConfig = Object.assign({\r\n        document: {\r\n          fileType: this.document_fileType,\r\n          title: this.document_title,\r\n        },\r\n        documentType: this.documentType,\r\n        editorConfig: {\r\n          lang: this.editorConfig_lang,\r\n        },\r\n        events: {\r\n          onAppReady: this.onAppReady,\r\n          onDocumentStateChange: this.events_onDocumentStateChange,\r\n          onMetaChange: this.events_onMetaChange,\r\n          onDocumentReady: this.events_onDocumentReady,\r\n          onInfo: this.events_onInfo,\r\n          onWarning: this.events_onWarning,\r\n          onError: this.events_onError,\r\n          onRequestSharingSettings: this.events_onRequestSharingSettings,\r\n          onRequestRename: this.events_onRequestRename,\r\n          onMakeActionLink: this.events_onMakeActionLink,\r\n          onRequestInsertImage: this.events_onRequestInsertImage,\r\n          onRequestSaveAs: this.events_onRequestSaveAs,\r\n          onRequestMailMergeRecipients: this.events_onRequestMailMergeRecipients,\r\n          onRequestCompareFile: this.events_onRequestCompareFile,\r\n          onRequestEditRights: this.events_onRequestEditRights,\r\n          onRequestHistory: this.events_onRequestHistory,\r\n          onRequestHistoryClose: this.events_onRequestHistoryClose,\r\n          onRequestHistoryData: this.events_onRequestHistoryData,\r\n          onRequestRestore: this.events_onRequestRestore\r\n        },\r\n        height: this.height,\r\n        type: this.type,\r\n        width: this.width,\r\n      }, this.config || {});\r\n\r\n      const editor = window.DocsAPI.DocEditor(this.id, initConfig);\r\n      window.DocEditor.instances[this.id] = editor;\r\n    } catch (err: any) {\r\n      console.error(err);\r\n      this.onError(-1);\r\n    }\r\n  };\r\n\r\n  onError = (errorCode: number) => {\r\n    let message;\r\n\r\n    switch(errorCode) {\r\n      case -2:\r\n        message = \"Error load DocsAPI from \" + this.documentServerUrl;\r\n        break;\r\n      case -3:\r\n        message = \"DocsAPI is not defined\";\r\n        break;\r\n      default:\r\n        message = \"Unknown error loading component\";\r\n        errorCode = -1;\r\n    }\r\n\r\n    if (typeof this.onLoadComponentError == \"undefined\") {\r\n      console.error(message);\r\n    } else {\r\n      this.onLoadComponentError(errorCode, message);\r\n    }\r\n  }\r\n\r\n  onAppReady() {\r\n    this.events_onAppReady!(window.DocEditor.instances[this.id]);\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -1384,7 +1375,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 67
+                "line": 69
             },
             "implements": [
                 "OnInit",
@@ -2472,26 +2463,6 @@
                 "defaultValue": "Template.bind({})"
             },
             {
-                "name": "context",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/test.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
-            },
-            {
-                "name": "context",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/onlyoffice/document-editor-angular/src/test.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
-            },
-            {
                 "name": "DocumentTemplate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -2562,24 +2533,6 @@
                 "defaultValue": "Template.bind({})"
             },
             {
-                "name": "require",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/test.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "literal type"
-            },
-            {
-                "name": "require",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "projects/onlyoffice/document-editor-angular/src/test.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "literal type"
-            },
-            {
                 "name": "SpreadsheetTemplate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -2603,16 +2556,6 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/document-editor.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<DocumentEditorComponent>",
-                "defaultValue": "(args: DocumentEditorComponent) => ({\r\n  props: args,\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/filling-form.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -2628,6 +2571,16 @@
                 "deprecationMessage": "",
                 "type": "Story<any>",
                 "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/document-editor.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<DocumentEditorComponent>",
+                "defaultValue": "(args: DocumentEditorComponent) => ({\r\n  props: args,\r\n})"
             },
             {
                 "name": "Template",
@@ -2719,48 +2672,6 @@
                     "deprecationMessage": "",
                     "type": "Story<any>",
                     "defaultValue": "(args) => ({\r\n  props: args\r\n})"
-                }
-            ],
-            "src/test.ts": [
-                {
-                    "name": "context",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/test.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
-                },
-                {
-                    "name": "require",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/test.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "literal type"
-                }
-            ],
-            "projects/onlyoffice/document-editor-angular/src/test.ts": [
-                {
-                    "name": "context",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/onlyoffice/document-editor-angular/src/test.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
-                },
-                {
-                    "name": "require",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/onlyoffice/document-editor-angular/src/test.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "literal type"
                 }
             ],
             "src/app/document-editor.stories.ts": [
@@ -2902,7 +2813,7 @@
                 "linktype": "component",
                 "name": "DocumentEditorComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/37",
+                "coverageCount": "0/39",
                 "status": "low"
             },
             {
@@ -2920,7 +2831,7 @@
                 "linktype": "interface",
                 "name": "IConfig",
                 "coveragePercent": 0,
-                "coverageCount": "0/12",
+                "coverageCount": "0/9",
                 "status": "low"
             },
             {
@@ -2929,26 +2840,6 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "loadScript",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/onlyoffice/document-editor-angular/src/test.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "context",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/onlyoffice/document-editor-angular/src/test.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "require",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -3262,26 +3153,6 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "environment",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/test.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "context",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/test.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "require",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
