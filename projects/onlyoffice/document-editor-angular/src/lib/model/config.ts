@@ -22,23 +22,26 @@ export interface IConfig {
   width?: string;
   document: {
     fileType: string;
-    key?: string;
+    key: string;
+    referenceData?: {
+      fileKey: string,
+      instanceId: string
+    }
     title: string;
     url: string;
     info?: {
-      author?: string;
-      created?: string;
+      owner?: string;
+      uploaded?: string;
       favorite?: boolean;
       folder?: string;
-      owner?: string;
       sharingSettings?: any[];
     };
     permissions?: {
       changeHistory?: boolean;
-      copy?:boolean;
       chat?: boolean;
       comment?: boolean;
       commentGroups?: any;
+      copy?: boolean;
       deleteCommentAuthorOnly?: boolean;
       download?: boolean;
       edit?: boolean;
@@ -57,7 +60,10 @@ export interface IConfig {
   editorConfig?: {
     actionLink?: any;
     callbackUrl?: string;
-    coEditing?: any;
+    coEditing?: {
+      mode: string;
+      change: boolean;
+    };
     createUrl?: string;
     lang?: string;
     location?: string;
@@ -164,6 +170,7 @@ export interface IConfig {
     onRequestHistoryData?: (event: object) => void;
     onRequestInsertImage?: (event: object) => void;
     onRequestMailMergeRecipients?: (event: object) => void;
+    onRequestReferenceData?: (event: object) => void;
     onRequestRename?: (event: object) => void;
     onRequestRestore?: (event: object) => void;
     onRequestSaveAs?: (event: object) => void;
