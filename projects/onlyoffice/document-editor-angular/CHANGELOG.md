@@ -1,5 +1,8 @@
 # Change Log
 
+##
+- extended IConfig
+
 ## 1.2.1
 - added component property onLoadComponentError
 
