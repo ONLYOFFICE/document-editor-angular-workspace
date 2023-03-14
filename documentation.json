@@ -3,12 +3,12 @@
     "interfaces": [
         {
             "name": "IConfig",
-            "id": "interface-IConfig-592005be23fe436cf686a0074b054d70335146fef7e959723531f6dffdc59ecda4a3e5844812491d11ad55bc9cf7b7655cb555a7e18329f892dbd31e7c1e00bb",
+            "id": "interface-IConfig-96a24f882396177815f372a46f9e887db6f8e9405d1fa9aff7a605698bb3126fa38fa6508cff3910876701a6c5a55021b098c01ae8dcc720bec1a37cadb9aae9",
             "file": "projects/onlyoffice/document-editor-angular/src/lib/model/config.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "export interface IConfig {\r\n  documentType?: string;\r\n  height?: string;\r\n  token?: string;\r\n  type?: string;\r\n  width?: string;\r\n  document: {\r\n    fileType: string;\r\n    key?: string;\r\n    title: string;\r\n    url: string;\r\n    info?: {\r\n      author?: string;\r\n      created?: string;\r\n      favorite?: boolean;\r\n      folder?: string;\r\n      owner?: string;\r\n      sharingSettings?: any[];\r\n    };\r\n    permissions?: {\r\n      changeHistory?: boolean;\r\n      chat?: boolean;\r\n      comment?: boolean;\r\n      commentGroups?: any;\r\n      deleteCommentAuthorOnly?: boolean;\r\n      download?: boolean;\r\n      edit?: boolean;\r\n      editCommentAuthorOnly?: boolean;\r\n      fillForms?: boolean;\r\n      modifyContentControl?: boolean;\r\n      modifyFilter?: boolean;\r\n      print?: boolean;\r\n      protect?: boolean;\r\n      rename?: boolean;\r\n      review?: boolean;\r\n      reviewGroups?: string[];\r\n      userInfoGroups?: string[];\r\n    };\r\n  };\r\n  editorConfig?: {\r\n    actionLink?: any;\r\n    callbackUrl?: string;\r\n    coEditing?: any;\r\n    createUrl?: string;\r\n    lang?: string;\r\n    location?: string;\r\n    mode?: string;\r\n    recent?: any[];\r\n    region?: string;\r\n    templates?: any[];\r\n    user?: {\r\n      firstname?: string;\r\n      group?: string;\r\n      id?: string;\r\n      lastname?: string;\r\n      name?: string;\r\n    };\r\n    customization?: {\r\n      anonymous?: {\r\n        request?: boolean;\r\n        label?: string;\r\n      };\r\n      autosave?: boolean;\r\n      chat?: boolean;\r\n      commentAuthorOnly?: boolean;\r\n      comments?: boolean;\r\n      compactHeader?: boolean;\r\n      compactToolbar?: boolean;\r\n      compatibleFeatures?: boolean;\r\n      customer?: {\r\n        address?: string;\r\n        info?: string;\r\n        logo?: string;\r\n        logoDark?: string;\r\n        mail?: string;\r\n        name?: string;\r\n        phone?: string;\r\n        www?: string;\r\n      };\r\n      features?: any;\r\n      feedback?: any;\r\n      forcesave?: boolean;\r\n      goback?: any;\r\n      help?: boolean;\r\n      hideNotes?: boolean;\r\n      hideRightMenu?: boolean;\r\n      hideRulers?: boolean;\r\n      integrationMode?: string;\r\n      logo?: {\r\n        image?: string;\r\n        imageDark?: string;\r\n        imageEmbedded?: string;\r\n        url?: string;\r\n      };\r\n      macros?: boolean;\r\n      macrosMode?: string;\r\n      mentionShare?: boolean;\r\n      plugins?: boolean;\r\n      review?: {\r\n        hideReviewDisplay?: boolean;\r\n        hoverMode?: boolean;\r\n        reviewDisplay?: string;\r\n        showReviewChanges?: boolean;\r\n        trackChanges?: boolean;\r\n      };\r\n      reviewDisplay?: string;\r\n      showReviewChanges?: boolean;\r\n      spellcheck?: boolean;\r\n      toolbarHideFileName?: boolean;\r\n      toolbarNoTabs?: boolean;\r\n      trackChanges?: boolean;\r\n      uiTheme?: string;\r\n      unit?: string;\r\n      zoom?: number;\r\n    };\r\n    embedded?: {\r\n      embedUrl?: string;\r\n      fullscreenUrl?: string;\r\n      saveUrl?: string;\r\n      shareUrl?: string;\r\n      toolbarDocked?: string;\r\n    };\r\n    plugins?: {\r\n      autostart?: string[];\r\n      pluginsData?: string[];\r\n      url?: string;\r\n    };\r\n  };\r\n  events?: {\r\n    onAppReady?: (event: object) => void;\r\n    onCollaborativeChanges?: (event: object) => void;\r\n    onDocumentReady?: (event: object) => void;\r\n    onDocumentStateChange?: (event: object) => void;\r\n    onDownloadAs?: (event: object) => void;\r\n    onError?: (event: object) => void;\r\n    onInfo?: (event: object) => void;\r\n    onMetaChange?: (event: object) => void;\r\n    onMakeActionLink?: (event: object) => void;\r\n    onOutdatedVersion?: (event: object) => void;\r\n    onPluginsReady?: (event: object) => void;\r\n    onRequestClose?: (event: object) => void;\r\n    onRequestCompareFile?: (event: object) => void;\r\n    onRequestCreateNew?: (event: object) => void;\r\n    onRequestEditRights?: (event: object) => void;\r\n    onRequestHistory?: (event: object) => void;\r\n    onRequestHistoryClose?: (event: object) => void;\r\n    onRequestHistoryData?: (event: object) => void;\r\n    onRequestInsertImage?: (event: object) => void;\r\n    onRequestMailMergeRecipients?: (event: object) => void;\r\n    onRequestRename?: (event: object) => void;\r\n    onRequestRestore?: (event: object) => void;\r\n    onRequestSaveAs?: (event: object) => void;\r\n    onRequestSendNotify?: (event: object) => void;\r\n    onRequestSharingSettings?: (event: object) => void;\r\n    onRequestUsers?: (event: object) => void;\r\n    onWarning?: (event: object) => void;\r\n  };\r\n}\r\n",
+            "sourceCode": "export interface IConfig {\r\n  documentType?: string;\r\n  height?: string;\r\n  token?: string;\r\n  type?: string;\r\n  width?: string;\r\n  document: {\r\n    fileType: string;\r\n    key: string;\r\n    referenceData?: {\r\n      fileKey: string,\r\n      instanceId: string\r\n    }\r\n    title: string;\r\n    url: string;\r\n    info?: {\r\n      owner?: string;\r\n      uploaded?: string;\r\n      favorite?: boolean;\r\n      folder?: string;\r\n      sharingSettings?: any[];\r\n    };\r\n    permissions?: {\r\n      changeHistory?: boolean;\r\n      chat?: boolean;\r\n      comment?: boolean;\r\n      commentGroups?: any;\r\n      copy?: boolean;\r\n      deleteCommentAuthorOnly?: boolean;\r\n      download?: boolean;\r\n      edit?: boolean;\r\n      editCommentAuthorOnly?: boolean;\r\n      fillForms?: boolean;\r\n      modifyContentControl?: boolean;\r\n      modifyFilter?: boolean;\r\n      print?: boolean;\r\n      protect?: boolean;\r\n      rename?: boolean;\r\n      review?: boolean;\r\n      reviewGroups?: string[];\r\n      userInfoGroups?: string[];\r\n    };\r\n  };\r\n  editorConfig?: {\r\n    actionLink?: any;\r\n    callbackUrl?: string;\r\n    coEditing?: {\r\n      mode: string;\r\n      change: boolean;\r\n    };\r\n    createUrl?: string;\r\n    lang?: string;\r\n    location?: string;\r\n    mode?: string;\r\n    recent?: any[];\r\n    region?: string;\r\n    templates?: any[];\r\n    user?: {\r\n      firstname?: string;\r\n      group?: string;\r\n      id?: string;\r\n      lastname?: string;\r\n      name?: string;\r\n    };\r\n    customization?: {\r\n      anonymous?: {\r\n        request?: boolean;\r\n        label?: string;\r\n      };\r\n      autosave?: boolean;\r\n      chat?: boolean;\r\n      commentAuthorOnly?: boolean;\r\n      comments?: boolean;\r\n      compactHeader?: boolean;\r\n      compactToolbar?: boolean;\r\n      compatibleFeatures?: boolean;\r\n      customer?: {\r\n        address?: string;\r\n        info?: string;\r\n        logo?: string;\r\n        logoDark?: string;\r\n        mail?: string;\r\n        name?: string;\r\n        phone?: string;\r\n        www?: string;\r\n      };\r\n      features?: any;\r\n      feedback?: any;\r\n      forcesave?: boolean;\r\n      goback?: any;\r\n      help?: boolean;\r\n      hideNotes?: boolean;\r\n      hideRightMenu?: boolean;\r\n      hideRulers?: boolean;\r\n      integrationMode?: string;\r\n      logo?: {\r\n        image?: string;\r\n        imageDark?: string;\r\n        imageEmbedded?: string;\r\n        url?: string;\r\n      };\r\n      macros?: boolean;\r\n      macrosMode?: string;\r\n      mentionShare?: boolean;\r\n      plugins?: boolean;\r\n      review?: {\r\n        hideReviewDisplay?: boolean;\r\n        hoverMode?: boolean;\r\n        reviewDisplay?: string;\r\n        showReviewChanges?: boolean;\r\n        trackChanges?: boolean;\r\n      };\r\n      reviewDisplay?: string;\r\n      showReviewChanges?: boolean;\r\n      spellcheck?: boolean;\r\n      toolbarHideFileName?: boolean;\r\n      toolbarNoTabs?: boolean;\r\n      trackChanges?: boolean;\r\n      uiTheme?: string;\r\n      unit?: string;\r\n      zoom?: number;\r\n    };\r\n    embedded?: {\r\n      embedUrl?: string;\r\n      fullscreenUrl?: string;\r\n      saveUrl?: string;\r\n      shareUrl?: string;\r\n      toolbarDocked?: string;\r\n    };\r\n    plugins?: {\r\n      autostart?: string[];\r\n      pluginsData?: string[];\r\n      url?: string;\r\n    };\r\n  };\r\n  events?: {\r\n    onAppReady?: (event: object) => void;\r\n    onCollaborativeChanges?: (event: object) => void;\r\n    onDocumentReady?: (event: object) => void;\r\n    onDocumentStateChange?: (event: object) => void;\r\n    onDownloadAs?: (event: object) => void;\r\n    onError?: (event: object) => void;\r\n    onInfo?: (event: object) => void;\r\n    onMetaChange?: (event: object) => void;\r\n    onMakeActionLink?: (event: object) => void;\r\n    onOutdatedVersion?: (event: object) => void;\r\n    onPluginsReady?: (event: object) => void;\r\n    onRequestClose?: (event: object) => void;\r\n    onRequestCompareFile?: (event: object) => void;\r\n    onRequestCreateNew?: (event: object) => void;\r\n    onRequestEditRights?: (event: object) => void;\r\n    onRequestHistory?: (event: object) => void;\r\n    onRequestHistoryClose?: (event: object) => void;\r\n    onRequestHistoryData?: (event: object) => void;\r\n    onRequestInsertImage?: (event: object) => void;\r\n    onRequestMailMergeRecipients?: (event: object) => void;\r\n    onRequestReferenceData?: (event: object) => void;\r\n    onRequestRename?: (event: object) => void;\r\n    onRequestRestore?: (event: object) => void;\r\n    onRequestSaveAs?: (event: object) => void;\r\n    onRequestSendNotify?: (event: object) => void;\r\n    onRequestSharingSettings?: (event: object) => void;\r\n    onRequestUsers?: (event: object) => void;\r\n    onWarning?: (event: object) => void;\r\n  };\r\n}\r\n",
             "properties": [
                 {
                     "name": "document",
@@ -35,7 +35,7 @@
                     "type": "literal type",
                     "optional": true,
                     "description": "",
-                    "line": 56
+                    "line": 60
                 },
                 {
                     "name": "events",
@@ -44,7 +44,7 @@
                     "type": "literal type",
                     "optional": true,
                     "description": "",
-                    "line": 145
+                    "line": 152
                 },
                 {
                     "name": "height",
@@ -524,7 +524,7 @@
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
-            "templateData": "\r\n<comments userName=\"John Smith\" [comments]=\"comments\" [connector]=\"connector\"></comments>\r\n\r\n<document-editor \r\n  id=\"docxForComments\" \r\n  documentServerUrl=\"http://192.168.4.38\"\r\n  [config]=\"config\"\r\n  [events_onDocumentReady]=\"onDocumentReady\"\r\n  height=\"600px\"\r\n  width=\"70%\"\r\n></document-editor>"
+            "templateData": "\r\n<comments userName=\"John Smith\" [comments]=\"comments\" [connector]=\"connector\"></comments>\r\n\r\n<document-editor \r\n  id=\"docxForComments\" \r\n  documentServerUrl=\"http://192.168.0.169\"\r\n  [config]=\"config\"\r\n  [events_onDocumentReady]=\"onDocumentReady\"\r\n  height=\"600px\"\r\n  width=\"70%\"\r\n></document-editor>"
         },
         {
             "name": "CommenstStoriesComponent",
@@ -1385,7 +1385,7 @@
         },
         {
             "name": "FormsStoriesComponent",
-            "id": "component-FormsStoriesComponent-4478bb02ae0fa2eedacd6bf09d87fd054098e0cc6d5814cdb4c6c6e775f1170f015a5ba082ed0a645d83cec4ad4b547ff3e07065b75958894aa9f5e63ebb3472",
+            "id": "component-FormsStoriesComponent-9e833fc7089f6a268d67798bb9ec8af7aaa22788ff102662186d0513b1b466f023b48a0905e28e36005dba3c98f9aaf4e9ecc70910a4ebfa186532f6ff84ae18",
             "file": "src/app/components/forms/forms-stories/forms-stories.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1488,7 +1488,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\nimport { FormsService } from 'src/app/service/forms.service';\r\n\r\n@Component({\r\n  selector: 'forms-stories',\r\n  templateUrl: './forms-stories.component.html'\r\n})\r\nexport class FormsStoriesComponent implements OnInit {\r\n  @Input() editorId: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  loading = false;\r\n  selectedForm: any;\r\n\r\n  constructor( public formsService: FormsService ) {}\r\n\r\n  ngOnInit(): void {\r\n    this.loading = true;\r\n    this.formsService.getForms().subscribe(() => {\r\n      this.loading = false\r\n    });\r\n  }\r\n\r\n  onChangeSelect(): void {\r\n    let newConfig = this.config;\r\n    newConfig = {...newConfig}\r\n\r\n    newConfig.document.title = this.selectedForm.title;\r\n    newConfig.document.url = this.selectedForm.url;\r\n    newConfig.document.key = undefined;\r\n\r\n    this.config = newConfig;\r\n  }\r\n}",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\nimport { FormsService } from 'src/app/service/forms.service';\r\n\r\n@Component({\r\n  selector: 'forms-stories',\r\n  templateUrl: './forms-stories.component.html'\r\n})\r\nexport class FormsStoriesComponent implements OnInit {\r\n  @Input() editorId: string;\r\n  @Input() documentServerUrl: string;\r\n  @Input() config: IConfig;\r\n\r\n  loading = false;\r\n  selectedForm: any;\r\n\r\n  constructor( public formsService: FormsService ) {}\r\n\r\n  ngOnInit(): void {\r\n    this.loading = true;\r\n    this.formsService.getForms().subscribe(() => {\r\n      this.loading = false\r\n    });\r\n  }\r\n\r\n  onChangeSelect(): void {\r\n    let newConfig = this.config;\r\n    newConfig = {...newConfig}\r\n\r\n    newConfig.document.title = this.selectedForm.title;\r\n    newConfig.document.url = this.selectedForm.url;\r\n    newConfig.document.key = \"oform\" + Math.random();\r\n\r\n    this.config = newConfig;\r\n  }\r\n}",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -2556,6 +2556,16 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/document-editor.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<DocumentEditorComponent>",
+                "defaultValue": "(args: DocumentEditorComponent) => ({\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/filling-form.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -2571,16 +2581,6 @@
                 "deprecationMessage": "",
                 "type": "Story<any>",
                 "defaultValue": "(args) => ({\r\n  props: args\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/document-editor.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<DocumentEditorComponent>",
-                "defaultValue": "(args: DocumentEditorComponent) => ({\r\n  props: args,\r\n})"
             },
             {
                 "name": "Template",
