@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.0.0
+- extended IConfig
+- angular 15
+
 ## 1.2.1
 - added component property onLoadComponentError
 
