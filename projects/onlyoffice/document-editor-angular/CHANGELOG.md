@@ -1,6 +1,9 @@
 # Change Log
 
 ## 
+- angular 17
+
+## 
 - angular 16
 
 ## 2.0.0
