@@ -58,13 +58,21 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
   @Input() events_onMakeActionLink?: (event: object) => void;
   @Input() events_onRequestInsertImage?: (event: object) => void;
   @Input() events_onRequestSaveAs?: (event: object) => void;
+  /**
+   * @deprecated Deprecated since version 7.5, please use events_onRequestSelectSpreadsheet instead.
+   */
   @Input() events_onRequestMailMergeRecipients?: (event: object) => void;
+  /**
+   * @deprecated Deprecated since version 7.5, please use events_onRequestSelectDocument instead.
+   */
   @Input() events_onRequestCompareFile?: (event: object) => void;
   @Input() events_onRequestEditRights?: (event: object) => void;
   @Input() events_onRequestHistory?: (event: object) => void;
   @Input() events_onRequestHistoryClose?: (event: object) => void;
   @Input() events_onRequestHistoryData?: (event: object) => void;
   @Input() events_onRequestRestore?: (event: object) => void;
+  @Input() events_onRequestSelectSpreadsheet?: (event: object) => void;
+  @Input() events_onRequestSelectDocument?: (event: object) => void;
 
   isFirstOnChanges: boolean = true;
 
@@ -151,7 +159,9 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
           onRequestHistory: this.events_onRequestHistory,
           onRequestHistoryClose: this.events_onRequestHistoryClose,
           onRequestHistoryData: this.events_onRequestHistoryData,
-          onRequestRestore: this.events_onRequestRestore
+          onRequestRestore: this.events_onRequestRestore,
+          onRequestSelectSpreadsheet: this.events_onRequestSelectSpreadsheet,
+          onRequestSelectDocument: this.events_onRequestSelectDocument
         },
         height: this.height,
         type: this.type,
