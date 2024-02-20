@@ -120,6 +120,7 @@ This TypeScript file will create the *AppComponent* component containing the ONL
     documentServerUrl="http://documentserver/"
     [config]="config"
     [events_onDocumentReady]="onDocumentReady"
+    [onLoadComponentError]="onLoadComponentError"
 ></document-editor>
 ```
 Replace the **"http://documentserver/"** line with the URL of your server.
@@ -157,6 +158,22 @@ export class AppComponent {
     onDocumentReady = () => {
         console.log("Document is loaded");
     };
+
+    onLoadComponentError = (errorCode, errorDescription) => {
+        switch(errorCode) {
+            case -1: // Unknown error loading component
+                console.log(errorDescription);
+                break;
+
+            case -2: // Error load DocsAPI from http://documentserver/
+                console.log(errorDescription);
+                break;
+
+            case -3: // DocsAPI is not defined
+                console.log(errorDescription);
+                break;
+        }
+    }
 }
 ```
 Replace the following lines with your own data:
@@ -172,6 +189,7 @@ This TypeScript file will create the *AppComponent* component containing the ONL
     documentServerUrl="http://documentserver/"
     [config]="config"
     [events_onDocumentReady]="onDocumentReady"
+    [onLoadComponentError]="onLoadComponentError"
 ></document-editor>
 ```
 Replace the **"http://documentserver/"** line with the URL of your server.
