@@ -4,6 +4,15 @@ This repo contains the ONLYOFFICE Docs Angular component which integrates [ONLYO
 
 **Please note**: Before working with this component, you need to install ONLYOFFICE Docs. To do so, you can use [Docker](https://github.com/onlyoffice/Docker-DocumentServer) (recommended).
 
+## Versions
+
+| Angular          | document-editor-angular |
+|------------------|:-----------------------:|
+| >=17.0.0 <18.0.0 |           v4.x          |
+| >=16.0.0 <17.0.0 |           v3.x          |
+| >=15.0.0 <16.0.0 |           v2.x          |
+
+---
 
 ## Prerequisites
 
