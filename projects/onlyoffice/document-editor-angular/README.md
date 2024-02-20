@@ -89,6 +89,22 @@ export class AppComponent {
     onDocumentReady = () => {
         console.log("Document is loaded");
     };
+
+    onLoadComponentError = (errorCode, errorDescription) => {
+        switch(errorCode) {
+            case -1: // Unknown error loading component
+                console.log(errorDescription);
+                break;
+
+            case -2: // Error load DocsAPI from http://documentserver/
+                console.log(errorDescription);
+                break;
+
+            case -3: // DocsAPI is not defined
+                console.log(errorDescription);
+                break;
+        }
+    }
 }
 ```
 Replace the following lines with your own data:
