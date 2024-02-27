@@ -33,14 +33,14 @@ const Template: Story<any> = (args) => ({
 export const FomsTemplate = Template.bind({});
 FomsTemplate.storyName = "Form templates";
 FomsTemplate.args = {
-  editorId: "oformEditor",
+  editorId: "pdfEditor",
   documentServerUrl: config.documentserverUrl,
   config:{
     document: {
-        fileType: "oform",
-        key: "oform" + Math.random(),
-        title: "demo.oform",
-        url: config.demoStorage + "demo.oform",
+        fileType: "pdf",
+        key: "pdf" + Math.random(),
+        title: "oform.pdf",
+        url: config.demoStorage + "oform.pdf",
     },
     documentType: "word",
     height:"600px",

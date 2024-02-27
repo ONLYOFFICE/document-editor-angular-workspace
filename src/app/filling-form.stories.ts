@@ -44,14 +44,14 @@ const Template: Story<any> = (args) => ({
 export const ContentControlsTemplate = Template.bind({});
 ContentControlsTemplate.storyName = "Work with forms";
 ContentControlsTemplate.args = {
-  editorId: "oformEditor",
+  editorId: "pdfEditor",
   documentServerUrl: config.documentserverUrl,
   config: {
     document: {
-      fileType: "oform",
-      key: "oform" + Math.random(),
-      title: "demo.oform",
-      url: config.demoStorage + "withtags.oform",
+      fileType: "pdf",
+      key: "pdf" + Math.random(),
+      title: "withtags.pdf",
+      url: config.demoStorage + "withtags.pdf",
     },
     documentType: "word",
     height:"600px",

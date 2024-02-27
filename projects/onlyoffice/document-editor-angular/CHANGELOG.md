@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.1.0
+- improved load api.js
+- updated IConfig
+- bump dependencies
+
 ## 2.0.0
 - extended IConfig
 - angular 15
