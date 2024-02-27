@@ -70,7 +70,7 @@ export class ContentControlsStoriesComponent {
 
   onDocumentReady = () => {
     try {
-      var editor = window.DocEditor.instances["oformEditor"];
+      var editor = window.DocEditor.instances["pdfEditor"];
       this.connector = editor.createConnector();
       this.connector.connect();
 

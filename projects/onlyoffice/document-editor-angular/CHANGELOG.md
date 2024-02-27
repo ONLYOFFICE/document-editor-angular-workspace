@@ -4,12 +4,13 @@
 - angular 16
 
 ## 2.1.0
+- improved load api.js
 - updated IConfig
+- bump dependencies
 
 ## 2.0.0
 - extended IConfig
 - angular 15
-- improved load api.js
 
 ## 1.2.1
 - added component property onLoadComponentError
