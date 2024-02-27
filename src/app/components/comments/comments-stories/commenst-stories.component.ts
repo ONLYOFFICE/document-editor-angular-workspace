@@ -11,10 +11,10 @@ export class CommenstStoriesComponent {
   @Input() documentServerUrl: string;
   @Input() config: IConfig;
 
-  comments: any[] = [];
-  connector: any = null;
+  private comments: any[] = [];
+  private connector: any = null;
 
-  onDocumentReady = () => {
+  private onDocumentReady = () => {
     var editor = window.DocEditor.instances["docxForComments"];
     this.connector = editor.createConnector();
     this.connector.executeMethod("GetAllComments", null, function(data: any) {

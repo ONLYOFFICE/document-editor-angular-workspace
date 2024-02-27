@@ -18,7 +18,7 @@ export class FormsService {
     return this.http.get<any>(config.oformsUrl).pipe(
       tap(response => {
           var fileOforms = response.data.map((item: { attributes: { file_oform: { data: any[] } } }) => {
-              return item.attributes.file_oform.data.find((f) => f.attributes.ext === ".oform");
+              return item.attributes.file_oform.data.find((f) => f.attributes.ext === ".pdf");
           });
 
           var forms = fileOforms.map((form: { attributes: { url: any; name: any } }) => {
