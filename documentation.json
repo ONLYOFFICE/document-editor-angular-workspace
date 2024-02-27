@@ -466,7 +466,7 @@
         },
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-78a182a4ae76729627b50d7bb92640727fcc4ce54a1f693d777afc7c28ea8d3b39b426700b737af8f9d1b732771e941129822519d4b35dd05103903e42e9a4c6",
+            "id": "component-AppComponent-d1f7516053ea7aef1fa2bae565b371404448f3eb6126af66ec73dc563576ad052ada3c70316e19a4e059e78b9416fa60b959a2b0e1a266ed74f2ed2b5351e4c3",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -496,7 +496,7 @@
                 },
                 {
                     "name": "config",
-                    "defaultValue": "{\r\n    document: {\r\n        fileType: \"docx\",\r\n        title: \"demo.docx\",\r\n        url: \"http://192.168.0.169:8090/plugins/servlet/onlyoffice/file-provider?vkey=NGQ2MjJkYjY4M2U2NmFhODg2YzFhZDU1OGYyYjA3NzRhN2U5MDcyNjJmMGZmMDUzNmMxNWU3NDFlMjc1Mjk3Zj8zMjQ0MDM0\",\r\n        key: \"712027760_embedded\"\r\n    },\r\n    documentType: \"word\",\r\n    editorConfig: {\r\n      mode: \"edit\",\r\n      user: {\r\n        id: \"uid-1\",\r\n        name: \"John Smith\",\r\n        },\r\n      },\r\n    height:\"600px\",\r\n    width:\"70%\"\r\n  }",
+                    "defaultValue": "{\r\n    document: {\r\n        fileType: \"docx\",\r\n        title: \"demo.docx\",\r\n        url: config.demoStorage + \"demo.docx\",\r\n        key: \"712027760_embedded\"\r\n    },\r\n    documentType: \"word\",\r\n    editorConfig: {\r\n      mode: \"edit\",\r\n      user: {\r\n        id: \"uid-1\",\r\n        name: \"John Smith\",\r\n        },\r\n      },\r\n    height:\"600px\",\r\n    width:\"70%\"\r\n  }",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "IConfig",
@@ -535,12 +535,12 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\nimport config from \"./../../config/config.json\";\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  templateUrl: './app.component.html'\r\n})\r\nexport class AppComponent {\r\n  comments: any[] = [];\r\n  connector: any = null;\r\n\r\n  onDocumentReady = () => {\r\n    var editor = window.DocEditor.instances[\"docxForComments\"];\r\n    this.connector = editor.createConnector();\r\n    this.connector.executeMethod(\"GetAllComments\", null, function(data: any) {\r\n      let commentsRevers: any[] = [];\r\n      for (var i = 0; i < data.length; i++){\r\n        commentsRevers[i] = data[(data.length - 1) - i];\r\n      }\r\n      this.comments = commentsRevers;\r\n    }.bind(this));\r\n  };\r\n\r\n  config: IConfig = {\r\n    document: {\r\n        fileType: \"docx\",\r\n        title: \"demo.docx\",\r\n        url: \"http://192.168.0.169:8090/plugins/servlet/onlyoffice/file-provider?vkey=NGQ2MjJkYjY4M2U2NmFhODg2YzFhZDU1OGYyYjA3NzRhN2U5MDcyNjJmMGZmMDUzNmMxNWU3NDFlMjc1Mjk3Zj8zMjQ0MDM0\",\r\n        key: \"712027760_embedded\"\r\n    },\r\n    documentType: \"word\",\r\n    editorConfig: {\r\n      mode: \"edit\",\r\n      user: {\r\n        id: \"uid-1\",\r\n        name: \"John Smith\",\r\n        },\r\n      },\r\n    height:\"600px\",\r\n    width:\"70%\"\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { IConfig } from '@onlyoffice/document-editor-angular';\r\nimport config from \"./../../config/config.json\";\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  templateUrl: './app.component.html'\r\n})\r\nexport class AppComponent {\r\n  comments: any[] = [];\r\n  connector: any = null;\r\n\r\n  onDocumentReady = () => {\r\n    var editor = window.DocEditor.instances[\"docxForComments\"];\r\n    this.connector = editor.createConnector();\r\n    this.connector.executeMethod(\"GetAllComments\", null, function(data: any) {\r\n      let commentsRevers: any[] = [];\r\n      for (var i = 0; i < data.length; i++){\r\n        commentsRevers[i] = data[(data.length - 1) - i];\r\n      }\r\n      this.comments = commentsRevers;\r\n    }.bind(this));\r\n  };\r\n\r\n  config: IConfig = {\r\n    document: {\r\n        fileType: \"docx\",\r\n        title: \"demo.docx\",\r\n        url: config.demoStorage + \"demo.docx\",\r\n        key: \"712027760_embedded\"\r\n    },\r\n    documentType: \"word\",\r\n    editorConfig: {\r\n      mode: \"edit\",\r\n      user: {\r\n        id: \"uid-1\",\r\n        name: \"John Smith\",\r\n        },\r\n      },\r\n    height:\"600px\",\r\n    width:\"70%\"\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "\r\n<comments userName=\"John Smith\" [comments]=\"comments\" [connector]=\"connector\"></comments>\r\n\r\n<document-editor \r\n  id=\"docxForComments\" \r\n  documentServerUrl=\"http://192.168.0.169\"\r\n  [config]=\"config\"\r\n  [events_onDocumentReady]=\"onDocumentReady\"\r\n  height=\"600px\"\r\n  width=\"70%\"\r\n></document-editor>"
+            "templateData": "\r\n<comments userName=\"John Smith\" [comments]=\"comments\" [connector]=\"connector\"></comments>\r\n\r\n<document-editor \r\n  id=\"docxForComments\" \r\n  documentServerUrl=\"http://documentserver/\"\r\n  [config]=\"config\"\r\n  [events_onDocumentReady]=\"onDocumentReady\"\r\n  height=\"600px\"\r\n  width=\"70%\"\r\n></document-editor>"
         },
         {
             "name": "CommenstStoriesComponent",
