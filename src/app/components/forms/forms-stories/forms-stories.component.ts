@@ -4,17 +4,18 @@ import { FormsService } from 'src/app/service/forms.service';
 
 @Component({
   selector: 'forms-stories',
-  templateUrl: './forms-stories.component.html'
+  templateUrl: './forms-stories.component.html',
+  providers: [FormsService]
 })
 export class FormsStoriesComponent implements OnInit {
   @Input() editorId: string;
   @Input() documentServerUrl: string;
   @Input() config: IConfig;
 
-  loading = false;
-  selectedForm: any;
+  private loading = false;
+  private selectedForm: any;
 
-  constructor( public formsService: FormsService ) {}
+  constructor( private formsService: FormsService ) {}
 
   ngOnInit(): void {
     this.loading = true;
@@ -23,7 +24,7 @@ export class FormsStoriesComponent implements OnInit {
     });
   }
 
-  onChangeSelect(): void {
+  private onChangeSelect(): void {
     let newConfig = this.config;
     newConfig = {...newConfig}
 

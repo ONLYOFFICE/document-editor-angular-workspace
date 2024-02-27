@@ -101,7 +101,7 @@
             "configDir": ".storybook",
             "browserTarget": "document-editor-angular-workspace:build",
             "compodoc": true,
-            "compodocArgs": ["-e", "json", "-d", "."],
+            "compodocArgs": ["-e", "json", "-d", ".", "--disablePrivate", "--disableInternal", "--disableLifeCycleHooks"],
             "port": 6006
           }
         },
@@ -111,7 +111,7 @@
             "configDir": ".storybook",
             "browserTarget": "document-editor-angular-workspace:build",
             "compodoc": true,
-            "compodocArgs": ["-e", "json", "-d", "."],
+            "compodocArgs": ["-e", "json", "-d", ".", "--disablePrivate", "--disableInternal", "--disableLifeCycleHooks"],
             "outputDir": "storybook-static"
           }
         }

@@ -26,7 +26,7 @@ export class AppComponent {
     document: {
         fileType: "docx",
         title: "demo.docx",
-        url: "http://192.168.0.169:8090/plugins/servlet/onlyoffice/file-provider?vkey=NGQ2MjJkYjY4M2U2NmFhODg2YzFhZDU1OGYyYjA3NzRhN2U5MDcyNjJmMGZmMDUzNmMxNWU3NDFlMjc1Mjk3Zj8zMjQ0MDM0",
+        url: config.demoStorage + "demo.docx",
         key: "712027760_embedded"
     },
     documentType: "word",

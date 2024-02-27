@@ -12,12 +12,12 @@ export class ContentControlsStoriesComponent {
   @Input() config: IConfig;
   @Input() persons: IPerson[];
 
-  connector: any = null;
+  private connector: any = null;
 
-  contentControls: any;
-  selectedPerson: any;
+  private contentControls: any;
+  private selectedPerson: any;
 
-  onChangeSelect = () => {
+  private onChangeSelect = () => {
     for (var [key, value] of Object.entries<string>(this.selectedPerson.value)) {
       if (key == "Sex") {
         key = value == "Male" ? "Male" : "Female";
@@ -28,13 +28,13 @@ export class ContentControlsStoriesComponent {
     }
   };
 
-  setFormValue = (formId: string, value: string) => {
+  private setFormValue = (formId: string, value: string) => {
     this.connector.executeMethod("GetFormsByTag", [formId], function(forms: any) {
       this.connector.executeMethod("SetFormValue", [forms[0]["InternalId"], value], null);
     }.bind(this));
   }
 
-  getAllContentControls = () => {
+  private getAllContentControls = () => {
     this.connector.executeMethod ("GetAllContentControls", null, function(data: any) {
       for (let i = 0; i < data.length; i++) {
         switch (data[i].Tag) {
@@ -60,15 +60,15 @@ export class ContentControlsStoriesComponent {
     }.bind(this));
   }
 
-  onChangeContentControl = (oPr: { Tag?: string; InternalId?: string }) => {
+  private onChangeContentControl = (oPr: { Tag?: string; InternalId?: string }) => {
     this.getAllContentControls();
   };
 
-  onBlurContentControl = (oPr: { Tag: string; InternalId: string }) => {
+  private onBlurContentControl = (oPr: { Tag: string; InternalId: string }) => {
     this.selectedPerson = {label: "Custom Data"};
   };
 
-  onDocumentReady = () => {
+  private onDocumentReady = () => {
     try {
       var editor = window.DocEditor.instances["pdfEditor"];
       this.connector = editor.createConnector();
