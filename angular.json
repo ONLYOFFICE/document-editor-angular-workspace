@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "document-editor-angular-workspace:build:production"
+              "buildTarget": "document-editor-angular-workspace:build:production"
             },
             "development": {
-              "browserTarget": "document-editor-angular-workspace:build:development"
+              "buildTarget": "document-editor-angular-workspace:build:development"
             }
           },
           "defaultConfiguration": "development"
