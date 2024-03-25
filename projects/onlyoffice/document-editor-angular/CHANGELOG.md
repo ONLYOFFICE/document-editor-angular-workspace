@@ -1,5 +1,8 @@
 # Change Log
 
+##
+- added props events_onRequestUsers
+
 ## 2.1.0
 - improved load api.js
 - updated IConfig
