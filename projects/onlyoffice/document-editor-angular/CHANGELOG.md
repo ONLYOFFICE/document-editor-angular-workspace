@@ -1,5 +1,9 @@
 # Change Log
 
+##
+- fix re-rendering of component after init editors
+- added props events_onRequestUsers
+
 ## 3.0.0
 - angular 16
 

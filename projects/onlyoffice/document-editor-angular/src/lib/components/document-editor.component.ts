@@ -17,6 +17,7 @@
 import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { IConfig } from '../model/config';
 import loadScript from "../utils/loadScript";
+import { cloneDeep } from 'lodash';
 
 declare global {
   interface Window {
@@ -73,6 +74,7 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
   @Input() events_onRequestRestore?: (event: object) => void;
   @Input() events_onRequestSelectSpreadsheet?: (event: object) => void;
   @Input() events_onRequestSelectDocument?: (event: object) => void;
+  @Input() events_onRequestUsers?: (event: object) => void;
 
   isFirstOnChanges: boolean = true;
 
@@ -131,6 +133,8 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
         window.DocEditor = { instances: {} };
       }
 
+      var cloneConfig = cloneDeep(this.config);
+
       let initConfig = Object.assign({
         document: {
           fileType: this.document_fileType,
@@ -161,12 +165,13 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
           onRequestHistoryData: this.events_onRequestHistoryData,
           onRequestRestore: this.events_onRequestRestore,
           onRequestSelectSpreadsheet: this.events_onRequestSelectSpreadsheet,
-          onRequestSelectDocument: this.events_onRequestSelectDocument
+          onRequestSelectDocument: this.events_onRequestSelectDocument,
+          onRequestUsers: this.events_onRequestUsers
         },
         height: this.height,
         type: this.type,
         width: this.width,
-      }, this.config || {});
+      }, cloneConfig || {});
 
       const editor = window.DocsAPI.DocEditor(this.id, initConfig);
       window.DocEditor.instances[this.id] = editor;
