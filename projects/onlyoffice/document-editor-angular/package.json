@@ -20,6 +20,7 @@
     "@angular/core": "^17.0.0"
   },
   "dependencies": {
+    "lodash": "^4.17.21",
     "tslib": "^2.6.2"
   },
   "keywords": [

@@ -10,10 +10,10 @@ export class ReviewStoriesComponent {
   @Input() documentServerUrl: string;
   @Input() config: IConfig;
 
-  private comments: any[] = [];
-  private connector: any = null;
+  comments: any[] = [];
+  connector: any = null;
 
-  private onDocumentReady = () => {
+  onDocumentReady = () => {
     var editor = window.DocEditor.instances[this.editorId];
     this.connector = editor.createConnector();
   };
