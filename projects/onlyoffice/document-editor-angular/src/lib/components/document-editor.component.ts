@@ -17,6 +17,7 @@
 import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { IConfig } from '../model/config';
 import loadScript from "../utils/loadScript";
+import { cloneDeep } from 'lodash';
 
 declare global {
   interface Window {
@@ -132,6 +133,8 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
         window.DocEditor = { instances: {} };
       }
 
+      var cloneConfig = cloneDeep(this.config);
+
       let initConfig = Object.assign({
         document: {
           fileType: this.document_fileType,
@@ -168,7 +171,7 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
         height: this.height,
         type: this.type,
         width: this.width,
-      }, this.config || {});
+      }, cloneConfig || {});
 
       const editor = window.DocsAPI.DocEditor(this.id, initConfig);
       window.DocEditor.instances[this.id] = editor;
