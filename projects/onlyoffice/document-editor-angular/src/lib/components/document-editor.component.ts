@@ -17,6 +17,7 @@
 import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { IConfig } from '../model/config';
 import loadScript from "../utils/loadScript";
+import { cloneDeep } from 'lodash';
 
 declare global {
   interface Window {
@@ -73,6 +74,7 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
   @Input() events_onRequestRestore?: (event: object) => void;
   @Input() events_onRequestSelectSpreadsheet?: (event: object) => void;
   @Input() events_onRequestSelectDocument?: (event: object) => void;
+  @Input() events_onRequestUsers?: (event: object) => void;
 
   isFirstOnChanges: boolean = true;
 
@@ -131,15 +133,10 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
         window.DocEditor = { instances: {} };
       }
 
-      let initConfig = Object.assign({
-        document: {
-          fileType: this.document_fileType,
-          title: this.document_title,
-        },
+      var cloneConfig = cloneDeep(this.config);
+
+      var propsConfig: any = {
         documentType: this.documentType,
-        editorConfig: {
-          lang: this.editorConfig_lang,
-        },
         events: {
           onAppReady: this.onAppReady,
           onDocumentStateChange: this.events_onDocumentStateChange,
@@ -161,12 +158,26 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
           onRequestHistoryData: this.events_onRequestHistoryData,
           onRequestRestore: this.events_onRequestRestore,
           onRequestSelectSpreadsheet: this.events_onRequestSelectSpreadsheet,
-          onRequestSelectDocument: this.events_onRequestSelectDocument
+          onRequestSelectDocument: this.events_onRequestSelectDocument,
+          onRequestUsers: this.events_onRequestUsers
         },
         height: this.height,
         type: this.type,
         width: this.width,
-      }, this.config || {});
+      };
+
+      const document = this.getDocument();
+      const editorConfig = this.getEditorConfig();
+
+      if (document !== null) {
+        propsConfig.document = document;
+      }
+
+      if (editorConfig !== null) {
+        propsConfig.editorConfig = editorConfig;
+      }
+
+      let initConfig = Object.assign(propsConfig, cloneConfig || {});
 
       const editor = window.DocsAPI.DocEditor(this.id, initConfig);
       window.DocEditor.instances[this.id] = editor;
@@ -175,6 +186,33 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
       this.onError(-1);
     }
   };
+
+  getDocument = () => {
+    var document: any = null;
+
+    if (this.document_fileType) {
+      document = document || {};
+      document.fileType = this.document_fileType;
+    }
+
+    if (this.document_title) {
+      document = document || {};
+      document.document_title = this.document_title;
+    }
+
+    return document;
+  }
+
+  getEditorConfig = () => {
+    var editorConfig: any = null;
+
+    if (this.editorConfig_lang) {
+      editorConfig = editorConfig || {};
+      editorConfig.lang = this.editorConfig_lang;
+    }
+
+    return editorConfig;
+  }
 
   onError = (errorCode: number) => {
     let message;

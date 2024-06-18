@@ -1,5 +1,10 @@
 # Change Log
 
+## 4.2.0
+- IConfig->document is not required
+- fix re-rendering of component after init editors
+- added props events_onRequestUsers
+
 ## 4.0.0
 - angular 17
 

@@ -12,10 +12,10 @@ export class FormsStoriesComponent implements OnInit {
   @Input() documentServerUrl: string;
   @Input() config: IConfig;
 
-  private loading = false;
-  private selectedForm: any;
+  loading = false;
+  selectedForm: any;
 
-  constructor( private formsService: FormsService ) {}
+  constructor( public formsService: FormsService ) {}
 
   ngOnInit(): void {
     this.loading = true;
@@ -24,13 +24,13 @@ export class FormsStoriesComponent implements OnInit {
     });
   }
 
-  private onChangeSelect(): void {
+  onChangeSelect(): void {
     let newConfig = this.config;
     newConfig = {...newConfig}
 
-    newConfig.document.title = this.selectedForm.title;
-    newConfig.document.url = this.selectedForm.url;
-    newConfig.document.key = "pdf" + Math.random();
+    newConfig.document!.title = this.selectedForm.title;
+    newConfig.document!.url = this.selectedForm.url;
+    newConfig.document!.key = "pdf" + Math.random();
 
     this.config = newConfig;
   }
