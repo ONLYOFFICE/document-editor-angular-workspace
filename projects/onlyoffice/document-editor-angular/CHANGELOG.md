@@ -1,9 +1,15 @@
 # Change Log
 
-## 2.2.0
+## 4.2.0
 - IConfig->document is not required
 - fix re-rendering of component after init editors
 - added props events_onRequestUsers
+
+## 4.0.0
+- angular 17
+
+## 3.0.0
+- angular 16
 
 ## 2.1.0
 - improved load api.js

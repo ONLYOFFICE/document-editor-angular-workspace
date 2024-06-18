@@ -4,7 +4,8 @@ import { FormsService } from 'src/app/service/forms.service';
 
 @Component({
   selector: 'forms-stories',
-  templateUrl: './forms-stories.component.html'
+  templateUrl: './forms-stories.component.html',
+  providers: [FormsService]
 })
 export class FormsStoriesComponent implements OnInit {
   @Input() editorId: string;

@@ -1,4 +1,4 @@
-import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { moduleMetadata, StoryFn, Meta } from '@storybook/angular';
 import { DocumentEditorComponent } from '@onlyoffice/document-editor-angular';
 import config from "./../../config/config.json";
 import { CommentsComponent } from './components/comments/comments.component';
@@ -13,9 +13,7 @@ import { RemoveCommentReplyComponent } from './components/comments/remove-commen
 export default {
   title: 'Samples/Work with comments',
   component: CommenstStoriesComponent,
-  parameters: {
-    docs: false,
-  },
+  tags: ['autodocs'],
   decorators: [
     moduleMetadata({
       declarations: [
@@ -31,7 +29,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<any> = (args) => ({
+const Template: StoryFn<any> = (args) => ({
   props: args
 });
 

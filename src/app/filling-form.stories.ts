@@ -1,4 +1,4 @@
-import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { moduleMetadata, StoryFn, Meta } from '@storybook/angular';
 import { DocumentEditorComponent } from '@onlyoffice/document-editor-angular';
 import config from "./../../config/config.json";
 import persons from "./data/persons.json";
@@ -26,9 +26,7 @@ function getPersonsOptions(){
 export default {
   title: 'Samples/Work with forms',
   component: ContentControlsStoriesComponent,
-  parameters: {
-    docs: false,
-  },
+  tags: ['autodocs'],
   decorators: [
     moduleMetadata({
       declarations: [ DocumentEditorComponent, ContentControlsComponent, InputContentControlComponent, RadioContentControlComponent ],
@@ -37,7 +35,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<any> = (args) => ({
+const Template: StoryFn<any> = (args) => ({
   props: args
 });
 
