@@ -135,15 +135,8 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
 
       var cloneConfig = cloneDeep(this.config);
 
-      let initConfig = Object.assign({
-        document: {
-          fileType: this.document_fileType,
-          title: this.document_title,
-        },
+      var propsConfig: any = {
         documentType: this.documentType,
-        editorConfig: {
-          lang: this.editorConfig_lang,
-        },
         events: {
           onAppReady: this.onAppReady,
           onDocumentStateChange: this.events_onDocumentStateChange,
@@ -171,7 +164,20 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
         height: this.height,
         type: this.type,
         width: this.width,
-      }, cloneConfig || {});
+      };
+
+      const document = this.getDocument();
+      const editorConfig = this.getEditorConfig();
+
+      if (document !== null) {
+        propsConfig.document = document;
+      }
+
+      if (editorConfig !== null) {
+        propsConfig.editorConfig = editorConfig;
+      }
+
+      let initConfig = Object.assign(propsConfig, cloneConfig || {});
 
       const editor = window.DocsAPI.DocEditor(this.id, initConfig);
       window.DocEditor.instances[this.id] = editor;
@@ -180,6 +186,33 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
       this.onError(-1);
     }
   };
+
+  getDocument = () => {
+    var document: any = null;
+
+    if (this.document_fileType) {
+      document = document || {};
+      document.fileType = this.document_fileType;
+    }
+
+    if (this.document_title) {
+      document = document || {};
+      document.document_title = this.document_title;
+    }
+
+    return document;
+  }
+
+  getEditorConfig = () => {
+    var editorConfig: any = null;
+
+    if (this.editorConfig_lang) {
+      editorConfig = editorConfig || {};
+      editorConfig.lang = this.editorConfig_lang;
+    }
+
+    return editorConfig;
+  }
 
   onError = (errorCode: number) => {
     let message;

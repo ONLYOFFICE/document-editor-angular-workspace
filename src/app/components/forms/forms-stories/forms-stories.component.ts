@@ -28,9 +28,9 @@ export class FormsStoriesComponent implements OnInit {
     let newConfig = this.config;
     newConfig = {...newConfig}
 
-    newConfig.document.title = this.selectedForm.title;
-    newConfig.document.url = this.selectedForm.url;
-    newConfig.document.key = "pdf" + Math.random();
+    newConfig.document!.title = this.selectedForm.title;
+    newConfig.document!.url = this.selectedForm.url;
+    newConfig.document!.key = "pdf" + Math.random();
 
     this.config = newConfig;
   }
