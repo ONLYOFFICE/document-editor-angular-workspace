@@ -7,6 +7,7 @@ import config from "./../../config/config.json";
   templateUrl: './app.component.html'
 })
 export class AppComponent {
+  title = 'document-editor-angular-workspace';
   comments: any[] = [];
   connector: any = null;
 

@@ -8,6 +8,7 @@ This repo contains the ONLYOFFICE Docs Angular component which integrates [ONLYO
 
 | Angular          | document-editor-angular |
 |------------------|:-----------------------:|
+| >=18.0.0 <19.0.0 |           v5.x          |
 | >=17.0.0 <18.0.0 |           v4.x          |
 | >=16.0.0 <17.0.0 |           v3.x          |
 | >=15.0.0 <16.0.0 |           v2.x          |
