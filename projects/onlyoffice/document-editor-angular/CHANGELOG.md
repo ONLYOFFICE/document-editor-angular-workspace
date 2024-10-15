@@ -1,5 +1,8 @@
 # Change Log
 
+## 5.0.0
+- angular 18
+
 ## 4.2.0
 - IConfig->document is not required
 - fix re-rendering of component after init editors
