@@ -2,6 +2,13 @@
 
 ## 5.0.0
 - angular 18
+- editorConfig/customization/logo#imageLight
+- editorConfig/customization/logo#visible
+- editorConfig/customization#close
+- editorConfig/plugins#options
+- deprecated editorConfig#location
+- events#onRequestStartFilling
+- events#onSubmit
 
 ## 4.2.0
 - IConfig->document is not required
