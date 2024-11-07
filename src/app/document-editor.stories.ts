@@ -1,13 +1,11 @@
-import { Story, Meta } from '@storybook/angular/types-6-0';
+import { StoryFn, Meta } from '@storybook/angular';
 import { DocumentEditorComponent } from '@onlyoffice/document-editor-angular';
 import config from "../../config/config.json";
 
 export default {
   title: 'DocumentEditorComponent',
   component: DocumentEditorComponent,
-  parameters: {
-    docs: false,
-  },
+  tags: ['autodocs'],
   argTypes: {
     documentType: {
         options: ["word", "cell", "slide"],
@@ -48,7 +46,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<DocumentEditorComponent> = (args: DocumentEditorComponent) => ({
+const Template: StoryFn<DocumentEditorComponent> = (args: DocumentEditorComponent) => ({
   props: args,
 });
 

@@ -1,9 +1,21 @@
 # Change Log
 
-## 2.2.0
+## 3.3.0
+- editorConfig/customization/logo#imageLight
+- editorConfig/customization/logo#visible
+- editorConfig/customization#close
+- editorConfig/plugins#options
+- deprecated editorConfig#location
+- events#onRequestStartFilling
+- events#onSubmit
+
+## 3.2.0
 - IConfig->document is not required
 - fix re-rendering of component after init editors
 - added props events_onRequestUsers
+
+## 3.0.0
+- angular 16
 
 ## 2.1.0
 - improved load api.js
