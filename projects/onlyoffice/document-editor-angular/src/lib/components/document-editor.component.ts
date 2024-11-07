@@ -121,7 +121,7 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  onLoad = () => {
+  private onLoad = () => {
     try {
       if (!window.DocsAPI) this.onError(-3);
       if (window?.DocEditor?.instances[this.id]) {
@@ -187,7 +187,7 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
     }
   };
 
-  getDocument = () => {
+  private getDocument = () => {
     var document: any = null;
 
     if (this.document_fileType) {
@@ -203,7 +203,7 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
     return document;
   }
 
-  getEditorConfig = () => {
+  private getEditorConfig = () => {
     var editorConfig: any = null;
 
     if (this.editorConfig_lang) {
@@ -214,7 +214,7 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
     return editorConfig;
   }
 
-  onError = (errorCode: number) => {
+  private onError = (errorCode: number) => {
     let message;
 
     switch(errorCode) {
@@ -236,7 +236,7 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  onAppReady() {
+  private onAppReady() {
     this.events_onAppReady!(window.DocEditor.instances[this.id]);
   }
 }
