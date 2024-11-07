@@ -1,6 +1,6 @@
 # Change Log
 
-## 5.0.0
+## 5.3.0
 - angular 18
 - editorConfig/customization/logo#imageLight
 - editorConfig/customization/logo#visible
