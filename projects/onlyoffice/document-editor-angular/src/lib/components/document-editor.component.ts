@@ -35,6 +35,7 @@ declare global {
 export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
   @Input() id: string;
   @Input() documentServerUrl: string;
+  @Input() shardkey: string | boolean = true;
   @Input() config: IConfig;
 
   @Input() document_fileType?: string;
@@ -84,8 +85,16 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
     let url = this.documentServerUrl;
     if (!url.endsWith("/")) url += "/";
 
-    const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;
-    loadScript(docApiUrl, "onlyoffice-api-script")
+    let docsApiUrl = `${url}web-apps/apps/api/documents/api.js`;
+    if (this.shardkey) {
+      if (typeof this.shardkey === "boolean") {
+        docsApiUrl += `?shardkey=${this.config.document?.key}`;
+      } else {
+        docsApiUrl += `?shardkey=${this.shardkey}`;
+      }
+    }
+
+    loadScript(docsApiUrl, "onlyoffice-api-script")
       .then(() => this.onLoad())
       .catch((err) => {
         this.onError(-2);

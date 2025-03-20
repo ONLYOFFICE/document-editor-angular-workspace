@@ -1,5 +1,8 @@
 # Change Log
 
+##
+- added shardkey property
+
 ## 4.3.0
 - editorConfig/customization/logo#imageLight
 - editorConfig/customization/logo#visible
