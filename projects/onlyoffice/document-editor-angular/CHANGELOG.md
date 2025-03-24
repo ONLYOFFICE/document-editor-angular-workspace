@@ -2,6 +2,7 @@
 
 ##
 - added shardkey property
+- update IConfig for Document Server v8.3
 
 ## 4.3.0
 - editorConfig/customization/logo#imageLight
