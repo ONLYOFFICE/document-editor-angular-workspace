@@ -1,9 +1,13 @@
 import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { RadioContentControlComponent } from './radio-content-control/radio-content-control.component';
+import { InputContentControlComponent } from './input-content-control/input-content-control.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'content-controls',
   templateUrl: './content-controls.component.html',
-  styleUrls: [ './content-controls.component.css' ]
+  styleUrls: [ './content-controls.component.css' ],
+  imports: [ CommonModule, InputContentControlComponent, RadioContentControlComponent ]
 })
 export class ContentControlsComponent implements OnChanges {
   @Input() contentControls: any[];

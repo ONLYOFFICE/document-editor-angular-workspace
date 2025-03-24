@@ -1,10 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IConfig } from '@onlyoffice/document-editor-angular';
+import { FormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { DocumentEditorModule, IConfig } from '@onlyoffice/document-editor-angular';
 import { FormsService } from 'src/app/service/forms.service';
 
 @Component({
   selector: 'forms-stories',
   templateUrl: './forms-stories.component.html',
+  imports: [DocumentEditorModule, FormsModule, NgSelectModule],
   providers: [FormsService]
 })
 export class FormsStoriesComponent implements OnInit {

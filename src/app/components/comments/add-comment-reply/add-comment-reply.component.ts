@@ -1,9 +1,11 @@
+import { CommonModule } from '@angular/common';
 import {Component, Input} from '@angular/core'
 
 @Component({
   selector: 'add-comment-reply',
   templateUrl: './add-comment-reply.component.html',
-  styleUrls: ['../comments.component.css']
+  styleUrls: ['../comments.component.css'],
+  imports: [ CommonModule ]
 })
 export class AddCommentReplyComponent {
   @Input() connector: any;
