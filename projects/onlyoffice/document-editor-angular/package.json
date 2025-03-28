@@ -1,6 +1,6 @@
 {
   "name": "@onlyoffice/document-editor-angular",
-  "version": "4.3.0",
+  "version": "4.4.0",
   "description": "This repo contains the Angular component for [ONLYOFFICE Document Server](https://github.com/ONLYOFFICE/DocumentServer).",
   "license": "Apache-2.0",
   "bugs": {
