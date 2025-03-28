@@ -29,7 +29,6 @@ export default {
   tags: ['autodocs'],
   decorators: [
     moduleMetadata({
-      declarations: [ DocumentEditorComponent, ContentControlsComponent, InputContentControlComponent, RadioContentControlComponent ],
       imports: [ NgSelectModule, CommonModule, FormsModule, ReactiveFormsModule ]
     }),
   ],

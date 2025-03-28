@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { IConfig } from '@onlyoffice/document-editor-angular';
+import { DocumentEditorModule, IConfig } from '@onlyoffice/document-editor-angular';
+import { CommentsComponent } from '../comments.component';
 
 @Component({
   selector: 'comments-stories',
-  templateUrl: './comments-stories.component.html'
+  templateUrl: './comments-stories.component.html',
+  imports: [ DocumentEditorModule, CommentsComponent ]
 })
 export class CommenstStoriesComponent {
   @Input() editorId: string;

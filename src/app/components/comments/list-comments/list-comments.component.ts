@@ -1,9 +1,14 @@
 import {Component, Input, SimpleChanges, OnChanges} from '@angular/core'
+import { AddCommentReplyComponent } from '../add-comment-reply/add-comment-reply.component';
+import { RemoveCommentReplyComponent } from '../remove-comment-reply/remove-comment-reply.component';
+import { RemoveCommentComponent } from '../remove-comment/remove-comment.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'list-comments',
   templateUrl: './list-comments.component.html',
-  styleUrls: ['../comments.component.css']
+  styleUrls: ['../comments.component.css'],
+  imports: [ CommonModule, RemoveCommentComponent, AddCommentReplyComponent, RemoveCommentReplyComponent ]
 })
 export class ListCommentsComponent implements OnChanges {
   @Input() connector: any;

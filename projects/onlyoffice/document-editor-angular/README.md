@@ -8,6 +8,7 @@ This repo contains the ONLYOFFICE Docs Angular component which integrates [ONLYO
 
 | Angular          | document-editor-angular |
 |------------------|:-----------------------:|
+| >=19.0.0 <20.0.0 |           v6.x          |
 | >=18.0.0 <19.0.0 |           v5.x          |
 | >=17.0.0 <18.0.0 |           v4.x          |
 | >=16.0.0 <17.0.0 |           v3.x          |
@@ -310,6 +311,7 @@ The application will be deployed on the web server (*http://localhost:3000* by d
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | `id` | string | null | yes | Component unique identifier. |
 | `documentServerUrl` | string | null | yes | Address ONLYOFFICE Document Server. |
+| `shardkey` | string \| boolean | true | no | The string or boolean parameter required to request load balancing during collaborative editing: all users editing the same document are served by the same server. [Shard key](https://api.onlyoffice.com/docs/docs-api/get-started/how-it-works/#shard-key)|
 | `config` | object | null | yes | Generic configuration object for opening a file with token. [Config API](https://api.onlyoffice.com/editors/config/) |
 | `onLoadComponentError` | (errorCode: number, errorDescription: string) => void | null | no | The function called when an error occurs while loading a component |
 | `document_fileType` | string | null | no | The type of the file. |

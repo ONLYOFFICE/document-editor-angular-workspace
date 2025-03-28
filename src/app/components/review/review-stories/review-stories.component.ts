@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { IConfig } from '@onlyoffice/document-editor-angular';
+import { DocumentEditorModule, IConfig } from '@onlyoffice/document-editor-angular';
+import { ReviewComponent } from '../review.component';
 
 @Component({
   selector: 'review-stories',
-  templateUrl: './review-stories.component.html'
+  templateUrl: './review-stories.component.html',
+  imports: [ DocumentEditorModule, ReviewComponent ]
 })
 export class ReviewStoriesComponent {
   @Input() editorId: string;

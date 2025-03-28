@@ -3,12 +3,12 @@
     "interfaces": [
         {
             "name": "IConfig",
-            "id": "interface-IConfig-761c7622626733d2be948ec220742f02ed9d1856dba3c03faed9ff8e1aaf66cf0d927ce421f21e5b7f7cf6c1a1b54df991d5e77ece566e847adcf4836baa709d",
+            "id": "interface-IConfig-0f132d53fc34d4ef64541e0d82ebb5fe67d40ed95528a541cc37c000c10d085b7a6072f9f8213a8d628896afd462d357fce2b1dff6d7443febe70b1baa25a26a",
             "file": "projects/onlyoffice/document-editor-angular/src/lib/model/config.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "export interface IConfig {\n  documentType?: string;\n  height?: string;\n  token?: string;\n  type?: string;\n  width?: string;\n  document?: {\n    fileType: string;\n    key: string;\n    referenceData?: {\n      fileKey: string,\n      instanceId: string,\n      key: string,\n    }\n    title: string;\n    url: string;\n    info?: {\n      owner?: string;\n      uploaded?: string;\n      favorite?: boolean;\n      folder?: string;\n      sharingSettings?: any[];\n    };\n    permissions?: {\n      /**\n       * @deprecated Deprecated since version 5.5, please add the onRequestRestore field instead.\n       */\n      changeHistory?: boolean;\n      chat?: boolean;\n      comment?: boolean;\n      commentGroups?: any;\n      copy?: boolean;\n      deleteCommentAuthorOnly?: boolean;\n      download?: boolean;\n      edit?: boolean;\n      editCommentAuthorOnly?: boolean;\n      fillForms?: boolean;\n      modifyContentControl?: boolean;\n      modifyFilter?: boolean;\n      print?: boolean;\n      protect?: boolean;\n      /**\n       * @deprecated Deprecated since version 6.0, please add the onRequestRename field instead.\n       */\n      rename?: boolean;\n      review?: boolean;\n      reviewGroups?: string[];\n      userInfoGroups?: string[];\n    };\n  };\n  editorConfig?: {\n    actionLink?: any;\n    callbackUrl?: string;\n    coEditing?: {\n      mode: string;\n      change: boolean;\n    };\n    createUrl?: string;\n    lang?: string;\n    /**\n     * @deprecated Deprecated since version 8.2, please use the region parameter instead.\n      */\n    location?: string;\n    mode?: string;\n    recent?: any[];\n    region?: string;\n    templates?: any[];\n    user?: {\n      /**\n       * @deprecated Deprecated since version 4.2, please use name instead.\n       */\n      firstname?: string;\n      group?: string;\n      id?: string;\n      image?: string;\n      /**\n       * @deprecated Deprecated since version 4.2, please use name instead.\n       */\n      lastname?: string;\n      name?: string;\n    };\n    customization?: {\n      anonymous?: {\n        request?: boolean;\n        label?: string;\n      };\n      autosave?: boolean;\n      /**\n       * @deprecated Deprecated since version 7.1, please use the document.permissions.chat parameter instead.\n       */\n      chat?: boolean;\n      close: {\n        visible: boolean;\n        text: string;\n      }\n      /**\n       * @deprecated Deprecated since version 6.3, please use the document.permissions.editCommentAuthorOnly and document.permissions.deleteCommentAuthorOnly fields instead.\n       */\n      commentAuthorOnly?: boolean;\n      comments?: boolean;\n      compactHeader?: boolean;\n      compactToolbar?: boolean;\n      compatibleFeatures?: boolean;\n      customer?: {\n        address?: string;\n        info?: string;\n        logo?: string;\n        logoDark?: string;\n        mail?: string;\n        name?: string;\n        phone?: string;\n        www?: string;\n      };\n      features?: any;\n      feedback?: any;\n      forcesave?: boolean;\n      goback?: any;\n      help?: boolean;\n      hideNotes?: boolean;\n      hideRightMenu?: boolean;\n      hideRulers?: boolean;\n      integrationMode?: string;\n      logo?: {\n        image?: string;\n        imageDark?: string;\n        imageLight?: string;\n        imageEmbedded?: string;\n        url?: string;\n        visible?: boolean;\n      };\n      macros?: boolean;\n      macrosMode?: string;\n      mentionShare?: boolean;\n      mobileForceView?: boolean;\n      plugins?: boolean;\n      review?: {\n        hideReviewDisplay?: boolean;\n        hoverMode?: boolean;\n        reviewDisplay?: string;\n        showReviewChanges?: boolean;\n        trackChanges?: boolean;\n      };\n      /**\n       * @deprecated Deprecated since version 7.0. Please use the review.reviewDisplay parameter instead.\n       */\n      reviewDisplay?: string;\n      /**\n       * @deprecated Deprecated since version 7.0. Please use the review.showReviewChanges parameter instead.\n       */\n      showReviewChanges?: boolean;\n      /**\n       * @deprecated Deprecated since version 7.1. Please use the features.spellcheck parameter instead.\n       */\n      spellcheck?: boolean;\n      submitForm?: boolean;\n      toolbarHideFileName?: boolean;\n      toolbarNoTabs?: boolean;\n      /**\n       * @deprecated Deprecated since version 7.0. Please use the review.trackChanges parameter instead.\n       */\n      trackChanges?: boolean;\n      uiTheme?: string;\n      unit?: string;\n      zoom?: number;\n    };\n    embedded?: {\n      embedUrl?: string;\n      fullscreenUrl?: string;\n      saveUrl?: string;\n      shareUrl?: string;\n      toolbarDocked?: string;\n    };\n    plugins?: {\n      autostart?: string[];\n      options?: {\n        all?: Object;\n        pluginGuid: Object;\n      };\n      pluginsData?: string[];\n      /**\n       * @deprecated Deprecated since version 4.3, please use the absolute URLs in pluginsData field.\n       */\n      url?: string;\n    };\n  };\n  events?: {\n    onAppReady?: (event: object) => void;\n    onCollaborativeChanges?: (event: object) => void;\n    onDocumentReady?: (event: object) => void;\n    onDocumentStateChange?: (event: object) => void;\n    onDownloadAs?: (event: object) => void;\n    onError?: (event: object) => void;\n    onInfo?: (event: object) => void;\n    onMetaChange?: (event: object) => void;\n    onMakeActionLink?: (event: object) => void;\n    onOutdatedVersion?: (event: object) => void;\n    onPluginsReady?: (event: object) => void;\n    onReady?: (event: object) => void;\n    onRequestClose?: (event: object) => void;\n    /**\n     * @deprecated Deprecated since version 7.5, please use onRequestSelectDocument instead\n     */\n    onRequestCompareFile?: (event: object) => void;\n    onRequestCreateNew?: (event: object) => void;\n    onRequestEditRights?: (event: object) => void;\n    onRequestHistory?: (event: object) => void;\n    onRequestHistoryClose?: (event: object) => void;\n    onRequestHistoryData?: (event: object) => void;\n    onRequestInsertImage?: (event: object) => void;\n    /**\n     * @deprecated Deprecated since version 7.5, please use onRequestSelectSpreadsheet instead\n     */\n    onRequestMailMergeRecipients?: (event: object) => void;\n    onRequestOpen?: (event: object) => void;\n    onRequestReferenceData?: (event: object) => void;\n    onRequestReferenceSource?: (event: object) => void;\n    onRequestRename?: (event: object) => void;\n    onRequestRestore?: (event: object) => void;\n    onRequestSaveAs?: (event: object) => void;\n    onRequestSelectDocument?: (event: object) => void;\n    onRequestSelectSpreadsheet?: (event: object) => void;\n    onRequestSendNotify?: (event: object) => void;\n    onRequestSharingSettings?: (event: object) => void;\n    onRequestStartFilling: (event: object) => void;\n    onRequestUsers?: (event: object) => void;\n    onSubmit?: (event: object) => void;\n    onWarning?: (event: object) => void;\n  };\n}\n",
+            "sourceCode": "export interface IConfig {\n  documentType?: string;\n  height?: string;\n  token?: string;\n  type?: string;\n  width?: string;\n  document?: {\n    fileType: string;\n    key: string;\n    referenceData?: {\n      fileKey: string,\n      instanceId: string,\n      key: string,\n    }\n    title: string;\n    url: string;\n    info?: {\n      owner?: string;\n      uploaded?: string;\n      favorite?: boolean;\n      folder?: string;\n      sharingSettings?: any[];\n    };\n    permissions?: {\n      /**\n       * @deprecated Deprecated since version 5.5, please add the onRequestRestore field instead.\n       */\n      changeHistory?: boolean;\n      chat?: boolean;\n      comment?: boolean;\n      commentGroups?: any;\n      copy?: boolean;\n      deleteCommentAuthorOnly?: boolean;\n      download?: boolean;\n      edit?: boolean;\n      editCommentAuthorOnly?: boolean;\n      fillForms?: boolean;\n      modifyContentControl?: boolean;\n      modifyFilter?: boolean;\n      print?: boolean;\n      protect?: boolean;\n      /**\n       * @deprecated Deprecated since version 6.0, please add the onRequestRename field instead.\n       */\n      rename?: boolean;\n      review?: boolean;\n      reviewGroups?: string[];\n      userInfoGroups?: string[];\n    };\n  };\n  editorConfig?: {\n    actionLink?: any;\n    callbackUrl?: string;\n    coEditing?: {\n      mode: string;\n      change: boolean;\n    };\n    createUrl?: string;\n    lang?: string;\n    /**\n     * @deprecated Deprecated since version 8.2, please use the region parameter instead.\n      */\n    location?: string;\n    mode?: string;\n    recent?: any[];\n    region?: string;\n    templates?: any[];\n    user?: {\n      /**\n       * @deprecated Deprecated since version 4.2, please use name instead.\n       */\n      firstname?: string;\n      group?: string;\n      id?: string;\n      image?: string;\n      /**\n       * @deprecated Deprecated since version 4.2, please use name instead.\n       */\n      lastname?: string;\n      name?: string;\n    };\n    customization?: {\n      anonymous?: {\n        request?: boolean;\n        label?: string;\n      };\n      autosave?: boolean;\n      /**\n       * @deprecated Deprecated since version 7.1, please use the document.permissions.chat parameter instead.\n       */\n      chat?: boolean;\n      close: {\n        visible: boolean;\n        text: string;\n      }\n      /**\n       * @deprecated Deprecated since version 6.3, please use the document.permissions.editCommentAuthorOnly and document.permissions.deleteCommentAuthorOnly fields instead.\n       */\n      commentAuthorOnly?: boolean;\n      comments?: boolean;\n      compactHeader?: boolean;\n      compactToolbar?: boolean;\n      compatibleFeatures?: boolean;\n      customer?: {\n        address?: string;\n        info?: string;\n        logo?: string;\n        logoDark?: string;\n        mail?: string;\n        name?: string;\n        phone?: string;\n        www?: string;\n      };\n      features?: any;\n      feedback?: any;\n      forcesave?: boolean;\n      goback?: any;\n      help?: boolean;\n      hideNotes?: boolean;\n      hideRightMenu?: boolean;\n      hideRulers?: boolean;\n      integrationMode?: string;\n      logo?: {\n        image?: string;\n        imageDark?: string;\n        imageLight?: string;\n        imageEmbedded?: string;\n        url?: string;\n        visible?: boolean;\n      };\n      macros?: boolean;\n      macrosMode?: string;\n      mentionShare?: boolean;\n      mobile?: {\n        forceView?: boolean;\n        info?: boolean;\n        standardView?: boolean;\n      };\n      /**\n       * @deprecated Starting from version 8.2, please use the mobile parameter instead.\n       */\n      mobileForceView?: boolean;\n      plugins?: boolean;\n      pointerMode: 'select' | 'hand';\n      review?: {\n        hideReviewDisplay?: boolean;\n        hoverMode?: boolean;\n        reviewDisplay?: string;\n        showReviewChanges?: boolean;\n        trackChanges?: boolean;\n      };\n      /**\n       * @deprecated Deprecated since version 7.0. Please use the review.reviewDisplay parameter instead.\n       */\n      reviewDisplay?: string;\n      showHorizontalScroll?: boolean; \n      /**\n       * @deprecated Deprecated since version 7.0. Please use the review.showReviewChanges parameter instead.\n       */\n      showReviewChanges?: boolean;\n      showVerticalScroll?: boolean;\n      slidePlayerBackground: string;\n      /**\n       * @deprecated Deprecated since version 7.1. Please use the features.spellcheck parameter instead.\n       */\n      spellcheck?: boolean;\n      submitForm?: {\n        visible:  boolean,\n        resultMessage: string,\n\n      } | boolean;\n      toolbarHideFileName?: boolean;\n      toolbarNoTabs?: boolean;\n      /**\n       * @deprecated Deprecated since version 7.0. Please use the review.trackChanges parameter instead.\n       */\n      trackChanges?: boolean;\n      uiTheme?: string;\n      unit?: string;\n      wordHeadingsColor?: string;\n      zoom?: number;\n    };\n    embedded?: {\n      embedUrl?: string;\n      fullscreenUrl?: string;\n      saveUrl?: string;\n      shareUrl?: string;\n      toolbarDocked?: string;\n    };\n    plugins?: {\n      autostart?: string[];\n      options?: {\n        all?: Object;\n        pluginGuid: Object;\n      };\n      pluginsData?: string[];\n      /**\n       * @deprecated Deprecated since version 4.3, please use the absolute URLs in pluginsData field.\n       */\n      url?: string;\n    };\n  };\n  events?: {\n    onAppReady?: (event: object) => void;\n    onCollaborativeChanges?: (event: object) => void;\n    onDocumentReady?: (event: object) => void;\n    onDocumentStateChange?: (event: object) => void;\n    onDownloadAs?: (event: object) => void;\n    onError?: (event: object) => void;\n    onInfo?: (event: object) => void;\n    onMetaChange?: (event: object) => void;\n    onMakeActionLink?: (event: object) => void;\n    onOutdatedVersion?: (event: object) => void;\n    onPluginsReady?: (event: object) => void;\n    onReady?: (event: object) => void;\n    onRequestClose?: (event: object) => void;\n    /**\n     * @deprecated Deprecated since version 7.5, please use onRequestSelectDocument instead\n     */\n    onRequestCompareFile?: (event: object) => void;\n    onRequestCreateNew?: (event: object) => void;\n    onRequestEditRights?: (event: object) => void;\n    onRequestHistory?: (event: object) => void;\n    onRequestHistoryClose?: (event: object) => void;\n    onRequestHistoryData?: (event: object) => void;\n    onRequestInsertImage?: (event: object) => void;\n    /**\n     * @deprecated Deprecated since version 7.5, please use onRequestSelectSpreadsheet instead\n     */\n    onRequestMailMergeRecipients?: (event: object) => void;\n    onRequestOpen?: (event: object) => void;\n    onRequestReferenceData?: (event: object) => void;\n    onRequestReferenceSource?: (event: object) => void;\n    onRequestRefreshFile?: (event: object) => void;\n    onRequestRename?: (event: object) => void;\n    onRequestRestore?: (event: object) => void;\n    onRequestSaveAs?: (event: object) => void;\n    onRequestSelectDocument?: (event: object) => void;\n    onRequestSelectSpreadsheet?: (event: object) => void;\n    onRequestSendNotify?: (event: object) => void;\n    onRequestSharingSettings?: (event: object) => void;\n    onRequestStartFilling: (event: object) => void;\n    onRequestUsers?: (event: object) => void;\n    onSubmit?: (event: object) => void;\n    onUserActionRequired?: (event: object) => void;\n    onWarning?: (event: object) => void;\n  };\n}\n",
             "properties": [
                 {
                     "name": "document",
@@ -48,7 +48,7 @@
                     "indexKey": "",
                     "optional": true,
                     "description": "",
-                    "line": 202
+                    "line": 219
                 },
                 {
                     "name": "height",
@@ -133,12 +133,12 @@
         },
         {
             "name": "Window",
-            "id": "interface-Window-7dd6f327280e39ff99da1ba52869f7ff291c2a5cba578e55a7a0d52a437021e2d9b0a55f6ccaed63038cd0e59a670633817962f83ed7ce03b5eaa32ff9b516cf",
+            "id": "interface-Window-bb49295852e90fd6653f1fc4e0ec4ec972ac526c1f5175f72d06e07f8415173896399990932b856b0987c9d12b8e5d06d150b9c912f40abe1c7242d1b234895c",
             "file": "projects/onlyoffice/document-editor-angular/src/lib/components/document-editor.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';\nimport { IConfig } from '../model/config';\nimport loadScript from \"../utils/loadScript\";\nimport { cloneDeep } from 'lodash';\n\ndeclare global {\n  interface Window {\n      DocsAPI?: any;\n      DocEditor?: any;\n  }\n}\n\n@Component({\n  selector: 'document-editor',\n  template: '<div [id]=\"id\"></div>',\n  styles: [\n  ]\n})\nexport class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {\n  @Input() id: string;\n  @Input() documentServerUrl: string;\n  @Input() config: IConfig;\n\n  @Input() document_fileType?: string;\n  @Input() document_title?: string;\n  @Input() documentType?: string;\n  @Input() editorConfig_lang?: string;\n  @Input() height?: string;\n  @Input() type?: string;\n  @Input() width?: string;\n\n  @Input() onLoadComponentError?: (errorCode: number, errorDescription: string) => void;\n\n  @Input() events_onAppReady?: (event: object) => void;\n  @Input() events_onDocumentStateChange?: (event: object) => void;\n  @Input() events_onMetaChange?: (event: object) => void;\n  @Input() events_onDocumentReady?: (event: object) => void;\n  @Input() events_onInfo?: (event: object) => void;\n  @Input() events_onWarning?: (event: object) => void;\n  @Input() events_onError?: (event: object) => void;\n  @Input() events_onRequestSharingSettings?: (event: object) => void;\n  @Input() events_onRequestRename?: (event: object) => void;\n  @Input() events_onMakeActionLink?: (event: object) => void;\n  @Input() events_onRequestInsertImage?: (event: object) => void;\n  @Input() events_onRequestSaveAs?: (event: object) => void;\n  /**\n   * @deprecated Deprecated since version 7.5, please use events_onRequestSelectSpreadsheet instead.\n   */\n  @Input() events_onRequestMailMergeRecipients?: (event: object) => void;\n  /**\n   * @deprecated Deprecated since version 7.5, please use events_onRequestSelectDocument instead.\n   */\n  @Input() events_onRequestCompareFile?: (event: object) => void;\n  @Input() events_onRequestEditRights?: (event: object) => void;\n  @Input() events_onRequestHistory?: (event: object) => void;\n  @Input() events_onRequestHistoryClose?: (event: object) => void;\n  @Input() events_onRequestHistoryData?: (event: object) => void;\n  @Input() events_onRequestRestore?: (event: object) => void;\n  @Input() events_onRequestSelectSpreadsheet?: (event: object) => void;\n  @Input() events_onRequestSelectDocument?: (event: object) => void;\n  @Input() events_onRequestUsers?: (event: object) => void;\n\n  isFirstOnChanges: boolean = true;\n\n  constructor() { }\n\n  ngOnInit(): void {\n    let url = this.documentServerUrl;\n    if (!url.endsWith(\"/\")) url += \"/\";\n\n    const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;\n    loadScript(docApiUrl, \"onlyoffice-api-script\")\n      .then(() => this.onLoad())\n      .catch((err) => {\n        this.onError(-2);\n      });\n  }\n\n  ngOnChanges(changes: SimpleChanges) {\n    const listNameChanges = [\"config\", \"document_fileType\", \"document_title\", \"documentType\", \"editorConfig_lang\", \"height\", \"type\", \"width\"];\n\n    if (this.isFirstOnChanges) {\n      this.isFirstOnChanges = false;\n      return;\n    }\n\n    for (const name of listNameChanges) {\n      if (changes.hasOwnProperty(name)) {\n        if (window?.DocEditor?.instances[this.id]) {\n          window.DocEditor.instances[this.id].destroyEditor();\n          window.DocEditor.instances[this.id] = undefined;\n    \n          console.log(\"Important props have been changed. Load new Editor.\");\n          this.onLoad();\n          return;\n        }\n      }\n    }\n  }\n\n  ngOnDestroy() {\n    if (window?.DocEditor?.instances[this.id]) {\n      window.DocEditor.instances[this.id].destroyEditor();\n      window.DocEditor.instances[this.id] = undefined;\n    }\n  }\n\n  private onLoad = () => {\n    try {\n      if (!window.DocsAPI) this.onError(-3);\n      if (window?.DocEditor?.instances[this.id]) {\n        console.log(\"Skip loading. Instance already exists\", this.id);\n        return;\n      }\n\n      if (!window?.DocEditor?.instances) {\n        window.DocEditor = { instances: {} };\n      }\n\n      var cloneConfig = cloneDeep(this.config);\n\n      var propsConfig: any = {\n        documentType: this.documentType,\n        events: {\n          onAppReady: this.onAppReady,\n          onDocumentStateChange: this.events_onDocumentStateChange,\n          onMetaChange: this.events_onMetaChange,\n          onDocumentReady: this.events_onDocumentReady,\n          onInfo: this.events_onInfo,\n          onWarning: this.events_onWarning,\n          onError: this.events_onError,\n          onRequestSharingSettings: this.events_onRequestSharingSettings,\n          onRequestRename: this.events_onRequestRename,\n          onMakeActionLink: this.events_onMakeActionLink,\n          onRequestInsertImage: this.events_onRequestInsertImage,\n          onRequestSaveAs: this.events_onRequestSaveAs,\n          onRequestMailMergeRecipients: this.events_onRequestMailMergeRecipients,\n          onRequestCompareFile: this.events_onRequestCompareFile,\n          onRequestEditRights: this.events_onRequestEditRights,\n          onRequestHistory: this.events_onRequestHistory,\n          onRequestHistoryClose: this.events_onRequestHistoryClose,\n          onRequestHistoryData: this.events_onRequestHistoryData,\n          onRequestRestore: this.events_onRequestRestore,\n          onRequestSelectSpreadsheet: this.events_onRequestSelectSpreadsheet,\n          onRequestSelectDocument: this.events_onRequestSelectDocument,\n          onRequestUsers: this.events_onRequestUsers\n        },\n        height: this.height,\n        type: this.type,\n        width: this.width,\n      };\n\n      const document = this.getDocument();\n      const editorConfig = this.getEditorConfig();\n\n      if (document !== null) {\n        propsConfig.document = document;\n      }\n\n      if (editorConfig !== null) {\n        propsConfig.editorConfig = editorConfig;\n      }\n\n      let initConfig = Object.assign(propsConfig, cloneConfig || {});\n\n      const editor = window.DocsAPI.DocEditor(this.id, initConfig);\n      window.DocEditor.instances[this.id] = editor;\n    } catch (err: any) {\n      console.error(err);\n      this.onError(-1);\n    }\n  };\n\n  private getDocument = () => {\n    var document: any = null;\n\n    if (this.document_fileType) {\n      document = document || {};\n      document.fileType = this.document_fileType;\n    }\n\n    if (this.document_title) {\n      document = document || {};\n      document.document_title = this.document_title;\n    }\n\n    return document;\n  }\n\n  private getEditorConfig = () => {\n    var editorConfig: any = null;\n\n    if (this.editorConfig_lang) {\n      editorConfig = editorConfig || {};\n      editorConfig.lang = this.editorConfig_lang;\n    }\n\n    return editorConfig;\n  }\n\n  private onError = (errorCode: number) => {\n    let message;\n\n    switch(errorCode) {\n      case -2:\n        message = \"Error load DocsAPI from \" + this.documentServerUrl;\n        break;\n      case -3:\n        message = \"DocsAPI is not defined\";\n        break;\n      default:\n        message = \"Unknown error loading component\";\n        errorCode = -1;\n    }\n\n    if (typeof this.onLoadComponentError == \"undefined\") {\n      console.error(message);\n    } else {\n      this.onLoadComponentError(errorCode, message);\n    }\n  }\n\n  private onAppReady() {\n    this.events_onAppReady!(window.DocEditor.instances[this.id]);\n  }\n}\n",
+            "sourceCode": "import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';\nimport { IConfig } from '../model/config';\nimport loadScript from \"../utils/loadScript\";\nimport { cloneDeep } from 'lodash';\n\ndeclare global {\n  interface Window {\n      DocsAPI?: any;\n      DocEditor?: any;\n  }\n}\n\n@Component({\n  selector: 'document-editor',\n  template: '<div [id]=\"id\"></div>',\n  styles: [\n  ],\n  standalone: false\n})\nexport class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {\n  @Input() id: string;\n  @Input() documentServerUrl: string;\n  @Input() shardkey: string | boolean = true;\n  @Input() config: IConfig;\n\n  @Input() document_fileType?: string;\n  @Input() document_title?: string;\n  @Input() documentType?: string;\n  @Input() editorConfig_lang?: string;\n  @Input() height?: string;\n  @Input() type?: string;\n  @Input() width?: string;\n\n  @Input() onLoadComponentError?: (errorCode: number, errorDescription: string) => void;\n\n  @Input() events_onAppReady?: (event: object) => void;\n  @Input() events_onDocumentStateChange?: (event: object) => void;\n  @Input() events_onMetaChange?: (event: object) => void;\n  @Input() events_onDocumentReady?: (event: object) => void;\n  @Input() events_onInfo?: (event: object) => void;\n  @Input() events_onWarning?: (event: object) => void;\n  @Input() events_onError?: (event: object) => void;\n  @Input() events_onRequestSharingSettings?: (event: object) => void;\n  @Input() events_onRequestRename?: (event: object) => void;\n  @Input() events_onMakeActionLink?: (event: object) => void;\n  @Input() events_onRequestInsertImage?: (event: object) => void;\n  @Input() events_onRequestSaveAs?: (event: object) => void;\n  /**\n   * @deprecated Deprecated since version 7.5, please use events_onRequestSelectSpreadsheet instead.\n   */\n  @Input() events_onRequestMailMergeRecipients?: (event: object) => void;\n  /**\n   * @deprecated Deprecated since version 7.5, please use events_onRequestSelectDocument instead.\n   */\n  @Input() events_onRequestCompareFile?: (event: object) => void;\n  @Input() events_onRequestEditRights?: (event: object) => void;\n  @Input() events_onRequestHistory?: (event: object) => void;\n  @Input() events_onRequestHistoryClose?: (event: object) => void;\n  @Input() events_onRequestHistoryData?: (event: object) => void;\n  @Input() events_onRequestRestore?: (event: object) => void;\n  @Input() events_onRequestSelectSpreadsheet?: (event: object) => void;\n  @Input() events_onRequestSelectDocument?: (event: object) => void;\n  @Input() events_onRequestUsers?: (event: object) => void;\n\n  isFirstOnChanges: boolean = true;\n\n  constructor() { }\n\n  ngOnInit(): void {\n    let url = this.documentServerUrl;\n    if (!url.endsWith(\"/\")) url += \"/\";\n\n    let docsApiUrl = `${url}web-apps/apps/api/documents/api.js`;\n    if (this.shardkey) {\n      if (typeof this.shardkey === \"boolean\") {\n        docsApiUrl += `?shardkey=${this.config.document?.key}`;\n      } else {\n        docsApiUrl += `?shardkey=${this.shardkey}`;\n      }\n    }\n\n    loadScript(docsApiUrl, \"onlyoffice-api-script\")\n      .then(() => this.onLoad())\n      .catch((err) => {\n        this.onError(-2);\n      });\n  }\n\n  ngOnChanges(changes: SimpleChanges) {\n    const listNameChanges = [\"config\", \"document_fileType\", \"document_title\", \"documentType\", \"editorConfig_lang\", \"height\", \"type\", \"width\"];\n\n    if (this.isFirstOnChanges) {\n      this.isFirstOnChanges = false;\n      return;\n    }\n\n    for (const name of listNameChanges) {\n      if (changes.hasOwnProperty(name)) {\n        if (window?.DocEditor?.instances[this.id]) {\n          window.DocEditor.instances[this.id].destroyEditor();\n          window.DocEditor.instances[this.id] = undefined;\n    \n          console.log(\"Important props have been changed. Load new Editor.\");\n          this.onLoad();\n          return;\n        }\n      }\n    }\n  }\n\n  ngOnDestroy() {\n    if (window?.DocEditor?.instances[this.id]) {\n      window.DocEditor.instances[this.id].destroyEditor();\n      window.DocEditor.instances[this.id] = undefined;\n    }\n  }\n\n  private onLoad = () => {\n    try {\n      if (!window.DocsAPI) this.onError(-3);\n      if (window?.DocEditor?.instances[this.id]) {\n        console.log(\"Skip loading. Instance already exists\", this.id);\n        return;\n      }\n\n      if (!window?.DocEditor?.instances) {\n        window.DocEditor = { instances: {} };\n      }\n\n      var cloneConfig = cloneDeep(this.config);\n\n      var propsConfig: any = {\n        documentType: this.documentType,\n        events: {\n          onAppReady: this.onAppReady,\n          onDocumentStateChange: this.events_onDocumentStateChange,\n          onMetaChange: this.events_onMetaChange,\n          onDocumentReady: this.events_onDocumentReady,\n          onInfo: this.events_onInfo,\n          onWarning: this.events_onWarning,\n          onError: this.events_onError,\n          onRequestSharingSettings: this.events_onRequestSharingSettings,\n          onRequestRename: this.events_onRequestRename,\n          onMakeActionLink: this.events_onMakeActionLink,\n          onRequestInsertImage: this.events_onRequestInsertImage,\n          onRequestSaveAs: this.events_onRequestSaveAs,\n          onRequestMailMergeRecipients: this.events_onRequestMailMergeRecipients,\n          onRequestCompareFile: this.events_onRequestCompareFile,\n          onRequestEditRights: this.events_onRequestEditRights,\n          onRequestHistory: this.events_onRequestHistory,\n          onRequestHistoryClose: this.events_onRequestHistoryClose,\n          onRequestHistoryData: this.events_onRequestHistoryData,\n          onRequestRestore: this.events_onRequestRestore,\n          onRequestSelectSpreadsheet: this.events_onRequestSelectSpreadsheet,\n          onRequestSelectDocument: this.events_onRequestSelectDocument,\n          onRequestUsers: this.events_onRequestUsers\n        },\n        height: this.height,\n        type: this.type,\n        width: this.width,\n      };\n\n      const document = this.getDocument();\n      const editorConfig = this.getEditorConfig();\n\n      if (document !== null) {\n        propsConfig.document = document;\n      }\n\n      if (editorConfig !== null) {\n        propsConfig.editorConfig = editorConfig;\n      }\n\n      let initConfig = Object.assign(propsConfig, cloneConfig || {});\n\n      const editor = window.DocsAPI.DocEditor(this.id, initConfig);\n      window.DocEditor.instances[this.id] = editor;\n    } catch (err: any) {\n      console.error(err);\n      this.onError(-1);\n    }\n  };\n\n  private getDocument = () => {\n    var document: any = null;\n\n    if (this.document_fileType) {\n      document = document || {};\n      document.fileType = this.document_fileType;\n    }\n\n    if (this.document_title) {\n      document = document || {};\n      document.document_title = this.document_title;\n    }\n\n    return document;\n  }\n\n  private getEditorConfig = () => {\n    var editorConfig: any = null;\n\n    if (this.editorConfig_lang) {\n      editorConfig = editorConfig || {};\n      editorConfig.lang = this.editorConfig_lang;\n    }\n\n    return editorConfig;\n  }\n\n  private onError = (errorCode: number) => {\n    let message;\n\n    switch(errorCode) {\n      case -2:\n        message = \"Error load DocsAPI from \" + this.documentServerUrl;\n        break;\n      case -3:\n        message = \"DocsAPI is not defined\";\n        break;\n      default:\n        message = \"Unknown error loading component\";\n        errorCode = -1;\n    }\n\n    if (typeof this.onLoadComponentError == \"undefined\") {\n      console.error(message);\n    } else {\n      this.onLoadComponentError(errorCode, message);\n    }\n  }\n\n  private onAppReady() {\n    this.events_onAppReady!(window.DocEditor.instances[this.id]);\n  }\n}\n",
             "properties": [
                 {
                     "name": "DocEditor",
@@ -351,7 +351,7 @@
         },
         {
             "name": "AddCommentReplyComponent",
-            "id": "component-AddCommentReplyComponent-ec3ec1e7fe7dc70bb53058a7df55c87bd3919d1cc6b825112dfed8a9449065ab97b61e7a2a342d4993454ee7df9bb76dbebc55b1578d893255be94fcbb08f9d1",
+            "id": "component-AddCommentReplyComponent-0b450cad5f9c71bae903a5b2b80e4a73e27b4d4b890ee1452454f8db5d97ce217d8d9e330726e061d5e31a52a8e802a68f75c410c77a9f73c3317aec4b11d58d",
             "file": "src/app/components/comments/add-comment-reply/add-comment-reply.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -373,7 +373,7 @@
                     "name": "comment",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 11,
+                    "line": 13,
                     "type": "any",
                     "decorators": []
                 },
@@ -381,7 +381,7 @@
                     "name": "connector",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 9,
+                    "line": 11,
                     "type": "any",
                     "decorators": []
                 },
@@ -389,7 +389,7 @@
                     "name": "userName",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 10,
+                    "line": 12,
                     "type": "string",
                     "decorators": []
                 }
@@ -405,7 +405,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 13
+                    "line": 15
                 },
                 {
                     "name": "showAddReply",
@@ -416,7 +416,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 14
+                    "line": 16
                 }
             ],
             "methodsClass": [
@@ -426,7 +426,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 20,
+                    "line": 22,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -443,7 +443,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 16,
+                    "line": 18,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -464,11 +464,16 @@
             "hostBindings": [],
             "hostListeners": [],
             "standalone": false,
-            "imports": [],
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, Input} from '@angular/core'\r\n\r\n@Component({\r\n  selector: 'add-comment-reply',\r\n  templateUrl: './add-comment-reply.component.html',\r\n  styleUrls: ['../comments.component.css']\r\n})\r\nexport class AddCommentReplyComponent {\r\n  @Input() connector: any;\r\n  @Input() userName: string;\r\n  @Input() comment: any;\r\n\r\n  reply = \"\";\r\n  showAddReply = false;\r\n\r\n  getValue(event: Event): string {\r\n    return (event.target as HTMLInputElement).value;\r\n  }\r\n\r\n  addReply () {\r\n    if (Boolean(this.reply)) {\r\n      var currentdate = Date.now(); \r\n      var datetime = \"\" + currentdate;\r\n\r\n      this.comment[\"Data\"][\"Replies\"].push({ Text: this.reply, Time: datetime, UserName: this.userName });\r\n\r\n      this.connector.executeMethod(\"ChangeComment\", [this.comment[\"Id\"], this.comment[\"Data\"]]);\r\n\r\n      this.reply = \"\";\r\n      this.showAddReply = false;\r\n    }\r\n  }\r\n}\r\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport {Component, Input} from '@angular/core'\n\n@Component({\n  selector: 'add-comment-reply',\n  templateUrl: './add-comment-reply.component.html',\n  styleUrls: ['../comments.component.css'],\n  imports: [ CommonModule ]\n})\nexport class AddCommentReplyComponent {\n  @Input() connector: any;\n  @Input() userName: string;\n  @Input() comment: any;\n\n  reply = \"\";\n  showAddReply = false;\n\n  getValue(event: Event): string {\n    return (event.target as HTMLInputElement).value;\n  }\n\n  addReply () {\n    if (Boolean(this.reply)) {\n      var currentdate = Date.now(); \n      var datetime = \"\" + currentdate;\n\n      this.comment[\"Data\"][\"Replies\"].push({ Text: this.reply, Time: datetime, UserName: this.userName });\n\n      this.connector.executeMethod(\"ChangeComment\", [this.comment[\"Id\"], this.comment[\"Data\"]]);\n\n      this.reply = \"\";\n      this.showAddReply = false;\n    }\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -482,7 +487,7 @@
         },
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-770e62185cfb49ad2c415060c6781f7c683a50da4fc456c544188391f1b97a553f04da223bc9eb35d4b2089aa350719fbcf5c6cd126607c78e45bc6d404c206e",
+            "id": "component-AppComponent-9b5095c2d799ddff1753d2db7cf8b6b26517550dc42893dc4a3642bd9b251dcd550e7d61f2ce7df8e6c072a52766427115bdd1e7a7b869d8f9e2f8886be5f05d",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -509,7 +514,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 10
+                    "line": 12
                 },
                 {
                     "name": "config",
@@ -520,7 +525,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 25
+                    "line": 27
                 },
                 {
                     "name": "connector",
@@ -531,7 +536,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 11
+                    "line": 13
                 },
                 {
                     "name": "onDocumentReady",
@@ -542,7 +547,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 13
+                    "line": 15
                 }
             ],
             "methodsClass": [],
@@ -551,11 +556,20 @@
             "hostBindings": [],
             "hostListeners": [],
             "standalone": false,
-            "imports": [],
+            "imports": [
+                {
+                    "name": "DocumentEditorModule",
+                    "type": "module"
+                },
+                {
+                    "name": "CommentsComponent",
+                    "type": "component"
+                }
+            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport { IConfig } from '@onlyoffice/document-editor-angular';\nimport config from \"./../../config/config.json\";\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html'\n})\nexport class AppComponent {\n  comments: any[] = [];\n  connector: any = null;\n\n  onDocumentReady = () => {\n    var editor = window.DocEditor.instances[\"docxForComments\"];\n    this.connector = editor.createConnector();\n    this.connector.executeMethod(\"GetAllComments\", null, function(data: any) {\n      let commentsRevers: any[] = [];\n      for (var i = 0; i < data.length; i++){\n        commentsRevers[i] = data[(data.length - 1) - i];\n      }\n      this.comments = commentsRevers;\n    }.bind(this));\n  };\n\n  config: IConfig = {\n    document: {\n        fileType: \"docx\",\n        title: \"demo.docx\",\n        url: config.demoStorage + \"demo.docx\",\n        key: \"712027760_embedded\"\n    },\n    documentType: \"word\",\n    editorConfig: {\n      mode: \"edit\",\n      user: {\n        id: \"uid-1\",\n        name: \"John Smith\",\n        },\n      },\n    height:\"600px\",\n    width:\"70%\"\n  }\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { DocumentEditorModule, IConfig } from '@onlyoffice/document-editor-angular';\nimport config from \"./../../config/config.json\";\nimport { CommentsComponent } from './components/comments/comments.component';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  imports: [ DocumentEditorModule, CommentsComponent ]\n})\nexport class AppComponent {\n  comments: any[] = [];\n  connector: any = null;\n\n  onDocumentReady = () => {\n    var editor = window.DocEditor.instances[\"docxForComments\"];\n    this.connector = editor.createConnector();\n    this.connector.executeMethod(\"GetAllComments\", null, function(data: any) {\n      let commentsRevers: any[] = [];\n      for (var i = 0; i < data.length; i++){\n        commentsRevers[i] = data[(data.length - 1) - i];\n      }\n      this.comments = commentsRevers;\n    }.bind(this));\n  };\n\n  config: IConfig = {\n    document: {\n        fileType: \"docx\",\n        title: \"demo.docx\",\n        url: config.demoStorage + \"demo.docx\",\n        key: \"712027760_embedded\"\n    },\n    documentType: \"word\",\n    editorConfig: {\n      mode: \"edit\",\n      user: {\n        id: \"uid-1\",\n        name: \"John Smith\",\n        },\n      },\n    height:\"600px\",\n    width:\"70%\"\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -564,7 +578,7 @@
         },
         {
             "name": "CommenstStoriesComponent",
-            "id": "component-CommenstStoriesComponent-68c62a91dfadd8b509df66630e339284c6fd2024f3fe978dadaf807bd40e365ed181c248b004237fb969fc590b857383f3f734afbf7050f524555c6d7c5dfa25",
+            "id": "component-CommenstStoriesComponent-ad7ae531dc17d95865cfd43e7d964c60595602d3305ed443c278f6f9c95c2bd208d1863ff76ae9375c6130e7f8dd53572cbe6b24fd9a939f07dfdc040acdf759",
             "file": "src/app/components/comments/comments-stories/commenst-stories.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -584,7 +598,7 @@
                     "name": "config",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 12,
+                    "line": 14,
                     "type": "IConfig",
                     "decorators": []
                 },
@@ -592,7 +606,7 @@
                     "name": "documentServerUrl",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 11,
+                    "line": 13,
                     "type": "string",
                     "decorators": []
                 },
@@ -600,7 +614,7 @@
                     "name": "editorId",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 9,
+                    "line": 11,
                     "type": "string",
                     "decorators": []
                 },
@@ -608,7 +622,7 @@
                     "name": "userName",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 10,
+                    "line": 12,
                     "type": "string",
                     "decorators": []
                 }
@@ -624,7 +638,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 14
+                    "line": 16
                 },
                 {
                     "name": "connector",
@@ -635,7 +649,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 15
+                    "line": 17
                 },
                 {
                     "name": "onDocumentReady",
@@ -646,7 +660,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 17
+                    "line": 19
                 }
             ],
             "methodsClass": [],
@@ -655,11 +669,20 @@
             "hostBindings": [],
             "hostListeners": [],
             "standalone": false,
-            "imports": [],
+            "imports": [
+                {
+                    "name": "DocumentEditorModule",
+                    "type": "module"
+                },
+                {
+                    "name": "CommentsComponent",
+                    "type": "component"
+                }
+            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { IConfig } from '@onlyoffice/document-editor-angular';\n\n@Component({\n  selector: 'comments-stories',\n  templateUrl: './comments-stories.component.html'\n})\nexport class CommenstStoriesComponent {\n  @Input() editorId: string;\n  @Input() userName: string;\n  @Input() documentServerUrl: string;\n  @Input() config: IConfig;\n\n  comments: any[] = [];\n  connector: any = null;\n\n  onDocumentReady = () => {\n    var editor = window.DocEditor.instances[\"docxForComments\"];\n    this.connector = editor.createConnector();\n    this.connector.executeMethod(\"GetAllComments\", null, function(data: any) {\n      let commentsRevers: any[] = [];\n      for (var i = 0; i < data.length; i++){\n        commentsRevers[i] = data[(data.length - 1) - i];\n      }\n      this.comments = commentsRevers;\n    }.bind(this));\n  };\n}",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { DocumentEditorModule, IConfig } from '@onlyoffice/document-editor-angular';\nimport { CommentsComponent } from '../comments.component';\n\n@Component({\n  selector: 'comments-stories',\n  templateUrl: './comments-stories.component.html',\n  imports: [ DocumentEditorModule, CommentsComponent ]\n})\nexport class CommenstStoriesComponent {\n  @Input() editorId: string;\n  @Input() userName: string;\n  @Input() documentServerUrl: string;\n  @Input() config: IConfig;\n\n  comments: any[] = [];\n  connector: any = null;\n\n  onDocumentReady = () => {\n    var editor = window.DocEditor.instances[\"docxForComments\"];\n    this.connector = editor.createConnector();\n    this.connector.executeMethod(\"GetAllComments\", null, function(data: any) {\n      let commentsRevers: any[] = [];\n      for (var i = 0; i < data.length; i++){\n        commentsRevers[i] = data[(data.length - 1) - i];\n      }\n      this.comments = commentsRevers;\n    }.bind(this));\n  };\n}",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -668,7 +691,7 @@
         },
         {
             "name": "CommentsComponent",
-            "id": "component-CommentsComponent-d639fee2e9209e3e7c7e4b0040627b94267a8618fc90fabadf5732b5cc7bbf1d6f50d5abde980b19c169e1337584ffee87e1dfeb242bbfb62b3843d1fc416dee",
+            "id": "component-CommentsComponent-60b78bae44574ced09d49b652dcd7ecad414be02548bce5fbb375b8badd9e99ac95b931f0e28c94d9c4efc8a5e05d202d09b850dc276dc3e7d1640f7a79dd58a",
             "file": "src/app/components/comments/comments.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -690,7 +713,7 @@
                     "name": "comments",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 10,
+                    "line": 13,
                     "type": "any[]",
                     "decorators": []
                 },
@@ -698,7 +721,7 @@
                     "name": "connector",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 11,
+                    "line": 14,
                     "type": "any",
                     "decorators": []
                 },
@@ -706,7 +729,7 @@
                     "name": "userName",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 9,
+                    "line": 12,
                     "type": "string",
                     "decorators": []
                 }
@@ -719,11 +742,20 @@
             "hostBindings": [],
             "hostListeners": [],
             "standalone": false,
-            "imports": [],
+            "imports": [
+                {
+                    "name": "ListCommentsComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "AddCommentComponent",
+                    "type": "component"
+                }
+            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, Input} from '@angular/core'\r\n\r\n@Component({\r\n  selector: 'comments',\r\n  templateUrl: './comments.component.html',\r\n  styleUrls: ['./comments.component.css']\r\n})\r\nexport class CommentsComponent {\r\n  @Input() userName: string;\r\n  @Input() comments: any[];\r\n  @Input() connector: any;\r\n\r\n}\r\n",
+            "sourceCode": "import {Component, Input} from '@angular/core'\nimport { ListCommentsComponent } from './list-comments/list-comments.component';\nimport { AddCommentComponent } from './add-comment/add-comment.component';\n\n@Component({\n  selector: 'comments',\n  templateUrl: './comments.component.html',\n  styleUrls: ['./comments.component.css'],\n  imports: [ ListCommentsComponent, AddCommentComponent ]\n})\nexport class CommentsComponent {\n  @Input() userName: string;\n  @Input() comments: any[];\n  @Input() connector: any;\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -737,7 +769,7 @@
         },
         {
             "name": "ContentControlsComponent",
-            "id": "component-ContentControlsComponent-b26525960c55175e947cfc2b7d93a577f808e406fd973c9990dd0f5cca44af0484c3ec0e5e874ca87626892701a403e5851130938d96be126b862b4905b1078d",
+            "id": "component-ContentControlsComponent-cd64638004ae9f3d3b333ddc6e540ff6e3a62b5012b84162307495535d22ee225632b17188184bb7464f0a157c92170e49fe9a619aa8802e13cbc7590fd3fd69",
             "file": "src/app/components/content-controls/content-controls.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -759,7 +791,7 @@
                     "name": "contentControls",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 9,
+                    "line": 13,
                     "type": "any[]",
                     "decorators": []
                 },
@@ -767,7 +799,7 @@
                     "name": "selectedOption",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 10,
+                    "line": 14,
                     "type": "any",
                     "decorators": []
                 },
@@ -775,7 +807,7 @@
                     "name": "setFormValue",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 12,
+                    "line": 16,
                     "type": "function",
                     "decorators": []
                 }
@@ -786,7 +818,7 @@
                     "defaultValue": "new EventEmitter()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 11,
+                    "line": 15,
                     "type": "EventEmitter<any>"
                 }
             ],
@@ -800,7 +832,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 14
+                    "line": 18
                 },
                 {
                     "name": "onChangeSelectedOption",
@@ -811,7 +843,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 64
+                    "line": 68
                 }
             ],
             "methodsClass": [
@@ -821,7 +853,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 22,
+                    "line": 26,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -838,7 +870,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 60,
+                    "line": 64,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -859,11 +891,24 @@
             "hostBindings": [],
             "hostListeners": [],
             "standalone": false,
-            "imports": [],
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "InputContentControlComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "RadioContentControlComponent",
+                    "type": "component"
+                }
+            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'content-controls',\r\n  templateUrl: './content-controls.component.html',\r\n  styleUrls: [ './content-controls.component.css' ]\r\n})\r\nexport class ContentControlsComponent implements OnChanges {\r\n  @Input() contentControls: any[];\r\n  @Input() selectedOption: any;\r\n  @Output() selectedOptionChange: EventEmitter<any> = new EventEmitter();\r\n  @Input() setFormValue: (id: string, value: string) => void;\r\n\r\n  copyContentControls: any[] = [];\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    if (changes.hasOwnProperty(\"contentControls\")) {\r\n      this.copyContentControls = this.getCopyContentControls()\r\n    }\r\n  }\r\n\r\n  getCopyContentControls () {\r\n    let copyContentControls: any[] = [];\r\n\r\n    for (i = 0; i < this.contentControls?.length; i++) {\r\n      var copyContentControl = this.contentControls[i];\r\n      copyContentControls[i] = {...copyContentControl};\r\n    }\r\n\r\n    let groupsRadioControls: any[] = copyContentControls.filter(contentControl => contentControl.Tag != \"\" && contentControl.Type == \"radio\").reduce((r, a) => {\r\n      r[a.GroupKey] = r[a.GroupKey] || [];\r\n      r[a.GroupKey].push({Tag: a.Tag, checked: a.Value});\r\n      return r;\r\n    }, {});\r\n\r\n    for (const [key, value] of Object.entries(groupsRadioControls)) {\r\n      let index = [];\r\n      let first = true;\r\n\r\n      for (var i = 0; i < copyContentControls.length; i++) {\r\n        if (copyContentControls[i].GroupKey && copyContentControls[i].GroupKey == key) {\r\n          index.push(i);\r\n        } \r\n      }\r\n\r\n      for (var i = 0; i < index.length; i++) {\r\n        if (first) {\r\n          copyContentControls[index[i]].Tag = key;\r\n          copyContentControls[index[i]].Value = value;\r\n          first = false;\r\n        } else {\r\n          copyContentControls.splice(index[i], 1);\r\n        }\r\n      }\r\n    }\r\n\r\n    return copyContentControls.filter(contentControl => contentControl.Tag != \"\");\r\n  }\r\n\r\n  getLabel(nameTag: string) {\r\n    return nameTag.replace(/([a-z])([A-Z])/g, '$1 $2');\r\n  }\r\n\r\n  onChangeSelectedOption = (value: any) => {\r\n    this.selectedOptionChange.emit(value);\r\n  }\r\n\r\n }",
+            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';\nimport { RadioContentControlComponent } from './radio-content-control/radio-content-control.component';\nimport { InputContentControlComponent } from './input-content-control/input-content-control.component';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'content-controls',\n  templateUrl: './content-controls.component.html',\n  styleUrls: [ './content-controls.component.css' ],\n  imports: [ CommonModule, InputContentControlComponent, RadioContentControlComponent ]\n})\nexport class ContentControlsComponent implements OnChanges {\n  @Input() contentControls: any[];\n  @Input() selectedOption: any;\n  @Output() selectedOptionChange: EventEmitter<any> = new EventEmitter();\n  @Input() setFormValue: (id: string, value: string) => void;\n\n  copyContentControls: any[] = [];\n\n  ngOnChanges(changes: SimpleChanges) {\n    if (changes.hasOwnProperty(\"contentControls\")) {\n      this.copyContentControls = this.getCopyContentControls()\n    }\n  }\n\n  getCopyContentControls () {\n    let copyContentControls: any[] = [];\n\n    for (i = 0; i < this.contentControls?.length; i++) {\n      var copyContentControl = this.contentControls[i];\n      copyContentControls[i] = {...copyContentControl};\n    }\n\n    let groupsRadioControls: any[] = copyContentControls.filter(contentControl => contentControl.Tag != \"\" && contentControl.Type == \"radio\").reduce((r, a) => {\n      r[a.GroupKey] = r[a.GroupKey] || [];\n      r[a.GroupKey].push({Tag: a.Tag, checked: a.Value});\n      return r;\n    }, {});\n\n    for (const [key, value] of Object.entries(groupsRadioControls)) {\n      let index = [];\n      let first = true;\n\n      for (var i = 0; i < copyContentControls.length; i++) {\n        if (copyContentControls[i].GroupKey && copyContentControls[i].GroupKey == key) {\n          index.push(i);\n        } \n      }\n\n      for (var i = 0; i < index.length; i++) {\n        if (first) {\n          copyContentControls[index[i]].Tag = key;\n          copyContentControls[index[i]].Value = value;\n          first = false;\n        } else {\n          copyContentControls.splice(index[i], 1);\n        }\n      }\n    }\n\n    return copyContentControls.filter(contentControl => contentControl.Tag != \"\");\n  }\n\n  getLabel(nameTag: string) {\n    return nameTag.replace(/([a-z])([A-Z])/g, '$1 $2');\n  }\n\n  onChangeSelectedOption = (value: any) => {\n    this.selectedOptionChange.emit(value);\n  }\n\n }",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -880,7 +925,7 @@
         },
         {
             "name": "ContentControlsStoriesComponent",
-            "id": "component-ContentControlsStoriesComponent-1cf9a20a7906f46701ddccd85cd116bf4185f447cb7c8781eaeb9f728a63b3c74656325fcd0f8def68be96b5f4007d3047d347e1710b5860e19eb3b38d351dbf",
+            "id": "component-ContentControlsStoriesComponent-849b356fdaf1fca377b2c8e9dc01c3bdc9c761c3240796589d219894a0d5e6a38c64508a24ace87fdbd018df378aebbdbbd384afb5e2a99d7b5cc859ef5350c3",
             "file": "src/app/components/content-controls/content-controls-stories/content-controls-stories.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -900,7 +945,7 @@
                     "name": "config",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 12,
+                    "line": 16,
                     "type": "IConfig",
                     "decorators": []
                 },
@@ -908,7 +953,7 @@
                     "name": "documentServerUrl",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 11,
+                    "line": 15,
                     "type": "string",
                     "decorators": []
                 },
@@ -916,7 +961,7 @@
                     "name": "editorId",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 10,
+                    "line": 14,
                     "type": "string",
                     "decorators": []
                 },
@@ -924,7 +969,7 @@
                     "name": "persons",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 13,
+                    "line": 17,
                     "type": "IPerson[]",
                     "decorators": []
                 }
@@ -940,7 +985,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 15
+                    "line": 19
                 },
                 {
                     "name": "contentControls",
@@ -950,7 +995,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 17
+                    "line": 21
                 },
                 {
                     "name": "getAllContentControls",
@@ -961,7 +1006,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 37
+                    "line": 41
                 },
                 {
                     "name": "onBlurContentControl",
@@ -972,7 +1017,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 67
+                    "line": 71
                 },
                 {
                     "name": "onChangeContentControl",
@@ -983,7 +1028,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 63
+                    "line": 67
                 },
                 {
                     "name": "onChangeSelect",
@@ -994,7 +1039,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 20
+                    "line": 24
                 },
                 {
                     "name": "onDocumentReady",
@@ -1005,7 +1050,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 71
+                    "line": 75
                 },
                 {
                     "name": "selectedPerson",
@@ -1015,7 +1060,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 18
+                    "line": 22
                 },
                 {
                     "name": "setFormValue",
@@ -1026,7 +1071,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 31
+                    "line": 35
                 }
             ],
             "methodsClass": [],
@@ -1035,11 +1080,28 @@
             "hostBindings": [],
             "hostListeners": [],
             "standalone": false,
-            "imports": [],
+            "imports": [
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "NgSelectModule",
+                    "type": "module"
+                },
+                {
+                    "name": "DocumentEditorModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ContentControlsComponent",
+                    "type": "component"
+                }
+            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { IConfig } from '@onlyoffice/document-editor-angular';\nimport { IPerson } from '../../../model/person';\n\n@Component({\n  selector: 'content-controls-stories',\n  templateUrl: './content-controls-stories.component.html'\n})\nexport class ContentControlsStoriesComponent {\n  @Input() editorId: string;\n  @Input() documentServerUrl: string;\n  @Input() config: IConfig;\n  @Input() persons: IPerson[];\n\n  connector: any = null;\n\n  contentControls: any;\n  selectedPerson: any;\n\n  onChangeSelect = () => {\n    for (var [key, value] of Object.entries<string>(this.selectedPerson.value)) {\n      if (key == \"Sex\") {\n        key = value == \"Male\" ? \"Male\" : \"Female\";\n        value = \"true\";\n      }\n\n      this.setFormValue(key, value || \"\");\n    }\n  };\n\n  setFormValue = (formId: string, value: string) => {\n    this.connector.executeMethod(\"GetFormsByTag\", [formId], function(forms: any) {\n      this.connector.executeMethod(\"SetFormValue\", [forms[0][\"InternalId\"], value], null);\n    }.bind(this));\n  }\n\n  getAllContentControls = () => {\n    this.connector.executeMethod (\"GetAllContentControls\", null, function(data: any) {\n      for (let i = 0; i < data.length; i++) {\n        switch (data[i].Tag) {\n          case \"Male\":\n            data[i].GroupKey = \"Sex\";\n            data[i].Type = \"radio\";\n            break;\n          case \"Female\":\n            data[i].GroupKey = \"Sex\";\n            data[i].Type = \"radio\";\n            break;\n          default:\n            data[i].Type = \"input\";\n        }\n\n        this.connector.executeMethod(\"GetFormValue\", [data[i].InternalId], (value: any) => {\n            data[i].Value = value ? value : \"\";\n            if (data.length - 1 == i) {\n              this.contentControls = data.filter((contentControl: any) => contentControl.Tag != \"\");\n            }\n        });\n      }\n    }.bind(this));\n  }\n\n  onChangeContentControl = (oPr: { Tag?: string; InternalId?: string }) => {\n    this.getAllContentControls();\n  };\n\n  onBlurContentControl = (oPr: { Tag: string; InternalId: string }) => {\n    this.selectedPerson = {label: \"Custom Data\"};\n  };\n\n  onDocumentReady = () => {\n    try {\n      var editor = window.DocEditor.instances[\"pdfEditor\"];\n      this.connector = editor.createConnector();\n      this.connector.connect();\n\n      this.getAllContentControls();\n      this.connector.attachEvent(\"onChangeContentControl\", this.onChangeContentControl);\n      this.connector.attachEvent(\"onBlurContentControl\", this.onBlurContentControl);\n    } catch (err) {\n      console.error(err);\n    }\n  };\n}",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { DocumentEditorModule, IConfig } from '@onlyoffice/document-editor-angular';\nimport { IPerson } from '../../../model/person';\nimport { ContentControlsComponent } from '../content-controls.component';\nimport { FormsModule } from '@angular/forms';\nimport { NgSelectModule } from '@ng-select/ng-select';\n\n@Component({\n  selector: 'content-controls-stories',\n  templateUrl: './content-controls-stories.component.html',\n  imports: [ FormsModule, NgSelectModule, DocumentEditorModule, ContentControlsComponent ]\n})\nexport class ContentControlsStoriesComponent {\n  @Input() editorId: string;\n  @Input() documentServerUrl: string;\n  @Input() config: IConfig;\n  @Input() persons: IPerson[];\n\n  connector: any = null;\n\n  contentControls: any;\n  selectedPerson: any;\n\n  onChangeSelect = () => {\n    for (var [key, value] of Object.entries<string>(this.selectedPerson.value)) {\n      if (key == \"Sex\") {\n        key = value == \"Male\" ? \"Male\" : \"Female\";\n        value = \"true\";\n      }\n\n      this.setFormValue(key, value || \"\");\n    }\n  };\n\n  setFormValue = (formId: string, value: string) => {\n    this.connector.executeMethod(\"GetFormsByTag\", [formId], function(forms: any) {\n      this.connector.executeMethod(\"SetFormValue\", [forms[0][\"InternalId\"], value], null);\n    }.bind(this));\n  }\n\n  getAllContentControls = () => {\n    this.connector.executeMethod (\"GetAllContentControls\", null, function(data: any) {\n      for (let i = 0; i < data.length; i++) {\n        switch (data[i].Tag) {\n          case \"Male\":\n            data[i].GroupKey = \"Sex\";\n            data[i].Type = \"radio\";\n            break;\n          case \"Female\":\n            data[i].GroupKey = \"Sex\";\n            data[i].Type = \"radio\";\n            break;\n          default:\n            data[i].Type = \"input\";\n        }\n\n        this.connector.executeMethod(\"GetFormValue\", [data[i].InternalId], (value: any) => {\n            data[i].Value = value ? value : \"\";\n            if (data.length - 1 == i) {\n              this.contentControls = data.filter((contentControl: any) => contentControl.Tag != \"\");\n            }\n        });\n      }\n    }.bind(this));\n  }\n\n  onChangeContentControl = (oPr: { Tag?: string; InternalId?: string }) => {\n    this.getAllContentControls();\n  };\n\n  onBlurContentControl = (oPr: { Tag: string; InternalId: string }) => {\n    this.selectedPerson = {label: \"Custom Data\"};\n  };\n\n  onDocumentReady = () => {\n    try {\n      var editor = window.DocEditor.instances[\"pdfEditor\"];\n      this.connector = editor.createConnector();\n      this.connector.connect();\n\n      this.getAllContentControls();\n      this.connector.attachEvent(\"onChangeContentControl\", this.onChangeContentControl);\n      this.connector.attachEvent(\"onBlurContentControl\", this.onBlurContentControl);\n    } catch (err) {\n      console.error(err);\n    }\n  };\n}",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -1048,7 +1110,7 @@
         },
         {
             "name": "DocumentEditorComponent",
-            "id": "component-DocumentEditorComponent-7dd6f327280e39ff99da1ba52869f7ff291c2a5cba578e55a7a0d52a437021e2d9b0a55f6ccaed63038cd0e59a670633817962f83ed7ce03b5eaa32ff9b516cf",
+            "id": "component-DocumentEditorComponent-bb49295852e90fd6653f1fc4e0ec4ec972ac526c1f5175f72d06e07f8415173896399990932b856b0987c9d12b8e5d06d150b9c912f40abe1c7242d1b234895c",
             "file": "projects/onlyoffice/document-editor-angular/src/lib/components/document-editor.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1067,7 +1129,7 @@
                     "name": "config",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 38,
+                    "line": 40,
                     "type": "IConfig",
                     "decorators": []
                 },
@@ -1075,7 +1137,7 @@
                     "name": "document_fileType",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 40,
+                    "line": 42,
                     "type": "string",
                     "decorators": []
                 },
@@ -1083,7 +1145,7 @@
                     "name": "document_title",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 41,
+                    "line": 43,
                     "type": "string",
                     "decorators": []
                 },
@@ -1091,7 +1153,7 @@
                     "name": "documentServerUrl",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 37,
+                    "line": 38,
                     "type": "string",
                     "decorators": []
                 },
@@ -1099,7 +1161,7 @@
                     "name": "documentType",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 42,
+                    "line": 44,
                     "type": "string",
                     "decorators": []
                 },
@@ -1107,7 +1169,7 @@
                     "name": "editorConfig_lang",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 43,
+                    "line": 45,
                     "type": "string",
                     "decorators": []
                 },
@@ -1115,7 +1177,7 @@
                     "name": "events_onAppReady",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 50,
+                    "line": 52,
                     "type": "function",
                     "decorators": []
                 },
@@ -1123,7 +1185,7 @@
                     "name": "events_onDocumentReady",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 53,
+                    "line": 55,
                     "type": "function",
                     "decorators": []
                 },
@@ -1131,7 +1193,7 @@
                     "name": "events_onDocumentStateChange",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 51,
+                    "line": 53,
                     "type": "function",
                     "decorators": []
                 },
@@ -1139,7 +1201,7 @@
                     "name": "events_onError",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 56,
+                    "line": 58,
                     "type": "function",
                     "decorators": []
                 },
@@ -1147,7 +1209,7 @@
                     "name": "events_onInfo",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 54,
+                    "line": 56,
                     "type": "function",
                     "decorators": []
                 },
@@ -1155,7 +1217,7 @@
                     "name": "events_onMakeActionLink",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 59,
+                    "line": 61,
                     "type": "function",
                     "decorators": []
                 },
@@ -1163,7 +1225,7 @@
                     "name": "events_onMetaChange",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 52,
+                    "line": 54,
                     "type": "function",
                     "decorators": []
                 },
@@ -1173,16 +1235,16 @@
                     "deprecationMessage": "Deprecated since version 7.5, please use events_onRequestSelectDocument instead.",
                     "jsdoctags": [
                         {
-                            "pos": 2413,
-                            "end": 2509,
+                            "pos": 2480,
+                            "end": 2576,
                             "kind": 331,
                             "id": 0,
                             "flags": 16842752,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
                             "tagName": {
-                                "pos": 2414,
-                                "end": 2424,
+                                "pos": 2481,
+                                "end": 2491,
                                 "kind": 80,
                                 "id": 0,
                                 "flags": 16842752,
@@ -1192,7 +1254,7 @@
                             "comment": "<p>Deprecated since version 7.5, please use events_onRequestSelectDocument instead.</p>\n"
                         }
                     ],
-                    "line": 69,
+                    "line": 71,
                     "type": "function",
                     "decorators": []
                 },
@@ -1200,7 +1262,7 @@
                     "name": "events_onRequestEditRights",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 70,
+                    "line": 72,
                     "type": "function",
                     "decorators": []
                 },
@@ -1208,7 +1270,7 @@
                     "name": "events_onRequestHistory",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 71,
+                    "line": 73,
                     "type": "function",
                     "decorators": []
                 },
@@ -1216,7 +1278,7 @@
                     "name": "events_onRequestHistoryClose",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 72,
+                    "line": 74,
                     "type": "function",
                     "decorators": []
                 },
@@ -1224,7 +1286,7 @@
                     "name": "events_onRequestHistoryData",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 73,
+                    "line": 75,
                     "type": "function",
                     "decorators": []
                 },
@@ -1232,7 +1294,7 @@
                     "name": "events_onRequestInsertImage",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 60,
+                    "line": 62,
                     "type": "function",
                     "decorators": []
                 },
@@ -1242,16 +1304,16 @@
                     "deprecationMessage": "Deprecated since version 7.5, please use events_onRequestSelectSpreadsheet instead.",
                     "jsdoctags": [
                         {
-                            "pos": 2226,
-                            "end": 2325,
+                            "pos": 2293,
+                            "end": 2392,
                             "kind": 331,
                             "id": 0,
                             "flags": 16842752,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
                             "tagName": {
-                                "pos": 2227,
-                                "end": 2237,
+                                "pos": 2294,
+                                "end": 2304,
                                 "kind": 80,
                                 "id": 0,
                                 "flags": 16842752,
@@ -1261,7 +1323,7 @@
                             "comment": "<p>Deprecated since version 7.5, please use events_onRequestSelectSpreadsheet instead.</p>\n"
                         }
                     ],
-                    "line": 65,
+                    "line": 67,
                     "type": "function",
                     "decorators": []
                 },
@@ -1269,7 +1331,7 @@
                     "name": "events_onRequestRename",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 58,
+                    "line": 60,
                     "type": "function",
                     "decorators": []
                 },
@@ -1277,7 +1339,7 @@
                     "name": "events_onRequestRestore",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 74,
+                    "line": 76,
                     "type": "function",
                     "decorators": []
                 },
@@ -1285,7 +1347,7 @@
                     "name": "events_onRequestSaveAs",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 61,
+                    "line": 63,
                     "type": "function",
                     "decorators": []
                 },
@@ -1293,7 +1355,7 @@
                     "name": "events_onRequestSelectDocument",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 76,
+                    "line": 78,
                     "type": "function",
                     "decorators": []
                 },
@@ -1301,7 +1363,7 @@
                     "name": "events_onRequestSelectSpreadsheet",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 75,
+                    "line": 77,
                     "type": "function",
                     "decorators": []
                 },
@@ -1309,7 +1371,7 @@
                     "name": "events_onRequestSharingSettings",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 57,
+                    "line": 59,
                     "type": "function",
                     "decorators": []
                 },
@@ -1317,7 +1379,7 @@
                     "name": "events_onRequestUsers",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 77,
+                    "line": 79,
                     "type": "function",
                     "decorators": []
                 },
@@ -1325,7 +1387,7 @@
                     "name": "events_onWarning",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 55,
+                    "line": 57,
                     "type": "function",
                     "decorators": []
                 },
@@ -1333,7 +1395,7 @@
                     "name": "height",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 44,
+                    "line": 46,
                     "type": "string",
                     "decorators": []
                 },
@@ -1341,7 +1403,7 @@
                     "name": "id",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 36,
+                    "line": 37,
                     "type": "string",
                     "decorators": []
                 },
@@ -1349,15 +1411,24 @@
                     "name": "onLoadComponentError",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 48,
+                    "line": 50,
                     "type": "function",
+                    "decorators": []
+                },
+                {
+                    "name": "shardkey",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 39,
+                    "type": "string | boolean",
                     "decorators": []
                 },
                 {
                     "name": "type",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 45,
+                    "line": 47,
                     "type": "string",
                     "decorators": []
                 },
@@ -1365,7 +1436,7 @@
                     "name": "width",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 46,
+                    "line": 48,
                     "type": "string",
                     "decorators": []
                 }
@@ -1381,7 +1452,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 79
+                    "line": 81
                 }
             ],
             "methodsClass": [],
@@ -1394,7 +1465,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';\nimport { IConfig } from '../model/config';\nimport loadScript from \"../utils/loadScript\";\nimport { cloneDeep } from 'lodash';\n\ndeclare global {\n  interface Window {\n      DocsAPI?: any;\n      DocEditor?: any;\n  }\n}\n\n@Component({\n  selector: 'document-editor',\n  template: '<div [id]=\"id\"></div>',\n  styles: [\n  ]\n})\nexport class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {\n  @Input() id: string;\n  @Input() documentServerUrl: string;\n  @Input() config: IConfig;\n\n  @Input() document_fileType?: string;\n  @Input() document_title?: string;\n  @Input() documentType?: string;\n  @Input() editorConfig_lang?: string;\n  @Input() height?: string;\n  @Input() type?: string;\n  @Input() width?: string;\n\n  @Input() onLoadComponentError?: (errorCode: number, errorDescription: string) => void;\n\n  @Input() events_onAppReady?: (event: object) => void;\n  @Input() events_onDocumentStateChange?: (event: object) => void;\n  @Input() events_onMetaChange?: (event: object) => void;\n  @Input() events_onDocumentReady?: (event: object) => void;\n  @Input() events_onInfo?: (event: object) => void;\n  @Input() events_onWarning?: (event: object) => void;\n  @Input() events_onError?: (event: object) => void;\n  @Input() events_onRequestSharingSettings?: (event: object) => void;\n  @Input() events_onRequestRename?: (event: object) => void;\n  @Input() events_onMakeActionLink?: (event: object) => void;\n  @Input() events_onRequestInsertImage?: (event: object) => void;\n  @Input() events_onRequestSaveAs?: (event: object) => void;\n  /**\n   * @deprecated Deprecated since version 7.5, please use events_onRequestSelectSpreadsheet instead.\n   */\n  @Input() events_onRequestMailMergeRecipients?: (event: object) => void;\n  /**\n   * @deprecated Deprecated since version 7.5, please use events_onRequestSelectDocument instead.\n   */\n  @Input() events_onRequestCompareFile?: (event: object) => void;\n  @Input() events_onRequestEditRights?: (event: object) => void;\n  @Input() events_onRequestHistory?: (event: object) => void;\n  @Input() events_onRequestHistoryClose?: (event: object) => void;\n  @Input() events_onRequestHistoryData?: (event: object) => void;\n  @Input() events_onRequestRestore?: (event: object) => void;\n  @Input() events_onRequestSelectSpreadsheet?: (event: object) => void;\n  @Input() events_onRequestSelectDocument?: (event: object) => void;\n  @Input() events_onRequestUsers?: (event: object) => void;\n\n  isFirstOnChanges: boolean = true;\n\n  constructor() { }\n\n  ngOnInit(): void {\n    let url = this.documentServerUrl;\n    if (!url.endsWith(\"/\")) url += \"/\";\n\n    const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;\n    loadScript(docApiUrl, \"onlyoffice-api-script\")\n      .then(() => this.onLoad())\n      .catch((err) => {\n        this.onError(-2);\n      });\n  }\n\n  ngOnChanges(changes: SimpleChanges) {\n    const listNameChanges = [\"config\", \"document_fileType\", \"document_title\", \"documentType\", \"editorConfig_lang\", \"height\", \"type\", \"width\"];\n\n    if (this.isFirstOnChanges) {\n      this.isFirstOnChanges = false;\n      return;\n    }\n\n    for (const name of listNameChanges) {\n      if (changes.hasOwnProperty(name)) {\n        if (window?.DocEditor?.instances[this.id]) {\n          window.DocEditor.instances[this.id].destroyEditor();\n          window.DocEditor.instances[this.id] = undefined;\n    \n          console.log(\"Important props have been changed. Load new Editor.\");\n          this.onLoad();\n          return;\n        }\n      }\n    }\n  }\n\n  ngOnDestroy() {\n    if (window?.DocEditor?.instances[this.id]) {\n      window.DocEditor.instances[this.id].destroyEditor();\n      window.DocEditor.instances[this.id] = undefined;\n    }\n  }\n\n  private onLoad = () => {\n    try {\n      if (!window.DocsAPI) this.onError(-3);\n      if (window?.DocEditor?.instances[this.id]) {\n        console.log(\"Skip loading. Instance already exists\", this.id);\n        return;\n      }\n\n      if (!window?.DocEditor?.instances) {\n        window.DocEditor = { instances: {} };\n      }\n\n      var cloneConfig = cloneDeep(this.config);\n\n      var propsConfig: any = {\n        documentType: this.documentType,\n        events: {\n          onAppReady: this.onAppReady,\n          onDocumentStateChange: this.events_onDocumentStateChange,\n          onMetaChange: this.events_onMetaChange,\n          onDocumentReady: this.events_onDocumentReady,\n          onInfo: this.events_onInfo,\n          onWarning: this.events_onWarning,\n          onError: this.events_onError,\n          onRequestSharingSettings: this.events_onRequestSharingSettings,\n          onRequestRename: this.events_onRequestRename,\n          onMakeActionLink: this.events_onMakeActionLink,\n          onRequestInsertImage: this.events_onRequestInsertImage,\n          onRequestSaveAs: this.events_onRequestSaveAs,\n          onRequestMailMergeRecipients: this.events_onRequestMailMergeRecipients,\n          onRequestCompareFile: this.events_onRequestCompareFile,\n          onRequestEditRights: this.events_onRequestEditRights,\n          onRequestHistory: this.events_onRequestHistory,\n          onRequestHistoryClose: this.events_onRequestHistoryClose,\n          onRequestHistoryData: this.events_onRequestHistoryData,\n          onRequestRestore: this.events_onRequestRestore,\n          onRequestSelectSpreadsheet: this.events_onRequestSelectSpreadsheet,\n          onRequestSelectDocument: this.events_onRequestSelectDocument,\n          onRequestUsers: this.events_onRequestUsers\n        },\n        height: this.height,\n        type: this.type,\n        width: this.width,\n      };\n\n      const document = this.getDocument();\n      const editorConfig = this.getEditorConfig();\n\n      if (document !== null) {\n        propsConfig.document = document;\n      }\n\n      if (editorConfig !== null) {\n        propsConfig.editorConfig = editorConfig;\n      }\n\n      let initConfig = Object.assign(propsConfig, cloneConfig || {});\n\n      const editor = window.DocsAPI.DocEditor(this.id, initConfig);\n      window.DocEditor.instances[this.id] = editor;\n    } catch (err: any) {\n      console.error(err);\n      this.onError(-1);\n    }\n  };\n\n  private getDocument = () => {\n    var document: any = null;\n\n    if (this.document_fileType) {\n      document = document || {};\n      document.fileType = this.document_fileType;\n    }\n\n    if (this.document_title) {\n      document = document || {};\n      document.document_title = this.document_title;\n    }\n\n    return document;\n  }\n\n  private getEditorConfig = () => {\n    var editorConfig: any = null;\n\n    if (this.editorConfig_lang) {\n      editorConfig = editorConfig || {};\n      editorConfig.lang = this.editorConfig_lang;\n    }\n\n    return editorConfig;\n  }\n\n  private onError = (errorCode: number) => {\n    let message;\n\n    switch(errorCode) {\n      case -2:\n        message = \"Error load DocsAPI from \" + this.documentServerUrl;\n        break;\n      case -3:\n        message = \"DocsAPI is not defined\";\n        break;\n      default:\n        message = \"Unknown error loading component\";\n        errorCode = -1;\n    }\n\n    if (typeof this.onLoadComponentError == \"undefined\") {\n      console.error(message);\n    } else {\n      this.onLoadComponentError(errorCode, message);\n    }\n  }\n\n  private onAppReady() {\n    this.events_onAppReady!(window.DocEditor.instances[this.id]);\n  }\n}\n",
+            "sourceCode": "import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';\nimport { IConfig } from '../model/config';\nimport loadScript from \"../utils/loadScript\";\nimport { cloneDeep } from 'lodash';\n\ndeclare global {\n  interface Window {\n      DocsAPI?: any;\n      DocEditor?: any;\n  }\n}\n\n@Component({\n  selector: 'document-editor',\n  template: '<div [id]=\"id\"></div>',\n  styles: [\n  ],\n  standalone: false\n})\nexport class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {\n  @Input() id: string;\n  @Input() documentServerUrl: string;\n  @Input() shardkey: string | boolean = true;\n  @Input() config: IConfig;\n\n  @Input() document_fileType?: string;\n  @Input() document_title?: string;\n  @Input() documentType?: string;\n  @Input() editorConfig_lang?: string;\n  @Input() height?: string;\n  @Input() type?: string;\n  @Input() width?: string;\n\n  @Input() onLoadComponentError?: (errorCode: number, errorDescription: string) => void;\n\n  @Input() events_onAppReady?: (event: object) => void;\n  @Input() events_onDocumentStateChange?: (event: object) => void;\n  @Input() events_onMetaChange?: (event: object) => void;\n  @Input() events_onDocumentReady?: (event: object) => void;\n  @Input() events_onInfo?: (event: object) => void;\n  @Input() events_onWarning?: (event: object) => void;\n  @Input() events_onError?: (event: object) => void;\n  @Input() events_onRequestSharingSettings?: (event: object) => void;\n  @Input() events_onRequestRename?: (event: object) => void;\n  @Input() events_onMakeActionLink?: (event: object) => void;\n  @Input() events_onRequestInsertImage?: (event: object) => void;\n  @Input() events_onRequestSaveAs?: (event: object) => void;\n  /**\n   * @deprecated Deprecated since version 7.5, please use events_onRequestSelectSpreadsheet instead.\n   */\n  @Input() events_onRequestMailMergeRecipients?: (event: object) => void;\n  /**\n   * @deprecated Deprecated since version 7.5, please use events_onRequestSelectDocument instead.\n   */\n  @Input() events_onRequestCompareFile?: (event: object) => void;\n  @Input() events_onRequestEditRights?: (event: object) => void;\n  @Input() events_onRequestHistory?: (event: object) => void;\n  @Input() events_onRequestHistoryClose?: (event: object) => void;\n  @Input() events_onRequestHistoryData?: (event: object) => void;\n  @Input() events_onRequestRestore?: (event: object) => void;\n  @Input() events_onRequestSelectSpreadsheet?: (event: object) => void;\n  @Input() events_onRequestSelectDocument?: (event: object) => void;\n  @Input() events_onRequestUsers?: (event: object) => void;\n\n  isFirstOnChanges: boolean = true;\n\n  constructor() { }\n\n  ngOnInit(): void {\n    let url = this.documentServerUrl;\n    if (!url.endsWith(\"/\")) url += \"/\";\n\n    let docsApiUrl = `${url}web-apps/apps/api/documents/api.js`;\n    if (this.shardkey) {\n      if (typeof this.shardkey === \"boolean\") {\n        docsApiUrl += `?shardkey=${this.config.document?.key}`;\n      } else {\n        docsApiUrl += `?shardkey=${this.shardkey}`;\n      }\n    }\n\n    loadScript(docsApiUrl, \"onlyoffice-api-script\")\n      .then(() => this.onLoad())\n      .catch((err) => {\n        this.onError(-2);\n      });\n  }\n\n  ngOnChanges(changes: SimpleChanges) {\n    const listNameChanges = [\"config\", \"document_fileType\", \"document_title\", \"documentType\", \"editorConfig_lang\", \"height\", \"type\", \"width\"];\n\n    if (this.isFirstOnChanges) {\n      this.isFirstOnChanges = false;\n      return;\n    }\n\n    for (const name of listNameChanges) {\n      if (changes.hasOwnProperty(name)) {\n        if (window?.DocEditor?.instances[this.id]) {\n          window.DocEditor.instances[this.id].destroyEditor();\n          window.DocEditor.instances[this.id] = undefined;\n    \n          console.log(\"Important props have been changed. Load new Editor.\");\n          this.onLoad();\n          return;\n        }\n      }\n    }\n  }\n\n  ngOnDestroy() {\n    if (window?.DocEditor?.instances[this.id]) {\n      window.DocEditor.instances[this.id].destroyEditor();\n      window.DocEditor.instances[this.id] = undefined;\n    }\n  }\n\n  private onLoad = () => {\n    try {\n      if (!window.DocsAPI) this.onError(-3);\n      if (window?.DocEditor?.instances[this.id]) {\n        console.log(\"Skip loading. Instance already exists\", this.id);\n        return;\n      }\n\n      if (!window?.DocEditor?.instances) {\n        window.DocEditor = { instances: {} };\n      }\n\n      var cloneConfig = cloneDeep(this.config);\n\n      var propsConfig: any = {\n        documentType: this.documentType,\n        events: {\n          onAppReady: this.onAppReady,\n          onDocumentStateChange: this.events_onDocumentStateChange,\n          onMetaChange: this.events_onMetaChange,\n          onDocumentReady: this.events_onDocumentReady,\n          onInfo: this.events_onInfo,\n          onWarning: this.events_onWarning,\n          onError: this.events_onError,\n          onRequestSharingSettings: this.events_onRequestSharingSettings,\n          onRequestRename: this.events_onRequestRename,\n          onMakeActionLink: this.events_onMakeActionLink,\n          onRequestInsertImage: this.events_onRequestInsertImage,\n          onRequestSaveAs: this.events_onRequestSaveAs,\n          onRequestMailMergeRecipients: this.events_onRequestMailMergeRecipients,\n          onRequestCompareFile: this.events_onRequestCompareFile,\n          onRequestEditRights: this.events_onRequestEditRights,\n          onRequestHistory: this.events_onRequestHistory,\n          onRequestHistoryClose: this.events_onRequestHistoryClose,\n          onRequestHistoryData: this.events_onRequestHistoryData,\n          onRequestRestore: this.events_onRequestRestore,\n          onRequestSelectSpreadsheet: this.events_onRequestSelectSpreadsheet,\n          onRequestSelectDocument: this.events_onRequestSelectDocument,\n          onRequestUsers: this.events_onRequestUsers\n        },\n        height: this.height,\n        type: this.type,\n        width: this.width,\n      };\n\n      const document = this.getDocument();\n      const editorConfig = this.getEditorConfig();\n\n      if (document !== null) {\n        propsConfig.document = document;\n      }\n\n      if (editorConfig !== null) {\n        propsConfig.editorConfig = editorConfig;\n      }\n\n      let initConfig = Object.assign(propsConfig, cloneConfig || {});\n\n      const editor = window.DocsAPI.DocEditor(this.id, initConfig);\n      window.DocEditor.instances[this.id] = editor;\n    } catch (err: any) {\n      console.error(err);\n      this.onError(-1);\n    }\n  };\n\n  private getDocument = () => {\n    var document: any = null;\n\n    if (this.document_fileType) {\n      document = document || {};\n      document.fileType = this.document_fileType;\n    }\n\n    if (this.document_title) {\n      document = document || {};\n      document.document_title = this.document_title;\n    }\n\n    return document;\n  }\n\n  private getEditorConfig = () => {\n    var editorConfig: any = null;\n\n    if (this.editorConfig_lang) {\n      editorConfig = editorConfig || {};\n      editorConfig.lang = this.editorConfig_lang;\n    }\n\n    return editorConfig;\n  }\n\n  private onError = (errorCode: number) => {\n    let message;\n\n    switch(errorCode) {\n      case -2:\n        message = \"Error load DocsAPI from \" + this.documentServerUrl;\n        break;\n      case -3:\n        message = \"DocsAPI is not defined\";\n        break;\n      default:\n        message = \"Unknown error loading component\";\n        errorCode = -1;\n    }\n\n    if (typeof this.onLoadComponentError == \"undefined\") {\n      console.error(message);\n    } else {\n      this.onLoadComponentError(errorCode, message);\n    }\n  }\n\n  private onAppReady() {\n    this.events_onAppReady!(window.DocEditor.instances[this.id]);\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -1404,7 +1475,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 79
+                "line": 81
             },
             "extends": [],
             "implements": [
@@ -1415,7 +1486,7 @@
         },
         {
             "name": "FormsStoriesComponent",
-            "id": "component-FormsStoriesComponent-74ec22fb5fe646e13f6bd29daf17caa7867346f93162aff1569ae152f804ea2d2724b9f42b20c4204af855a1913e656201aae7aeb9bef9079d478d4700894cdf",
+            "id": "component-FormsStoriesComponent-0f00ab5dbbeb239aa0836ba5c30a383b7fc0bdedeafc3c3ba2ed900e8293350cb3a4f6b4f1708d2883569a80465fe103d43c04caa283290166ba79f7ca17f566",
             "file": "src/app/components/forms/forms-stories/forms-stories.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1440,7 +1511,7 @@
                     "name": "config",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 13,
+                    "line": 16,
                     "type": "IConfig",
                     "decorators": []
                 },
@@ -1448,7 +1519,7 @@
                     "name": "documentServerUrl",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 12,
+                    "line": 15,
                     "type": "string",
                     "decorators": []
                 },
@@ -1456,7 +1527,7 @@
                     "name": "editorId",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 11,
+                    "line": 14,
                     "type": "string",
                     "decorators": []
                 }
@@ -1471,7 +1542,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 18,
+                    "line": 21,
                     "modifierKind": [
                         125
                     ]
@@ -1485,7 +1556,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 15
+                    "line": 18
                 },
                 {
                     "name": "selectedForm",
@@ -1495,7 +1566,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 16
+                    "line": 19
                 }
             ],
             "methodsClass": [
@@ -1505,7 +1576,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 27,
+                    "line": 30,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -1515,11 +1586,24 @@
             "hostBindings": [],
             "hostListeners": [],
             "standalone": false,
-            "imports": [],
+            "imports": [
+                {
+                    "name": "DocumentEditorModule",
+                    "type": "module"
+                },
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "NgSelectModule",
+                    "type": "module"
+                }
+            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\nimport { IConfig } from '@onlyoffice/document-editor-angular';\nimport { FormsService } from 'src/app/service/forms.service';\n\n@Component({\n  selector: 'forms-stories',\n  templateUrl: './forms-stories.component.html',\n  providers: [FormsService]\n})\nexport class FormsStoriesComponent implements OnInit {\n  @Input() editorId: string;\n  @Input() documentServerUrl: string;\n  @Input() config: IConfig;\n\n  loading = false;\n  selectedForm: any;\n\n  constructor( public formsService: FormsService ) {}\n\n  ngOnInit(): void {\n    this.loading = true;\n    this.formsService.getForms().subscribe(() => {\n      this.loading = false\n    });\n  }\n\n  onChangeSelect(): void {\n    let newConfig = this.config;\n    newConfig = {...newConfig}\n\n    newConfig.document!.title = this.selectedForm.title;\n    newConfig.document!.url = this.selectedForm.url;\n    newConfig.document!.key = \"pdf\" + Math.random();\n\n    this.config = newConfig;\n  }\n}",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\nimport { FormsModule } from '@angular/forms';\nimport { NgSelectModule } from '@ng-select/ng-select';\nimport { DocumentEditorModule, IConfig } from '@onlyoffice/document-editor-angular';\nimport { FormsService } from 'src/app/service/forms.service';\n\n@Component({\n  selector: 'forms-stories',\n  templateUrl: './forms-stories.component.html',\n  imports: [DocumentEditorModule, FormsModule, NgSelectModule],\n  providers: [FormsService]\n})\nexport class FormsStoriesComponent implements OnInit {\n  @Input() editorId: string;\n  @Input() documentServerUrl: string;\n  @Input() config: IConfig;\n\n  loading = false;\n  selectedForm: any;\n\n  constructor( public formsService: FormsService ) {}\n\n  ngOnInit(): void {\n    this.loading = true;\n    this.formsService.getForms().subscribe(() => {\n      this.loading = false\n    });\n  }\n\n  onChangeSelect(): void {\n    let newConfig = this.config;\n    newConfig = {...newConfig}\n\n    newConfig.document!.title = this.selectedForm.title;\n    newConfig.document!.url = this.selectedForm.url;\n    newConfig.document!.key = \"pdf\" + Math.random();\n\n    this.config = newConfig;\n  }\n}",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -1536,7 +1620,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 16,
+                "line": 19,
                 "jsdoctags": [
                     {
                         "name": "formsService",
@@ -1680,7 +1764,7 @@
         },
         {
             "name": "ListCommentsComponent",
-            "id": "component-ListCommentsComponent-b2932c0ea67f147c1f2fce08555f5affd64a0c0b4ea6a12a298e6fa62a6206cad7596f3d71e6cd6467658bfc3aa8aa1a80db699a0051f8bf9d5b0721a136ebde",
+            "id": "component-ListCommentsComponent-bb752fec1c40a0d92b0a3c81d62e3e0a1261a1845a4038631587791151afe24dc07d9a53476126c173fabd9ca89607b6ea09952cd6d555eef878972fac43c0e0",
             "file": "src/app/components/comments/list-comments/list-comments.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1702,7 +1786,7 @@
                     "name": "comments",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 11,
+                    "line": 16,
                     "type": "any[]",
                     "decorators": []
                 },
@@ -1710,7 +1794,7 @@
                     "name": "connector",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 9,
+                    "line": 14,
                     "type": "any",
                     "decorators": []
                 },
@@ -1718,7 +1802,7 @@
                     "name": "userName",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 10,
+                    "line": 15,
                     "type": "string",
                     "decorators": []
                 }
@@ -1739,7 +1823,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 52,
+                    "line": 57,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1767,7 +1851,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 13,
+                    "line": 18,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1788,11 +1872,28 @@
             "hostBindings": [],
             "hostListeners": [],
             "standalone": false,
-            "imports": [],
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "RemoveCommentComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "AddCommentReplyComponent",
+                    "type": "component"
+                },
+                {
+                    "name": "RemoveCommentReplyComponent",
+                    "type": "component"
+                }
+            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, Input, SimpleChanges, OnChanges} from '@angular/core'\r\n\r\n@Component({\r\n  selector: 'list-comments',\r\n  templateUrl: './list-comments.component.html',\r\n  styleUrls: ['../comments.component.css']\r\n})\r\nexport class ListCommentsComponent implements OnChanges {\r\n  @Input() connector: any;\r\n  @Input() userName: string;\r\n  @Input() comments: any[];\r\n\r\n  goToComment (e: any) {\r\n    if (e.target.parentElement.id) {\r\n      this.connector.executeMethod(\"MoveToComment\",[e.target.parentElement.id]);\r\n    }\r\n  }\r\n\r\n  ngOnChanges(changes: SimpleChanges) {\r\n    if (changes.hasOwnProperty(\"connector\")) {\r\n      if (this.connector) {\r\n        this.connector.attachEvent(\"onAddComment\",  function (val:any) {\r\n          console.log(\"onAddComment\");\r\n          var comments = this.comments;\r\n          var index = this.comments.findIndex((comment:any) => comment.Id === val.Id)\r\n\r\n          if (index == -1) {\r\n             this.comments = [val, ...comments];\r\n          }\r\n        }.bind(this));\r\n\r\n        this.connector.attachEvent(\"onRemoveComment\",  function (val:any) {\r\n          console.log(\"onRemoveComment\");\r\n          const index = this.comments.findIndex((comment:any) => comment.Id === val.Id);\r\n\r\n          if (index !== -1) {\r\n            this.comments.splice(index, 1);\r\n          }\r\n        }.bind(this));\r\n\r\n        this.connector.attachEvent(\"onChangeCommentData\",  function (val:any) {\r\n          const index = this.comments.findIndex((comment:any) => comment.Id === val.Id);\r\n\r\n          if (index !== -1) {\r\n            this.comments[index].Data = val.Data;\r\n          }\r\n        }.bind(this));\r\n      }\r\n    }\r\n  }\r\n\r\n  dateParser(date: string) {\r\n    return new Date(parseInt(date, 10)).toLocaleString();\r\n  }\r\n}",
+            "sourceCode": "import {Component, Input, SimpleChanges, OnChanges} from '@angular/core'\nimport { AddCommentReplyComponent } from '../add-comment-reply/add-comment-reply.component';\nimport { RemoveCommentReplyComponent } from '../remove-comment-reply/remove-comment-reply.component';\nimport { RemoveCommentComponent } from '../remove-comment/remove-comment.component';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'list-comments',\n  templateUrl: './list-comments.component.html',\n  styleUrls: ['../comments.component.css'],\n  imports: [ CommonModule, RemoveCommentComponent, AddCommentReplyComponent, RemoveCommentReplyComponent ]\n})\nexport class ListCommentsComponent implements OnChanges {\n  @Input() connector: any;\n  @Input() userName: string;\n  @Input() comments: any[];\n\n  goToComment (e: any) {\n    if (e.target.parentElement.id) {\n      this.connector.executeMethod(\"MoveToComment\",[e.target.parentElement.id]);\n    }\n  }\n\n  ngOnChanges(changes: SimpleChanges) {\n    if (changes.hasOwnProperty(\"connector\")) {\n      if (this.connector) {\n        this.connector.attachEvent(\"onAddComment\",  function (val:any) {\n          console.log(\"onAddComment\");\n          var comments = this.comments;\n          var index = this.comments.findIndex((comment:any) => comment.Id === val.Id)\n\n          if (index == -1) {\n             this.comments = [val, ...comments];\n          }\n        }.bind(this));\n\n        this.connector.attachEvent(\"onRemoveComment\",  function (val:any) {\n          console.log(\"onRemoveComment\");\n          const index = this.comments.findIndex((comment:any) => comment.Id === val.Id);\n\n          if (index !== -1) {\n            this.comments.splice(index, 1);\n          }\n        }.bind(this));\n\n        this.connector.attachEvent(\"onChangeCommentData\",  function (val:any) {\n          const index = this.comments.findIndex((comment:any) => comment.Id === val.Id);\n\n          if (index !== -1) {\n            this.comments[index].Data = val.Data;\n          }\n        }.bind(this));\n      }\n    }\n  }\n\n  dateParser(date: string) {\n    return new Date(parseInt(date, 10)).toLocaleString();\n  }\n}",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -2234,7 +2335,7 @@
         },
         {
             "name": "ReviewStoriesComponent",
-            "id": "component-ReviewStoriesComponent-1404be67480014c48782b5c8bd4e5bc257b5b78077eb4fe145b7080b1f4dc5481595fc20ca0ab3fdd11e6ccbe5e7274b6c2b3836b5a1b328dc7572c00aa00687",
+            "id": "component-ReviewStoriesComponent-ef6df35e4a8dd042908dbdad6cf01e8bc01d354aa5fe8d05af3f4a6d4ee314e522219db39c38fbc86fc9f0602763f916a4d33a158597334697a8210054c61b0b",
             "file": "src/app/components/review/review-stories/review-stories.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2254,7 +2355,7 @@
                     "name": "config",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 11,
+                    "line": 13,
                     "type": "IConfig",
                     "decorators": []
                 },
@@ -2262,7 +2363,7 @@
                     "name": "documentServerUrl",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 10,
+                    "line": 12,
                     "type": "string",
                     "decorators": []
                 },
@@ -2270,7 +2371,7 @@
                     "name": "editorId",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 9,
+                    "line": 11,
                     "type": "string",
                     "decorators": []
                 }
@@ -2286,7 +2387,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 13
+                    "line": 15
                 },
                 {
                     "name": "connector",
@@ -2297,7 +2398,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 14
+                    "line": 16
                 },
                 {
                     "name": "onDocumentReady",
@@ -2308,7 +2409,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 16
+                    "line": 18
                 }
             ],
             "methodsClass": [],
@@ -2317,11 +2418,20 @@
             "hostBindings": [],
             "hostListeners": [],
             "standalone": false,
-            "imports": [],
+            "imports": [
+                {
+                    "name": "DocumentEditorModule",
+                    "type": "module"
+                },
+                {
+                    "name": "ReviewComponent",
+                    "type": "component"
+                }
+            ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { IConfig } from '@onlyoffice/document-editor-angular';\n\n@Component({\n  selector: 'review-stories',\n  templateUrl: './review-stories.component.html'\n})\nexport class ReviewStoriesComponent {\n  @Input() editorId: string;\n  @Input() documentServerUrl: string;\n  @Input() config: IConfig;\n\n  comments: any[] = [];\n  connector: any = null;\n\n  onDocumentReady = () => {\n    var editor = window.DocEditor.instances[this.editorId];\n    this.connector = editor.createConnector();\n  };\n}",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { DocumentEditorModule, IConfig } from '@onlyoffice/document-editor-angular';\nimport { ReviewComponent } from '../review.component';\n\n@Component({\n  selector: 'review-stories',\n  templateUrl: './review-stories.component.html',\n  imports: [ DocumentEditorModule, ReviewComponent ]\n})\nexport class ReviewStoriesComponent {\n  @Input() editorId: string;\n  @Input() documentServerUrl: string;\n  @Input() config: IConfig;\n\n  comments: any[] = [];\n  connector: any = null;\n\n  onDocumentReady = () => {\n    var editor = window.DocEditor.instances[this.editorId];\n    this.connector = editor.createConnector();\n  };\n}",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -2331,96 +2441,6 @@
     ],
     "modules": [
         {
-            "name": "AppModule",
-            "id": "module-AppModule-e1f4d9ac30d2cbe1b1aeb70135e039b5d94dc1a2dea9b9d5e73d29382e7c161a15a9adb0928ec303c261456b7bf451a72179917602d3a8331273b9a7da03877f",
-            "description": "",
-            "deprecationMessage": "",
-            "deprecated": false,
-            "file": "src/app/app.module.ts",
-            "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { BrowserModule } from '@angular/platform-browser';\r\nimport { DocumentEditorModule } from '@onlyoffice/document-editor-angular';\r\n\r\nimport { AppComponent } from './app.component';\r\nimport { AddCommentComponent } from './components/comments/add-comment/add-comment.component';\r\nimport { AddCommentReplyComponent } from './components/comments/add-comment-reply/add-comment-reply.component';\r\nimport { CommentsComponent } from './components/comments/comments.component';\r\nimport { ListCommentsComponent } from './components/comments/list-comments/list-comments.component';\r\nimport { RemoveCommentComponent } from './components/comments/remove-comment/remove-comment.component';\r\nimport { RemoveCommentReplyComponent } from './components/comments/remove-comment-reply/remove-comment-reply.component';\r\nimport { CommenstStoriesComponent } from './components/comments/comments-stories/commenst-stories.component';\r\nimport { ContentControlsStoriesComponent } from './components/content-controls/content-controls-stories/content-controls-stories.component';\r\nimport { ContentControlsComponent } from './components/content-controls/content-controls.component';\r\nimport { InputContentControlComponent } from './components/content-controls/input-content-control/input-content-control.component';\r\nimport { RadioContentControlComponent } from './components/content-controls/radio-content-control/radio-content-control.component';\r\nimport { NgSelectModule } from '@ng-select/ng-select';\r\nimport { CommonModule } from '@angular/common';\r\nimport { FormsModule, ReactiveFormsModule } from '@angular/forms';\r\nimport { FormsStoriesComponent } from './components/forms/forms-stories/forms-stories.component';\r\nimport { HttpClientModule } from '@angular/common/http';\r\nimport { ReviewComponent } from './components/review/review.component';\r\nimport { ReviewStoriesComponent } from './components/review/review-stories/review-stories.component';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    CommentsComponent,\r\n    ListCommentsComponent,\r\n    AddCommentComponent,\r\n    AddCommentReplyComponent,\r\n    RemoveCommentComponent,\r\n    RemoveCommentReplyComponent,\r\n    CommenstStoriesComponent,\r\n    ContentControlsStoriesComponent,\r\n    ContentControlsComponent,\r\n    InputContentControlComponent,\r\n    RadioContentControlComponent,\r\n    FormsStoriesComponent,\r\n    ReviewComponent,\r\n    ReviewStoriesComponent\r\n  ],\r\n  imports: [\r\n    BrowserModule,\r\n    DocumentEditorModule,\r\n    NgSelectModule,\r\n    CommonModule,\r\n    FormsModule,\r\n    ReactiveFormsModule,\r\n    HttpClientModule\r\n  ],\r\n  providers: [],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule { }\r\n",
-            "children": [
-                {
-                    "type": "providers",
-                    "elements": []
-                },
-                {
-                    "type": "declarations",
-                    "elements": [
-                        {
-                            "name": "AddCommentComponent"
-                        },
-                        {
-                            "name": "AddCommentReplyComponent"
-                        },
-                        {
-                            "name": "AppComponent"
-                        },
-                        {
-                            "name": "CommenstStoriesComponent"
-                        },
-                        {
-                            "name": "CommentsComponent"
-                        },
-                        {
-                            "name": "ContentControlsComponent"
-                        },
-                        {
-                            "name": "ContentControlsStoriesComponent"
-                        },
-                        {
-                            "name": "FormsStoriesComponent"
-                        },
-                        {
-                            "name": "InputContentControlComponent"
-                        },
-                        {
-                            "name": "ListCommentsComponent"
-                        },
-                        {
-                            "name": "RadioContentControlComponent"
-                        },
-                        {
-                            "name": "RemoveCommentComponent"
-                        },
-                        {
-                            "name": "RemoveCommentReplyComponent"
-                        },
-                        {
-                            "name": "ReviewComponent"
-                        },
-                        {
-                            "name": "ReviewStoriesComponent"
-                        }
-                    ]
-                },
-                {
-                    "type": "imports",
-                    "elements": [
-                        {
-                            "name": "DocumentEditorModule"
-                        }
-                    ]
-                },
-                {
-                    "type": "exports",
-                    "elements": []
-                },
-                {
-                    "type": "bootstrap",
-                    "elements": [
-                        {
-                            "name": "AppComponent"
-                        }
-                    ]
-                },
-                {
-                    "type": "classes",
-                    "elements": []
-                }
-            ]
-        },
-        {
             "name": "DocumentEditorModule",
             "id": "module-DocumentEditorModule-29e5dfd1107e0dcd16a736775418ccfaf1a76f9f7fe1a328aa567efbe78c032680cf2a266394e591e5881ee2fd544a516ad86043d5e8420185abed3fecfbae01",
             "description": "",
@@ -2428,7 +2448,7 @@
             "deprecated": false,
             "file": "projects/onlyoffice/document-editor-angular/src/lib/document-editor.module.ts",
             "methods": [],
-            "sourceCode": "/*\n* (c) Copyright Ascensio System SIA 2024\n*\n* Licensed under the Apache License, Version 2.0 (the \"License\");\n* you may not use this file except in compliance with the License.\n* You may obtain a copy of the License at\n*\n*     http://www.apache.org/licenses/LICENSE-2.0\n*\n* Unless required by applicable law or agreed to in writing, software\n* distributed under the License is distributed on an \"AS IS\" BASIS,\n* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n* See the License for the specific language governing permissions and\n* limitations under the License.\n*/\n\nimport { NgModule } from '@angular/core';\nimport { DocumentEditorComponent } from './components/document-editor.component';\n\n@NgModule({\n  declarations: [\n    DocumentEditorComponent\n  ],\n  imports: [\n  ],\n  exports: [\n    DocumentEditorComponent\n  ]\n})\nexport class DocumentEditorModule { }\n",
+            "sourceCode": "/*\n* (c) Copyright Ascensio System SIA 2025\n*\n* Licensed under the Apache License, Version 2.0 (the \"License\");\n* you may not use this file except in compliance with the License.\n* You may obtain a copy of the License at\n*\n*     http://www.apache.org/licenses/LICENSE-2.0\n*\n* Unless required by applicable law or agreed to in writing, software\n* distributed under the License is distributed on an \"AS IS\" BASIS,\n* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n* See the License for the specific language governing permissions and\n* limitations under the License.\n*/\n\nimport { NgModule } from '@angular/core';\nimport { DocumentEditorComponent } from './components/document-editor.component';\n\n@NgModule({\n  declarations: [\n    DocumentEditorComponent\n  ],\n  imports: [\n  ],\n  exports: [\n    DocumentEditorComponent\n  ]\n})\nexport class DocumentEditorModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -2900,7 +2920,7 @@
                 "linktype": "component",
                 "name": "DocumentEditorComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/36",
+                "coverageCount": "0/37",
                 "status": "low"
             },
             {

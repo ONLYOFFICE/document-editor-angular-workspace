@@ -1,5 +1,5 @@
 /*
-* (c) Copyright Ascensio System SIA 2024
+* (c) Copyright Ascensio System SIA 2025
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -147,8 +147,17 @@ export interface IConfig {
       macros?: boolean;
       macrosMode?: string;
       mentionShare?: boolean;
+      mobile?: {
+        forceView?: boolean;
+        info?: boolean;
+        standardView?: boolean;
+      };
+      /**
+       * @deprecated Starting from version 8.2, please use the mobile parameter instead.
+       */
       mobileForceView?: boolean;
       plugins?: boolean;
+      pointerMode: 'select' | 'hand';
       review?: {
         hideReviewDisplay?: boolean;
         hoverMode?: boolean;
@@ -160,15 +169,22 @@ export interface IConfig {
        * @deprecated Deprecated since version 7.0. Please use the review.reviewDisplay parameter instead.
        */
       reviewDisplay?: string;
+      showHorizontalScroll?: boolean; 
       /**
        * @deprecated Deprecated since version 7.0. Please use the review.showReviewChanges parameter instead.
        */
       showReviewChanges?: boolean;
+      showVerticalScroll?: boolean;
+      slidePlayerBackground: string;
       /**
        * @deprecated Deprecated since version 7.1. Please use the features.spellcheck parameter instead.
        */
       spellcheck?: boolean;
-      submitForm?: boolean;
+      submitForm?: {
+        visible:  boolean,
+        resultMessage: string,
+
+      } | boolean;
       toolbarHideFileName?: boolean;
       toolbarNoTabs?: boolean;
       /**
@@ -177,6 +193,7 @@ export interface IConfig {
       trackChanges?: boolean;
       uiTheme?: string;
       unit?: string;
+      wordHeadingsColor?: string;
       zoom?: number;
     };
     embedded?: {
@@ -230,6 +247,7 @@ export interface IConfig {
     onRequestOpen?: (event: object) => void;
     onRequestReferenceData?: (event: object) => void;
     onRequestReferenceSource?: (event: object) => void;
+    onRequestRefreshFile?: (event: object) => void;
     onRequestRename?: (event: object) => void;
     onRequestRestore?: (event: object) => void;
     onRequestSaveAs?: (event: object) => void;
@@ -240,6 +258,7 @@ export interface IConfig {
     onRequestStartFilling: (event: object) => void;
     onRequestUsers?: (event: object) => void;
     onSubmit?: (event: object) => void;
+    onUserActionRequired?: (event: object) => void;
     onWarning?: (event: object) => void;
   };
 }
