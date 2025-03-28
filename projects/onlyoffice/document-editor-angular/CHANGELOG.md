@@ -1,5 +1,9 @@
 # Change Log
 
+##
+- added shardkey property
+- update IConfig for Document Server v8.3
+
 ## 5.3.0
 - angular 18
 - editorConfig/customization/logo#imageLight
