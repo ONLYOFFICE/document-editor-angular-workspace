@@ -46,7 +46,7 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn<DocumentEditorComponent> = (args: DocumentEditorComponent) => ({
+const Template: StoryFn<DocumentEditorComponent> = (args) => ({
   props: args,
 });
 

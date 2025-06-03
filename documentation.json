@@ -2624,7 +2624,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StoryFn<DocumentEditorComponent>",
-                "defaultValue": "(args: DocumentEditorComponent) => ({\n  props: args,\n})"
+                "defaultValue": "(args) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -2809,7 +2809,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StoryFn<DocumentEditorComponent>",
-                    "defaultValue": "(args: DocumentEditorComponent) => ({\n  props: args,\n})"
+                    "defaultValue": "(args) => ({\n  props: args,\n})"
                 }
             ],
             "src/environments/environment.prod.ts": [
