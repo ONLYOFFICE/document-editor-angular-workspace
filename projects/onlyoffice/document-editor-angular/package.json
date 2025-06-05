@@ -16,8 +16,8 @@
     "Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyoffice.com)"
   ],
   "peerDependencies": {
-    "@angular/common": "^19.0.0",
-    "@angular/core": "^19.0.0"
+    "@angular/common": "^20.0.1",
+    "@angular/core": "^20.0.1"
   },
   "dependencies": {
     "lodash": "^4.17.21",
