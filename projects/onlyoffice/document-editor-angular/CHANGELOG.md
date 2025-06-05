@@ -1,5 +1,8 @@
 # Change Log
 
+##
+- angular 20
+
 ## 6.4.0
 - angular 19
 - added shardkey property
