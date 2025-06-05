@@ -13,6 +13,27 @@ const preview: Preview = {
       },
     },
   },
+  decorators: [
+    (storyFn, context) => {
+      const newArgs = {
+        ...context.args,
+        id: `${context.args['id']}-${Date.now()}`,
+      };
+
+      return {
+        ...storyFn(),
+        props: {
+          ...storyFn().props,
+          ...newArgs,
+        },
+        template: `
+          <div style="display: grid; height: 100%; min-height: 400px;">
+            ${storyFn().template}
+          </div>
+        `,
+      };
+    },
+  ],
 };
 
 export default preview;
