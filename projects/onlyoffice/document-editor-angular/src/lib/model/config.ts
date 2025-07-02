@@ -130,6 +130,7 @@ export interface IConfig {
       features?: any;
       feedback?: any;
       forcesave?: boolean;
+      forceWesternFontSize?: boolean;
       goback?: any;
       help?: boolean;
       hideNotes?: boolean;
@@ -144,6 +145,7 @@ export interface IConfig {
         url?: string;
         visible?: boolean;
       };
+      layout?: any;
       macros?: boolean;
       macrosMode?: string;
       mentionShare?: boolean;

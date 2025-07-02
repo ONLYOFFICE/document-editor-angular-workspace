@@ -2,6 +2,7 @@
 
 ##
 - angular 20
+- update IConfig for Document Server v9.0
 
 ## 6.4.0
 - angular 19
