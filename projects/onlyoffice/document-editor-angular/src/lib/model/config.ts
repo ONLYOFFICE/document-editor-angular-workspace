@@ -185,7 +185,6 @@ export interface IConfig {
       submitForm?: {
         visible:  boolean,
         resultMessage: string,
-
       } | boolean;
       toolbarHideFileName?: boolean;
       toolbarNoTabs?: boolean;
@@ -233,7 +232,7 @@ export interface IConfig {
     onReady?: (event: object) => void;
     onRequestClose?: (event: object) => void;
     /**
-     * @deprecated Deprecated since version 7.5, please use onRequestSelectDocument instead
+     * @deprecated Deprecated since version 7.5, please use onRequestSelectDocument instead.
      */
     onRequestCompareFile?: (event: object) => void;
     onRequestCreateNew?: (event: object) => void;
@@ -243,7 +242,7 @@ export interface IConfig {
     onRequestHistoryData?: (event: object) => void;
     onRequestInsertImage?: (event: object) => void;
     /**
-     * @deprecated Deprecated since version 7.5, please use onRequestSelectSpreadsheet instead
+     * @deprecated Deprecated since version 7.5, please use onRequestSelectSpreadsheet instead.
      */
     onRequestMailMergeRecipients?: (event: object) => void;
     onRequestOpen?: (event: object) => void;
