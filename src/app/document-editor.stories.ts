@@ -8,7 +8,7 @@ export default {
   tags: ['autodocs'],
   argTypes: {
     documentType: {
-        options: ["word", "cell", "slide"],
+        options: ["word", "cell", "slide", "pdf", "diagram"],
         control: { type: "select" },
     },
     editorConfig_lang: {
@@ -114,6 +114,23 @@ FormTemplate.args = {
             url: config.demoStorage + "oform.pdf",
         },
         documentType: "word",
+    },
+    height: "600px"
+};
+
+export const DiagramTemplate = Template.bind({});
+DiagramTemplate.storyName = "Diagram";
+DiagramTemplate.args = {
+    id: "diagramEditor",
+    documentServerUrl: config.documentserverUrl,
+    config: {
+        document: {
+            fileType: "vsdx",
+            key: "vsdx" + Math.random(),
+            title: "demo.vsdx",
+            url: config.demoStorage + "demo.vsdx",
+        },
+        documentType: "diagram",
     },
     height: "600px"
 };
