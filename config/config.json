@@ -1,5 +1,5 @@
 {
-    "documentserverUrl": "http://192.168.56.1/",
+    "documentserverUrl": "http://documentserver/",
     "demoStorage": "https://static.onlyoffice.com/assets/docs/samples/",
     "oformsUrl": "https://cmsoforms.onlyoffice.com/api/oforms?populate=*&locale=all"
 }
