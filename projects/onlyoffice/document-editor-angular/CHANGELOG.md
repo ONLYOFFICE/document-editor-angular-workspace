@@ -1,6 +1,6 @@
 # Change Log
 
-##
+## 6.5.0
 - update IConfig for Document Server v9.0
 
 ## 6.4.0
