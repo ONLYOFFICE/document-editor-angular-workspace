@@ -32,7 +32,8 @@ describe('DocumentEditorAngularComponent', () => {
     component = fixture.componentInstance;
 
     component.id="docEditor";
-    component.documentServerUrl="http://documentserver/"
+    component.documentServerUrl="http://documentserver/";
+    component.shardkey = "shardkey";
 
     fixture.detectChanges();
   });

@@ -1,5 +1,9 @@
 # Change Log
 
+## 7.5.0
+- angular 20
+- update IConfig for Document Server v9.0
+
 ## 6.4.0
 - angular 19
 - added shardkey property
