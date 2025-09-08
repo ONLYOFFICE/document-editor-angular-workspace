@@ -1,6 +1,6 @@
 # Change Log
 
-##
+## 5.5.1
 - fix IConfig (fields pointerMode and slidePlayerBackground is not required)
 
 ## 5.5.0
