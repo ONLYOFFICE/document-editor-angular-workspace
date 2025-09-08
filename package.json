@@ -1,5 +1,8 @@
 {
   "name": "document-editor-angular-workspace",
+  "bugs": {
+    "email": "support@onlyoffice.com"
+  },
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
