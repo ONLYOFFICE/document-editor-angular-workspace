@@ -1,0 +1,13 @@
+---
+- - :approve
+  - callsite
+  - :who:
+    :why: MIT
+    :versions: []
+    :when: 2025-11-11 13:16:52.065262300 Z
+- - :approve
+  - emitter-component
+  - :who:
+    :why: MIT
+    :versions: []
+    :when: 2025-11-11 13:17:29.442108200 Z
