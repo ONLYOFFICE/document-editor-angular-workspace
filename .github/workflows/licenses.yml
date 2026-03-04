@@ -7,6 +7,9 @@ on:
   pull_request:
     branches: [master, develop]
 
+permissions:
+  contents: read
+
 jobs:
   licences:
     runs-on: ubuntu-latest
