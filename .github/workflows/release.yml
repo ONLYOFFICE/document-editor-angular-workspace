@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write
 
 jobs:
   release:
@@ -28,9 +29,7 @@ jobs:
           cd ${{ github.workspace }}/projects
           ng build @onlyoffice/document-editor-angular
       - name: Publish to npm
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish ./dist/onlyoffice/document-editor-angular --access public
+        run: npm publish ./dist/onlyoffice/document-editor-angular --provenance --access public
       - name: Get Info
         run: |
           cd ${{ github.workspace }}/projects/onlyoffice/document-editor-angular
