@@ -1,5 +1,8 @@
 # Change Log
 
+##
+- angular 21
+
 ## 7.5.1
 - fix IConfig (fields pointerMode and slidePlayerBackground is not required)
 
