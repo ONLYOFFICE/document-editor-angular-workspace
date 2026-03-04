@@ -19,13 +19,6 @@ import { IConfig } from '../model/config';
 import loadScript from "../utils/loadScript";
 import { cloneDeep } from 'lodash';
 
-declare global {
-  interface Window {
-      DocsAPI?: any;
-      DocEditor?: any;
-  }
-}
-
 @Component({
   selector: 'document-editor',
   template: '<div [id]="id"></div>',

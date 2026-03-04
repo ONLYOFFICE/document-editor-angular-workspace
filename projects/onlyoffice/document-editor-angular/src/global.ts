@@ -14,11 +14,12 @@
 * limitations under the License.
 */
 
-/*
- * Public API Surface of @onlyoffice/document-editor-angular
- */
+declare global {
+  interface Window {
+    DocsAPI?: any;
+    DocEditor?: any;
+  }
+}
 
-export * from './lib/document-editor.module';
-export * from './lib/components/document-editor.component';
-export * from './lib/model/config';
-export type { } from './global';
+
+export {};
