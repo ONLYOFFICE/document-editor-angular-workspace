@@ -14,17 +14,12 @@
 * limitations under the License.
 */
 
-import { NgModule } from '@angular/core';
-import { DocumentEditorComponent } from './components/document-editor.component';
+declare global {
+  interface Window {
+    DocsAPI?: any;
+    DocEditor?: any;
+  }
+}
 
-@NgModule({
-  declarations: [
-    DocumentEditorComponent
-  ],
-  imports: [
-  ],
-  exports: [
-    DocumentEditorComponent
-  ]
-})
-export class DocumentEditorModule { }
+
+export {};
