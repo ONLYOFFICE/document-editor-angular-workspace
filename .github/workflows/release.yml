@@ -20,18 +20,18 @@ jobs:
         with:
           node-version: 22
           registry-url: 'https://registry.npmjs.org/'
-      - name: Install Angular CLI
-        run: npm install -g @angular/cli
+      - name: Upgrade npm
+        run: npm install -g npm@11
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Build project
         run: |
           cd ${{ github.workspace }}/projects
-          ng build @onlyoffice/document-editor-angular
+          npx ng build @onlyoffice/document-editor-angular
       - name: Publish to npm
         run: |
           cd ./dist/onlyoffice/document-editor-angular
-          npm publish --provenance --access public
+          npm publish --access public
       - name: Get Info
         run: |
           cd ${{ github.workspace }}/projects/onlyoffice/document-editor-angular
