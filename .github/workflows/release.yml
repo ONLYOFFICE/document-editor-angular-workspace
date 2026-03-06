@@ -29,7 +29,9 @@ jobs:
           cd ${{ github.workspace }}/projects
           ng build @onlyoffice/document-editor-angular
       - name: Publish to npm
-        run: npm publish ./dist/onlyoffice/document-editor-angular --provenance --access public
+        run: |
+          cd ./dist/onlyoffice/document-editor-angular
+          npm publish --provenance --access public
       - name: Get Info
         run: |
           cd ${{ github.workspace }}/projects/onlyoffice/document-editor-angular
