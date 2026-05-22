@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { DocumentEditorModule, IConfig } from '@onlyoffice/document-editor-angular';
+import { Config } from '@onlyoffice/doceditor-types';
+import { DocumentEditorModule } from '@onlyoffice/document-editor-angular';
 import { IPerson } from '../../../model/person';
 import { ContentControlsComponent } from '../content-controls.component';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +14,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 export class ContentControlsStoriesComponent {
   @Input() editorId: string;
   @Input() documentServerUrl: string;
-  @Input() config: IConfig;
+  @Input() config: Config;
   @Input() persons: IPerson[];
 
   connector: any = null;
@@ -74,7 +75,9 @@ export class ContentControlsStoriesComponent {
 
   onDocumentReady = () => {
     try {
-      var editor = window.DocEditor.instances["pdfEditor"];
+      var editor = window.DocEditor?.instances["pdfEditor"];
+      if (!editor) return;
+
       this.connector = editor.createConnector();
       this.connector.connect();
 

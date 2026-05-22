@@ -20,4 +20,3 @@
 
 export * from './lib/document-editor.module';
 export * from './lib/components/document-editor.component';
-export * from './lib/model/config';
