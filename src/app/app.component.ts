@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IConfig } from '@onlyoffice/document-editor-angular';
+import { Config } from '@onlyoffice/doceditor-types';
 import config from "./../../config/config.json";
 
 @Component({
@@ -11,7 +11,9 @@ export class AppComponent {
   connector: any = null;
 
   onDocumentReady = () => {
-    var editor = window.DocEditor.instances["docxForComments"];
+    var editor = window.DocEditor?.instances["docxForComments"];
+    if (!editor) return;
+
     this.connector = editor.createConnector();
     this.connector.executeMethod("GetAllComments", null, function(data: any) {
       let commentsRevers: any[] = [];
@@ -22,7 +24,7 @@ export class AppComponent {
     }.bind(this));
   };
 
-  config: IConfig = {
+  config: Config = {
     document: {
         fileType: "docx",
         title: "demo.docx",
@@ -31,6 +33,7 @@ export class AppComponent {
     },
     documentType: "word",
     editorConfig: {
+      callbackUrl: "https://example.com/url-to-callback",
       mode: "edit",
       user: {
         id: "uid-1",

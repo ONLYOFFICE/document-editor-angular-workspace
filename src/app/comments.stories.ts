@@ -48,6 +48,7 @@ CommentsTemplate.args = {
     },
     documentType: "word",
     editorConfig: {
+      callbackUrl: "https://example.com/url-to-callback",
       mode: "edit",
       user: {
           name: "John Smith" ,

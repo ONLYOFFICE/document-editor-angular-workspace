@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IConfig } from '@onlyoffice/document-editor-angular';
+import { Config } from '@onlyoffice/doceditor-types';
 import { FormsService } from 'src/app/service/forms.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { FormsService } from 'src/app/service/forms.service';
 export class FormsStoriesComponent implements OnInit {
   @Input() editorId: string;
   @Input() documentServerUrl: string;
-  @Input() config: IConfig;
+  @Input() config: Config;
 
   loading = false;
   selectedForm: any;

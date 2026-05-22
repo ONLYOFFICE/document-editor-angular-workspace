@@ -15,14 +15,18 @@
 */
 
 import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
-import { IConfig } from '../model/config';
+import { Config, DocEditor } from '@onlyoffice/doceditor-types';
 import loadScript from "../utils/loadScript";
 import { cloneDeep } from 'lodash';
 
 declare global {
   interface Window {
-      DocsAPI?: any;
-      DocEditor?: any;
+      DocsAPI?: {
+        DocEditor: (id: string, config: Config) => DocEditor;
+      };
+      DocEditor?: {
+        instances: Record<string, DocEditor | undefined>;
+      };
   }
 }
 
@@ -36,7 +40,7 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
   @Input() id: string;
   @Input() documentServerUrl: string;
   @Input() shardkey: string | boolean = true;
-  @Input() config: IConfig;
+  @Input() config: Config;
 
   @Input() document_fileType?: string;
   @Input() document_title?: string;
@@ -111,9 +115,12 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
 
     for (const name of listNameChanges) {
       if (changes.hasOwnProperty(name)) {
-        if (window?.DocEditor?.instances[this.id]) {
-          window.DocEditor.instances[this.id].destroyEditor();
-          window.DocEditor.instances[this.id] = undefined;
+        const instances = window?.DocEditor?.instances;
+        const editor = instances?.[this.id];
+
+        if (editor) {
+          editor.destroyEditor();
+          instances[this.id] = undefined;
     
           console.log("Important props have been changed. Load new Editor.");
           this.onLoad();
@@ -124,15 +131,21 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (window?.DocEditor?.instances[this.id]) {
-      window.DocEditor.instances[this.id].destroyEditor();
-      window.DocEditor.instances[this.id] = undefined;
+    const instances = window?.DocEditor?.instances;
+    const editor = instances?.[this.id];
+
+    if (editor) {
+      editor.destroyEditor();
+      instances[this.id] = undefined;
     }
   }
 
   private onLoad = () => {
     try {
-      if (!window.DocsAPI) this.onError(-3);
+      if (!window.DocsAPI) {
+        this.onError(-3);
+        return;
+      }
       if (window?.DocEditor?.instances[this.id]) {
         console.log("Skip loading. Instance already exists", this.id);
         return;
@@ -246,6 +259,6 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private onAppReady() {
-    this.events_onAppReady!(window.DocEditor.instances[this.id]);
+    this.events_onAppReady!(window.DocEditor?.instances[this.id] || {});
   }
 }

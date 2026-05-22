@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IConfig } from '@onlyoffice/document-editor-angular';
+import { Config } from '@onlyoffice/doceditor-types';
 import { IPerson } from '../../../model/person';
 
 @Component({
@@ -9,7 +9,7 @@ import { IPerson } from '../../../model/person';
 export class ContentControlsStoriesComponent {
   @Input() editorId: string;
   @Input() documentServerUrl: string;
-  @Input() config: IConfig;
+  @Input() config: Config;
   @Input() persons: IPerson[];
 
   connector: any = null;
@@ -70,7 +70,9 @@ export class ContentControlsStoriesComponent {
 
   onDocumentReady = () => {
     try {
-      var editor = window.DocEditor.instances["pdfEditor"];
+      var editor = window.DocEditor?.instances["pdfEditor"];
+      if (!editor) return;
+
       this.connector = editor.createConnector();
       this.connector.connect();
 
