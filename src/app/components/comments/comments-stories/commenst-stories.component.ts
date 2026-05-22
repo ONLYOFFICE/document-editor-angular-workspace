@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { DocumentEditorModule, IConfig } from '@onlyoffice/document-editor-angular';
+import { Config } from '@onlyoffice/doceditor-types';
+import { DocumentEditorModule } from '@onlyoffice/document-editor-angular';
 import { CommentsComponent } from '../comments.component';
 
 @Component({
@@ -11,13 +12,15 @@ export class CommenstStoriesComponent {
   @Input() editorId: string;
   @Input() userName: string;
   @Input() documentServerUrl: string;
-  @Input() config: IConfig;
+  @Input() config: Config;
 
   comments: any[] = [];
   connector: any = null;
 
   onDocumentReady = () => {
-    var editor = window.DocEditor.instances["docxForComments"];
+    var editor = window.DocEditor?.instances["docxForComments"];
+    if (!editor) return;
+
     this.connector = editor.createConnector();
     this.connector.executeMethod("GetAllComments", null, function(data: any) {
       let commentsRevers: any[] = [];

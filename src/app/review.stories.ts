@@ -30,6 +30,7 @@ CommentsTemplate.args = {
       }
     },
     editorConfig: {
+      callbackUrl: "https://example.com/url-to-callback",
       mode: "edit"
     },
     documentType: "word",

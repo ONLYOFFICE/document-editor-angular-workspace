@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { DocumentEditorModule, IConfig } from '@onlyoffice/document-editor-angular';
+import { Config } from '@onlyoffice/doceditor-types';
+import { DocumentEditorModule } from '@onlyoffice/document-editor-angular';
 import { ReviewComponent } from '../review.component';
 
 @Component({
@@ -10,13 +11,15 @@ import { ReviewComponent } from '../review.component';
 export class ReviewStoriesComponent {
   @Input() editorId: string;
   @Input() documentServerUrl: string;
-  @Input() config: IConfig;
+  @Input() config: Config;
 
   comments: any[] = [];
   connector: any = null;
 
   onDocumentReady = () => {
-    var editor = window.DocEditor.instances[this.editorId];
+    var editor = window.DocEditor?.instances[this.editorId];
+    if (!editor) return;
+
     this.connector = editor.createConnector();
   };
 }
