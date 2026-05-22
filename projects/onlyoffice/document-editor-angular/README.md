@@ -79,14 +79,14 @@ export class AppModule { }
 2. Open the *./src/app/app.component.ts* file in the *onlyoffice-angular-demo* project and define options in your consuming component:
 ```
 import { Component } from "@angular/core";
-import { IConfig } from "@onlyoffice/document-editor-angular";
+import { Config } from "@onlyoffice/doceditor-types";
 
 @Component({
     selector: "app-root",
     templateUrl: "./app.component.html"
 })
 export class AppComponent {
-    config: IConfig = {
+    config: Config = {
         document: {
             "fileType": "docx",
             "key": "Khirz6zTPdfd7",
@@ -147,7 +147,7 @@ Replace the **"http://documentserver/"** line with the URL of your server.
 
 ```
 import { Component } from "@angular/core";
-import { IConfig } from "@onlyoffice/document-editor-angular";
+import { Config } from "@onlyoffice/doceditor-types";
 import { DocumentEditorModule } from "@onlyoffice/document-editor-angular";
 
 @Component({
@@ -157,7 +157,7 @@ import { DocumentEditorModule } from "@onlyoffice/document-editor-angular";
     templateUrl: "./app.component.html"
 })
 export class AppComponent {
-    config: IConfig = {
+    config: Config = {
         document: {
             "fileType": "docx",
             "key": "Khirz6zTPdfd7",

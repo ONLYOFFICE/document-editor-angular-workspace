@@ -14,10 +14,16 @@
 * limitations under the License.
 */
 
+import { Config, DocEditor } from '@onlyoffice/doceditor-types';
+
 declare global {
   interface Window {
-    DocsAPI?: any;
-    DocEditor?: any;
+      DocsAPI?: {
+        DocEditor: (id: string, config: Config) => DocEditor;
+      };
+      DocEditor?: {
+        instances: Record<string, DocEditor | undefined>;
+      };
   }
 }
 
