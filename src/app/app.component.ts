@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { Config } from '@onlyoffice/doceditor-types';
+import { DocumentEditorModule } from '@onlyoffice/document-editor-angular';
 import config from "./../../config/config.json";
+import { CommentsComponent } from './components/comments/comments.component';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  imports: [ DocumentEditorModule, CommentsComponent ]
 })
 export class AppComponent {
   comments: any[] = [];

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Angular workspace containing a reusable npm library (`@onlyoffice/document-editor-angular`) for integrating ONLYOFFICE Document Server, plus a demo application. Currently targets **Angular 18** on branch `develop`.
+Angular workspace containing a reusable npm library (`@onlyoffice/document-editor-angular`) for integrating ONLYOFFICE Document Server, plus a demo application. Currently targets **Angular 20** on branch `feature/angular-v-20`.
 
 ## Build & Development Commands
 
@@ -71,4 +71,4 @@ TypeScript path `onlyoffice/document-editor-angular` maps to `dist/onlyoffice/do
 - **Commits**: Conventional Commits enforced via commitlint + lefthook
 - **Testing**: Karma + Jasmine, Chrome browser
 - **TypeScript**: Strict mode enabled, ES2022 target
-- **Library versioning**: Major version tracks Angular compatibility (v5.x = Angular 18)
+- **Library versioning**: Major version tracks Angular compatibility (v7.x = Angular 20)

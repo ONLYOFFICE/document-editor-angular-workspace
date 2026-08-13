@@ -1,10 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { Config } from '@onlyoffice/doceditor-types';
+import { DocumentEditorModule } from '@onlyoffice/document-editor-angular';
 import { IPerson } from '../../../model/person';
+import { ContentControlsComponent } from '../content-controls.component';
+import { FormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'content-controls-stories',
-  templateUrl: './content-controls-stories.component.html'
+  templateUrl: './content-controls-stories.component.html',
+  imports: [ FormsModule, NgSelectModule, DocumentEditorModule, ContentControlsComponent ]
 })
 export class ContentControlsStoriesComponent {
   @Input() editorId: string;

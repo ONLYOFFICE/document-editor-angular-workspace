@@ -34,7 +34,8 @@ declare global {
   selector: 'document-editor',
   template: '<div [id]="id"></div>',
   styles: [
-  ]
+  ],
+  standalone: false
 })
 export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
   @Input() id: string;

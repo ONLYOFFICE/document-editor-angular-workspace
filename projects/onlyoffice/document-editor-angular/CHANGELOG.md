@@ -1,12 +1,14 @@
 # Change Log
 
-## 5.5.1
+## 7.5.1
 - fix IConfig (fields pointerMode and slidePlayerBackground is not required)
 
-## 5.5.0
+## 7.5.0
+- angular 20
 - update IConfig for Document Server v9.0
 
-## 5.4.0
+## 6.4.0
+- angular 19
 - added shardkey property
 - update IConfig for Document Server v8.3
 

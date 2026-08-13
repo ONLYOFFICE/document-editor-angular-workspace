@@ -1,22 +1,12 @@
-import { moduleMetadata, StoryFn, Meta } from '@storybook/angular';
-import { DocumentEditorComponent } from '@onlyoffice/document-editor-angular';
+import { StoryFn, Meta } from '@storybook/angular';
 import config from "./../../config/config.json";
 
 import { ReviewStoriesComponent } from './components/review/review-stories/review-stories.component';
-import { ReviewComponent } from './components/review/review.component';
 
 export default {
   title: 'Samples/Work with review',
   component: ReviewStoriesComponent,
-  tags: ['autodocs'],
-  decorators: [
-    moduleMetadata({
-      declarations: [
-        DocumentEditorComponent,
-        ReviewComponent
-      ]
-    }),
-  ],
+  tags: ['autodocs']
 } as Meta;
 
 const Template: StoryFn<any> = (args) => ({
