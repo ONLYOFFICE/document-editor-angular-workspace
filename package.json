@@ -19,7 +19,8 @@
   "scripts": {
     "ng": "ng",
     "build": "ng build",
-    "test": "ng test"
+    "test": "ng test",
+    "test:e2e": "npm --prefix e2e ci && npm --prefix e2e run test"
   },
   "private": true,
   "dependencies": {
