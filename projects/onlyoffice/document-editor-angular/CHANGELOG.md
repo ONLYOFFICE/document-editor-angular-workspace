@@ -1,5 +1,8 @@
 # Change Log
 
+##
+- breaking: removed IConfig export, use Config from @onlyoffice/doceditor-types instead
+
 ## 7.5.1
 - fix IConfig (fields pointerMode and slidePlayerBackground is not required)
 
