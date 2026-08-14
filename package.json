@@ -9,10 +9,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
-    "storybook": "ng run document-editor-angular-workspace:storybook",
-    "build-storybook": "ng run document-editor-angular-workspace:build-storybook"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
@@ -35,21 +32,11 @@
     "@angular-devkit/build-angular": "^20.0.1",
     "@angular/cli": "~20.0.1",
     "@angular/compiler-cli": "^20.0.1",
-    "@babel/core": "^7.26.10",
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
-    "@compodoc/compodoc": "^1.1.26",
-    "@storybook/addon-actions": "^8.6.14",
-    "@storybook/addon-docs": "^8.6.14",
-    "@storybook/addon-essentials": "^8.6.8",
-    "@storybook/addon-interactions": "^8.6.8",
-    "@storybook/addon-links": "^8.6.14",
-    "@storybook/angular": "^8.6.14",
-    "@storybook/testing-library": "^0.2.2",
     "@onlyoffice/doceditor-types": "^9.3.1",
     "@types/jasmine": "~5.1.7",
     "@types/lodash": "^4.17.16",
-    "babel-loader": "^10.0.0",
     "jasmine-core": "~5.7.1",
     "karma": "~6.4.4",
     "karma-chrome-launcher": "~3.2.0",
@@ -58,9 +45,6 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "lefthook": "^1.11.5",
     "ng-packagr": "^20.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "storybook": "^8.6.14",
     "typescript": "~5.8.3"
   },
   "overrides": {

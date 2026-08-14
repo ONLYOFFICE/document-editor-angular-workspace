@@ -24,13 +24,6 @@ ng build
 # Run tests
 ng test                                          # demo app tests
 ng test @onlyoffice/document-editor-angular      # library tests
-
-# Storybook (component documentation)
-npm run storybook          # dev server on port 6006
-npm run build-storybook    # static build
-
-# Generate compodoc documentation
-npm run docs:json
 ```
 
 ## Architecture
@@ -40,7 +33,6 @@ npm run docs:json
 - **`src/`** — Demo application (standalone components, bootstrapped via `bootstrapApplication`)
 - **`projects/onlyoffice/document-editor-angular/`** — Publishable library (NgModule-based, built with ng-packagr)
 - **`dist/`** — Build outputs for both library and app
-- **`.storybook/`** — Storybook configuration with compodoc integration
 - **`config/config.json`** — Runtime config (document server URL, demo storage, oforms API)
 
 ### Library (`@onlyoffice/document-editor-angular`)
@@ -59,8 +51,6 @@ Uses standalone Angular components. Key areas:
 - **Content Controls** — Input and radio button controls
 - **Forms** — Integration with oforms API via `FormsService`
 - **Review** — Change tracking features
-
-Each feature area has corresponding Storybook stories (`*.stories.ts`).
 
 ### Path Alias
 

@@ -13,7 +13,3 @@ pack:
 `cd ../dist/onlyoffice/document-editor-angular`
 `npm pack`
 `cd ../../../`
-
-Storybook
-`npm run build-storybook`
-`npm run storybook`
