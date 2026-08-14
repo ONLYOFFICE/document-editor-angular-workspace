@@ -1,9 +1,21 @@
 {
-  "name": "document-editor-angular-workspace",
+  "name": "@onlyoffice/document-editor-angular-workspace",
+  "description": "Angular workspace for the @onlyoffice/document-editor-angular library, an Angular component for embedding ONLYOFFICE Document Server.",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
   "bugs": {
+    "url": "https://github.com/ONLYOFFICE/document-editor-angular-workspace/issues",
     "email": "support@onlyoffice.com"
   },
-  "version": "0.0.0",
+  "homepage": "https://www.onlyoffice.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ONLYOFFICE/document-editor-angular-workspace.git"
+  },
+  "author": "Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyoffice.com)",
+  "maintainers": [
+    "Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyoffice.com)"
+  ],
   "scripts": {
     "ng": "ng",
     "build": "ng build",
