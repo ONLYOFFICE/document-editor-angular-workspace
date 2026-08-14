@@ -1,0 +1,24 @@
+{
+  "name": "document-editor-angular-e2e",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Integration smoke tests that install the packed @onlyoffice/document-editor-angular tarball into a real Angular app and drive it with Playwright.",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "node scripts/setup.mjs && playwright test"
+  },
+  "devDependencies": {
+    "@angular/build": "^20.3.34",
+    "@angular/cli": "^20.3.34",
+    "@angular/common": "^20.3.0",
+    "@angular/compiler": "^20.3.0",
+    "@angular/compiler-cli": "^20.3.0",
+    "@angular/core": "^20.3.0",
+    "@angular/platform-browser": "^20.3.0",
+    "@onlyoffice/doceditor-types": "^9.3.1",
+    "@playwright/test": "^1.62.1",
+    "typescript": "~5.9.2"
+  }
+}
