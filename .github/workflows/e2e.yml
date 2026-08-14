@@ -5,10 +5,17 @@ on:
     branches:
       - master
   workflow_dispatch:
+    inputs:
+      package_version:
+        description: 'Version of @onlyoffice/document-editor-angular to install from npm (leave empty to build from source instead)'
+        required: false
+        type: string
 
 jobs:
   e2e:
     runs-on: ubuntu-latest
+    env:
+      E2E_LIB_VERSION: ${{ github.event.inputs.package_version }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v7
@@ -17,6 +24,7 @@ jobs:
         with:
           node-version: 24
       - name: Install workspace dependencies
+        if: env.E2E_LIB_VERSION == ''
         run: npm ci
       - name: Install e2e dependencies
         run: npm ci
