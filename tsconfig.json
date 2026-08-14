@@ -4,11 +4,6 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
-    "paths": {
-      "onlyoffice/document-editor-angular": [
-        "dist/onlyoffice/document-editor-angular"
-      ]
-    },
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,

@@ -1,5 +1,0 @@
-{
-    "documentserverUrl": "http://documentserver/",
-    "demoStorage": "https://static.onlyoffice.com/assets/docs/samples/",
-    "oformsUrl": "https://cmsoforms.onlyoffice.com/api/oforms?populate=*&locale=all"
-}
