@@ -7,7 +7,6 @@
   "scripts": {
     "ng": "ng",
     "build": "ng build @onlyoffice/document-editor-angular",
-    "watch": "ng build @onlyoffice/document-editor-angular --watch --configuration development",
     "test": "ng test @onlyoffice/document-editor-angular"
   },
   "private": true,
@@ -25,8 +24,6 @@
     "@angular-devkit/build-angular": "^20.0.1",
     "@angular/cli": "~20.0.1",
     "@angular/compiler-cli": "^20.0.1",
-    "@commitlint/cli": "^19.8.0",
-    "@commitlint/config-conventional": "^19.8.0",
     "@onlyoffice/doceditor-types": "^9.3.1",
     "@types/jasmine": "~5.1.7",
     "@types/lodash": "^4.17.16",

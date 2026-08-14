@@ -37,7 +37,7 @@ Core component: `DocumentEditorComponent` (selector: `<document-editor>`)
 
 ## Conventions
 
-- **Commits**: Conventional Commits enforced via commitlint
+- **Commits**: Conventional Commits format
 - **Testing**: Karma + Jasmine, Chrome browser
 - **TypeScript**: Strict mode enabled, ES2022 target
 - **Library versioning**: Major version tracks Angular compatibility (v7.x = Angular 20)
