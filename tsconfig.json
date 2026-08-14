@@ -2,35 +2,38 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@onlyoffice/document-editor-angular": [
+        "./dist/onlyoffice/document-editor-angular"
+      ]
+    },
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "sourceMap": true,
-    "declaration": false,
+    "skipLibCheck": true,
+    "isolatedModules": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
     "importHelpers": true,
-    "noImplicitThis": false,
     "target": "ES2022",
-    "module": "es2022",
-    "strictPropertyInitialization": false,
-    "lib": [
-      "es2022",
-      "dom"
-    ],
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "useDefineForClassFields": false
+    "module": "preserve",
+    "strictPropertyInitialization": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
+    "typeCheckHostBindings": true,
     "strictTemplates": true
-  }
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./projects/onlyoffice/document-editor-angular/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/onlyoffice/document-editor-angular/tsconfig.spec.json"
+    }
+  ]
 }
