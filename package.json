@@ -24,19 +24,19 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/common": "^20.3.0",
-    "@angular/compiler": "^20.3.0",
-    "@angular/core": "^20.3.0",
-    "@angular/forms": "^20.3.0",
-    "@angular/platform-browser": "^20.3.0",
-    "@angular/router": "^20.3.0",
+    "@angular/common": "^21.2.20",
+    "@angular/compiler": "^21.2.20",
+    "@angular/core": "^21.2.20",
+    "@angular/forms": "^21.2.20",
+    "@angular/platform-browser": "^21.2.20",
+    "@angular/router": "^21.2.20",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@angular/build": "^20.3.34",
-    "@angular/cli": "^20.3.34",
-    "@angular/compiler-cli": "^20.3.0",
+    "@angular/build": "^21.2.21",
+    "@angular/cli": "^21.2.21",
+    "@angular/compiler-cli": "^21.2.20",
     "@onlyoffice/doceditor-types": "^9.3.1",
     "@types/jasmine": "~5.1.0",
     "@types/lodash": "^4.17.16",
@@ -46,7 +46,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "ng-packagr": "^20.3.0",
+    "ng-packagr": "^21.2.7",
     "typescript": "~5.9.2"
   }
 }
