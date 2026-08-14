@@ -1,5 +1,8 @@
 # Change Log
 
+##
+- angular 22
+
 ## 8.5.1
 - angular 21
 

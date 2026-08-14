@@ -10,15 +10,15 @@
     "test": "node scripts/setup.mjs && playwright test"
   },
   "devDependencies": {
-    "@angular/build": "^21.2.21",
-    "@angular/cli": "^21.2.21",
-    "@angular/common": "^21.2.20",
-    "@angular/compiler": "^21.2.20",
-    "@angular/compiler-cli": "^21.2.20",
-    "@angular/core": "^21.2.20",
-    "@angular/platform-browser": "^21.2.20",
+    "@angular/build": "^22.1.4",
+    "@angular/cli": "^22.1.4",
+    "@angular/common": "^22.1.2",
+    "@angular/compiler": "^22.1.2",
+    "@angular/compiler-cli": "^22.1.2",
+    "@angular/core": "^22.1.2",
+    "@angular/platform-browser": "^22.1.2",
     "@onlyoffice/doceditor-types": "^9.3.1",
     "@playwright/test": "^1.62.1",
-    "typescript": "~5.9.2"
+    "typescript": "~6.0.3"
   }
 }
