@@ -1,6 +1,6 @@
 # Change Log
 
-##
+## 7.6.0
 - breaking: removed IConfig export, use Config from @onlyoffice/doceditor-types instead
 
 ## 7.5.1
