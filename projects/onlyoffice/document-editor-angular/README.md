@@ -8,6 +8,7 @@ This repo contains the ONLYOFFICE Docs Angular component which integrates [ONLYO
 
 | Angular          | document-editor-angular |
 |------------------|:-----------------------:|
+| >=22.0.0 <23.0.0 |           v9.x          |
 | >=21.0.0 <22.0.0 |           v8.x          |
 | >=20.0.0 <21.0.0 |           v7.x          |
 | >=19.0.0 <20.0.0 |           v6.x          |
@@ -79,14 +80,14 @@ export class AppModule { }
 2. Open the *./src/app/app.component.ts* file in the *onlyoffice-angular-demo* project and define options in your consuming component:
 ```
 import { Component } from "@angular/core";
-import { IConfig } from "@onlyoffice/document-editor-angular";
+import { Config } from "@onlyoffice/doceditor-types";
 
 @Component({
     selector: "app-root",
     templateUrl: "./app.component.html"
 })
 export class AppComponent {
-    config: IConfig = {
+    config: Config = {
         document: {
             "fileType": "docx",
             "key": "Khirz6zTPdfd7",
@@ -147,7 +148,7 @@ Replace the **"http://documentserver/"** line with the URL of your server.
 
 ```
 import { Component } from "@angular/core";
-import { IConfig } from "@onlyoffice/document-editor-angular";
+import { Config } from "@onlyoffice/doceditor-types";
 import { DocumentEditorModule } from "@onlyoffice/document-editor-angular";
 
 @Component({
@@ -157,7 +158,7 @@ import { DocumentEditorModule } from "@onlyoffice/document-editor-angular";
     templateUrl: "./app.component.html"
 })
 export class AppComponent {
-    config: IConfig = {
+    config: Config = {
         document: {
             "fileType": "docx",
             "key": "Khirz6zTPdfd7",

@@ -1,65 +1,52 @@
 {
-  "name": "document-editor-angular-workspace",
+  "name": "@onlyoffice/document-editor-angular-workspace",
+  "description": "Angular workspace for the @onlyoffice/document-editor-angular library, an Angular component for embedding ONLYOFFICE Document Server.",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
   "bugs": {
+    "url": "https://github.com/ONLYOFFICE/document-editor-angular-workspace/issues",
     "email": "support@onlyoffice.com"
   },
-  "version": "0.0.0",
+  "homepage": "https://www.onlyoffice.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ONLYOFFICE/document-editor-angular-workspace.git"
+  },
+  "author": "Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyoffice.com)",
+  "maintainers": [
+    "Ascensio System SIA <integration@onlyoffice.com> (https://www.onlyoffice.com)"
+  ],
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
-    "storybook": "ng run document-editor-angular-workspace:storybook",
-    "build-storybook": "ng run document-editor-angular-workspace:build-storybook"
+    "test:e2e": "npm --prefix e2e ci && npm --prefix e2e run test"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^21.2.0",
-    "@angular/common": "^21.2.0",
-    "@angular/compiler": "^21.2.0",
-    "@angular/core": "^21.2.0",
-    "@angular/forms": "^21.2.0",
-    "@angular/platform-browser": "^21.2.0",
-    "@angular/platform-browser-dynamic": "^21.2.0",
-    "@angular/router": "^21.2.0",
-    "@ng-select/ng-select": "^15.1.0",
-    "@onlyoffice/document-editor-angular": "file:dist/onlyoffice/document-editor-angular",
-    "@types/node": "^22.15.29",
-    "rxjs": "~7.8.2",
-    "tslib": "^2.8.1",
-    "zone.js": "~0.15.0"
+    "@angular/common": "^22.1.2",
+    "@angular/compiler": "^22.1.2",
+    "@angular/core": "^22.1.2",
+    "@angular/forms": "^22.1.2",
+    "@angular/platform-browser": "^22.1.2",
+    "@angular/router": "^22.1.2",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^21.2.0",
-    "@angular/cli": "~21.2.0",
-    "@angular/compiler-cli": "^21.2.0",
-    "@babel/core": "^7.26.10",
-    "@commitlint/cli": "^19.8.0",
-    "@commitlint/config-conventional": "^19.8.0",
-    "@compodoc/compodoc": "^1.1.16",
-    "@storybook/addon-docs": "^10.2.15",
-    "@storybook/addon-links": "^10.2.15",
-    "@storybook/angular": "^10.2.15",
-    "@storybook/testing-library": "^0.2.2",
-    "@types/jasmine": "~5.1.7",
+    "@angular/build": "^22.1.4",
+    "@angular/cli": "^22.1.4",
+    "@angular/compiler-cli": "^22.1.2",
+    "@onlyoffice/doceditor-types": "^9.3.1",
+    "@types/jasmine": "~5.1.0",
     "@types/lodash": "^4.17.16",
-    "babel-loader": "^10.0.0",
-    "jasmine-core": "~5.7.1",
-    "karma": "~6.4.4",
+    "jasmine-core": "~5.9.0",
+    "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
-    "karma-coverage": "~2.2.1",
+    "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "lefthook": "^1.11.5",
-    "ng-packagr": "^21.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "storybook": "^10.2.15",
-    "typescript": "~5.9.3"
-  },
-  "overrides": {
-    "serialize-javascript": "7.0.4"
+    "ng-packagr": "^22.1.1",
+    "typescript": "~6.0.3"
   }
 }

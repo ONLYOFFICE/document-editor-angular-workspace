@@ -14,6 +14,7 @@
 * limitations under the License.
 */
 
+import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DocumentEditorComponent } from './document-editor.component';
@@ -24,7 +25,8 @@ describe('DocumentEditorAngularComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DocumentEditorComponent ]
+      declarations: [ DocumentEditorComponent ],
+      providers: [provideZonelessChangeDetection()]
     })
     .compileComponents();
 

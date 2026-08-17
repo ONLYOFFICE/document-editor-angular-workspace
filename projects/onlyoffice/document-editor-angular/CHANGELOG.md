@@ -1,5 +1,9 @@
 # Change Log
 
+## 9.6.0
+- angular 22
+- breaking: removed IConfig export, use Config from @onlyoffice/doceditor-types instead
+
 ## 8.5.1
 - angular 21
 

@@ -1,12 +1,7 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "paths": {
-      "@onlyoffice/document-editor-angular": [
-        "./dist/onlyoffice/document-editor-angular"
-      ]
-    },
+    "outDir": "./out-tsc",
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -17,8 +12,7 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
-    "module": "preserve",
-    "strictPropertyInitialization": false
+    "module": "preserve"
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -26,14 +20,5 @@
     "strictInputAccessModifiers": true,
     "typeCheckHostBindings": true,
     "strictTemplates": true
-  },
-  "files": [],
-  "references": [
-    {
-      "path": "./projects/onlyoffice/document-editor-angular/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/onlyoffice/document-editor-angular/tsconfig.spec.json"
-    }
-  ]
+  }
 }
