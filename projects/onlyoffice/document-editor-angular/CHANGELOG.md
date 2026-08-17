@@ -1,6 +1,6 @@
 # Change Log
 
-##
+## 8.6.0
 - breaking: removed IConfig export, use Config from @onlyoffice/doceditor-types instead
 
 ## 8.5.1
