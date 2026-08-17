@@ -31,7 +31,16 @@ jobs:
       - name: Publish to npm
         run: |
           cd ./dist/onlyoffice/document-editor-angular
-          npm publish --access public
+          name=$(node -p "require('./package.json').name")
+          version=$(node -p "require('./package.json').version")
+          latest=$(npm view "$name" version)
+          new_major=$(echo "$version" | cut -d. -f1)
+          latest_major=$(echo "$latest" | cut -d. -f1)
+          if [ "$new_major" -ge "$latest_major" ]; then
+            npm publish --access public
+          else
+            npm publish --access public --tag backport
+          fi
       - name: Get Info
         run: |
           cd ${{ github.workspace }}/projects/onlyoffice/document-editor-angular
