@@ -100,6 +100,9 @@ There is no lint script configured in either `package.json`.
     corresponding block built from the flattened inputs rather than merging field by field. `config` is
     deep-cloned (`lodash` `cloneDeep`) first so the caller's object isn't mutated. Note that
     `document_title` is currently written to `document.document_title`, not `document.title`.
+    Every flattened input is marked `@deprecated` in favor of its `config` counterpart (the supported
+    API is `id`, `documentServerUrl`, `shardkey`, `config`, `onLoadComponentError` — the props the
+    README table documents); they are still read and merged, the tags are documentation only.
   - Errors are surfaced through `onLoadComponentError?(errorCode, errorDescription)` rather than
     thrown; error codes are `-1` (unknown), `-2` (failed to load the `DocsAPI` script), `-3`
     (`DocsAPI` not defined after load).
