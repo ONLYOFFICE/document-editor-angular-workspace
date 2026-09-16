@@ -61,8 +61,9 @@ There is no lint script configured in either `package.json`.
 - `ng-package.json` (ng-packagr config) declares the entry point (`src/public-api.ts`) and build
   destination (`dist/onlyoffice/document-editor-angular`). `lodash` is whitelisted there as an
   `allowedNonPeerDependencies` since ng-packagr otherwise requires all deps to be peer deps.
-- `src/public-api.ts` is the sole public export surface: `DocumentEditorModule` and
-  `DocumentEditorComponent`. Anything not exported there is not part of the library's public API.
+- `src/public-api.ts` is the sole public export surface: `DocumentEditorModule`,
+  `DocumentEditorComponent` and `DocumentEditorPreloadComponent`. Anything not exported there is not
+  part of the library's public API.
 - The root `tsconfig.json` maps the path `@onlyoffice/document-editor-angular` to
   `./dist/onlyoffice/document-editor-angular`, so anything importing the package by name resolves to
   the **built output**, not to the sources — rebuild before relying on it.
@@ -108,6 +109,18 @@ There is no lint script configured in either `package.json`.
     (`DocsAPI` not defined after load).
   - `DocsAPI`/`DocEditor` types come from the separate `@onlyoffice/doceditor-types` package and are
     declared as ambient `Window` extensions at the top of the component file.
+- `src/lib/components/document-editor-preload.component.ts` (`<document-editor-preload>`, declared and
+  exported by the same `DocumentEditorModule`) shares nothing with the editor component: no
+  `loadScript`, no `DocsAPI`, no instance registry. It renders one hidden `<iframe>` pointing at
+  `${documentServerUrl}web-apps/apps/api/documents/preload.html` (adding the trailing slash when the
+  url lacks one) so that ONLYOFFICE Docs 9.0+ caches the editor assets before a document is opened;
+  older servers answer that page with a 404, which is harmless. The `src` is written with
+  `setAttribute` from `ngOnInit`/`ngOnChanges` rather than bound in the template on purpose: an
+  iframe `src` is a resource URL for Angular, so a binding would need `DomSanitizer` from
+  `@angular/platform-browser`, which is not a dependency of this library. Keep the component free of
+  `DocsAPI` knowledge — placing it next to `<document-editor>` is pointless, it is meant for pages
+  shown *before* the editor. Its only coverage is
+  `src/lib/components/document-editor-preload.component.spec.ts`; there is no e2e test for it.
 - `src/lib/utils/loadScript.ts` handles script-tag injection and de-duplication: it resolves
   immediately if `window.DocsAPI` already exists, and if a script tag with the same `id` is present
   (e.g. from a previous editor instance on the page) it polls that tag's `loading` attribute instead
