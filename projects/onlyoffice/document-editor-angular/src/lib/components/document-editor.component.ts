@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { Config, DocEditor } from '@onlyoffice/doceditor-types';
 import loadScript from "../utils/loadScript";
 import { cloneDeep } from 'lodash';
@@ -34,6 +34,7 @@ declare global {
   selector: 'document-editor',
   template: '<div [id]="id"></div>',
   styles: [
+    ':host { display: contents; }'
   ],
   standalone: false
 })
@@ -83,8 +84,13 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
   @Input() events_onRequestUsers?: (event: object) => void;
 
   isFirstOnChanges: boolean = true;
+  private isDestroyed: boolean = false;
 
-  constructor() { }
+  constructor(private elementRef: ElementRef<HTMLElement>) {
+    // DocsAPI finds the placeholder with getElementById, so the id must stay on
+    // the template div and off the host element Angular owns.
+    this.elementRef.nativeElement.removeAttribute("id");
+  }
 
   ngOnInit(): void {
     let url = this.documentServerUrl;
@@ -100,8 +106,12 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     loadScript(docsApiUrl, "onlyoffice-api-script")
-      .then(() => this.onLoad())
+      .then(() => {
+        if (this.isDestroyed) return;
+        this.onLoad();
+      })
       .catch((err) => {
+        if (this.isDestroyed) return;
         this.onError(-2);
       });
   }
@@ -132,6 +142,8 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.isDestroyed = true;
+
     const instances = window?.DocEditor?.instances;
     const editor = instances?.[this.id];
 
@@ -259,7 +271,7 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  private onAppReady() {
-    this.events_onAppReady!(window.DocEditor?.instances[this.id] || {});
+  private onAppReady = () => {
+    this.events_onAppReady?.(window.DocEditor?.instances[this.id] || {});
   }
 }

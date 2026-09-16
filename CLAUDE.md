@@ -75,7 +75,19 @@ There is no lint script configured in either `package.json`.
     (`{documentServerUrl}/web-apps/apps/api/documents/api.js`, with a `shardkey` query param unless
     `shardkey` is set to `false`; `shardkey: true`, the default, uses `config.document.key`) via
     `loadScript`, then calls `onLoad()`, which constructs the `window.DocsAPI.DocEditor` instance and
-    stores it on the global `window.DocEditor.instances` map keyed by the component's `id`.
+    stores it on the global `window.DocEditor.instances` map keyed by the component's `id`. The load
+    can settle long after the component is gone, so `ngOnDestroy` sets `isDestroyed` and the
+    `then`/`catch` callbacks bail out on it — otherwise they build an editor nobody destroys, which
+    makes the next `onLoad` skip loading ("Instance already exists"), and report a spurious `-1`.
+  - **DOM ownership**: the constructor removes the `id` attribute from the host element. `id` is an
+    `@Input`, but written as an attribute (as the README documents it) Angular also renders it on the
+    `<document-editor>` host, which then comes first in document order for the `getElementById` that
+    Docs does — so Docs would `replaceChild` its iframe over the *host*, the one node Angular owns.
+    Angular would then be holding a detached node: the editor is not removed with the component, and
+    the placeholder Docs puts back on `destroyEditor()` stays in the document and is picked up by the
+    next `getElementById`. With the attribute gone, the `id` is on the template's `<div [id]="id">`
+    alone, Docs swaps that inside the host, and `:host { display: contents }` keeps the host out of
+    layout so sizing still comes from the consumer's element. Do not put the `id` back on the host.
   - `ngOnChanges` watches a fixed list of "important" inputs (`config`, `document_fileType`,
     `document_title`, `documentType`, `editorConfig_lang`, `height`, `type`, `width`); if any change
     after the first change detection pass, it destroys the existing instance from
@@ -98,7 +110,14 @@ There is no lint script configured in either `package.json`.
   (e.g. from a previous editor instance on the page) it polls that tag's `loading` attribute instead
   of injecting a duplicate `<script>`.
 - Unit tests run **zoneless** — specs provide `provideZonelessChangeDetection()` in the TestBed; keep
-  new specs consistent with that.
+  new specs consistent with that. Because nothing marks a plain field dirty in zoneless mode, the
+  lifecycle specs drive the component through a host component whose state is `signal()`s, and they
+  await a macrotask (`flush()`) for `loadScript`'s promise callbacks, which no test scheduler tracks.
+  The specs stub `window.DocsAPI` with a fake `DocEditor` that replaces the placeholder with an
+  iframe and restores it on `destroyEditor()`, mirroring what Docs does to the DOM — that is what
+  makes the create/destroy/re-create cases testable. They also drop any leftover
+  `#onlyoffice-api-script` tag between specs, since `loadScript` would otherwise poll one spec's
+  script tag in the next.
 
 ### E2E harness (`e2e/`)
 
@@ -108,10 +127,14 @@ There is no lint script configured in either `package.json`.
   is how the `E2E` workflow's `workflow_dispatch` input tests an already-published release.
 - `src/app/app.component.ts` is a minimal standalone app that mounts `<document-editor>` and records
   editor events / component errors on `window.__e2eEvents__` and `window.__e2eErrors__`; the specs in
-  `tests/` assert against those globals.
+  `tests/` assert against those globals. It also exposes `toggle-editor` and `change-key` buttons so
+  the lifecycle specs can destroy, re-create and reconfigure the editor.
 - No real Document Server is involved: the tests inject a fake `window.DocsAPI` either via
   `page.addInitScript` or by fulfilling the routed `**/web-apps/apps/api/documents/api.js**` request,
-  and abort that route to exercise the `-2` error path.
+  and abort that route to exercise the `-2` error path. `tests/fake-docs-api.ts` holds the shared
+  route pattern and fake source: it swaps the placeholder for an iframe the way api.js does and
+  records the opened `document.key`s in `window.__e2eOpenedKeys__`. Holding the routed request open
+  is how the specs exercise a destroy or a config change while api.js is still loading.
 - The dev server runs on port 4300 (`playwright.config.ts` `webServer` + `baseURL`).
 
 ## Release process

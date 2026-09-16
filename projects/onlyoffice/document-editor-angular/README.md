@@ -320,6 +320,10 @@ The application will be deployed on the web server (*http://localhost:3000* by d
 | `config` | object | null | yes | Generic configuration object for opening a file with token. [Config API](https://api.onlyoffice.com/docs/docs-api/usage-api/config/) |
 | `onLoadComponentError` | (errorCode: number, errorDescription: string) => void | null | no | The function called when an error occurs while loading a component |
 
+### Notes
+
+* The component renders the editor placeholder inside its own `document-editor` host element and removes the `id` attribute from that host, so the `id` you pass stays on the placeholder alone. ONLYOFFICE Docs replaces the placeholder with its own iframe, so the host is what keeps the editor removable by Angular and reusable after the component is destroyed. The host is styled with `display: contents` and creates no box of its own, so the editor is laid out by the element you place the component in, and sizing it is unchanged.
+
 ## Development
 
 ### Clone project from the GitHub repository:
