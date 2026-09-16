@@ -216,6 +216,21 @@ describe('DocumentEditorAngularComponent lifecycle', () => {
     expect(host.errors).toEqual([]);
   });
 
+  it('creates no editor when destroyed while api.js is still loading', async () => {
+    const releaseScript = holdApiScript();
+    await createHost();
+
+    await setMounted(false);
+
+    releaseScript();
+    await flush();
+
+    expect(openedKeys).toEqual([]);
+    expect(editor()).toBeUndefined();
+    expect(iframes().length).toBe(0);
+    expect(host.errors).toEqual([]);
+  });
+
   it('builds the editor from the config it has when api.js arrives', async () => {
     const releaseScript = holdApiScript();
     await createHost();

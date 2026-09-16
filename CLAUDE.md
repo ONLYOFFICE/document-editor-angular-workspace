@@ -75,7 +75,10 @@ There is no lint script configured in either `package.json`.
     (`{documentServerUrl}/web-apps/apps/api/documents/api.js`, with a `shardkey` query param unless
     `shardkey` is set to `false`; `shardkey: true`, the default, uses `config.document.key`) via
     `loadScript`, then calls `onLoad()`, which constructs the `window.DocsAPI.DocEditor` instance and
-    stores it on the global `window.DocEditor.instances` map keyed by the component's `id`.
+    stores it on the global `window.DocEditor.instances` map keyed by the component's `id`. The load
+    can settle long after the component is gone, so `ngOnDestroy` sets `isDestroyed` and the
+    `then`/`catch` callbacks bail out on it — otherwise they build an editor nobody destroys, which
+    makes the next `onLoad` skip loading ("Instance already exists"), and report a spurious `-1`.
   - **DOM ownership**: the constructor removes the `id` attribute from the host element. `id` is an
     `@Input`, but written as an attribute (as the README documents it) Angular also renders it on the
     `<document-editor>` host, which then comes first in document order for the `getElementById` that
@@ -131,7 +134,7 @@ There is no lint script configured in either `package.json`.
   and abort that route to exercise the `-2` error path. `tests/fake-docs-api.ts` holds the shared
   route pattern and fake source: it swaps the placeholder for an iframe the way api.js does and
   records the opened `document.key`s in `window.__e2eOpenedKeys__`. Holding the routed request open
-  is how the specs exercise a config change while api.js is still loading.
+  is how the specs exercise a destroy or a config change while api.js is still loading.
 - The dev server runs on port 4300 (`playwright.config.ts` `webServer` + `baseURL`).
 
 ## Release process

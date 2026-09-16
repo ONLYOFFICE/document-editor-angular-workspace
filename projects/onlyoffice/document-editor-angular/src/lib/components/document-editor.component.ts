@@ -84,6 +84,7 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
   @Input() events_onRequestUsers?: (event: object) => void;
 
   isFirstOnChanges: boolean = true;
+  private isDestroyed: boolean = false;
 
   constructor(private elementRef: ElementRef<HTMLElement>) {
     // DocsAPI finds the placeholder with getElementById, so the id must stay on
@@ -105,8 +106,12 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     loadScript(docsApiUrl, "onlyoffice-api-script")
-      .then(() => this.onLoad())
+      .then(() => {
+        if (this.isDestroyed) return;
+        this.onLoad();
+      })
       .catch((err) => {
+        if (this.isDestroyed) return;
         this.onError(-2);
       });
   }
@@ -137,6 +142,8 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.isDestroyed = true;
+
     const instances = window?.DocEditor?.instances;
     const editor = instances?.[this.id];
 

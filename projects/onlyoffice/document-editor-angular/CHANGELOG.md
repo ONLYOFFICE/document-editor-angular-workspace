@@ -3,6 +3,7 @@
 ## [Unreleased]
 - fix the editor not being reusable after the component is destroyed, for example on a soft navigation
 - the id is no longer rendered on the document-editor host element, so ONLYOFFICE Docs replaces the placeholder inside it instead of the host itself; the host is kept out of layout with display: contents
+- fix an editor being left behind when the component is destroyed while api.js is still loading
 
 ## 7.6.0
 - breaking: removed IConfig export, use Config from @onlyoffice/doceditor-types instead
