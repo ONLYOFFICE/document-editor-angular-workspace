@@ -271,7 +271,7 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  private onAppReady() {
-    this.events_onAppReady!(window.DocEditor?.instances[this.id] || {});
+  private onAppReady = () => {
+    this.events_onAppReady?.(window.DocEditor?.instances[this.id] || {});
   }
 }

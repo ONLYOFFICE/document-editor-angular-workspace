@@ -42,7 +42,7 @@ let openedKeys: string[] = [];
 
 // Stands in for api.js: replaces the placeholder with its own iframe, and puts
 // it back on destroyEditor().
-const installFakeDocsAPI = () => {
+const installFakeDocsAPI = (fireAppReady = false) => {
   window.DocsAPI = {
     DocEditor: (id: string, config: Config) => {
       openedKeys.push(config.document!.key!);
@@ -51,6 +51,8 @@ const installFakeDocsAPI = () => {
       const iframe = document.createElement("iframe");
       iframe.setAttribute("name", "frameEditor");
       target.parentNode!.replaceChild(iframe, target);
+
+      if (fireAppReady) setTimeout(() => (config as any).events.onAppReady());
 
       return {
         destroyEditor: () => {
@@ -89,6 +91,7 @@ const holdApiScript = () => {
         [shardkey]="false"
         [config]="config()"
         [onLoadComponentError]="onLoadComponentError"
+        [events_onAppReady]="events_onAppReady"
       ></document-editor>
     }
   `,
@@ -98,9 +101,14 @@ class HostComponent {
   mounted = signal(true);
   config = signal<Config>(baseConfig);
   errors: Array<{ errorCode: number, errorDescription: string }> = [];
+  appReady: object[] = [];
 
   onLoadComponentError = (errorCode: number, errorDescription: string) => {
     this.errors.push({ errorCode, errorDescription });
+  };
+
+  events_onAppReady = (event: object) => {
+    this.appReady.push(event);
   };
 }
 
@@ -185,6 +193,16 @@ describe('DocumentEditorAngularComponent lifecycle', () => {
     expect(openedKeys).toEqual(["Khirz6zTPdfd7"]);
     expect(hostedIframes().length).toBe(1);
     expect(placeholders().length).toBe(0);
+  });
+
+  it('calls events_onAppReady with the editor instance', async () => {
+    installFakeDocsAPI(true);
+    await createHost();
+    // the fake fires onAppReady from a timer of its own, as api.js does
+    await flush();
+
+    expect(host.appReady).toEqual([editor()!]);
+    expect(host.errors).toEqual([]);
   });
 
   it('destroys the editor and removes its iframe when the component is destroyed', async () => {
