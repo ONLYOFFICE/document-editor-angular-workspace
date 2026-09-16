@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { Config, DocEditor } from '@onlyoffice/doceditor-types';
 import loadScript from "../utils/loadScript";
 import { cloneDeep } from 'lodash';
@@ -34,6 +34,7 @@ declare global {
   selector: 'document-editor',
   template: '<div [id]="id"></div>',
   styles: [
+    ':host { display: contents; }'
   ],
   standalone: false
 })
@@ -84,7 +85,11 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
 
   isFirstOnChanges: boolean = true;
 
-  constructor() { }
+  constructor(private elementRef: ElementRef<HTMLElement>) {
+    // DocsAPI finds the placeholder with getElementById, so the id must stay on
+    // the template div and off the host element Angular owns.
+    this.elementRef.nativeElement.removeAttribute("id");
+  }
 
   ngOnInit(): void {
     let url = this.documentServerUrl;
