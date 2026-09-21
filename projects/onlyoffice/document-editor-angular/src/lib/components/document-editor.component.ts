@@ -44,43 +44,124 @@ export class DocumentEditorComponent implements OnInit, OnChanges, OnDestroy {
   @Input() shardkey: string | boolean = true;
   @Input() config: Config;
 
+  /**
+   * @deprecated Use `config.document.fileType` instead.
+   */
   @Input() document_fileType?: string;
+  /**
+   * @deprecated Use `config.document.title` instead.
+   */
   @Input() document_title?: string;
+  /**
+   * @deprecated Use `config.documentType` instead.
+   */
   @Input() documentType?: string;
+  /**
+   * @deprecated Use `config.editorConfig.lang` instead.
+   */
   @Input() editorConfig_lang?: string;
+  /**
+   * @deprecated Use `config.height` instead.
+   */
   @Input() height?: string;
+  /**
+   * @deprecated Use `config.type` instead.
+   */
   @Input() type?: string;
+  /**
+   * @deprecated Use `config.width` instead.
+   */
   @Input() width?: string;
 
   @Input() onLoadComponentError?: (errorCode: number, errorDescription: string) => void;
 
+  /**
+   * @deprecated Use `config.events.onAppReady` instead.
+   */
   @Input() events_onAppReady?: (event: object) => void;
+  /**
+   * @deprecated Use `config.events.onDocumentStateChange` instead.
+   */
   @Input() events_onDocumentStateChange?: (event: object) => void;
+  /**
+   * @deprecated Use `config.events.onMetaChange` instead.
+   */
   @Input() events_onMetaChange?: (event: object) => void;
+  /**
+   * @deprecated Use `config.events.onDocumentReady` instead.
+   */
   @Input() events_onDocumentReady?: (event: object) => void;
+  /**
+   * @deprecated Use `config.events.onInfo` instead.
+   */
   @Input() events_onInfo?: (event: object) => void;
+  /**
+   * @deprecated Use `config.events.onWarning` instead.
+   */
   @Input() events_onWarning?: (event: object) => void;
+  /**
+   * @deprecated Use `config.events.onError` instead.
+   */
   @Input() events_onError?: (event: object) => void;
+  /**
+   * @deprecated Use `config.events.onRequestSharingSettings` instead.
+   */
   @Input() events_onRequestSharingSettings?: (event: object) => void;
+  /**
+   * @deprecated Use `config.events.onRequestRename` instead.
+   */
   @Input() events_onRequestRename?: (event: object) => void;
+  /**
+   * @deprecated Use `config.events.onMakeActionLink` instead.
+   */
   @Input() events_onMakeActionLink?: (event: object) => void;
+  /**
+   * @deprecated Use `config.events.onRequestInsertImage` instead.
+   */
   @Input() events_onRequestInsertImage?: (event: object) => void;
+  /**
+   * @deprecated Use `config.events.onRequestSaveAs` instead.
+   */
   @Input() events_onRequestSaveAs?: (event: object) => void;
   /**
-   * @deprecated Deprecated since version 7.5, please use events_onRequestSelectSpreadsheet instead.
+   * @deprecated Deprecated since version 7.5, please use `config.events.onRequestSelectSpreadsheet` instead.
    */
   @Input() events_onRequestMailMergeRecipients?: (event: object) => void;
   /**
-   * @deprecated Deprecated since version 7.5, please use events_onRequestSelectDocument instead.
+   * @deprecated Deprecated since version 7.5, please use `config.events.onRequestSelectDocument` instead.
    */
   @Input() events_onRequestCompareFile?: (event: object) => void;
+  /**
+   * @deprecated Use `config.events.onRequestEditRights` instead.
+   */
   @Input() events_onRequestEditRights?: (event: object) => void;
+  /**
+   * @deprecated Use `config.events.onRequestHistory` instead.
+   */
   @Input() events_onRequestHistory?: (event: object) => void;
+  /**
+   * @deprecated Use `config.events.onRequestHistoryClose` instead.
+   */
   @Input() events_onRequestHistoryClose?: (event: object) => void;
+  /**
+   * @deprecated Use `config.events.onRequestHistoryData` instead.
+   */
   @Input() events_onRequestHistoryData?: (event: object) => void;
+  /**
+   * @deprecated Use `config.events.onRequestRestore` instead.
+   */
   @Input() events_onRequestRestore?: (event: object) => void;
+  /**
+   * @deprecated Use `config.events.onRequestSelectSpreadsheet` instead.
+   */
   @Input() events_onRequestSelectSpreadsheet?: (event: object) => void;
+  /**
+   * @deprecated Use `config.events.onRequestSelectDocument` instead.
+   */
   @Input() events_onRequestSelectDocument?: (event: object) => void;
+  /**
+   * @deprecated Use `config.events.onRequestUsers` instead.
+   */
   @Input() events_onRequestUsers?: (event: object) => void;
 
   isFirstOnChanges: boolean = true;
