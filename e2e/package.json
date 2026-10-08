@@ -10,7 +10,7 @@
     "test": "node scripts/setup.mjs && playwright test"
   },
   "devDependencies": {
-    "@angular/build": "^22.1.4",
+    "@angular/build": "^22.2.2",
     "@angular/cli": "^22.1.4",
     "@angular/common": "^22.1.2",
     "@angular/compiler": "^22.1.2",
