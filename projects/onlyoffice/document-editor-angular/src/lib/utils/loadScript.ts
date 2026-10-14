@@ -14,6 +14,8 @@
 * limitations under the License.
 */
 
+import type {} from '../../global';
+
 const loadScript = async (url: string, id: string) => {
   return new Promise((resolve, reject) => {
     try {

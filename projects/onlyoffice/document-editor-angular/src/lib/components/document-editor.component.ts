@@ -16,6 +16,7 @@
 
 import { Component, ElementRef, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { Config } from '@onlyoffice/doceditor-types';
+import type {} from '../../global';
 import loadScript from "../utils/loadScript";
 import { cloneDeep } from 'lodash';
 
