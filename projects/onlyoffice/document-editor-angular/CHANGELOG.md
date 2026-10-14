@@ -1,5 +1,13 @@
 # Change Log
 
+## [Unreleased]
+- fix the editor not being reusable after the component is destroyed, for example on a soft navigation
+- the id is no longer rendered on the document-editor host element, so ONLYOFFICE Docs replaces the placeholder inside it instead of the host itself; the host is kept out of layout with display: contents
+- fix an editor being left behind when the component is destroyed while api.js is still loading
+- fix the events_onAppReady input never being called
+- added the document-editor-preload component for caching the editor static assets before a document is opened (ONLYOFFICE Docs 9 and later)
+- deprecated the legacy flat inputs (document_fileType, document_title, documentType, editorConfig_lang, height, type, width and all events_* callbacks) in favor of the config object
+
 ## 9.6.0
 - angular 22
 - breaking: removed IConfig export, use Config from @onlyoffice/doceditor-types instead
