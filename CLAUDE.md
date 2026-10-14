@@ -108,7 +108,12 @@ There is no lint script configured in either `package.json`.
     thrown; error codes are `-1` (unknown), `-2` (failed to load the `DocsAPI` script), `-3`
     (`DocsAPI` not defined after load).
   - `DocsAPI`/`DocEditor` types come from the separate `@onlyoffice/doceditor-types` package and are
-    declared as ambient `Window` extensions at the top of the component file.
+    declared as ambient `Window` extensions in `src/global.ts`. That file is re-exported from
+    `public-api.ts` so the augmentation ships in the published typings, and imported as
+    `import type {} from '../../global'` by every file that touches `window.DocsAPI` /
+    `window.DocEditor` — the spec build (`tsconfig.spec.json`) only includes `*.spec.ts` and `*.d.ts`
+    and never goes through `public-api.ts`, so without that import those files fail to type-check
+    under `npm test`.
 - `src/lib/components/document-editor-preload.component.ts` (`<document-editor-preload>`, declared and
   exported by the same `DocumentEditorModule`) shares nothing with the editor component: no
   `loadScript`, no `DocsAPI`, no instance registry. It renders one hidden `<iframe>` pointing at
