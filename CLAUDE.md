@@ -61,8 +61,9 @@ There is no lint script configured in either `package.json`.
 - `ng-package.json` (ng-packagr config) declares the entry point (`src/public-api.ts`) and build
   destination (`dist/onlyoffice/document-editor-angular`). `lodash` is whitelisted there as an
   `allowedNonPeerDependencies` since ng-packagr otherwise requires all deps to be peer deps.
-- `src/public-api.ts` is the sole public export surface: `DocumentEditorModule` and
-  `DocumentEditorComponent`. Anything not exported there is not part of the library's public API.
+- `src/public-api.ts` is the sole public export surface: `DocumentEditorModule`,
+  `DocumentEditorComponent` and `DocumentEditorPreloadComponent`. Anything not exported there is not
+  part of the library's public API.
 - The root `tsconfig.json` maps the path `@onlyoffice/document-editor-angular` to
   `./dist/onlyoffice/document-editor-angular`, so anything importing the package by name resolves to
   the **built output**, not to the sources — rebuild before relying on it.
@@ -75,7 +76,19 @@ There is no lint script configured in either `package.json`.
     (`{documentServerUrl}/web-apps/apps/api/documents/api.js`, with a `shardkey` query param unless
     `shardkey` is set to `false`; `shardkey: true`, the default, uses `config.document.key`) via
     `loadScript`, then calls `onLoad()`, which constructs the `window.DocsAPI.DocEditor` instance and
-    stores it on the global `window.DocEditor.instances` map keyed by the component's `id`.
+    stores it on the global `window.DocEditor.instances` map keyed by the component's `id`. The load
+    can settle long after the component is gone, so `ngOnDestroy` sets `isDestroyed` and the
+    `then`/`catch` callbacks bail out on it — otherwise they build an editor nobody destroys, which
+    makes the next `onLoad` skip loading ("Instance already exists"), and report a spurious `-1`.
+  - **DOM ownership**: the constructor removes the `id` attribute from the host element. `id` is an
+    `@Input`, but written as an attribute (as the README documents it) Angular also renders it on the
+    `<document-editor>` host, which then comes first in document order for the `getElementById` that
+    Docs does — so Docs would `replaceChild` its iframe over the *host*, the one node Angular owns.
+    Angular would then be holding a detached node: the editor is not removed with the component, and
+    the placeholder Docs puts back on `destroyEditor()` stays in the document and is picked up by the
+    next `getElementById`. With the attribute gone, the `id` is on the template's `<div [id]="id">`
+    alone, Docs swaps that inside the host, and `:host { display: contents }` keeps the host out of
+    layout so sizing still comes from the consumer's element. Do not put the `id` back on the host.
   - `ngOnChanges` watches a fixed list of "important" inputs (`config`, `document_fileType`,
     `document_title`, `documentType`, `editorConfig_lang`, `height`, `type`, `width`); if any change
     after the first change detection pass, it destroys the existing instance from
@@ -88,17 +101,39 @@ There is no lint script configured in either `package.json`.
     corresponding block built from the flattened inputs rather than merging field by field. `config` is
     deep-cloned (`lodash` `cloneDeep`) first so the caller's object isn't mutated. Note that
     `document_title` is currently written to `document.document_title`, not `document.title`.
+    Every flattened input is marked `@deprecated` in favor of its `config` counterpart (the supported
+    API is `id`, `documentServerUrl`, `shardkey`, `config`, `onLoadComponentError` — the props the
+    README table documents); they are still read and merged, the tags are documentation only.
   - Errors are surfaced through `onLoadComponentError?(errorCode, errorDescription)` rather than
     thrown; error codes are `-1` (unknown), `-2` (failed to load the `DocsAPI` script), `-3`
     (`DocsAPI` not defined after load).
   - `DocsAPI`/`DocEditor` types come from the separate `@onlyoffice/doceditor-types` package and are
     declared as ambient `Window` extensions at the top of the component file.
+- `src/lib/components/document-editor-preload.component.ts` (`<document-editor-preload>`, declared and
+  exported by the same `DocumentEditorModule`) shares nothing with the editor component: no
+  `loadScript`, no `DocsAPI`, no instance registry. It renders one hidden `<iframe>` pointing at
+  `${documentServerUrl}web-apps/apps/api/documents/preload.html` (adding the trailing slash when the
+  url lacks one) so that ONLYOFFICE Docs 9.0+ caches the editor assets before a document is opened;
+  older servers answer that page with a 404, which is harmless. The `src` is written with
+  `setAttribute` from `ngOnInit`/`ngOnChanges` rather than bound in the template on purpose: an
+  iframe `src` is a resource URL for Angular, so a binding would need `DomSanitizer` from
+  `@angular/platform-browser`, which is not a dependency of this library. Keep the component free of
+  `DocsAPI` knowledge — placing it next to `<document-editor>` is pointless, it is meant for pages
+  shown *before* the editor. Its only coverage is
+  `src/lib/components/document-editor-preload.component.spec.ts`; there is no e2e test for it.
 - `src/lib/utils/loadScript.ts` handles script-tag injection and de-duplication: it resolves
   immediately if `window.DocsAPI` already exists, and if a script tag with the same `id` is present
   (e.g. from a previous editor instance on the page) it polls that tag's `loading` attribute instead
   of injecting a duplicate `<script>`.
 - Unit tests run **zoneless** — specs provide `provideZonelessChangeDetection()` in the TestBed; keep
-  new specs consistent with that.
+  new specs consistent with that. Because nothing marks a plain field dirty in zoneless mode, the
+  lifecycle specs drive the component through a host component whose state is `signal()`s, and they
+  await a macrotask (`flush()`) for `loadScript`'s promise callbacks, which no test scheduler tracks.
+  The specs stub `window.DocsAPI` with a fake `DocEditor` that replaces the placeholder with an
+  iframe and restores it on `destroyEditor()`, mirroring what Docs does to the DOM — that is what
+  makes the create/destroy/re-create cases testable. They also drop any leftover
+  `#onlyoffice-api-script` tag between specs, since `loadScript` would otherwise poll one spec's
+  script tag in the next.
 
 ### E2E harness (`e2e/`)
 
@@ -108,10 +143,14 @@ There is no lint script configured in either `package.json`.
   is how the `E2E` workflow's `workflow_dispatch` input tests an already-published release.
 - `src/app/app.component.ts` is a minimal standalone app that mounts `<document-editor>` and records
   editor events / component errors on `window.__e2eEvents__` and `window.__e2eErrors__`; the specs in
-  `tests/` assert against those globals.
+  `tests/` assert against those globals. It also exposes `toggle-editor` and `change-key` buttons so
+  the lifecycle specs can destroy, re-create and reconfigure the editor.
 - No real Document Server is involved: the tests inject a fake `window.DocsAPI` either via
   `page.addInitScript` or by fulfilling the routed `**/web-apps/apps/api/documents/api.js**` request,
-  and abort that route to exercise the `-2` error path.
+  and abort that route to exercise the `-2` error path. `tests/fake-docs-api.ts` holds the shared
+  route pattern and fake source: it swaps the placeholder for an iframe the way api.js does and
+  records the opened `document.key`s in `window.__e2eOpenedKeys__`. Holding the routed request open
+  is how the specs exercise a destroy or a config change while api.js is still loading.
 - The dev server runs on port 4300 (`playwright.config.ts` `webServer` + `baseURL`).
 
 ## Release process
