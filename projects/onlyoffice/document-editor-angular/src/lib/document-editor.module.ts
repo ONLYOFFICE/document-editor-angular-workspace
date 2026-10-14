@@ -16,15 +16,18 @@
 
 import { NgModule } from '@angular/core';
 import { DocumentEditorComponent } from './components/document-editor.component';
+import { DocumentEditorPreloadComponent } from './components/document-editor-preload.component';
 
 @NgModule({
   declarations: [
-    DocumentEditorComponent
+    DocumentEditorComponent,
+    DocumentEditorPreloadComponent
   ],
   imports: [
   ],
   exports: [
-    DocumentEditorComponent
+    DocumentEditorComponent,
+    DocumentEditorPreloadComponent
   ]
 })
 export class DocumentEditorModule { }
